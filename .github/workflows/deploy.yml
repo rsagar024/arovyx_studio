@@ -1,0 +1,135 @@
+# Build & deploy Arovyx Studio to Vercel whenever code lands on master
+# (a merged pull request is a push to master). Can also be run by hand from
+# the Actions tab ("Run workflow") or with `gh workflow run deploy.yml`.
+#
+# GitHub Secrets / Variables are the single source of truth: every deploy
+# syncs them into the Vercel project's runtime environment, applies the
+# Prisma schema to Neon, seeds an empty database, then builds and deploys.
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+# Never run two production deploys at once; a newer push waits for the
+# running one instead of cancelling it mid-deploy.
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  NODE_VERSION: "24" # matches the Vercel project setting
+  VERCEL_CLI_VERSION: "65.2.0"
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  check:
+    name: Typecheck & validate
+    runs-on: ubuntu-latest
+    env:
+      # prisma validate / generate need the variables to exist; no connection is made.
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ci
+      DIRECT_URL: postgresql://ci:ci@localhost:5432/ci
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npx prisma validate
+
+  deploy:
+    name: Deploy production
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: ${{ steps.deploy.outputs.url }}
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DIRECT_URL: ${{ secrets.DIRECT_URL }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Check required secrets
+        env:
+          NVIDIA_NIM_API_KEY: ${{ secrets.NVIDIA_NIM_API_KEY }}
+          ADMIN_SECRET_KEY: ${{ secrets.ADMIN_SECRET_KEY }}
+          ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+        run: |
+          missing=0
+          for name in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID DATABASE_URL DIRECT_URL \
+                      NVIDIA_NIM_API_KEY ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL; do
+            if [ -z "${!name}" ]; then echo "::error::Missing secret/variable: $name"; missing=1; fi
+          done
+          exit $missing
+
+      - run: npm ci
+      - run: npm install --global vercel@${{ env.VERCEL_CLI_VERSION }}
+
+      # DATABASE_URL is not synced: the Neon ↔ Vercel integration manages it
+      # at runtime (same database). The GitHub secret is used by the schema
+      # push and seed steps below.
+      - name: Sync GitHub Secrets → Vercel runtime environment
+        env:
+          NVIDIA_NIM_API_KEY: ${{ secrets.NVIDIA_NIM_API_KEY }}
+          NVIDIA_NIM_MODEL: ${{ vars.NVIDIA_NIM_MODEL }}
+          NVIDIA_NIM_BASE_URL: ${{ vars.NVIDIA_NIM_BASE_URL }}
+          ADMIN_SECRET_KEY: ${{ secrets.ADMIN_SECRET_KEY }}
+          ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+        run: |
+          for name in DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
+                      ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL; do
+            value="${!name}"
+            [ -z "$value" ] && { echo "skip $name (not set; app default applies)"; continue; }
+            vercel env rm "$name" production --yes --token="$VERCEL_TOKEN" >/dev/null 2>&1 || true
+            printf '%s' "$value" | vercel env add "$name" production --token="$VERCEL_TOKEN" >/dev/null
+            echo "synced $name"
+          done
+
+      - name: Apply database schema (Neon)
+        # Without --accept-data-loss, Prisma refuses destructive changes.
+        run: npx prisma db push --skip-generate
+
+      - name: Seed empty database
+        run: npx tsx prisma/seed.ts --if-empty
+
+      - name: Pull Vercel project settings
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
+      - name: Build
+        run: vercel build --prod --token="$VERCEL_TOKEN"
+
+      - name: Deploy
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### 🚀 Deployed: $url" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Smoke test
+        env:
+          SITE: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+        run: |
+          set -e
+          for path in / /projects /api/projects /robots.txt /sitemap.xml /studio; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --retry 3 --retry-delay 5 "$SITE$path")
+            echo "$path → $code"; [ "$code" = "200" ]
+          done
+          code=$(curl -s -o /dev/null -w '%{http_code}' "$SITE/studio/overview")
+          echo "/studio/overview (anonymous) → $code"; [ "$code" = "307" ]
+          echo "✅ Live at $SITE" >> "$GITHUB_STEP_SUMMARY"

@@ -9,6 +9,10 @@ import {
   zodErrorMessage,
 } from "@/lib/api";
 
+// NIM calls can take ~45 s and retry on 429/5xx — allow beyond the
+// serverless default (Vercel caps this at the plan maximum).
+export const maxDuration = 300;
+
 /**
  * POST /api/admin/ai/improve (spec §8) — the "AI Description Improver":
  * rewrites the short + long description while keeping facts accurate.

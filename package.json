@@ -7,9 +7,9 @@
     "predev": "tsx prisma/seed.ts --if-empty",
     "dev": "next dev",
     "build": "next build",
-    "prestart": "tsx prisma/seed.ts --if-empty",
     "start": "next start",
     "typecheck": "tsc --noEmit",
+    "postinstall": "prisma generate",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
     "db:seed": "tsx prisma/seed.ts"

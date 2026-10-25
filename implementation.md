@@ -298,6 +298,17 @@ Results:
 
 ---
 
+## Phase 9 — Deployment (Vercel + Neon, GitHub Actions) ✅ DONE
+
+GitHub Pages was ruled out because it's static-only: it can't run `/studio` auth, the API routes, NIM calls or a database.
+- **DB:** Prisma moved from SQLite to **PostgreSQL** (`url` pooled + `directUrl`, `binaryTargets` adds `rhel-openssl-3.0.x` for Vercel functions). The column design is unchanged. A free Neon DB `arovyx-db` (iad1) was provisioned via the Vercel Marketplace CLI.
+- **Hosting:** Vercel project `arovyx-studio` (iad1), linked by CLI with **Vercel Git auto-deploy disconnected**, so Actions is the only deploy path.
+- **Workflow:** `.github/workflows/deploy.yml` runs on push to `master` and on manual dispatch, with `concurrency: production`.
+  - `check`: typecheck + `prisma validate`.
+  - `deploy`: required-secret gate → sync GitHub Secrets to Vercel runtime env (`DATABASE_URL` excluded, since the Neon integration manages it) → `prisma db push` (no data-loss flag) → `seed --if-empty` → `vercel pull/build --prod/deploy --prebuilt --prod` → smoke test.
+- **Secrets:** all in GitHub Secrets (8) + Variables (3). `ADMIN_SECRET_KEY` and `VERCEL_TOKEN` were entered by the owner; the rest were piped in without being printed, and `ADMIN_JWT_SECRET` was freshly generated. The AI routes declare `maxDuration = 300`. `prestart` was dropped and `postinstall: prisma generate` added.
+- **Verification so far:** schema pushed to Neon, seeded 3 projects (second run skipped), and a production `next build` against Neon passes (27 routes, no warnings).
+
 ## Build Order (summary)
 
 | # | Phase | Depends on |
