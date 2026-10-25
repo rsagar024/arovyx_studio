@@ -44,10 +44,15 @@ export async function POST(req: NextRequest) {
     return jsonError(400, zodErrorMessage(parsed.error), zodErrorDetails(parsed.error));
   }
 
-  const input = parsed.data;
+  const { screenshots, ...input } = parsed.data;
   const slug = await uniqueSlug(input.title);
   const row = await db.project.create({
-    data: { slug, ...input, ...serializeProject(input) },
+    data: {
+      slug,
+      ...input,
+      ...serializeProject(input),
+      screenshots: JSON.stringify(screenshots),
+    },
   });
 
   return jsonOk({ project: toProjectDTO(row) }, { status: 201 });

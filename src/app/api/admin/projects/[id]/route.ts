@@ -26,6 +26,7 @@ interface StoredRow {
   tags: string;
   techStack: string;
   features: string;
+  screenshots: string;
 }
 
 /**
@@ -34,8 +35,10 @@ interface StoredRow {
  * their stored encoding verbatim).
  */
 function applyUpdate(existing: StoredRow, patch: Omit<ProjectUpdate, "slug">) {
-  const { tags, techStack, features, category, status, ...scalars } = patch;
+  const { tags, techStack, features, screenshots, category, status, ...scalars } = patch;
   const update: Record<string, unknown> = { ...scalars };
+
+  if (screenshots !== undefined) update.screenshots = JSON.stringify(screenshots);
 
   if (category !== undefined) update.category = category;
   if (status !== undefined) update.status = status;

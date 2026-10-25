@@ -13,7 +13,7 @@ const HEADERS = {
   Accept: "text/html,application/json;q=0.9,*/*;q=0.8",
 };
 
-export type FetchSource = "github" | "gitlab" | "npm" | "pypi" | "html";
+export type FetchSource = "github" | "gitlab" | "npm" | "pypi" | "playstore" | "html";
 
 export interface FetchedData {
   url: string;
@@ -24,6 +24,12 @@ export interface FetchedData {
   topics: string[];
   languages: string[];
   stars: number | null;
+  /** Install count (Play Store minimum installs). */
+  downloads: number | null;
+  /** App icon / feature graphic / phone screenshots (Play Store). */
+  iconUrl: string | null;
+  bannerUrl: string | null;
+  screenshots: string[];
   license: string | null;
   version: string | null;
   repositoryUrl: string | null;
@@ -269,6 +275,115 @@ async function fetchPypi(packageName: string, data: FetchedData): Promise<void> 
 }
 
 /* ------------------------------------------------------------------ */
+/* Google Play Store                                                    */
+/* ------------------------------------------------------------------ */
+
+// Play serves reduced markup (no structured data) to bot user agents.
+const BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36";
+
+const MAX_SCREENSHOTS = 8;
+/** Phone screenshots are tall/wide (≥1.7, e.g. 1920×1080); tablet & Chromebook ones are ~1.33–1.6. */
+const PHONE_RATIO = 1.7;
+
+/** play-lh.googleusercontent.com URLs take a size suffix (`=s512`, `=w1024`, `=h720`). */
+function playImage(url: string, size: string): string {
+  return `${url.replace(/=[a-z0-9-]+$/i, "")}=${size}`;
+}
+
+/** Safe nested lookup into Play's positional arrays. */
+function pick(root: unknown, path: number[]): unknown {
+  let node = root;
+  for (const key of path) {
+    if (!Array.isArray(node)) return undefined;
+    node = node[key];
+  }
+  return node;
+}
+
+/**
+ * The app details block (`ds:5`) that Play embeds in the page.
+ * Unofficial and positional — every read is guarded, and callers fall back
+ * to plain HTML when it's missing or its shape changes.
+ */
+function playDetails(html: string): unknown[] | null {
+  const match = html.match(
+    /AF_initDataCallback\(\{key: 'ds:5'[\s\S]*?data:([\s\S]*?), sideChannel: \{\}\}\);<\/script/
+  );
+  if (!match?.[1]) return null;
+  try {
+    const details = pick(JSON.parse(match[1]), [1, 2]);
+    return Array.isArray(details) ? details : null;
+  } catch {
+    return null;
+  }
+}
+
+async function fetchPlayStore(url: string, data: FetchedData): Promise<void> {
+  const appId = new URL(url).searchParams.get("id");
+  if (!appId) throw new FetchError("Play Store URL has no app id (?id=…)");
+
+  const pageUrl = `https://play.google.com/store/apps/details?id=${encodeURIComponent(appId)}&hl=en&gl=US`;
+  const html = await getText(pageUrl, { "User-Agent": BROWSER_UA, "Accept-Language": "en-US,en;q=0.9" });
+
+  const extracted = extractHtml(html);
+  data.title = extracted.title?.replace(/ - Apps on Google Play$/i, "") ?? null;
+  data.description = extracted.description;
+  data.meta = extracted.meta;
+  data.text = extracted.text;
+  data.homepage = pageUrl;
+
+  const details = playDetails(html);
+  if (details) {
+    const title = pick(details, [0, 0]);
+    if (typeof title === "string") data.title = title;
+
+    const icon = pick(details, [95, 0, 3, 2]);
+    if (typeof icon === "string") data.iconUrl = playImage(icon, "s512");
+
+    const banner = pick(details, [96, 0, 3, 2]);
+    if (typeof banner === "string") data.bannerUrl = playImage(banner, "w1024");
+
+    const installs = pick(details, [13, 1]);
+    if (typeof installs === "number") data.downloads = installs;
+
+    const shots = (pick(details, [78, 0]) as unknown[] | undefined) ?? [];
+    const parsed = (Array.isArray(shots) ? shots : [])
+      .map((shot) => ({
+        url: pick(shot, [3, 2]),
+        dims: pick(shot, [2]),
+      }))
+      .filter((s): s is { url: string; dims: unknown } => typeof s.url === "string");
+    const isPhone = (dims: unknown) => {
+      if (!Array.isArray(dims) || dims.length < 2) return false;
+      const [a, b] = dims as number[];
+      if (!a || !b) return false;
+      return Math.max(a, b) / Math.min(a, b) >= PHONE_RATIO;
+    };
+    const phone = parsed.filter((s) => isPhone(s.dims));
+    data.screenshots = [...new Set((phone.length ? phone : parsed).map((s) => playImage(s.url, "h720")))].slice(
+      0,
+      MAX_SCREENSHOTS
+    );
+  } else {
+    data.warnings.push("Play Store structured data not found — used page metadata only.");
+  }
+
+  // Fallbacks from plain HTML when the structured block was missing or incomplete.
+  if (!data.iconUrl) {
+    const og = extracted.meta["og:image"];
+    if (og?.includes("googleusercontent.com")) data.iconUrl = playImage(og, "s512");
+  }
+  if (!data.screenshots.length) {
+    const urls = [...html.matchAll(/<img[^>]*alt="Screenshot image"[^>]*>/gi)]
+      .map((m) => attr(m[0], "src"))
+      .filter((u): u is string => Boolean(u?.includes("googleusercontent.com")))
+      .map((u) => playImage(u, "h720"));
+    data.screenshots = [...new Set(urls)].slice(0, MAX_SCREENSHOTS);
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /* Public entry point                                                  */
 /* ------------------------------------------------------------------ */
 
@@ -287,6 +402,9 @@ export function detectSource(url: string): FetchSource {
   if (host === "gitlab.com") return "gitlab";
   if (host === "npmjs.com" || host === "npmjs.org") return "npm";
   if (host === "pypi.org") return "pypi";
+  if (host === "play.google.com" && parsed.pathname.startsWith("/store/apps/details")) {
+    return "playstore";
+  }
   if (!["http:", "https:"].includes(parsed.protocol)) {
     throw new FetchError(`Only http(s) links are supported (got "${parsed.protocol}").`);
   }
@@ -306,6 +424,10 @@ export async function fetchProjectData(url: string): Promise<FetchedData> {
     topics: [],
     languages: [],
     stars: null,
+    downloads: null,
+    iconUrl: null,
+    bannerUrl: null,
+    screenshots: [],
     license: null,
     version: null,
     repositoryUrl: null,
@@ -326,6 +448,8 @@ export async function fetchProjectData(url: string): Promise<FetchedData> {
     } else if (source === "pypi") {
       const match = url.match(/pypi\.org\/project\/([^/?#]+)/);
       await fetchPypi(match?.[1] ?? new URL(url).pathname.split("/").filter(Boolean).pop()!, data);
+    } else if (source === "playstore") {
+      await fetchPlayStore(url, data);
     } else {
       const html = await getText(url);
       const extracted = extractHtml(html);
@@ -355,7 +479,7 @@ export function hasContent(data: FetchedData): boolean {
 
 /** Human-readable one-line summary for logs/toasts. */
 export function describeSource(data: FetchedData): string {
-  const bits = [data.source.toUpperCase()];
+  const bits = [data.source === "playstore" ? "GOOGLE PLAY" : data.source.toUpperCase()];
   if (data.title) bits.push(data.title);
   if (data.stars != null) bits.push(`${data.stars}★`);
   if (data.version) bits.push(`v${data.version}`);

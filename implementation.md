@@ -328,6 +328,41 @@ GitHub Pages was ruled out because it's static-only: it can't run `/studio` auth
     - NIM key in **0 of 12** live JS bundles
   - Admin login and a live AI generate need the owner's password, so the owner checks them.
 
+## Phase 10 — Play Store media + Studio-controlled hero cards ✅ DONE
+
+**Play Store media**
+- **Fetcher:** new source `playstore` (`play.google.com/store/apps/details?id=…`), fetched as `hl=en&gl=US` with a browser user agent.
+  - Reads Play's embedded `ds:5` data: icon `[95,0,3,2]`, feature graphic `[96,0,3,2]`, screenshots `[78,0][i][3,2]` with dims, installs `[13,1]`.
+  - Phone screenshots are kept by aspect ratio ≥ 1.7 (tablet/Chromebook are ~1.33–1.6), de-duplicated, max 8. Image URLs are re-sized: `=s512` / `=w1024` / `=h720`.
+  - Fallbacks: `og:image` for the icon and `<img alt="Screenshot image">` for screenshots, with a warning. Missing media stays empty.
+  - Live-tested on Spotify, DuckDuckGo, Firefox and Fossify Notes (all media 200 `image/*`); a bogus id returns a clean 404 warning.
+- **Data:** additive columns `Project.bannerUrl`, `Project.screenshots` (JSON `string[]`); `imageUrl` is now the app icon.
+  - Encoded or decoded only when touched (create/PATCH), like `tags`.
+  - Zod: `screenshots` URLs only, max 12. `fetchedDataSchema` carries the media so Regenerate keeps it.
+- **Generate route:** fetched media **overrides** the AI draft (the AI never invents media). This also covers bulk mode. Installs are passed to the AI prompt and into the form.
+- **UI:**
+  - Studio form: a **Media** group (icon, banner, screenshots, each with a preview); the AI preview shows the banner, icon and screenshot count.
+  - Detail page: banner header with a theme-aware fade, 80 px icon beside the title, and a scroll-snap screenshot gallery (omitted when empty).
+  - **"Get it on Google Play"** button via `sourceLinkMeta()`; other hosts get GitHub/GitLab/npm/PyPI/Visit labels.
+  - The OG image prefers the banner. JSON-LD gains `image`, `screenshot` and Android `installUrl`.
+  - Cards get a Play badge and a source-aware quick link.
+
+**Hero cards**
+- `SiteConfig.heroProjectIds` (JSON, max 3 cuids). `pickHeroProjects()` keeps the chosen order, skips unpublished or deleted projects, and falls back to the latest 3.
+- `Hero` takes `cards`; the hard-coded PulseBoard/Nebula Drift/tinyfetch are gone. Each card is now a real link with icon and category colour.
+- Studio **Settings → Hero showcase**: tick up to 3 projects and reorder with ▲/▼.
+
+**Verification**
+- `tsc` clean; `next build` passes on real PostgreSQL (27 routes).
+- Testing used a throwaway **embedded-postgres** in the scratchpad. PGlite was tried first but can't serve a Next build's parallel workers. The live Neon DB was never touched before merge.
+- E2E against `next start`: **39/39**.
+  - Live Play generate in 23 s with media from the fetch.
+  - Detail page: banner, icon, button and gallery all present. The no-media project shows no gallery or banner.
+  - PATCH validation: a bad URL and 13 screenshots each → 400; other edits keep the screenshots; clearing works.
+  - Hero: default = latest 3; chosen order honoured; invalid id or 4 ids → 400; an unpublished choice is skipped; cleared → fallback.
+  - Studio pages render the new controls.
+- Two first-run failures were test-scope artifacts and were re-verified with scoped assertions: "View source" came from the GitHub cards under *Similar projects*, and the old hero phrases are seed descriptions in the *Featured* grid.
+
 ## Build Order (summary)
 
 | # | Phase | Depends on |

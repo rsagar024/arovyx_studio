@@ -79,10 +79,19 @@ export async function POST(req: NextRequest) {
 
   // Step 2 — AI phase.
   try {
-    const project = await generateProjectDetails(fetched, {
+    const draft = await generateProjectDetails(fetched, {
       ...(category ? { category } : {}),
       ...(extraInstruction ? { extraInstruction } : {}),
     });
+
+    // Media comes from the fetch, never from the AI: fetched icon / feature
+    // graphic / screenshots win over anything the model guessed.
+    const project = {
+      ...draft,
+      imageUrl: fetched.iconUrl ?? draft.imageUrl,
+      bannerUrl: fetched.bannerUrl ?? null,
+      screenshots: fetched.screenshots ?? [],
+    };
 
     return jsonOk({
       project,

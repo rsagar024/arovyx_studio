@@ -4,7 +4,7 @@ import { ArrowRight, Boxes, Gamepad2, Package, Puzzle } from "lucide-react";
 import Hero from "@/components/Hero";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
-import { getPublishedProjects, getProjectStats, getSiteConfig } from "@/lib/projects";
+import { getPublishedProjects, getProjectStats, getSiteConfig, pickHeroProjects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 import { CATEGORY_META, cn, truncate } from "@/lib/utils";
 import type { Category } from "@/lib/validators";
@@ -39,6 +39,14 @@ export default async function HomePage() {
 
   const featured = projects.slice(0, 6);
 
+  const heroCards = pickHeroProjects(projects, config.heroProjectIds).map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    category: p.category,
+    meta: p.techStack.length ? p.techStack.slice(0, 2).join(" · ") : truncate(p.shortDescription, 40),
+    iconUrl: p.imageUrl,
+  }));
+
   const tiles: Array<{ category: Category; count: number }> = [
     { category: "APP", count: stats.APP },
     { category: "GAME", count: stats.GAME },
@@ -48,7 +56,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Hero ownerName={config.ownerName} tagline={config.tagline} bio={config.bio} />
+      <Hero ownerName={config.ownerName} tagline={config.tagline} bio={config.bio} cards={heroCards} />
 
       {/* stats strip */}
       <section aria-label="Portfolio statistics" className="border-y border-[var(--border)] bg-[var(--panel)]">

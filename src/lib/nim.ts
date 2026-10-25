@@ -416,6 +416,7 @@ function buildUserPrompt(data: FetchedData, extra?: string, category?: Category)
   if (data.version) lines.push(`Latest version: ${data.version}`);
   if (data.license) lines.push(`License: ${data.license}`);
   if (data.stars != null) lines.push(`Stars: ${data.stars}`);
+  if (data.downloads != null) lines.push(`Installs: ${data.downloads.toLocaleString("en-US")}+`);
   if (data.topics.length) lines.push(`Topics/keywords: ${data.topics.join(", ")}`);
   if (data.languages.length) lines.push(`Languages: ${data.languages.join(", ")}`);
 

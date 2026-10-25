@@ -37,12 +37,16 @@ const nullableUrl = (schema: z.ZodType<string>) =>
 /* Project DTO (arrays as real arrays) + DB mappers                    */
 /* ------------------------------------------------------------------ */
 
-export type ProjectDTO = Omit<Project, "category" | "status" | "tags" | "techStack" | "features"> & {
+export type ProjectDTO = Omit<
+  Project,
+  "category" | "status" | "tags" | "techStack" | "features" | "screenshots"
+> & {
   category: Category;
   status: Status;
   tags: string[];
   techStack: string[];
   features: string[];
+  screenshots: string[];
 };
 
 /** DB row → application object (decodes JSON columns, validates enums). */
@@ -54,6 +58,7 @@ export function toProjectDTO(row: Project): ProjectDTO {
     tags: parseJsonStringArray(row.tags),
     techStack: parseJsonStringArray(row.techStack),
     features: parseJsonStringArray(row.features),
+    screenshots: parseJsonStringArray(row.screenshots),
   };
 }
 
@@ -64,6 +69,8 @@ export function serializeProject(project: {
   tags: string[];
   techStack: string[];
   features: string[];
+  /** Encoded only when provided (partial updates leave it untouched). */
+  screenshots?: string[];
 }) {
   return {
     category: project.category,
@@ -71,6 +78,9 @@ export function serializeProject(project: {
     tags: JSON.stringify(project.tags),
     techStack: JSON.stringify(project.techStack),
     features: JSON.stringify(project.features),
+    ...(project.screenshots !== undefined
+      ? { screenshots: JSON.stringify(project.screenshots) }
+      : {}),
   };
 }
 
@@ -90,6 +100,10 @@ export const projectDraftSchema = z.object({
   version: nullableUrl(z.string()).catch(null),
   imageUrl: nullableUrl(z.string().url()).catch(null),
   demoUrl: nullableUrl(z.string().url()).catch(null),
+  // Media is never invented by the AI — the generate route overlays what the
+  // fetcher found (Play Store icon / feature graphic / screenshots).
+  bannerUrl: nullableUrl(z.string().url()).catch(null),
+  screenshots: z.array(z.string().url()).catch([]),
 });
 
 export type ProjectDraft = z.infer<typeof projectDraftSchema>;
@@ -111,6 +125,8 @@ export const projectInputSchema = z.object({
   sourceUrl: z.string().trim().url("Source URL must be a valid URL"),
   demoUrl: nullableUrl(z.string().url()).default(null),
   imageUrl: nullableUrl(z.string().url()).default(null),
+  bannerUrl: nullableUrl(z.string().url()).default(null),
+  screenshots: z.array(z.string().trim().url("Each screenshot must be a valid URL")).max(12).default([]),
   stars: z.number().int().nonnegative().nullable().default(null),
   downloads: z.number().int().nonnegative().nullable().default(null),
   isPublished: z.boolean().default(true),
@@ -167,6 +183,8 @@ export const settingsInputSchema = z.object({
   instagramUrl: z.string().trim().url().or(z.literal("")),
   avatarUrl: z.string().trim().url().or(z.literal("")),
   resumeUrl: z.string().trim().url().or(z.literal("")),
+  /** Up to 3 project ids shown as the home hero cards, in order (empty = latest 3). */
+  heroProjectIds: z.array(z.string().cuid("Invalid project id")).max(3, "Pick at most 3 projects"),
 });
 
 export type SettingsInput = z.infer<typeof settingsInputSchema>;
@@ -183,13 +201,17 @@ const nullableStr = z.string().max(100_000).nullable().catch(null);
 
 export const fetchedDataSchema = z.object({
   url: z.string().url(),
-  source: z.enum(["github", "gitlab", "npm", "pypi", "html"]),
+  source: z.enum(["github", "gitlab", "npm", "pypi", "playstore", "html"]),
   title: nullableStr,
   description: nullableStr,
   readme: nullableStr,
   topics: z.array(z.string().max(200)).max(50).catch([]),
   languages: z.array(z.string().max(50)).max(50).catch([]),
   stars: z.number().int().nonnegative().nullable().catch(null),
+  downloads: z.number().int().nonnegative().nullable().catch(null),
+  iconUrl: nullableStr,
+  bannerUrl: nullableStr,
+  screenshots: z.array(z.string().url().max(2_000)).max(20).catch([]),
   license: nullableStr,
   version: nullableStr,
   repositoryUrl: nullableStr,
