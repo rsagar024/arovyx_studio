@@ -20,12 +20,14 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
+# local env files (never commit secrets; .env.example is the template)
 .env
-.env*.local
+.env*
+!.env.example
 
 # vercel
 .vercel
+.env*.vercel
 
 # typescript
 *.tsbuildinfo

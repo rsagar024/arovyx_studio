@@ -1,16 +1,20 @@
-// Arovyx Studio — Prisma schema (SQLite)
-// Note on SQLite limitations (Prisma does not support enums or scalar lists here):
+// Arovyx Studio — Prisma schema (PostgreSQL on Neon)
+// Column design dates from the original SQLite version and is kept portable:
 // - category/status are stored as String columns, validated by Zod enums in lib/validators.ts
 // - tags/techStack/features are stored as JSON-encoded String columns
 //   and exposed as string[] via the mappers in lib/validators.ts
 
 generator client {
   provider = "prisma-client-js"
+  // "native" for local/CI, rhel-openssl-3.0.x for Vercel's serverless runtime
+  // (the client is generated on the GitHub Actions runner, then deployed).
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // pooled connection (app runtime)
+  directUrl = env("DIRECT_URL") // direct connection (prisma db push)
 }
 
 model Project {

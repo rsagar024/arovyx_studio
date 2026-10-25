@@ -15,6 +15,10 @@ import {
   zodErrorMessage,
 } from "@/lib/api";
 
+// NIM calls can take ~45 s and retry on 429/5xx — allow beyond the
+// serverless default (Vercel caps this at the plan maximum).
+export const maxDuration = 300;
+
 /**
  * POST /api/admin/ai/generate (spec §6.1 / §7) — the auto-fill pipeline:
  * fetch the link (Phase 2 `fetchProjectData`) → NVIDIA NIM generates the
