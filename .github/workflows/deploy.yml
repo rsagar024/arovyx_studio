@@ -80,10 +80,9 @@ jobs:
       - run: npm ci
       - run: npm install --global vercel@${{ env.VERCEL_CLI_VERSION }}
 
-      # `vercel env` needs the project settings that `vercel pull` writes to .vercel/
-      - name: Link Vercel project
-        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
-
+      # Uses the Vercel REST API (upsert) rather than `vercel env add`, whose
+      # generic "Could not retrieve Project Settings" error hid the real cause
+      # in CI. Any failure here prints the actual HTTP status + API message.
       # DATABASE_URL is not synced: the Neon ↔ Vercel integration manages it
       # at runtime (same database). The GitHub secret is used by the schema
       # push and seed steps below.
@@ -96,15 +95,27 @@ jobs:
           ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
           NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
         run: |
+          api="https://api.vercel.com/v10/projects/$VERCEL_PROJECT_ID/env?upsert=true&teamId=$VERCEL_ORG_ID"
+          failed=0
           for name in DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
                       ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL; do
             value="${!name}"
             [ -z "$value" ] && { echo "skip $name (not set; app default applies)"; continue; }
-            # --force overwrites an existing value; --sensitive stores it as a secret in Vercel
-            printf '%s' "$value" | vercel env add "$name" --environment production \
-              --force --sensitive --yes --token="$VERCEL_TOKEN"
-            echo "synced $name"
+            # "sensitive" = stored encrypted and never readable back from Vercel
+            body=$(jq -n --arg k "$name" --arg v "$value" \
+              '{key: $k, value: $v, type: "sensitive", target: ["production"]}')
+            code=$(curl -sS -o resp.json -w '%{http_code}' -X POST "$api" \
+              -H "Authorization: Bearer $VERCEL_TOKEN" -H "Content-Type: application/json" \
+              --data "$body")
+            if [ "$code" = "200" ] || [ "$code" = "201" ]; then
+              echo "synced $name"
+            else
+              echo "::error::sync $name failed: HTTP $code $(jq -r '.error.code + ": " + .error.message' resp.json 2>/dev/null)"
+              failed=1
+            fi
           done
+          rm -f resp.json
+          exit $failed
 
       - name: Apply database schema (Neon)
         # Without --accept-data-loss, Prisma refuses destructive changes.
