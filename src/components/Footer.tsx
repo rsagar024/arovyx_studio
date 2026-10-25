@@ -40,7 +40,14 @@ export default async function Footer() {
         <div className="flex flex-col items-center gap-1 text-center text-xs text-[var(--muted)] md:items-end">
           <p>© {year} {config.siteName}. All rights reserved.</p>
           <p className="inline-flex items-center gap-1 opacity-70">
-            Built with <span className="text-accent-600 dark:text-accent-400">NVIDIA NIM</span>
+            Built with
+            <span role="img" aria-label="love" className="text-red-500">
+              ❤️
+            </span>
+            and caffeine
+            <span role="img" aria-label="coffee">
+              ☕
+            </span>
           </p>
         </div>
       </div>
