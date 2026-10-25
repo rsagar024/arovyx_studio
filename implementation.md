@@ -307,7 +307,26 @@ GitHub Pages was ruled out because it's static-only: it can't run `/studio` auth
   - `check`: typecheck + `prisma validate`.
   - `deploy`: required-secret gate → sync GitHub Secrets to Vercel runtime env (`DATABASE_URL` excluded, since the Neon integration manages it) → `prisma db push` (no data-loss flag) → `seed --if-empty` → `vercel pull/build --prod/deploy --prebuilt --prod` → smoke test.
 - **Secrets:** all in GitHub Secrets (8) + Variables (3). `ADMIN_SECRET_KEY` and `VERCEL_TOKEN` were entered by the owner; the rest were piped in without being printed, and `ADMIN_JWT_SECRET` was freshly generated. The AI routes declare `maxDuration = 300`. `prestart` was dropped and `postinstall: prisma generate` added.
-- **Verification so far:** schema pushed to Neon, seeded 3 projects (second run skipped), and a production `next build` against Neon passes (27 routes, no warnings).
+- **Live:** <https://arovyx-studio.vercel.app> (admin at `/studio`). First green deploy: run #4 (PR #4), 1m32s.
+- **CI fixes on the way** (each shipped as its own PR, so merge-triggered deploys were exercised 4×):
+  1. PR #2: `vercel env` needs project settings, so pull before sync. It still failed in CI with the CLI's generic "Could not retrieve Project Settings" (the same command works locally).
+  2. PR #3: replaced the CLI with the **Vercel REST API upsert** (`POST /v10/projects/:id/env?upsert=true`), so failures now print the real HTTP status and error. The sync then passed.
+  3. PR #4: values synced as *sensitive* can't be read back, so `vercel pull` wrote `[SENSITIVE]` for `NEXT_PUBLIC_SITE_URL` and the prerender crashed on `new URL(...)`. GitHub **Variables** now sync as *plain* and **Secrets** stay *sensitive* (runtime-only). This was reproduced locally with `vercel pull` + `vercel build --prod` before shipping.
+- **Verification:**
+  - Locally: schema pushed to Neon, seeded 3 projects (second run skipped), production `next build` against Neon passes (27 routes, no warnings).
+  - Workflow smoke test: `/`, `/projects`, `/api/projects`, `/robots.txt`, `/sitemap.xml` and `/studio` → 200; anonymous `/studio/overview` → 307.
+  - Independent live checks:
+    - 3 projects served from Neon
+    - detail page 200
+    - sitemap on the live domain
+    - `/studio` has `noindex, nofollow`
+    - anonymous `/api/admin/projects` 401
+    - wrong admin key 401
+    - contact validation 400
+    - `/og` PNG
+    - custom 404
+    - NIM key in **0 of 12** live JS bundles
+  - Admin login and a live AI generate need the owner's password, so the owner checks them.
 
 ## Build Order (summary)
 
