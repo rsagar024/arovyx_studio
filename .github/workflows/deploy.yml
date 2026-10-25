@@ -101,14 +101,20 @@ jobs:
                       ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL; do
             value="${!name}"
             [ -z "$value" ] && { echo "skip $name (not set; app default applies)"; continue; }
-            # "sensitive" = stored encrypted and never readable back from Vercel
-            body=$(jq -n --arg k "$name" --arg v "$value" \
-              '{key: $k, value: $v, type: "sensitive", target: ["production"]}')
+            # GitHub Secrets → "sensitive" (encrypted, never readable back; runtime-only).
+            # GitHub Variables → "plain": the build must read them (NEXT_PUBLIC_* is
+            # inlined at build time; a sensitive value would pull as "[SENSITIVE]").
+            case "$name" in
+              NEXT_PUBLIC_SITE_URL|NVIDIA_NIM_MODEL|NVIDIA_NIM_BASE_URL) type=plain ;;
+              *) type=sensitive ;;
+            esac
+            body=$(jq -n --arg k "$name" --arg v "$value" --arg t "$type" \
+              '{key: $k, value: $v, type: $t, target: ["production"]}')
             code=$(curl -sS -o resp.json -w '%{http_code}' -X POST "$api" \
               -H "Authorization: Bearer $VERCEL_TOKEN" -H "Content-Type: application/json" \
               --data "$body")
             if [ "$code" = "200" ] || [ "$code" = "201" ]; then
-              echo "synced $name"
+              echo "synced $name ($type)"
             else
               echo "::error::sync $name failed: HTTP $code $(jq -r '.error.code + ": " + .error.message' resp.json 2>/dev/null)"
               failed=1
