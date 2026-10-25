@@ -273,7 +273,7 @@ Results:
 | 5.3 | Detail: long desc, features, tech, tags, meta; conditional Source/Demo; similar projects; per-project SEO/OG | ✅ | `projects/[slug]/page.tsx`, `lib/seo.ts` |
 | 5.4 | About: bio, tech arsenal, timeline | ✅ | `about/page.tsx` (+ avatar/résumé) |
 | 5.5 | Contact form → DB + "sends a confirmation (server-side)"; source cards; copy email | ⚠️ | `api/contact`, `ContactForm`, `ContactLinks`. The confirmation is the server-generated response shown on the page; no email (decided in Phase 8, no mail infrastructure). |
-| 5.6 | Glass sticky navbar + Projects dropdown; footer socials, copyright, NIM credit; responsive; dark default + toggle in localStorage; custom 404 | ✅ | `Navbar`, `Footer`, `ThemeToggle`, `not-found.tsx` |
+| 5.6 | Glass sticky navbar + Projects dropdown; footer socials, copyright, NIM credit; responsive; dark default + toggle in localStorage; custom 404 | ⚠️ | `Navbar`, `Footer`, `ThemeToggle`, `not-found.tsx`. At the owner's request the footer credit reads **"Built with ❤️ and caffeine ☕"** instead of "Built with NVIDIA NIM" (NIM is still credited in the README). |
 | 6 | Hidden `/studio` (unlinked) via direct URL + Ctrl+Shift+A | ✅ | `studio/page.tsx`, `AdminShortcut` |
 | 6 | Constant-time key check; HTTP-only signed cookie (`ADMIN_JWT_SECRET`); middleware protects `/studio/*` + `/api/admin/*`; logout | ✅ | `lib/auth.ts`, `lib/session.ts`, `middleware.ts`, `StudioShell` |
 | 6 | Sidebar: Overview, Projects, Add (AI), Messages, Settings | ✅ | `studio/(panel)/*` |

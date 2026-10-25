@@ -25,6 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
     title: { default: siteName, template: `%s · ${siteName}` },
     description,
     applicationName: siteName,
+    // favicon / apple-touch icon come from app/icon.png, app/apple-icon.png, app/favicon.ico
+    appleWebApp: { title: siteName, capable: true, statusBarStyle: "black-translucent" },
     // No site-wide canonical: it would be inherited by every page that
     // doesn't set its own. Pages set theirs via pageMetadata().
     openGraph: {

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { KeyRound, ShieldCheck } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
+import BrandMark from "@/components/BrandMark";
 import { getSession } from "@/lib/session";
 import StudioLoginForm from "@/components/studio/StudioLoginForm";
 
@@ -23,9 +24,7 @@ export default async function StudioLoginPage() {
     <main id="main" tabIndex={-1} className="relative flex min-h-screen items-center justify-center px-5 py-16">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center text-center">
-          <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-accent-500/40 bg-accent-400/10 text-accent-600 dark:text-accent-400">
-            <KeyRound className="h-5 w-5" aria-hidden />
-          </span>
+          <BrandMark size={64} className="h-16 w-16 drop-shadow-[0_0_18px_rgba(34,211,238,0.35)]" />
           <h1 className="mt-5 font-display text-3xl font-semibold tracking-tight">
             Studio access
           </h1>

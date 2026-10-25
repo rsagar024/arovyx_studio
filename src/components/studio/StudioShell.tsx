@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import SkipLink from "@/components/SkipLink";
 import ThemeToggle from "@/components/ThemeToggle";
+import BrandMark from "@/components/BrandMark";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -95,9 +96,7 @@ export default function StudioShell({ children }: { children: ReactNode }) {
   const sidebarInner = (
     <>
       <div className="flex items-center gap-2 px-1 font-display text-base font-semibold tracking-tight">
-        <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-accent-500/40 bg-accent-400/10 text-accent-600 dark:text-accent-400">
-          <Sparkles className="h-4 w-4" aria-hidden />
-        </span>
+        <BrandMark size={32} className="h-8 w-8" />
         Arovyx <span className="text-accent-600 dark:text-accent-400">Studio</span>
         <span className="ml-auto rounded border border-[var(--border)] px-1.5 py-0.5 text-[10px] uppercase tracking-micro text-[var(--muted)]">
           Console

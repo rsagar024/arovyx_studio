@@ -21,7 +21,25 @@ const CATEGORIES = [
   { label: "PLUGINS", color: "#fcd34d" },
 ];
 
-export function GET() {
+/** The AX mark as a data URL, or null if it can't be loaded (card then renders text-only). */
+async function loadMark(origin: string): Promise<string | null> {
+  try {
+    const res = await fetch(`${origin}/brand/arovyx-mark-192.png`);
+    if (!res.ok) return null;
+    const bytes = new Uint8Array(await res.arrayBuffer());
+    let binary = "";
+    for (let i = 0; i < bytes.length; i += 0x8000) {
+      binary += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+    }
+    return `data:image/png;base64,${btoa(binary)}`;
+  } catch {
+    return null;
+  }
+}
+
+export async function GET(req: Request) {
+  const mark = await loadMark(new URL(req.url).origin);
+
   return new ImageResponse(
     (
       <div
@@ -44,8 +62,14 @@ export function GET() {
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 104, fontWeight: 700, letterSpacing: -4, lineHeight: 1 }}>
-            {SITE_NAME}
+          <div style={{ display: "flex", alignItems: "center", gap: 32 }}>
+            {mark && (
+              // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
+              <img src={mark} width={128} height={128} style={{ width: 128, height: 128 }} />
+            )}
+            <div style={{ fontSize: 104, fontWeight: 700, letterSpacing: -4, lineHeight: 1 }}>
+              {SITE_NAME}
+            </div>
           </div>
           <div style={{ marginTop: 28, fontSize: 36, color: "#8b97a6", maxWidth: 900 }}>{TAGLINE}</div>
         </div>

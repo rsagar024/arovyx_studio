@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Boxes, Gamepad2, Package, Puzzle } from "lucide-react";
 import Hero from "@/components/Hero";
+import AboutSection from "@/components/sections/AboutSection";
+import ContactSection from "@/components/sections/ContactSection";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import { getPublishedProjects, getProjectStats, getSiteConfig, pickHeroProjects } from "@/lib/projects";
@@ -144,6 +146,10 @@ export default async function HomePage() {
           })}
         </div>
       </section>
+
+      {/* about + contact live on the home page; the navbar scrolls to them */}
+      <AboutSection config={config} projects={projects} />
+      <ContactSection config={config} />
     </>
   );
 }

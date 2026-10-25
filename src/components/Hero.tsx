@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Zap } from "lucide-react";
 import { CATEGORY_META, cn, mediaSrc } from "@/lib/utils";
 import SafeImg from "@/components/SafeImg";
+import SectionLink from "@/components/SectionLink";
 import type { Category } from "@/lib/validators";
 
 const PHRASES = [
@@ -118,12 +119,12 @@ export default function Hero({
               Explore projects
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
             </Link>
-            <Link
-              href="/contact"
+            <SectionLink
+              href="/#contact"
               className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--panel)] px-5 py-3 text-sm font-medium text-[var(--fg)] transition-colors hover:border-accent-500/50"
             >
               Get in touch
-            </Link>
+            </SectionLink>
           </div>
         </div>
 

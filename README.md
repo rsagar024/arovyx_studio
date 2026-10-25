@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/brand/arovyx-logo.jpg" alt="Arovyx Studio logo" width="480" />
+</p>
+
 # Arovyx Studio
 
 An AI-powered developer portfolio for showcasing **apps, games, packages and plugins**.
@@ -99,11 +103,11 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
 ## Features
 
 ### Public site
-- **Home:** hero with typing tagline, live stats strip, featured projects, category tiles
+- **Home:** hero with typing tagline, live stats strip, featured projects, category tiles, then the About and Contact sections. The navbar's About / Contact links smooth-scroll to them (and highlight the section in view); the old `/about` and `/contact` URLs redirect there.
 - **`/projects`:** category tabs and search (title, tag, tech) synced to `?category=&q=`
 - **`/projects/[slug]`:** full detail (markdown), features, tech stack, source/demo buttons, similar projects, per-project SEO and Open Graph. When set, it also shows an **app icon** and **"by {publisher}"** beside the title, the **feature graphic** as a banner above it, and a scrollable **screenshot gallery**. **Similar projects** lists only genuinely related work (same publisher, shared title words or tags, or 2+ shared tech-stack items) and is hidden when nothing is related. Play Store projects get a **"Get it on Google Play"** button; without media those parts simply don't render.
-- **`/about`:** bio, avatar, résumé link, tech arsenal, shipped timeline
-- **`/contact`:** form (validated and rate-limited, 5 per 10 min per IP), plus email/GitHub/LinkedIn/Instagram cards with copy-email. After a submission the server saves the message and returns a confirmation shown on the page; no email is sent.
+- **About** (home page section `#about`): bio, avatar, résumé link, tech arsenal, shipped timeline
+- **Contact** (home page section `#contact`): form (validated and rate-limited, 5 per 10 min per IP), plus email/GitHub/LinkedIn/Instagram cards with copy-email. After a submission the server saves the message and returns a confirmation shown on the page; no email is sent.
 - Dark theme by default with a light/dark toggle (remembered, synced across tabs), custom 404, skip link, keyboard-friendly menus, `sitemap.xml`, `robots.txt` and a default social card at `/og`
 
 ### Admin panel (`/studio`)
