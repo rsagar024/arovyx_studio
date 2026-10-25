@@ -5,16 +5,14 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
   AlertTriangle,
-  ArrowDown,
-  ArrowUp,
   ExternalLink,
   Loader2,
   RotateCcw,
   Save,
   UserRound,
 } from "lucide-react";
-import { CATEGORY_META, cn } from "@/lib/utils";
-import type { Category } from "@/lib/validators";
+import { cn } from "@/lib/utils";
+import ProjectPicker, { type PickerOption } from "@/components/studio/ProjectPicker";
 
 const inputClass =
   "w-full rounded-lg border border-[var(--border)] bg-[var(--panel)] px-3.5 py-2.5 text-sm text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-accent-500/60 focus:outline-none";
@@ -35,14 +33,6 @@ export interface SettingsValues {
 }
 
 type Key = keyof SettingsValues;
-
-export interface HeroOption {
-  id: string;
-  title: string;
-  category: Category;
-}
-
-const MAX_HERO = 3;
 
 const sameIds = (a: string[], b: string[]) => a.length === b.length && a.every((id, i) => id === b[i]);
 
@@ -71,13 +61,16 @@ function trimAll(values: SettingsValues): SettingsValues {
 export default function SettingsForm({
   initial,
   initialHeroIds,
-  heroOptions,
+  initialFeaturedIds,
+  projectOptions,
 }: {
   initial: SettingsValues;
   /** Saved hero card choices (project ids, in display order). */
   initialHeroIds: string[];
-  /** Published projects that can be shown in the hero. */
-  heroOptions: HeroOption[];
+  /** Saved "Featured projects" choices (project ids, in display order). */
+  initialFeaturedIds: string[];
+  /** Published projects that can be picked for the hero / featured grid. */
+  projectOptions: PickerOption[];
 }) {
   const router = useRouter();
   const [saved, setSaved] = useState<SettingsValues>(initial);
@@ -87,34 +80,16 @@ export default function SettingsForm({
   const [saving, setSaving] = useState(false);
   const [avatarBroken, setAvatarBroken] = useState(false);
   // Drop saved choices that are no longer published so they can't block saving.
-  const validInitialHero = initialHeroIds.filter((id) => heroOptions.some((o) => o.id === id));
-  const [savedHero, setSavedHero] = useState<string[]>(validInitialHero);
-  const [heroIds, setHeroIds] = useState<string[]>(validInitialHero);
+  const published = (ids: string[]) => ids.filter((id) => projectOptions.some((o) => o.id === id));
+  const [savedHero, setSavedHero] = useState<string[]>(() => published(initialHeroIds));
+  const [heroIds, setHeroIds] = useState<string[]>(() => published(initialHeroIds));
+  const [savedFeatured, setSavedFeatured] = useState<string[]>(() => published(initialFeaturedIds));
+  const [featuredIds, setFeaturedIds] = useState<string[]>(() => published(initialFeaturedIds));
 
   const dirty =
-    (Object.keys(form) as Key[]).some((key) => form[key] !== saved[key]) || !sameIds(heroIds, savedHero);
-
-  function toggleHero(id: string) {
-    setHeroIds((prev) => {
-      if (prev.includes(id)) return prev.filter((x) => x !== id);
-      if (prev.length >= MAX_HERO) {
-        toast.error(`Pick at most ${MAX_HERO} projects — untick one first.`);
-        return prev;
-      }
-      return [...prev, id];
-    });
-  }
-
-  function moveHero(id: string, delta: -1 | 1) {
-    setHeroIds((prev) => {
-      const i = prev.indexOf(id);
-      const j = i + delta;
-      if (i < 0 || j < 0 || j >= prev.length) return prev;
-      const next = [...prev];
-      [next[i], next[j]] = [next[j]!, next[i]!];
-      return next;
-    });
-  }
+    (Object.keys(form) as Key[]).some((key) => form[key] !== saved[key]) ||
+    !sameIds(heroIds, savedHero) ||
+    !sameIds(featuredIds, savedFeatured);
 
   const set =
     (key: Key) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -143,6 +118,7 @@ export default function SettingsForm({
   function reset() {
     setForm(saved);
     setHeroIds(savedHero);
+    setFeaturedIds(savedFeatured);
     setFieldErrors({});
     setFormError(null);
     setAvatarBroken(false);
@@ -175,7 +151,7 @@ export default function SettingsForm({
       const res = await fetch("/api/admin/settings", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, heroProjectIds: heroIds }),
+        body: JSON.stringify({ ...payload, heroProjectIds: heroIds, featuredProjectIds: featuredIds }),
       });
       const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
@@ -193,6 +169,7 @@ export default function SettingsForm({
       setSaved(payload);
       setForm(payload);
       setSavedHero(heroIds);
+      setSavedFeatured(featuredIds);
       toast.success("Settings saved — public site updated.");
       router.refresh();
     } catch {
@@ -327,92 +304,27 @@ export default function SettingsForm({
         {field("resumeUrl", "Résumé URL", { type: "url", placeholder: "https://…/resume.pdf" })}
       </fieldset>
 
-      <fieldset className="glass space-y-4 rounded-2xl p-5 sm:p-6">
-        <legend className="micro-label px-1">Hero showcase</legend>
-        <p className="text-sm text-[var(--muted)]">
-          Pick up to {MAX_HERO} projects for the floating cards beside the home page title, in order.{" "}
-          {heroIds.length === 0 && "None picked — the latest 3 published projects are shown automatically."}
-        </p>
+      <ProjectPicker
+        legend="Hero showcase"
+        description="Pick up to 3 projects for the floating cards beside the home page title, in order."
+        fallbackHint="None picked — the latest 3 published projects are shown automatically."
+        max={3}
+        options={projectOptions}
+        value={heroIds}
+        onChange={setHeroIds}
+        error={fieldErrors.heroProjectIds}
+      />
 
-        {heroIds.length > 0 && (
-          <ol aria-label="Hero order" className="space-y-2">
-            {heroIds.map((id, index) => {
-              const option = heroOptions.find((o) => o.id === id);
-              if (!option) return null;
-              return (
-                <li
-                  key={id}
-                  className="flex items-center gap-3 rounded-lg border border-accent-500/30 bg-accent-400/5 px-3 py-2"
-                >
-                  <span className="w-5 text-center font-display text-sm font-semibold text-accent-600 dark:text-accent-400">
-                    {index + 1}
-                  </span>
-                  <span className="min-w-0 flex-1 truncate text-sm">{option.title}</span>
-                  <button
-                    type="button"
-                    onClick={() => moveHero(id, -1)}
-                    disabled={index === 0}
-                    aria-label={`Move ${option.title} up`}
-                    className="rounded p-1 text-[var(--muted)] transition-colors hover:text-[var(--fg)] disabled:opacity-30"
-                  >
-                    <ArrowUp className="h-4 w-4" aria-hidden />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => moveHero(id, 1)}
-                    disabled={index === heroIds.length - 1}
-                    aria-label={`Move ${option.title} down`}
-                    className="rounded p-1 text-[var(--muted)] transition-colors hover:text-[var(--fg)] disabled:opacity-30"
-                  >
-                    <ArrowDown className="h-4 w-4" aria-hidden />
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-        )}
-
-        {heroOptions.length === 0 ? (
-          <p className="text-sm text-[var(--muted)]">No published projects yet.</p>
-        ) : (
-          <ul className="grid gap-2 sm:grid-cols-2">
-            {heroOptions.map((option) => {
-              const checked = heroIds.includes(option.id);
-              const full = !checked && heroIds.length >= MAX_HERO;
-              return (
-                <li key={option.id}>
-                  <label
-                    className={cn(
-                      "flex cursor-pointer items-center gap-3 rounded-lg border px-3 py-2 text-sm transition-colors",
-                      checked
-                        ? "border-accent-500/40 bg-accent-400/10"
-                        : "border-[var(--border)] bg-[var(--panel)] hover:border-accent-500/30",
-                      full && "opacity-50"
-                    )}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={checked}
-                      onChange={() => toggleHero(option.id)}
-                      className="h-4 w-4 accent-cyan-500"
-                    />
-                    <span className="min-w-0 flex-1 truncate">{option.title}</span>
-                    <span
-                      className={cn(
-                        "shrink-0 rounded border px-1.5 py-0.5 text-[10px] uppercase tracking-micro",
-                        CATEGORY_META[option.category].chip
-                      )}
-                    >
-                      {CATEGORY_META[option.category].label}
-                    </span>
-                  </label>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-        {fieldErrors.heroProjectIds && <span className={errorClass}>{fieldErrors.heroProjectIds}</span>}
-      </fieldset>
+      <ProjectPicker
+        legend="Featured projects"
+        description="Pick up to 6 projects for the home page “Featured projects” grid, in order."
+        fallbackHint="None picked — the 6 newest published projects are shown automatically."
+        max={6}
+        options={projectOptions}
+        value={featuredIds}
+        onChange={setFeaturedIds}
+        error={fieldErrors.featuredProjectIds}
+      />
 
       <div className="flex flex-wrap items-center justify-end gap-3 border-t border-[var(--border)] pt-5">
         <button

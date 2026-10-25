@@ -120,7 +120,7 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
   - **Manual add** without AI
 - **Projects:** search, publish/unpublish, edit (same form, with the **AI Description Improver**), delete
 - **Messages:** inbox with read/unread, detail view, reply by email, delete
-- **Settings:** site name, owner name, tagline, bio, email, socials, avatar and résumé, live on the public site as soon as you save. **Hero showcase:** pick up to 3 projects (and their order) for the floating cards beside the home page title; with none picked, the latest 3 published are shown.
+- **Settings:** site name, owner name, tagline, bio, email, socials, avatar and résumé, live on the public site as soon as you save. **Hero showcase:** pick up to 3 projects (and their order) for the floating cards beside the home page title; with none picked, the latest 3 published are shown. **Featured projects:** pick up to 6 projects (and their order) for the home page grid; with none picked, the 6 newest published are shown.
 
 Every AI call (generate or improve, success or failure) is logged to the `AiLog` table and shown on Overview.
 
@@ -252,7 +252,7 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
    - **Add Project:** paste a GitHub/npm/PyPI/store/website URL, review the AI draft, edit, **Save**. It's live immediately, no redeploy needed.
    - **Bulk mode:** one URL per line; each becomes a draft.
    - **Projects:** publish/unpublish, edit (with **Improve with AI**), delete.
-   - **Messages:** contact-form inbox. **Settings:** name, bio, socials, avatar, résumé, and **Hero showcase** (which projects float beside the home title), all live on save.
+   - **Messages:** contact-form inbox. **Settings:** name, bio, socials, avatar, résumé, **Hero showcase** (which projects float beside the home title) and **Featured projects** (which projects fill the home grid), all live on save.
    - **Overview:** counts plus a log of every AI job.
 4. **Log out** at the bottom of the sidebar.
 

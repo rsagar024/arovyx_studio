@@ -194,6 +194,8 @@ export const settingsInputSchema = z.object({
   resumeUrl: z.string().trim().url().or(z.literal("")),
   /** Up to 3 project ids shown as the home hero cards, in order (empty = latest 3). */
   heroProjectIds: z.array(z.string().cuid("Invalid project id")).max(3, "Pick at most 3 projects"),
+  /** Up to 6 project ids for the home "Featured projects" grid, in order (empty = latest 6). */
+  featuredProjectIds: z.array(z.string().cuid("Invalid project id")).max(6, "Pick at most 6 projects"),
 });
 
 export type SettingsInput = z.infer<typeof settingsInputSchema>;

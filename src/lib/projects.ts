@@ -123,22 +123,26 @@ export async function getSimilarProjects(project: ProjectDTO, limit = 3): Promis
 }
 
 /**
- * Projects for the home hero cards: the ones chosen in Studio (SiteConfig
- * `heroProjectIds`, JSON string[]) in that order, skipping any that are
- * unpublished or deleted. Falls back to the latest published when none
- * of the choices are available.
+ * Projects chosen in Studio (a SiteConfig JSON string[] of ids) in that
+ * order, skipping any that are unpublished or deleted. Falls back to the
+ * latest published when none of the choices are available.
  */
-export function pickHeroProjects(
+export function pickChosenProjects(
   published: ProjectDTO[],
-  heroProjectIds: string | null | undefined,
-  limit = 3
+  idsJson: string | null | undefined,
+  limit: number
 ): ProjectDTO[] {
   const byId = new Map(published.map((p) => [p.id, p]));
-  const chosen = parseJsonStringArray(heroProjectIds)
+  const chosen = parseJsonStringArray(idsJson)
     .map((id) => byId.get(id))
     .filter((p): p is ProjectDTO => Boolean(p))
     .slice(0, limit);
   return chosen.length ? chosen : published.slice(0, limit);
+}
+
+/** Home hero cards (SiteConfig `heroProjectIds`, up to 3). */
+export function pickHeroProjects(published: ProjectDTO[], heroProjectIds: string | null | undefined, limit = 3) {
+  return pickChosenProjects(published, heroProjectIds, limit);
 }
 
 /** Single-row site settings (with defaults if the row is missing). */
@@ -158,6 +162,7 @@ export async function getSiteConfig() {
     avatarUrl: "",
     resumeUrl: "",
     heroProjectIds: "[]",
+    featuredProjectIds: "[]",
     updatedAt: new Date(),
   };
 }

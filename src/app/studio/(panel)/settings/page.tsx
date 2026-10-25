@@ -33,7 +33,8 @@ export default async function StudioSettingsPage() {
           resumeUrl: config.resumeUrl,
         }}
         initialHeroIds={parseJsonStringArray(config.heroProjectIds)}
-        heroOptions={published.map((p) => ({ id: p.id, title: p.title, category: p.category }))}
+        initialFeaturedIds={parseJsonStringArray(config.featuredProjectIds)}
+        projectOptions={published.map((p) => ({ id: p.id, title: p.title, category: p.category }))}
       />
     </div>
   );
