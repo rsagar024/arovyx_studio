@@ -37,6 +37,8 @@ interface FormState {
   sourceUrl: string;
   demoUrl: string;
   imageUrl: string;
+  bannerUrl: string;
+  screenshotsText: string;
   stars: string;
   downloads: string;
   tagsText: string;
@@ -51,27 +53,32 @@ export interface AiContext {
   requestedCategory?: Category;
 }
 
+/** AI draft or existing project — arrays are joined into text fields. */
+export type ProjectFormInitial = Partial<{
+  title: string;
+  shortDescription: string;
+  longDescription: string;
+  category: Category;
+  status: Status;
+  version: string | null;
+  sourceUrl: string;
+  demoUrl: string | null;
+  imageUrl: string | null;
+  bannerUrl: string | null;
+  screenshots: string[];
+  stars: number | null;
+  downloads: number | null;
+  tags: string[];
+  techStack: string[];
+  features: string[];
+  isPublished: boolean;
+  aiGenerated: boolean;
+}>;
+
 interface ProjectFormProps {
   mode: "create" | "edit";
   /** AI draft or existing project — arrays are joined into text fields. */
-  initial?: Partial<{
-    title: string;
-    shortDescription: string;
-    longDescription: string;
-    category: Category;
-    status: Status;
-    version: string | null;
-    sourceUrl: string;
-    demoUrl: string | null;
-    imageUrl: string | null;
-    stars: number | null;
-    downloads: number | null;
-    tags: string[];
-    techStack: string[];
-    features: string[];
-    isPublished: boolean;
-    aiGenerated: boolean;
-  }>;
+  initial?: ProjectFormInitial;
   /** Present in the AI flow — enables Regenerate on the same fetched data. */
   ai?: AiContext | null;
   projectId?: string;
@@ -103,6 +110,8 @@ function seedToForm(seed?: ProjectFormProps["initial"]): FormState {
     sourceUrl: seed?.sourceUrl ?? "",
     demoUrl: seed?.demoUrl ?? "",
     imageUrl: seed?.imageUrl ?? "",
+    bannerUrl: seed?.bannerUrl ?? "",
+    screenshotsText: (seed?.screenshots ?? []).join("\n"),
     stars: seed?.stars != null ? String(seed.stars) : "",
     downloads: seed?.downloads != null ? String(seed.downloads) : "",
     tagsText: (seed?.tags ?? []).join(", "),
@@ -186,6 +195,12 @@ export default function ProjectForm({
       errs.demoUrl = "Must be a valid http(s) URL, or empty.";
     if (form.imageUrl.trim() && !isHttpUrl(form.imageUrl.trim()))
       errs.imageUrl = "Must be a valid http(s) URL, or empty.";
+    if (form.bannerUrl.trim() && !isHttpUrl(form.bannerUrl.trim()))
+      errs.bannerUrl = "Must be a valid http(s) URL, or empty.";
+    const shots = splitLines(form.screenshotsText);
+    if (shots.length > 12) errs.screenshots = "At most 12 screenshots.";
+    else if (shots.some((s) => !isHttpUrl(s)))
+      errs.screenshots = "Every line must be a valid http(s) URL.";
     if (form.stars && !/^\d+$/.test(form.stars)) errs.stars = "Must be a whole number ≥ 0.";
     if (form.downloads && !/^\d+$/.test(form.downloads))
       errs.downloads = "Must be a whole number ≥ 0.";
@@ -205,6 +220,8 @@ export default function ProjectForm({
       sourceUrl: form.sourceUrl.trim(),
       demoUrl: form.demoUrl.trim() || null,
       imageUrl: form.imageUrl.trim() || null,
+      bannerUrl: form.bannerUrl.trim() || null,
+      screenshots: splitLines(form.screenshotsText),
       stars: form.stars === "" ? null : Number(form.stars),
       downloads: form.downloads === "" ? null : Number(form.downloads),
       tags: splitCommas(form.tagsText),
@@ -326,6 +343,8 @@ export default function ProjectForm({
         status: draft.status,
         version: draft.version ?? "",
         imageUrl: draft.imageUrl ?? "",
+        bannerUrl: draft.bannerUrl ?? "",
+        screenshotsText: (draft.screenshots ?? []).join("\n"),
         demoUrl: draft.demoUrl ?? "",
         tagsText: draft.tags.join(", "),
         techText: draft.techStack.join(", "),
@@ -629,22 +648,96 @@ export default function ProjectForm({
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-3">
+        {/* Media — filled automatically from Play Store links, editable for any project */}
+        <div className="space-y-4 rounded-xl border border-[var(--border)] p-4">
+          <p className="micro-label">Media</p>
+
+          <div className="flex items-start gap-3">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--panel)]">
+              {isHttpUrl(form.imageUrl.trim()) ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={form.imageUrl.trim()} alt="Icon preview" className="h-full w-full object-cover" />
+              ) : (
+                <span className="text-[10px] text-[var(--muted)]">icon</span>
+              )}
+            </div>
+            <div className="flex-1">
+              <label htmlFor="pf-image" className={labelClass}>
+                Icon URL <span className="normal-case tracking-normal">(optional — app icon / thumbnail)</span>
+              </label>
+              <input
+                id="pf-image"
+                type="url"
+                value={form.imageUrl}
+                onChange={set("imageUrl")}
+                placeholder="https://…"
+                aria-invalid={Boolean(fieldErrors.imageUrl)}
+                className={inputClass}
+              />
+              {fieldErrors.imageUrl && <span className={errorClass}>{fieldErrors.imageUrl}</span>}
+            </div>
+          </div>
+
           <div>
-            <label htmlFor="pf-image" className={labelClass}>
-              Image URL <span className="normal-case tracking-normal">(optional)</span>
+            <label htmlFor="pf-banner" className={labelClass}>
+              Banner / feature graphic URL{" "}
+              <span className="normal-case tracking-normal">(optional — detail page background)</span>
             </label>
             <input
-              id="pf-image"
+              id="pf-banner"
               type="url"
-              value={form.imageUrl}
-              onChange={set("imageUrl")}
+              value={form.bannerUrl}
+              onChange={set("bannerUrl")}
               placeholder="https://…"
-              aria-invalid={Boolean(fieldErrors.imageUrl)}
+              aria-invalid={Boolean(fieldErrors.bannerUrl)}
               className={inputClass}
             />
-            {fieldErrors.imageUrl && <span className={errorClass}>{fieldErrors.imageUrl}</span>}
+            {fieldErrors.bannerUrl && <span className={errorClass}>{fieldErrors.bannerUrl}</span>}
+            {isHttpUrl(form.bannerUrl.trim()) && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={form.bannerUrl.trim()}
+                alt="Banner preview"
+                className="mt-2 aspect-[1024/500] w-full max-w-md rounded-lg border border-[var(--border)] object-cover"
+              />
+            )}
           </div>
+
+          <div>
+            <label htmlFor="pf-screens" className={labelClass}>
+              Screenshots <span className="normal-case tracking-normal">(one URL per line, max 12)</span>
+            </label>
+            <textarea
+              id="pf-screens"
+              rows={4}
+              value={form.screenshotsText}
+              onChange={set("screenshotsText")}
+              placeholder="https://…"
+              aria-invalid={Boolean(fieldErrors.screenshots)}
+              className={cn(inputClass, "resize-y font-mono text-[12px]")}
+            />
+            {fieldErrors.screenshots && <span className={errorClass}>{fieldErrors.screenshots}</span>}
+            {splitLines(form.screenshotsText).some(isHttpUrl) && (
+              <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
+                {splitLines(form.screenshotsText)
+                  .filter(isHttpUrl)
+                  .slice(0, 12)
+                  .map((src, i) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={`${src}-${i}`}
+                      src={src}
+                      alt={`Screenshot ${i + 1} preview`}
+                      loading="lazy"
+                      className="h-28 w-auto shrink-0 rounded-md border border-[var(--border)] object-cover"
+                    />
+                  ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label htmlFor="pf-stars" className={labelClass}>
               Stars <span className="normal-case tracking-normal">(optional)</span>

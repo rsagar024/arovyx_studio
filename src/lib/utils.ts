@@ -34,6 +34,24 @@ export function absoluteUrl(path = ""): string {
   return `${base.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
 }
 
+export type SourceKind = "playstore" | "github" | "gitlab" | "npm" | "pypi" | "web";
+
+/** What a project's source link points at — drives the button label and icon. */
+export function sourceLinkMeta(url: string | null | undefined): { kind: SourceKind; label: string } {
+  let host = "";
+  try {
+    host = new URL(url ?? "").hostname.replace(/^www\./, "").toLowerCase();
+  } catch {
+    return { kind: "web", label: "Visit" };
+  }
+  if (host === "play.google.com") return { kind: "playstore", label: "Get it on Google Play" };
+  if (host === "github.com") return { kind: "github", label: "View source" };
+  if (host === "gitlab.com") return { kind: "gitlab", label: "View source" };
+  if (host === "npmjs.com" || host === "npmjs.org") return { kind: "npm", label: "View on npm" };
+  if (host === "pypi.org") return { kind: "pypi", label: "View on PyPI" };
+  return { kind: "web", label: "Visit" };
+}
+
 /** Category display metadata — labels + Tailwind chip classes (one accent per category). */
 export const CATEGORY_META: Record<Category, {
   label: string;

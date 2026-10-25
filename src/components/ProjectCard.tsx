@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight, Github, Star, Download } from "lucide-react";
+import { ArrowUpRight, Github, Globe, Star, Download } from "lucide-react";
 import type { ProjectDTO } from "@/lib/validators";
-import { CATEGORY_META, cn } from "@/lib/utils";
+import { CATEGORY_META, cn, sourceLinkMeta } from "@/lib/utils";
 import CategoryBadge from "@/components/CategoryBadge";
 import StatusBadge from "@/components/StatusBadge";
 import TechChip from "@/components/TechChip";
+import GooglePlayIcon from "@/components/icons/GooglePlayIcon";
 
 /** Small preview tile used in hero collage / detail pages. */
 export default function ProjectCard({
@@ -18,6 +19,7 @@ export default function ProjectCard({
 }) {
   const meta = CATEGORY_META[project.category];
   const accent = meta.accentText;
+  const source = sourceLinkMeta(project.sourceUrl);
 
   return (
     <article
@@ -46,17 +48,28 @@ export default function ProjectCard({
 
       {/* header: icon or image + status */}
       <div className="mb-4 flex items-start justify-between gap-3">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[var(--border)] bg-black/20">
-          {project.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={project.imageUrl}
-              alt={`${project.title} preview`}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <span className={cn("font-display text-lg font-semibold", accent)}>
-              {project.title.charAt(0).toUpperCase()}
+        <div className="relative shrink-0">
+          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg border border-[var(--border)] bg-black/20">
+            {project.imageUrl ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={project.imageUrl}
+                alt={`${project.title} preview`}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <span className={cn("font-display text-lg font-semibold", accent)}>
+                {project.title.charAt(0).toUpperCase()}
+              </span>
+            )}
+          </div>
+          {source.kind === "playstore" && (
+            <span
+              title="On Google Play"
+              className="absolute -bottom-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg)]"
+            >
+              <GooglePlayIcon className="h-3 w-3" />
+              <span className="sr-only">On Google Play</span>
             </span>
           )}
         </div>
@@ -118,11 +131,17 @@ export default function ProjectCard({
               href={project.sourceUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`${project.title} source`}
+              aria-label={`${project.title}: ${source.label}`}
               onClick={(e) => e.stopPropagation()}
               className="flex h-8 w-8 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg)] text-[var(--muted)] hover:border-accent-500/60 hover:text-accent-500"
             >
-              <Github className="h-4 w-4" />
+              {source.kind === "playstore" ? (
+                <GooglePlayIcon className="h-4 w-4" />
+              ) : source.kind === "github" ? (
+                <Github className="h-4 w-4" aria-hidden />
+              ) : (
+                <Globe className="h-4 w-4" aria-hidden />
+              )}
             </a>
           )}
           {project.demoUrl && (

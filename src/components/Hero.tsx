@@ -4,12 +4,30 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowRight, Zap } from "lucide-react";
 import { CATEGORY_META, cn } from "@/lib/utils";
+import type { Category } from "@/lib/validators";
 
 const PHRASES = [
   "apps that ship.",
   "games that flow.",
   "packages devs reuse.",
   "plugins that extend.",
+];
+
+/** One floating showcase card — chosen in Studio → Settings → Hero showcase. */
+export interface HeroCard {
+  slug: string;
+  title: string;
+  category: Category;
+  /** Short subtitle (tech stack or description). */
+  meta: string;
+  iconUrl: string | null;
+}
+
+/** Layout + float phase per card position (up to 3). */
+const CARD_SLOTS = [
+  { delay: 0, className: "w-[85%]" },
+  { delay: 1200, className: "ml-auto w-[85%]" },
+  { delay: 2400, className: "w-[85%] sm:ml-8" },
 ];
 
 /**
@@ -21,10 +39,13 @@ export default function Hero({
   ownerName,
   tagline,
   bio,
+  cards,
 }: {
   ownerName: string;
   tagline: string;
   bio: string;
+  /** Real projects for the floating cards; empty = orb only. */
+  cards: HeroCard[];
 }) {
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [typed, setTyped] = useState("");
@@ -106,18 +127,17 @@ export default function Hero({
         </div>
 
         {/* ---------- right: orb + floating cards (tablet & up) ---------- */}
-        <div
-          aria-hidden
-          className="relative mx-auto hidden w-full max-w-[22rem] justify-self-center md:flex lg:max-w-md"
-        >
-          <div className="absolute -inset-6 animate-pulse-glow rounded-full bg-gradient-to-tr from-accent-500/30 via-accent-400/10 to-transparent blur-3xl" />
-          <div className="absolute right-4 top-0 h-36 w-36 animate-gradient-x rounded-full bg-gradient-to-br bg-[length:200%_200%] from-accent-400 via-accent-600 to-accent-300 opacity-80 sm:h-44 sm:w-44 lg:right-6 lg:top-4 lg:h-52 lg:w-52" />
+        <div className="relative mx-auto hidden w-full max-w-[22rem] justify-self-center md:flex lg:max-w-md">
+          <div aria-hidden className="absolute -inset-6 animate-pulse-glow rounded-full bg-gradient-to-tr from-accent-500/30 via-accent-400/10 to-transparent blur-3xl" />
+          <div aria-hidden className="absolute right-4 top-0 h-36 w-36 animate-gradient-x rounded-full bg-gradient-to-br bg-[length:200%_200%] from-accent-400 via-accent-600 to-accent-300 opacity-80 sm:h-44 sm:w-44 lg:right-6 lg:top-4 lg:h-52 lg:w-52" />
 
-          <div className="relative w-full space-y-3 pt-14 sm:space-y-4 sm:pt-16 lg:pt-20">
-            <FloatingCard label="APP" accent={CATEGORY_META.APP.accentText} title="PulseBoard" meta="realtime analytics" delay={0} className="w-[85%]" />
-            <FloatingCard label="GAME" accent={CATEGORY_META.GAME.accentText} title="Nebula Drift" meta="canvas arcade" delay={1200} className="ml-auto w-[85%]" />
-            <FloatingCard label="PACKAGE" accent={CATEGORY_META.PACKAGE.accentText} title="tinyfetch" meta="1.2 kB fetch" delay={2400} className="w-[85%] sm:ml-8" />
-          </div>
+          {cards.length > 0 && (
+            <ul aria-label="Featured work" className="relative w-full space-y-3 pt-14 sm:space-y-4 sm:pt-16 lg:pt-20">
+              {cards.slice(0, CARD_SLOTS.length).map((card, index) => (
+                <FloatingCard key={card.slug} card={card} {...CARD_SLOTS[index]!} />
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </section>
@@ -125,32 +145,48 @@ export default function Hero({
 }
 
 function FloatingCard({
-  label,
-  accent,
-  title,
-  meta,
+  card,
   delay,
   className,
 }: {
-  label: string;
-  accent: string;
-  title: string;
-  meta: string;
+  card: HeroCard;
   /** Float-animation offset in ms so the cards drift out of phase. */
   delay: number;
   className?: string;
 }) {
+  const meta = CATEGORY_META[card.category];
   return (
     // outer wrapper floats; inner card keeps its own hover lift
-    <div className={cn("motion-safe:animate-float", className)} style={{ animationDelay: `${delay}ms` }}>
-      <div className="glass rounded-xl p-4 shadow-card transition-transform duration-300 hover:-translate-y-1">
+    <li className={cn("motion-safe:animate-float", className)} style={{ animationDelay: `${delay}ms` }}>
+      <Link
+        href={`/projects/${card.slug}`}
+        className={cn(
+          "glass block rounded-xl p-4 shadow-card transition-all duration-300 hover:-translate-y-1 focus-visible:-translate-y-1",
+          meta.hoverBorder
+        )}
+      >
         <div className="flex items-center justify-between">
-          <span className={`text-[10px] font-semibold uppercase tracking-micro ${accent}`}>{label}</span>
-          <Zap className="h-3.5 w-3.5 text-accent-400/70" />
+          <span className={`text-[10px] font-semibold uppercase tracking-micro ${meta.accentText}`}>
+            {meta.label}
+          </span>
+          <Zap className="h-3.5 w-3.5 text-accent-400/70" aria-hidden />
         </div>
-        <p className="mt-2 font-display text-sm font-semibold">{title}</p>
-        <p className="mt-0.5 truncate font-mono text-[11px] text-[var(--muted)]">{meta}</p>
-      </div>
-    </div>
+        <div className="mt-2 flex items-center gap-2.5">
+          {card.iconUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={card.iconUrl}
+              alt=""
+              aria-hidden
+              className="h-8 w-8 shrink-0 rounded-lg border border-[var(--border)] object-cover"
+            />
+          )}
+          <div className="min-w-0">
+            <p className="truncate font-display text-sm font-semibold">{card.title}</p>
+            <p className="mt-0.5 truncate font-mono text-[11px] text-[var(--muted)]">{card.meta}</p>
+          </div>
+        </div>
+      </Link>
+    </li>
   );
 }

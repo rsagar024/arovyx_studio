@@ -1,5 +1,5 @@
 import { db } from "@/lib/db";
-import { toProjectDTO, type ProjectDTO } from "@/lib/validators";
+import { parseJsonStringArray, toProjectDTO, type ProjectDTO } from "@/lib/validators";
 
 /** All published projects, newest first, decoded to DTOs. */
 export async function getPublishedProjects(): Promise<ProjectDTO[]> {
@@ -61,6 +61,25 @@ export async function getSimilarProjects(project: ProjectDTO, limit = 3): Promis
   return [...matched, ...fallback].slice(0, limit);
 }
 
+/**
+ * Projects for the home hero cards: the ones chosen in Studio (SiteConfig
+ * `heroProjectIds`, JSON string[]) in that order, skipping any that are
+ * unpublished or deleted. Falls back to the latest published when none
+ * of the choices are available.
+ */
+export function pickHeroProjects(
+  published: ProjectDTO[],
+  heroProjectIds: string | null | undefined,
+  limit = 3
+): ProjectDTO[] {
+  const byId = new Map(published.map((p) => [p.id, p]));
+  const chosen = parseJsonStringArray(heroProjectIds)
+    .map((id) => byId.get(id))
+    .filter((p): p is ProjectDTO => Boolean(p))
+    .slice(0, limit);
+  return chosen.length ? chosen : published.slice(0, limit);
+}
+
 /** Single-row site settings (with defaults if the row is missing). */
 export async function getSiteConfig() {
   const config = await db.siteConfig.findFirst();
@@ -77,6 +96,7 @@ export async function getSiteConfig() {
     instagramUrl: "",
     avatarUrl: "",
     resumeUrl: "",
+    heroProjectIds: "[]",
     updatedAt: new Date(),
   };
 }

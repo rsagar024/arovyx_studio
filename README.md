@@ -101,7 +101,7 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
 ### Public site
 - **Home:** hero with typing tagline, live stats strip, featured projects, category tiles
 - **`/projects`:** category tabs and search (title, tag, tech) synced to `?category=&q=`
-- **`/projects/[slug]`:** full detail (markdown), features, tech stack, source/demo buttons, similar projects, per-project SEO and Open Graph
+- **`/projects/[slug]`:** full detail (markdown), features, tech stack, source/demo buttons, similar projects, per-project SEO and Open Graph. When set, it also shows an **app icon** beside the title, a **banner / feature graphic** behind the header, and a scrollable **screenshot gallery**. Play Store projects get a **"Get it on Google Play"** button; without media those parts simply don't render.
 - **`/about`:** bio, avatar, résumé link, tech arsenal, shipped timeline
 - **`/contact`:** form (validated and rate-limited, 5 per 10 min per IP), plus email/GitHub/LinkedIn/Instagram cards with copy-email. After a submission the server saves the message and returns a confirmation shown on the page; no email is sent.
 - Dark theme by default with a light/dark toggle (remembered, synced across tabs), custom 404, skip link, keyboard-friendly menus, `sitemap.xml`, `robots.txt` and a default social card at `/og`
@@ -110,12 +110,13 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
 - **Overview:** project counts per category (live/draft), unread messages, AI jobs in the last 30 days with success rate, recent AI jobs (with errors), recently updated projects
 - **Add Project (AI auto-fill):**
   - paste a URL and choose a category (or **AUTO**) to get an editable preview
+  - **Google Play links** also bring in the **app icon**, **feature graphic** and up to 8 **phone screenshots**, plus the install count, read from the store page itself (never invented by the AI). All of it stays editable under **Media** in the form, and you can fill Media by hand for any project.
   - **Regenerate** re-runs the AI on the *same* fetched data, with an optional extra instruction (e.g. "make it more playful")
   - **Bulk mode:** one URL per line, processed in sequence with per-URL progress, each saved as a draft
   - **Manual add** without AI
 - **Projects:** search, publish/unpublish, edit (same form, with the **AI Description Improver**), delete
 - **Messages:** inbox with read/unread, detail view, reply by email, delete
-- **Settings:** site name, owner name, tagline, bio, email, socials, avatar and résumé, live on the public site as soon as you save
+- **Settings:** site name, owner name, tagline, bio, email, socials, avatar and résumé, live on the public site as soon as you save. **Hero showcase:** pick up to 3 projects (and their order) for the floating cards beside the home page title; with none picked, the latest 3 published are shown.
 
 Every AI call (generate or improve, success or failure) is logged to the `AiLog` table and shown on Overview.
 
@@ -247,7 +248,7 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
    - **Add Project:** paste a GitHub/npm/PyPI/store/website URL, review the AI draft, edit, **Save**. It's live immediately, no redeploy needed.
    - **Bulk mode:** one URL per line; each becomes a draft.
    - **Projects:** publish/unpublish, edit (with **Improve with AI**), delete.
-   - **Messages:** contact-form inbox. **Settings:** name, bio, socials, avatar, résumé, all live on save.
+   - **Messages:** contact-form inbox. **Settings:** name, bio, socials, avatar, résumé, and **Hero showcase** (which projects float beside the home title), all live on save.
    - **Overview:** counts plus a log of every AI job.
 4. **Log out** at the bottom of the sidebar.
 

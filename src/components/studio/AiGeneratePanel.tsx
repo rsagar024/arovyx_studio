@@ -113,6 +113,7 @@ async function saveDraft(result: GenerateResult): Promise<void> {
       ...result.project,
       sourceUrl: result.url,
       stars: result.stars,
+      downloads: result.fetched.downloads ?? null,
       isPublished: false,
       aiGenerated: true,
     }),
@@ -437,11 +438,35 @@ export default function AiGeneratePanel({
                 ★ {result.stars.toLocaleString()}
               </span>
             )}
+            {result.project.screenshots.length > 0 && (
+              <span className="rounded border border-[var(--border)] px-2 py-0.5 text-[10px] text-[var(--muted)]">
+                {result.project.screenshots.length} screenshots
+              </span>
+            )}
           </div>
 
-          <h3 className="mt-3 font-display text-xl font-semibold tracking-tight">
-            {result.project.title}
-          </h3>
+          {result.project.bannerUrl && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={result.project.bannerUrl}
+              alt="Feature graphic"
+              className="mt-4 aspect-[1024/500] w-full rounded-xl border border-[var(--border)] object-cover"
+            />
+          )}
+
+          <div className="mt-3 flex items-center gap-3">
+            {result.project.imageUrl && (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={result.project.imageUrl}
+                alt="App icon"
+                className="h-12 w-12 shrink-0 rounded-xl border border-[var(--border)] object-cover"
+              />
+            )}
+            <h3 className="font-display text-xl font-semibold tracking-tight">
+              {result.project.title}
+            </h3>
+          </div>
           <p className="mt-1.5 text-sm text-[var(--muted)]">{result.project.shortDescription}</p>
 
           {result.project.longDescription && (

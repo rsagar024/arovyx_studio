@@ -31,7 +31,9 @@ model Project {
   version          String?
   sourceUrl        String
   demoUrl          String?
-  imageUrl         String?
+  imageUrl         String? // app icon / thumbnail
+  bannerUrl        String? // feature graphic / header background
+  screenshots      String   @default("[]") // JSON string[] (phone screenshots)
   stars            Int?
   downloads        Int?
   isPublished      Boolean  @default(true)
@@ -68,6 +70,7 @@ model SiteConfig {
   instagramUrl  String @default("")
   avatarUrl     String @default("")
   resumeUrl     String @default("")
+  heroProjectIds String @default("[]") // JSON string[] — up to 3 project ids for the home hero cards
   updatedAt     DateTime @updatedAt
 }
 
