@@ -1,23 +1,22 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Code2, Cpu, FileText, Rocket } from "lucide-react";
 import Reveal from "@/components/Reveal";
-import { getPublishedProjects, getSiteConfig } from "@/lib/projects";
-import { pageMetadata } from "@/lib/seo";
+import SectionLink from "@/components/SectionLink";
 import { CATEGORY_META, formatDate } from "@/lib/utils";
+import type { ProjectDTO } from "@/lib/validators";
+import type { getSiteConfig } from "@/lib/projects";
 
-export function generateMetadata(): Promise<Metadata> {
-  return pageMetadata({
-    title: "About",
-    description:
-      "Who is behind Arovyx Studio — background, tools of the trade, and a track record of shipped projects.",
-    path: "/about",
-  });
-}
+type SiteConfig = Awaited<ReturnType<typeof getSiteConfig>>;
 
-export default async function AboutPage() {
-  const [config, projects] = await Promise.all([getSiteConfig(), getPublishedProjects()]);
-
+/** Home-page "About" section (#about): bio, shipped timeline, tech arsenal. */
+export default function AboutSection({
+  config,
+  projects,
+}: {
+  config: SiteConfig;
+  /** Published projects, newest first. */
+  projects: ProjectDTO[];
+}) {
   // Tech arsenal: every tech across published projects, with usage counts
   const counts = new Map<string, number>();
   for (const project of projects) {
@@ -36,12 +35,12 @@ export default async function AboutPage() {
   const years = [...byYear.entries()].sort((a, b) => b[0] - a[0]);
 
   return (
-    <div className="container-page py-16">
+    <section id="about" aria-labelledby="about-heading" className="container-page scroll-mt-20 pt-24">
       <Reveal>
         <p className="micro-label">The maker</p>
-        <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h2 id="about-heading" className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
           About Arovyx
-        </h1>
+        </h2>
       </Reveal>
 
       <div className="mt-10 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
@@ -60,10 +59,10 @@ export default async function AboutPage() {
                 />
               )}
               <div>
-                <h2 id="bio-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
+                <h3 id="bio-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
                   <Rocket className="h-5 w-5 text-accent-500" aria-hidden />
                   The story
-                </h2>
+                </h3>
                 {config.avatarUrl && (
                   <p className="mt-0.5 text-sm text-[var(--muted)]">{config.ownerName}</p>
                 )}
@@ -83,12 +82,12 @@ export default async function AboutPage() {
                 See the work
                 <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
-              <Link
-                href="/contact"
+              <SectionLink
+                href="/#contact"
                 className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-4 py-2.5 text-sm font-medium transition-colors hover:border-accent-500/60"
               >
                 Work together
-              </Link>
+              </SectionLink>
               {config.resumeUrl && (
                 <a
                   href={config.resumeUrl}
@@ -105,10 +104,10 @@ export default async function AboutPage() {
 
           {/* timeline */}
           <section aria-labelledby="timeline-heading" className="mt-8">
-            <h2 id="timeline-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
+            <h3 id="timeline-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
               <Code2 className="h-5 w-5 text-accent-500" aria-hidden />
               Shipped
-            </h2>
+            </h3>
             <ol className="mt-5 space-y-6 border-l border-[var(--border)] pl-6">
               {years.map(([year, items]) => (
                 <li key={year} className="relative">
@@ -139,10 +138,10 @@ export default async function AboutPage() {
         {/* tech arsenal */}
         <Reveal delay={140}>
           <section aria-labelledby="arsenal-heading" className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6">
-            <h2 id="arsenal-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
+            <h3 id="arsenal-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
               <Cpu className="h-5 w-5 text-accent-500" aria-hidden />
               Tech arsenal
-            </h2>
+            </h3>
             <p className="mt-2 text-sm text-[var(--muted)]">
               Tools used across {projects.length} published {projects.length === 1 ? "project" : "projects"}.
             </p>
@@ -163,6 +162,6 @@ export default async function AboutPage() {
           </section>
         </Reveal>
       </div>
-    </div>
+    </section>
   );
 }

@@ -150,7 +150,7 @@ export function clientIp(req: NextRequest): string {
  * Pass extra paths (e.g. `/projects/my-slug`) when a single page changes.
  */
 export function revalidatePublicPages(extraPaths: string[] = []) {
-  for (const path of ["/", "/projects", "/about", "/contact", ...extraPaths]) {
+  for (const path of ["/", "/projects", ...extraPaths]) {
     revalidatePath(path);
   }
 }

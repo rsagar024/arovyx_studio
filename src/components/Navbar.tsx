@@ -5,24 +5,30 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
 import BrandMark from "@/components/BrandMark";
+import SectionLink from "@/components/SectionLink";
 import ThemeToggle from "@/components/ThemeToggle";
 import { CATEGORY_META, cn } from "@/lib/utils";
 import type { Category } from "@/lib/validators";
 
 const CATEGORY_ORDER: Category[] = ["APP", "GAME", "PACKAGE", "PLUGIN"];
 
+// About and Contact are sections of the home page — the links scroll to them.
 const links = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
+
+const HOME_SECTIONS = ["about", "contact"];
 
 export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuButton = useRef<HTMLButtonElement | null>(null);
+  /** Home-page section currently in view ("" = top of the page). */
+  const [section, setSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -30,6 +36,32 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Scroll-spy: highlight About / Contact while that section is on screen.
+  useEffect(() => {
+    if (pathname !== "/") {
+      setSection("");
+      return;
+    }
+    const targets = HOME_SECTIONS.map((id) => document.getElementById(id)).filter(
+      (el): el is HTMLElement => Boolean(el)
+    );
+    if (!targets.length || typeof IntersectionObserver === "undefined") return;
+    const visible = new Set<string>();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) visible.add(entry.target.id);
+          else visible.delete(entry.target.id);
+        }
+        // the lowest visible section wins (contact sits below about)
+        setSection(HOME_SECTIONS.filter((id) => visible.has(id)).pop() ?? "");
+      },
+      { rootMargin: "-45% 0px -50% 0px" }
+    );
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
 
   // close the mobile menu on navigation
   useEffect(() => {
@@ -48,8 +80,11 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [open]);
 
-  const isActive = (href: string) =>
-    href === "/" ? pathname === "/" : pathname.startsWith(href);
+  const isActive = (href: string) => {
+    if (href.startsWith("/#")) return pathname === "/" && section === href.slice(2);
+    if (href === "/") return pathname === "/" && section === "";
+    return pathname.startsWith(href);
+  };
 
   return (
     <header
@@ -112,9 +147,10 @@ export default function Navbar() {
                 </div>
               </div>
             ) : (
-              <Link
+              <SectionLink
                 key={link.href}
                 href={link.href}
+                aria-current={isActive(link.href) ? "page" : undefined}
                 className={cn(
                   "rounded-lg px-3 py-2 text-sm transition-colors",
                   isActive(link.href)
@@ -123,7 +159,7 @@ export default function Navbar() {
                 )}
               >
                 {link.label}
-              </Link>
+              </SectionLink>
             )
           )}
           <div className="ml-3">
@@ -156,9 +192,11 @@ export default function Navbar() {
         >
           <nav className="container-page flex flex-col gap-1 py-4" aria-label="Mobile">
             {links.map((link) => (
-              <Link
+              <SectionLink
                 key={link.href}
                 href={link.href}
+                onNavigate={() => setOpen(false)}
+                aria-current={isActive(link.href) ? "page" : undefined}
                 className={cn(
                   "rounded-lg px-3 py-2.5 text-sm",
                   isActive(link.href)
@@ -167,7 +205,7 @@ export default function Navbar() {
                 )}
               >
                 {link.label}
-              </Link>
+              </SectionLink>
             ))}
             <div className="mt-2 border-t border-[var(--border)] pt-3">
               <p className="micro-label px-3 pb-2">Categories</p>
