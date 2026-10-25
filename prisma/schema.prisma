@@ -1,0 +1,81 @@
+// Arovyx Studio — Prisma schema (SQLite)
+// Note on SQLite limitations (Prisma does not support enums or scalar lists here):
+// - category/status are stored as String columns, validated by Zod enums in lib/validators.ts
+// - tags/techStack/features are stored as JSON-encoded String columns
+//   and exposed as string[] via the mappers in lib/validators.ts
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Project {
+  id               String   @id @default(cuid())
+  slug             String   @unique
+  title            String
+  shortDescription String
+  longDescription  String   @default("")
+  category         String   @default("APP") // APP | GAME | PACKAGE | PLUGIN
+  tags             String   @default("[]") // JSON string[]
+  techStack        String   @default("[]") // JSON string[]
+  features         String   @default("[]") // JSON string[]
+  status           String   @default("IN_DEVELOPMENT") // LIVE | IN_DEVELOPMENT | ARCHIVED
+  version          String?
+  sourceUrl        String
+  demoUrl          String?
+  imageUrl         String?
+  stars            Int?
+  downloads        Int?
+  isPublished      Boolean  @default(true)
+  aiGenerated      Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([category, isPublished])
+  @@index([createdAt])
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead, createdAt])
+}
+
+// Single-row site settings (owner profile + social links)
+model SiteConfig {
+  id            Int    @id @default(1)
+  siteName      String @default("Arovyx Studio")
+  ownerName     String @default("Arovyx Studio Owner")
+  tagline       String @default("Building apps, games, packages & plugins.")
+  bio           String @default("")
+  email         String @default("")
+  githubUrl     String @default("")
+  linkedinUrl   String @default("")
+  instagramUrl  String @default("")
+  avatarUrl     String @default("")
+  resumeUrl     String @default("")
+  updatedAt     DateTime @updatedAt
+}
+
+// AI usage log, shown in admin Overview
+model AiLog {
+  id        String   @id @default(cuid())
+  url       String
+  action    String   @default("generate") // generate | improve
+  success   Boolean
+  error     String?
+  model     String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}

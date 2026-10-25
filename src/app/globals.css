@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #07090b;
+  /* same color as an RGB triplet, for translucent bars: rgb(var(--bg-rgb) / 0.8) */
+  --bg-rgb: 7 9 11;
+  --toast-bg: #10141a;
+  --fg: #e7edf3;
+  --muted: #8b97a6;
+  --panel: rgba(255, 255, 255, 0.04);
+  --border: rgba(255, 255, 255, 0.09);
+  --accent: #22d3ee;
+}
+
+html.light {
+  --bg: #f4f6f8;
+  --bg-rgb: 244 246 248;
+  --toast-bg: #ffffff;
+  --fg: #0b0e11;
+  --muted: #55616f;
+  --panel: rgba(255, 255, 255, 0.7);
+  --border: rgba(11, 14, 17, 0.12);
+}
+
+html {
+  background-color: var(--bg);
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: "Space Grotesk", "DM Mono", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Subtle film-grain / noise texture over the whole page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer components {
+  .glass {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .accent-border {
+    border: 1px solid rgba(34, 211, 238, 0.35);
+  }
+
+  .micro-label {
+    @apply font-body text-[11px] uppercase tracking-micro;
+    color: var(--accent);
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* NOTE: use background-image (never the `background` shorthand) anywhere
+     near bg-clip-text — the shorthand resets background-clip. */
+  .animated-gradient {
+    background-image: linear-gradient(90deg, #22d3ee, #67e8f9, #0891b2, #22d3ee);
+    background-size: 300% 300%;
+    animation: gradient-x 8s ease infinite;
+  }
+}
+
+/* Gradient-filled heading text — defined outside @layer so its
+   background-clip/text-transparent pairing can never be overridden by
+   another utility's shorthand reset. */
+.gradient-text {
+  background-image: linear-gradient(90deg, #22d3ee, #67e8f9, #0891b2, #22d3ee);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-x 8s ease infinite;
+}
+
+/* Light theme needs a darker gradient or the text washes out on white. */
+html.light .gradient-text {
+  background-image: linear-gradient(90deg, #0e7490, #0891b2, #06b6d4, #0e7490);
+}
+
+/* Fallback: if background-clip:text is unsupported, show solid accent color
+   instead of an invisible word. */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .gradient-text {
+    color: var(--accent);
+    -webkit-text-fill-color: var(--accent);
+  }
+}
+
+/* Focus visibility for accessibility */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Form fields use `focus:outline-none` (which outranks the rule above), so
+   give keyboard focus a ring that survives it. */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.45);
+}
+
+/* Skip-to-content target: no outline flash when focused programmatically. */
+#main:focus {
+  outline: none;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
