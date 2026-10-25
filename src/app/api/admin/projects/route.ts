@@ -7,7 +7,13 @@ import {
 } from "@/lib/validators";
 import { uniqueSlug } from "@/lib/slug";
 import { getSession } from "@/lib/session";
-import { jsonError, jsonOk, zodErrorDetails, zodErrorMessage } from "@/lib/api";
+import {
+  jsonError,
+  jsonOk,
+  revalidatePublicPages,
+  zodErrorDetails,
+  zodErrorMessage,
+} from "@/lib/api";
 
 /**
  * GET /api/admin/projects (spec §7) — list ALL projects (drafts included),
@@ -54,6 +60,11 @@ export async function POST(req: NextRequest) {
       screenshots: JSON.stringify(screenshots),
     },
   });
+
+  // Refresh the cached home page (stats, featured, hero, about) and the new
+  // detail page — without this, new projects stayed invisible on "/" until
+  // the next deploy.
+  revalidatePublicPages([`/projects/${row.slug}`]);
 
   return jsonOk({ project: toProjectDTO(row) }, { status: 201 });
 }

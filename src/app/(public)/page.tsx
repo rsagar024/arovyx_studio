@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, Boxes, Gamepad2, Package, Puzzle } from "lucide-react";
 import Hero from "@/components/Hero";
+import CountUp from "@/components/CountUp";
 import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Reveal from "@/components/Reveal";
@@ -17,6 +18,10 @@ const CATEGORY_ICONS: Record<Category, typeof Boxes> = {
   PACKAGE: Package,
   PLUGIN: Puzzle,
 };
+
+// Safety net: mutations revalidate "/" on demand, but if any write path ever
+// misses it the cached page still refreshes within a minute.
+export const revalidate = 60;
 
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getSiteConfig();
@@ -63,9 +68,14 @@ export default async function HomePage() {
       {/* stats strip */}
       <section aria-label="Portfolio statistics" className="border-y border-[var(--border)] bg-[var(--panel)]">
         <div className="container-page grid grid-cols-2 divide-x divide-[var(--border)] md:grid-cols-5">
-          <Stat value={stats.total} label="Projects" accent />
-          {tiles.map((tile) => (
-            <Stat key={tile.category} value={tile.count} label={CATEGORY_META[tile.category].plural} />
+          <Stat value={stats.total} label="Projects" accent delay={0} />
+          {tiles.map((tile, index) => (
+            <Stat
+              key={tile.category}
+              value={tile.count}
+              label={CATEGORY_META[tile.category].plural}
+              delay={(index + 1) * 80}
+            />
           ))}
         </div>
       </section>
@@ -130,7 +140,7 @@ export default async function HomePage() {
                       <Icon className="h-5 w-5" aria-hidden />
                     </span>
                     <span className="font-display text-3xl font-semibold text-[var(--muted)] transition-colors group-hover:text-[var(--fg)]">
-                      {String(tile.count).padStart(2, "0")}
+                      <CountUp value={tile.count} delay={index * 80} />
                     </span>
                   </div>
                   <div className="mt-8">
@@ -154,7 +164,18 @@ export default async function HomePage() {
   );
 }
 
-function Stat({ value, label, accent }: { value: number; label: string; accent?: boolean }) {
+function Stat({
+  value,
+  label,
+  accent,
+  delay,
+}: {
+  value: number;
+  label: string;
+  accent?: boolean;
+  /** Count-up stagger in ms. */
+  delay: number;
+}) {
   return (
     <div className="flex flex-col items-center justify-center px-4 py-7 text-center">
       <span
@@ -163,7 +184,7 @@ function Stat({ value, label, accent }: { value: number; label: string; accent?:
           accent ? "text-accent-600 dark:text-accent-400" : "text-[var(--fg)]"
         )}
       >
-        {String(value).padStart(2, "0")}
+        <CountUp value={value} delay={delay} />
       </span>
       <span className="mt-1 text-[11px] uppercase tracking-micro text-[var(--muted)]">{label}</span>
     </div>
