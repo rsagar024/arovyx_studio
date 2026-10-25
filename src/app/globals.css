@@ -10,8 +10,14 @@
   --fg: #e7edf3;
   --muted: #8b97a6;
   --panel: rgba(255, 255, 255, 0.04);
+  /* subtle inset fill (icon tiles, chips) */
+  --panel-2: rgba(255, 255, 255, 0.05);
   --border: rgba(255, 255, 255, 0.09);
+  /* accent used as TEXT (micro-labels, focus ring) */
   --accent: #22d3ee;
+  --code-bg: rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset, 0 20px 50px -30px rgba(0, 0, 0, 0.9);
+  --noise-opacity: 0.035;
 }
 
 html.light {
@@ -20,8 +26,16 @@ html.light {
   --toast-bg: #ffffff;
   --fg: #0b0e11;
   --muted: #55616f;
-  --panel: rgba(255, 255, 255, 0.7);
-  --border: rgba(11, 14, 17, 0.12);
+  /* solid white cards so they separate from the off-white page */
+  --panel: #ffffff;
+  --panel-2: #eef2f5;
+  --border: rgba(11, 14, 17, 0.14);
+  /* cyan-700: ~5:1 on the light background (cyan-400 was ~1.8:1) */
+  --accent: #0e7490;
+  --code-bg: #eef2f5;
+  /* soft layered shadow — the dark-theme one turns into a grey smudge on white */
+  --shadow-card: 0 1px 2px rgba(15, 23, 42, 0.06), 0 8px 24px -12px rgba(15, 23, 42, 0.18);
+  --noise-opacity: 0.02;
 }
 
 html {
@@ -48,7 +62,7 @@ body::before {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 

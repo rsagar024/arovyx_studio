@@ -33,6 +33,7 @@ model Project {
   demoUrl          String?
   imageUrl         String? // app icon / thumbnail
   bannerUrl        String? // feature graphic / header background
+  publisher        String? // "published by" — developer / owner / author
   screenshots      String   @default("[]") // JSON string[] (phone screenshots)
   stars            Int?
   downloads        Int?

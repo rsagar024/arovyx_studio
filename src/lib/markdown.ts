@@ -23,7 +23,7 @@ function inline(input: string): string {
   let out = input;
 
   // inline code first so its contents are not processed further
-  out = out.replace(/`([^`]+)`/g, (_m, code: string) => `<code class="rounded bg-black/20 px-1.5 py-0.5 text-[0.9em] text-accent-600 dark:text-accent-300">${code}</code>`);
+  out = out.replace(/`([^`]+)`/g, (_m, code: string) => `<code class="rounded bg-[var(--code-bg)] px-1.5 py-0.5 text-[0.9em] text-accent-600 dark:text-accent-300">${code}</code>`);
 
   // images
   out = out.replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (m, alt: string, url: string) => {
@@ -82,7 +82,7 @@ export function markdownToHtml(markdown: string): string {
     if (line.startsWith("```")) {
       if (codeBlock) {
         html.push(
-          `<pre class="mb-5 overflow-x-auto rounded-lg border border-[var(--border)] bg-black/30 p-4 text-sm leading-relaxed text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`
+          `<pre class="mb-5 overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--code-bg)] p-4 text-sm leading-relaxed text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`
         );
         codeBlock = null;
       } else {
@@ -156,7 +156,7 @@ export function markdownToHtml(markdown: string): string {
   }
 
   if (codeBlock) {
-    html.push(`<pre class="mb-5 overflow-x-auto rounded-lg border border-[var(--border)] bg-black/30 p-4 text-sm text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`);
+    html.push(`<pre class="mb-5 overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--code-bg)] p-4 text-sm text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`);
   }
   flushParagraph();
   flushList();

@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { ArrowUpRight, Github, Globe, Star, Download } from "lucide-react";
 import type { ProjectDTO } from "@/lib/validators";
-import { CATEGORY_META, cn, sourceLinkMeta } from "@/lib/utils";
+import { CATEGORY_META, cn, mediaSrc, sourceLinkMeta } from "@/lib/utils";
 import CategoryBadge from "@/components/CategoryBadge";
 import StatusBadge from "@/components/StatusBadge";
 import TechChip from "@/components/TechChip";
 import GooglePlayIcon from "@/components/icons/GooglePlayIcon";
+import SafeImg from "@/components/SafeImg";
 
 /** Small preview tile used in hero collage / detail pages. */
 export default function ProjectCard({
@@ -20,6 +21,11 @@ export default function ProjectCard({
   const meta = CATEGORY_META[project.category];
   const accent = meta.accentText;
   const source = sourceLinkMeta(project.sourceUrl);
+  const initial = (
+    <span className={cn("font-display text-lg font-semibold", accent)}>
+      {project.title.charAt(0).toUpperCase()}
+    </span>
+  );
 
   return (
     <article
@@ -49,18 +55,16 @@ export default function ProjectCard({
       {/* header: icon or image + status */}
       <div className="mb-4 flex items-start justify-between gap-3">
         <div className="relative shrink-0">
-          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg border border-[var(--border)] bg-black/20">
+          <div className="flex h-11 w-11 items-center justify-center overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--panel-2)]">
             {project.imageUrl ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={project.imageUrl}
-                alt={`${project.title} preview`}
+              <SafeImg
+                src={mediaSrc(project.imageUrl)}
+                alt={`${project.title} icon`}
                 className="h-full w-full object-cover"
+                fallback={initial}
               />
             ) : (
-              <span className={cn("font-display text-lg font-semibold", accent)}>
-                {project.title.charAt(0).toUpperCase()}
-              </span>
+              initial
             )}
           </div>
           {source.kind === "playstore" && (

@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ArrowRight, Zap } from "lucide-react";
-import { CATEGORY_META, cn } from "@/lib/utils";
+import { CATEGORY_META, cn, mediaSrc } from "@/lib/utils";
+import SafeImg from "@/components/SafeImg";
 import type { Category } from "@/lib/validators";
 
 const PHRASES = [
@@ -173,9 +174,8 @@ function FloatingCard({
         </div>
         <div className="mt-2 flex items-center gap-2.5">
           {card.iconUrl && (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={card.iconUrl}
+            <SafeImg
+              src={mediaSrc(card.iconUrl)}
               alt=""
               aria-hidden
               className="h-8 w-8 shrink-0 rounded-lg border border-[var(--border)] object-cover"

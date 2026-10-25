@@ -30,6 +30,8 @@ export interface FetchedData {
   iconUrl: string | null;
   bannerUrl: string | null;
   screenshots: string[];
+  /** "Published by": Play developer, repo owner, package author, site name. */
+  publisher: string | null;
   license: string | null;
   version: string | null;
   repositoryUrl: string | null;
@@ -147,6 +149,7 @@ interface GithubRepo {
   stargazers_count: number;
   topics?: string[];
   license: { spdx_id?: string; name?: string } | null;
+  owner?: { login?: string };
 }
 
 async function fetchGithub(repoUrl: string, data: FetchedData): Promise<void> {
@@ -160,6 +163,7 @@ async function fetchGithub(repoUrl: string, data: FetchedData): Promise<void> {
   const info = await getJson<GithubRepo>(api, { Accept: "application/vnd.github+json" });
   data.title = info.full_name;
   data.description = info.description;
+  data.publisher = info.owner?.login ?? owner;
   data.stars = info.stargazers_count;
   data.license = info.license?.spdx_id ?? info.license?.name ?? null;
   data.repositoryUrl = info.html_url;
@@ -195,11 +199,13 @@ async function fetchGitlab(repoUrl: string, data: FetchedData): Promise<void> {
     topics?: string[];
     tag_list?: string[];
     homepage?: string;
+    namespace?: { name?: string; full_path?: string };
   }
 
   const info = await getJson<GitlabProject>(api);
   data.title = info.name;
   data.description = info.description;
+  data.publisher = info.namespace?.name ?? info.namespace?.full_path ?? null;
   data.stars = info.star_count;
   data.repositoryUrl = info.web_url;
   data.homepage = info.homepage ?? null;
@@ -223,6 +229,8 @@ async function fetchNpm(packageName: string, data: FetchedData): Promise<void> {
     license?: string;
     homepage?: string;
     repository?: { url?: string };
+    author?: string | { name?: string };
+    maintainers?: Array<{ name?: string }>;
     "dist-tags"?: { latest?: string };
     versions?: Record<string, { version?: string }>;
   }
@@ -232,6 +240,10 @@ async function fetchNpm(packageName: string, data: FetchedData): Promise<void> {
 
   data.title = pkg.name ?? packageName;
   data.description = pkg.description ?? null;
+  data.publisher =
+    (typeof pkg.author === "string" ? pkg.author.replace(/\s*[<(].*$/, "") : pkg.author?.name) ||
+    pkg.maintainers?.[0]?.name ||
+    null;
   data.version = latest ?? null;
   data.topics = pkg.keywords ?? [];
   data.license = typeof pkg.license === "string" ? pkg.license : null;
@@ -252,6 +264,8 @@ async function fetchPypi(packageName: string, data: FetchedData): Promise<void> 
       home_page?: string;
       project_urls?: Record<string, string>;
       version?: string;
+      author?: string;
+      maintainer?: string;
     };
   }
 
@@ -262,6 +276,7 @@ async function fetchPypi(packageName: string, data: FetchedData): Promise<void> 
 
   data.title = info.name ?? packageName;
   data.description = info.summary ?? null;
+  data.publisher = info.author || info.maintainer || null;
   data.version = info.version ?? null;
   data.license = info.license ?? null;
   data.homepage = info.home_page || Object.values(info.project_urls ?? {})[0] || null;
@@ -343,6 +358,13 @@ async function fetchPlayStore(url: string, data: FetchedData): Promise<void> {
 
     const banner = pick(details, [96, 0, 3, 2]);
     if (typeof banner === "string") data.bannerUrl = playImage(banner, "w1024");
+
+    const developer = pick(details, [68, 0]);
+    if (typeof developer === "string") data.publisher = developer;
+
+    // Store genre (e.g. "Productivity") — a useful tag hint for the AI
+    const genre = pick(details, [79, 0, 0, 0]);
+    if (typeof genre === "string") data.topics = [...new Set([...data.topics, genre])];
 
     const installs = pick(details, [13, 1]);
     if (typeof installs === "number") data.downloads = installs;
@@ -428,6 +450,7 @@ export async function fetchProjectData(url: string): Promise<FetchedData> {
     iconUrl: null,
     bannerUrl: null,
     screenshots: [],
+    publisher: null,
     license: null,
     version: null,
     repositoryUrl: null,
@@ -458,6 +481,7 @@ export async function fetchProjectData(url: string): Promise<FetchedData> {
       data.meta = extracted.meta;
       data.text = extracted.text;
       data.homepage = url;
+      data.publisher = extracted.meta["og:site_name"] ?? null;
       if (!extracted.title && !extracted.description && !extracted.text) {
         data.warnings.push("Page contained no readable text.");
       }

@@ -19,7 +19,7 @@ import {
   type ProjectDraft,
   type Status,
 } from "@/lib/validators";
-import { CATEGORY_META, STATUS_META, cn } from "@/lib/utils";
+import { CATEGORY_META, STATUS_META, cn, mediaSrc } from "@/lib/utils";
 
 const inputClass =
   "w-full rounded-lg border border-[var(--border)] bg-[var(--panel)] px-3.5 py-2.5 text-sm text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-accent-500/60 focus:outline-none";
@@ -39,6 +39,7 @@ interface FormState {
   imageUrl: string;
   bannerUrl: string;
   screenshotsText: string;
+  publisher: string;
   stars: string;
   downloads: string;
   tagsText: string;
@@ -66,6 +67,7 @@ export type ProjectFormInitial = Partial<{
   imageUrl: string | null;
   bannerUrl: string | null;
   screenshots: string[];
+  publisher: string | null;
   stars: number | null;
   downloads: number | null;
   tags: string[];
@@ -111,6 +113,7 @@ function seedToForm(seed?: ProjectFormProps["initial"]): FormState {
     demoUrl: seed?.demoUrl ?? "",
     imageUrl: seed?.imageUrl ?? "",
     bannerUrl: seed?.bannerUrl ?? "",
+    publisher: seed?.publisher ?? "",
     screenshotsText: (seed?.screenshots ?? []).join("\n"),
     stars: seed?.stars != null ? String(seed.stars) : "",
     downloads: seed?.downloads != null ? String(seed.downloads) : "",
@@ -221,6 +224,7 @@ export default function ProjectForm({
       demoUrl: form.demoUrl.trim() || null,
       imageUrl: form.imageUrl.trim() || null,
       bannerUrl: form.bannerUrl.trim() || null,
+      publisher: form.publisher.trim() || null,
       screenshots: splitLines(form.screenshotsText),
       stars: form.stars === "" ? null : Number(form.stars),
       downloads: form.downloads === "" ? null : Number(form.downloads),
@@ -344,6 +348,7 @@ export default function ProjectForm({
         version: draft.version ?? "",
         imageUrl: draft.imageUrl ?? "",
         bannerUrl: draft.bannerUrl ?? "",
+        publisher: draft.publisher ?? "",
         screenshotsText: (draft.screenshots ?? []).join("\n"),
         demoUrl: draft.demoUrl ?? "",
         tagsText: draft.tags.join(", "),
@@ -648,6 +653,26 @@ export default function ProjectForm({
           </div>
         </div>
 
+        <div>
+          <label htmlFor="pf-publisher" className={labelClass}>
+            Published by{" "}
+            <span className="normal-case tracking-normal">
+              (optional — developer / owner; used to find similar projects)
+            </span>
+          </label>
+          <input
+            id="pf-publisher"
+            type="text"
+            value={form.publisher}
+            onChange={set("publisher")}
+            maxLength={120}
+            placeholder="e.g. Fossify, your GitHub username…"
+            aria-invalid={Boolean(fieldErrors.publisher)}
+            className={inputClass}
+          />
+          {fieldErrors.publisher && <span className={errorClass}>{fieldErrors.publisher}</span>}
+        </div>
+
         {/* Media — filled automatically from Play Store links, editable for any project */}
         <div className="space-y-4 rounded-xl border border-[var(--border)] p-4">
           <p className="micro-label">Media</p>
@@ -656,7 +681,7 @@ export default function ProjectForm({
             <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--panel)]">
               {isHttpUrl(form.imageUrl.trim()) ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={form.imageUrl.trim()} alt="Icon preview" className="h-full w-full object-cover" />
+                <img src={mediaSrc(form.imageUrl.trim())} alt="Icon preview" className="h-full w-full object-cover" />
               ) : (
                 <span className="text-[10px] text-[var(--muted)]">icon</span>
               )}
@@ -681,7 +706,7 @@ export default function ProjectForm({
           <div>
             <label htmlFor="pf-banner" className={labelClass}>
               Banner / feature graphic URL{" "}
-              <span className="normal-case tracking-normal">(optional — detail page background)</span>
+              <span className="normal-case tracking-normal">(optional — shown above the title on the detail page)</span>
             </label>
             <input
               id="pf-banner"
@@ -696,7 +721,7 @@ export default function ProjectForm({
             {isHttpUrl(form.bannerUrl.trim()) && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={form.bannerUrl.trim()}
+                src={mediaSrc(form.bannerUrl.trim())}
                 alt="Banner preview"
                 className="mt-2 aspect-[1024/500] w-full max-w-md rounded-lg border border-[var(--border)] object-cover"
               />
@@ -726,7 +751,7 @@ export default function ProjectForm({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       key={`${src}-${i}`}
-                      src={src}
+                      src={mediaSrc(src)}
                       alt={`Screenshot ${i + 1} preview`}
                       loading="lazy"
                       className="h-28 w-auto shrink-0 rounded-md border border-[var(--border)] object-cover"

@@ -363,6 +363,46 @@ GitHub Pages was ruled out because it's static-only: it can't run `/studio` auth
   - Studio pages render the new controls.
 - Two first-run failures were test-scope artifacts and were re-verified with scoped assertions: "View source" came from the GitHub cards under *Similar projects*, and the old hero phrases are seed descriptions in the *Featured* grid.
 
+## Phase 11 — Light-mode polish, relevant "Similar projects", publisher, image proxy ✅ DONE
+
+**Light theme.** Found by screenshotting every key page in light mode (Playwright, desktop + mobile).
+- **Contrast:** `--accent` was `#22d3ee` in both themes, so micro-labels sat at 1.67:1. In light it's now `#0e7490`: 4.95:1 on the page and 5.36:1 on cards (passes WCAG AA).
+- **New per-theme tokens:**
+  - `--panel` is solid `#fff` in light, so cards separate from the page.
+  - `--panel-2` (icon tiles, gallery fill) and `--code-bg` replace the hard-coded `bg-black/20` / `bg-black/30`.
+  - `--shadow-card`: Tailwind `shadow-card` now uses `var()`. Light gets a soft layered shadow instead of the 90%-black smudge.
+  - `--noise-opacity` drops to 0.02 in light; `--border` is slightly stronger in light.
+- **Detail header:** the feature graphic now renders as a strip *above* the title instead of behind it. Store graphics carry their own lettering ("Ad-free, Open-source…"), which collided with the title.
+- **Accent line:** the decorative diagonal no longer pokes into the navbar.
+- **Dark mode:** re-shot, no regressions.
+
+**Broken Play images (found in the screenshots).** Hot-linking `play-lh.googleusercontent.com` returned **HTTP 429** under load, showing broken boxes.
+- New edge route `GET /api/img?u=`: allow-list of Google image hosts, https only, image content types only.
+  - Success responses carry `Cache-Control: public, max-age/s-maxage=31536000, immutable`, so Vercel's CDN serves each image once.
+  - Failures return 502 `no-store`, so they aren't cached.
+- `mediaSrc()` routes Play artwork through it everywhere: detail, cards, hero and Studio previews.
+- `SafeImg` / `ScreenshotGallery` hide images that still fail. A card falls back to its initial letter; the gallery hides itself if all its images fail.
+
+**Publisher.** Additive `Project.publisher`, editable in Studio ("Published by") and shown as "by X" under the detail title, plus JSON-LD `author`.
+- Fetchers fill it automatically: Play developer `[68,0]`, GitHub `owner.login`, GitLab namespace, npm author/maintainer, PyPI author/maintainer, `og:site_name`.
+- The Play genre `[79,0,0,0]` is added to topics. The publisher is also passed to the AI prompt and overlaid from the fetch (never AI-invented).
+
+**Similar projects.** `pickSimilarProjects()` is a pure function, unit-tested.
+- Scores: publisher (or GitHub/GitLab owner from `sourceUrl`) +5, each shared meaningful title word +3 (stopwords like app/pro/lite/android excluded), each shared tag +2, each shared tech +1. Same category is a +1 tie-breaker only.
+- A project counts as related only when relevance (without category) ≥ 2, so one shared language alone isn't enough.
+- No fallback padding: the section disappears when nothing is related.
+
+**Verification**
+- `tsc` clean; `next build` passes on a throwaway embedded PostgreSQL.
+- Similarity unit tests: **11/11**.
+- HTTP checks: **15/15**.
+  - Unrelated project → no section; same publisher → only that project; GitHub-owner siblings.
+  - "by X" and JSON-LD author render.
+  - Images are proxied; the banner sits above the text.
+  - Publisher validation and clearing.
+  - Proxy: 200 + 1-year cache; other host, http and garbage → 400; upstream failure → 502 no-store.
+- Live fetcher publisher check: Play "Fossify", npm "Colin McDonnell", GitHub returns the repo's *current* owner after a transfer.
+
 ## Build Order (summary)
 
 | # | Phase | Depends on |

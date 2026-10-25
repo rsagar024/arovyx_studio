@@ -77,7 +77,8 @@ const config: Config = {
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(34, 211, 238, 0.25), 0 0 32px -8px rgba(34, 211, 238, 0.35)",
-        card: "0 1px 0 0 rgba(255,255,255,0.04) inset, 0 20px 50px -30px rgba(0,0,0,0.9)",
+        // per-theme value lives in globals.css (--shadow-card)
+        card: "var(--shadow-card)",
       },
     },
   },

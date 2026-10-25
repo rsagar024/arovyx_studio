@@ -104,6 +104,7 @@ export const projectDraftSchema = z.object({
   // fetcher found (Play Store icon / feature graphic / screenshots).
   bannerUrl: nullableUrl(z.string().url()).catch(null),
   screenshots: z.array(z.string().url()).catch([]),
+  publisher: z.string().trim().min(1).max(120).nullable().catch(null),
 });
 
 export type ProjectDraft = z.infer<typeof projectDraftSchema>;
@@ -126,6 +127,14 @@ export const projectInputSchema = z.object({
   demoUrl: nullableUrl(z.string().url()).default(null),
   imageUrl: nullableUrl(z.string().url()).default(null),
   bannerUrl: nullableUrl(z.string().url()).default(null),
+  /** "Published by" — developer, owner or author. Empty → null. */
+  publisher: z
+    .string()
+    .trim()
+    .max(120)
+    .nullable()
+    .transform((v) => v || null)
+    .default(null),
   screenshots: z.array(z.string().trim().url("Each screenshot must be a valid URL")).max(12).default([]),
   stars: z.number().int().nonnegative().nullable().default(null),
   downloads: z.number().int().nonnegative().nullable().default(null),
@@ -211,6 +220,7 @@ export const fetchedDataSchema = z.object({
   downloads: z.number().int().nonnegative().nullable().catch(null),
   iconUrl: nullableStr,
   bannerUrl: nullableStr,
+  publisher: nullableStr,
   screenshots: z.array(z.string().url().max(2_000)).max(20).catch([]),
   license: nullableStr,
   version: nullableStr,

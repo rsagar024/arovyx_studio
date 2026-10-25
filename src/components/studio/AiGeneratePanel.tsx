@@ -14,7 +14,7 @@ import {
   Sparkles,
   XCircle,
 } from "lucide-react";
-import { CATEGORY_META, STATUS_META, cn } from "@/lib/utils";
+import { CATEGORY_META, STATUS_META, cn, mediaSrc } from "@/lib/utils";
 import {
   CATEGORIES,
   type Category,
@@ -448,7 +448,7 @@ export default function AiGeneratePanel({
           {result.project.bannerUrl && (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={result.project.bannerUrl}
+              src={mediaSrc(result.project.bannerUrl)}
               alt="Feature graphic"
               className="mt-4 aspect-[1024/500] w-full rounded-xl border border-[var(--border)] object-cover"
             />
@@ -458,7 +458,7 @@ export default function AiGeneratePanel({
             {result.project.imageUrl && (
               // eslint-disable-next-line @next/next/no-img-element
               <img
-                src={result.project.imageUrl}
+                src={mediaSrc(result.project.imageUrl)}
                 alt="App icon"
                 className="h-12 w-12 shrink-0 rounded-xl border border-[var(--border)] object-cover"
               />
