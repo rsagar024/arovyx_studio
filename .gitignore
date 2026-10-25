@@ -37,3 +37,8 @@ next-env.d.ts
 /prisma/*.db
 /prisma/*.db-journal
 /dev.db
+
+# AI-assistant skill files installed by the Neon/Vercel CLIs (not app code)
+.agents/
+.claude/skills/
+skills-lock.json
