@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="public/brand/arovyx-logo.jpg" alt="Arovyx Studio logo" width="480" />
+</p>
+
 # Arovyx Studio
 
 An AI-powered developer portfolio for showcasing **apps, games, packages and plugins**.

@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, X, Sparkles } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
+import BrandMark from "@/components/BrandMark";
 import ThemeToggle from "@/components/ThemeToggle";
 import { CATEGORY_META, cn } from "@/lib/utils";
 import type { Category } from "@/lib/validators";
@@ -65,9 +66,10 @@ export default function Navbar() {
           className="group flex items-center gap-2 font-display text-lg font-semibold tracking-tight"
           aria-label="Arovyx Studio home"
         >
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-accent-500/40 bg-accent-400/10 text-accent-600 transition-shadow group-hover:shadow-glow dark:text-accent-400">
-            <Sparkles className="h-4 w-4" aria-hidden />
-          </span>
+          <BrandMark
+            size={34}
+            className="h-[34px] w-[34px] transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_10px_rgba(34,211,238,0.55)]"
+          />
           Arovyx <span className="text-accent-600 dark:text-accent-400">Studio</span>
         </Link>
 

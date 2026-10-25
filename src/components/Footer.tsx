@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Github, Instagram, Linkedin, Mail, Sparkles } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail } from "lucide-react";
+import BrandMark from "@/components/BrandMark";
 import { getSiteConfig } from "@/lib/projects";
 
 export default async function Footer() {
@@ -17,9 +18,7 @@ export default async function Footer() {
     <footer className="relative z-10 mt-24 border-t border-[var(--border)]">
       <div className="container-page flex flex-col items-center gap-6 py-10 md:flex-row md:justify-between">
         <Link href="/" className="flex items-center gap-2 font-display text-base font-semibold">
-          <span className="flex h-7 w-7 items-center justify-center rounded-md border border-accent-500/40 bg-accent-400/10 text-accent-600 dark:text-accent-400">
-            <Sparkles className="h-3.5 w-3.5" aria-hidden />
-          </span>
+          <BrandMark size={28} className="h-7 w-7" />
           Arovyx <span className="text-accent-600 dark:text-accent-400">Studio</span>
         </Link>
 
