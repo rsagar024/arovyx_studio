@@ -101,7 +101,7 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
 ### Public site
 - **Home:** hero with typing tagline, live stats strip, featured projects, category tiles
 - **`/projects`:** category tabs and search (title, tag, tech) synced to `?category=&q=`
-- **`/projects/[slug]`:** full detail (markdown), features, tech stack, source/demo buttons, similar projects, per-project SEO and Open Graph. When set, it also shows an **app icon** beside the title, a **banner / feature graphic** behind the header, and a scrollable **screenshot gallery**. Play Store projects get a **"Get it on Google Play"** button; without media those parts simply don't render.
+- **`/projects/[slug]`:** full detail (markdown), features, tech stack, source/demo buttons, similar projects, per-project SEO and Open Graph. When set, it also shows an **app icon** and **"by {publisher}"** beside the title, the **feature graphic** as a banner above it, and a scrollable **screenshot gallery**. **Similar projects** lists only genuinely related work (same publisher, shared title words or tags, or 2+ shared tech-stack items) and is hidden when nothing is related. Play Store projects get a **"Get it on Google Play"** button; without media those parts simply don't render.
 - **`/about`:** bio, avatar, résumé link, tech arsenal, shipped timeline
 - **`/contact`:** form (validated and rate-limited, 5 per 10 min per IP), plus email/GitHub/LinkedIn/Instagram cards with copy-email. After a submission the server saves the message and returns a confirmation shown on the page; no email is sent.
 - Dark theme by default with a light/dark toggle (remembered, synced across tabs), custom 404, skip link, keyboard-friendly menus, `sitemap.xml`, `robots.txt` and a default social card at `/og`
@@ -110,7 +110,7 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
 - **Overview:** project counts per category (live/draft), unread messages, AI jobs in the last 30 days with success rate, recent AI jobs (with errors), recently updated projects
 - **Add Project (AI auto-fill):**
   - paste a URL and choose a category (or **AUTO**) to get an editable preview
-  - **Google Play links** also bring in the **app icon**, **feature graphic** and up to 8 **phone screenshots**, plus the install count, read from the store page itself (never invented by the AI). All of it stays editable under **Media** in the form, and you can fill Media by hand for any project.
+  - **Google Play links** also bring in the **app icon**, **feature graphic** and up to 8 **phone screenshots**, plus the install count and **publisher**, read from the store page itself (never invented by the AI). GitHub/GitLab/npm/PyPI links fill **Published by** too (owner / author). All of it stays editable under **Media** in the form, and you can fill Media by hand for any project.
   - **Regenerate** re-runs the AI on the *same* fetched data, with an optional extra instruction (e.g. "make it more playful")
   - **Bulk mode:** one URL per line, processed in sequence with per-URL progress, each saved as a draft
   - **Manual add** without AI
@@ -298,4 +298,5 @@ Note this points at the **live** database, so anything you add or delete locally
 - **Data model:** the schema is portable. `category` and `status` are strings validated by Zod, and `tags`, `techStack` and `features` are JSON-encoded strings exposed as `string[]` by the mappers in `src/lib/validators.ts`. That design dates from the original SQLite version and works unchanged on PostgreSQL.
 - **Function duration:** the AI routes declare `maxDuration = 300` because NIM calls can take ~45 s and retry.
 - **Social card:** `/og` runs on the edge runtime. In the Node runtime, `@vercel/og` fails to build on Windows, and edge can't reach Prisma, so the card shows the brand text rather than the editable site name. Projects with an `imageUrl` use that image instead.
+- **Play Store images** are served through `/api/img`, a cached pass-through restricted to Google's image host. Hot-linking Google directly gets visitors rate-limited (HTTP 429, broken images); the proxy lets Vercel's CDN cache each image for a year. Images that still fail are hidden rather than shown broken.
 - **Rate limits** (contact form, login) are in memory per serverless instance, so on Vercel they're best-effort rather than global. Use a shared store (e.g. Upstash Redis) if that ever matters.

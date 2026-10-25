@@ -37,28 +37,89 @@ export async function getProjectStats(): Promise<{
   return stats;
 }
 
+/* ------------------------------------------------------------------ */
+/* Similar projects                                                    */
+/* ------------------------------------------------------------------ */
+
+/** Words too generic to make two titles "related". */
+const TITLE_STOPWORDS = new Set([
+  "the", "and", "for", "with", "app", "apps", "pro", "lite", "free", "mobile", "android", "ios",
+  "plus", "new", "beta", "official", "game", "games", "your", "you", "from", "by", "of", "a", "an",
+]);
+
+const norm = (value: string) => value.trim().toLowerCase();
+
+/** Meaningful lower-case title words (≥3 chars, no stopwords). */
+export function titleTokens(title: string): Set<string> {
+  return new Set(
+    title
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((word) => word.length >= 3 && !TITLE_STOPWORDS.has(word))
+  );
+}
+
+/** "Published by": the stored value, else the GitHub/GitLab owner from the source URL. */
+export function effectivePublisher(project: Pick<ProjectDTO, "publisher" | "sourceUrl">): string | null {
+  if (project.publisher?.trim()) return norm(project.publisher);
+  try {
+    const url = new URL(project.sourceUrl);
+    const host = url.hostname.replace(/^www\./, "");
+    if (host === "github.com" || host === "gitlab.com") {
+      const owner = url.pathname.split("/").filter(Boolean)[0];
+      if (owner) return norm(owner);
+    }
+  } catch {
+    /* invalid URL — no publisher */
+  }
+  return null;
+}
+
+const SCORE = { publisher: 5, titleWord: 3, tag: 2, tech: 1, category: 1 } as const;
+/** Minimum relevance (category excluded) for a project to count as related. */
+const MIN_RELEVANCE = 2;
+
 /**
- * Similar projects: same category first, then shared tags (spec §5.3).
- * If nothing scores (no same-category/tag overlap), fills with the most
- * recent published projects so the section is never empty-handed.
- * The source project is excluded.
+ * How related `other` is to `project`. `relevance` excludes the category
+ * bonus — a shared category alone never makes projects "similar".
  */
+export function similarityScore(project: ProjectDTO, other: ProjectDTO): { relevance: number; total: number } {
+  let relevance = 0;
+
+  const publisher = effectivePublisher(project);
+  if (publisher && publisher === effectivePublisher(other)) relevance += SCORE.publisher;
+
+  const words = titleTokens(project.title);
+  for (const word of titleTokens(other.title)) if (words.has(word)) relevance += SCORE.titleWord;
+
+  const tags = new Set(project.tags.map(norm));
+  relevance += other.tags.filter((tag) => tags.has(norm(tag))).length * SCORE.tag;
+
+  const tech = new Set(project.techStack.map(norm));
+  relevance += other.techStack.filter((t) => tech.has(norm(t))).length * SCORE.tech;
+
+  const total = relevance + (other.category === project.category ? SCORE.category : 0);
+  return { relevance, total };
+}
+
+/**
+ * Projects genuinely related to `project` — same publisher, shared title
+ * words, shared tags, or 2+ shared tech-stack items — best match first.
+ * Returns an empty list when nothing is related (the section is then hidden);
+ * never pads with unrelated projects.
+ */
+export function pickSimilarProjects(project: ProjectDTO, candidates: ProjectDTO[], limit = 3): ProjectDTO[] {
+  return candidates
+    .filter((p) => p.id !== project.id)
+    .map((p, index) => ({ p, index, ...similarityScore(project, p) }))
+    .filter((entry) => entry.relevance >= MIN_RELEVANCE)
+    .sort((a, b) => b.total - a.total || a.index - b.index)
+    .slice(0, limit)
+    .map((entry) => entry.p);
+}
+
 export async function getSimilarProjects(project: ProjectDTO, limit = 3): Promise<ProjectDTO[]> {
-  const all = await getPublishedProjects();
-  const candidates = all.filter((p) => p.id !== project.id);
-
-  const scored = candidates
-    .map((p, index) => {
-      let score = p.category === project.category ? 2 : 0;
-      score += p.tags.filter((tag) => project.tags.includes(tag)).length;
-      return { p, score, index };
-    })
-    .sort((a, b) => b.score - a.score || a.index - b.index);
-
-  const matched = scored.filter((entry) => entry.score > 0).map((entry) => entry.p);
-  const fallback = scored.filter((entry) => entry.score === 0).map((entry) => entry.p);
-
-  return [...matched, ...fallback].slice(0, limit);
+  return pickSimilarProjects(project, await getPublishedProjects(), limit);
 }
 
 /**

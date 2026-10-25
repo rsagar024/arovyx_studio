@@ -91,6 +91,7 @@ export async function POST(req: NextRequest) {
       imageUrl: fetched.iconUrl ?? draft.imageUrl,
       bannerUrl: fetched.bannerUrl ?? null,
       screenshots: fetched.screenshots ?? [],
+      publisher: fetched.publisher ?? null,
     };
 
     return jsonOk({

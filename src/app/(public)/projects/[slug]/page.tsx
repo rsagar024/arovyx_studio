@@ -8,10 +8,12 @@ import TechChip from "@/components/TechChip";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import GooglePlayIcon from "@/components/icons/GooglePlayIcon";
+import SafeImg from "@/components/SafeImg";
+import ScreenshotGallery from "@/components/ScreenshotGallery";
 import { getProjectBySlug, getSimilarProjects } from "@/lib/projects";
 import { markdownToHtml } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/seo";
-import { CATEGORY_META, absoluteUrl, cn, formatDate, sourceLinkMeta } from "@/lib/utils";
+import { CATEGORY_META, absoluteUrl, cn, formatDate, mediaSrc, sourceLinkMeta } from "@/lib/utils";
 
 interface Props {
   params: { slug: string };
@@ -65,6 +67,7 @@ export default async function ProjectDetailPage({ params }: Props) {
     ...(project.demoUrl ? { sameAs: project.demoUrl } : {}),
     ...(project.imageUrl ? { image: project.imageUrl } : {}),
     ...(project.screenshots.length ? { screenshot: project.screenshots } : {}),
+    ...(project.publisher ? { author: { "@type": "Organization", name: project.publisher } } : {}),
     ...(source.kind === "playstore" ? { operatingSystem: "Android", installUrl: project.sourceUrl } : {}),
   };
 
@@ -74,7 +77,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       <div aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden sm:block">
         <div
           className={cn(
-            "absolute -top-10 right-[12%] h-[380px] w-px rotate-[24deg] bg-gradient-to-b to-transparent",
+            "absolute top-0 right-[12%] h-[380px] w-px rotate-[24deg] bg-gradient-to-b to-transparent",
             meta.line
           )}
         />
@@ -98,29 +101,25 @@ export default async function ProjectDetailPage({ params }: Props) {
       <Reveal delay={60}>
         <header
           className={cn(
-            "relative mt-6 border-b border-[var(--border)] pb-10",
-            project.bannerUrl &&
-              "overflow-hidden rounded-2xl border px-5 pt-28 shadow-card sm:px-10 sm:pt-44"
+            "relative mt-6",
+            project.bannerUrl
+              ? "overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-card"
+              : "border-b border-[var(--border)] pb-10"
           )}
         >
-          {/* feature graphic as background; fades into the page so text stays readable in both themes */}
+          {/* Feature graphic as a strip ABOVE the text — store graphics often contain
+              their own lettering, so text is never drawn on top of it. If the image
+              fails to load it removes itself and the card simply starts with the text. */}
           {project.bannerUrl && (
-            <>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={project.bannerUrl}
-                alt=""
-                aria-hidden
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[rgb(var(--bg-rgb)/0.85)] to-[rgb(var(--bg-rgb)/0.2)]"
-              />
-            </>
+            <SafeImg
+              src={mediaSrc(project.bannerUrl)}
+              alt=""
+              aria-hidden
+              className="block aspect-[1024/500] max-h-[22rem] w-full border-b border-[var(--border)] object-cover"
+            />
           )}
 
-          <div className="relative">
+          <div className={cn("relative", project.bannerUrl && "px-5 pb-8 pt-6 sm:px-10")}>
             <div className="flex flex-wrap items-center gap-2">
               <CategoryBadge category={project.category} />
               <StatusBadge status={project.status} />
@@ -134,18 +133,24 @@ export default async function ProjectDetailPage({ params }: Props) {
 
             <div className="mt-5 flex items-center gap-4">
               {project.imageUrl && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={project.imageUrl}
+                <SafeImg
+                  src={mediaSrc(project.imageUrl)}
                   alt={`${project.title} icon`}
                   width={80}
                   height={80}
                   className="h-16 w-16 shrink-0 rounded-2xl border border-[var(--border)] object-cover shadow-card sm:h-20 sm:w-20"
                 />
               )}
-              <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-                {project.title}
-              </h1>
+              <div className="min-w-0">
+                <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
+                  {project.title}
+                </h1>
+                {project.publisher && (
+                  <p className="mt-1.5 text-sm text-[var(--muted)]">
+                    by <span className="font-medium text-[var(--fg)]">{project.publisher}</span>
+                  </p>
+                )}
+              </div>
             </div>
             <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--muted)]">
               {project.shortDescription}
@@ -211,31 +216,10 @@ export default async function ProjectDetailPage({ params }: Props) {
       {/* phone screenshots — section is omitted entirely when there are none */}
       {project.screenshots.length > 0 && (
         <Reveal delay={100}>
-          <section aria-labelledby="screenshots-heading" className="mt-12">
-            <h2 id="screenshots-heading" className="micro-label">
-              Screenshots
-            </h2>
-            <ul className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
-              {project.screenshots.map((src, index) => (
-                <li key={`${src}-${index}`} className="shrink-0 snap-start">
-                  <a
-                    href={src}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block overflow-hidden rounded-2xl border border-[var(--border)] transition-all hover:-translate-y-1 hover:border-accent-500/50 hover:shadow-glow"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={src}
-                      alt={`Screenshot ${index + 1} of ${project.title}`}
-                      loading="lazy"
-                      className="h-[22rem] w-auto max-w-none object-cover sm:h-[26rem]"
-                    />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <ScreenshotGallery
+            title={project.title}
+            screenshots={[...new Set(project.screenshots.map((s) => mediaSrc(s)))]}
+          />
         </Reveal>
       )}
 

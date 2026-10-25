@@ -414,6 +414,7 @@ function buildUserPrompt(data: FetchedData, extra?: string, category?: Category)
   if (data.repositoryUrl) lines.push(`Repository: ${data.repositoryUrl}`);
   if (data.homepage) lines.push(`Homepage: ${data.homepage}`);
   if (data.version) lines.push(`Latest version: ${data.version}`);
+  if (data.publisher) lines.push(`Published by: ${data.publisher}`);
   if (data.license) lines.push(`License: ${data.license}`);
   if (data.stars != null) lines.push(`Stars: ${data.stars}`);
   if (data.downloads != null) lines.push(`Installs: ${data.downloads.toLocaleString("en-US")}+`);

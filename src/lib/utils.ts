@@ -34,6 +34,24 @@ export function absoluteUrl(path = ""): string {
   return `${base.replace(/\/$/, "")}/${path.replace(/^\//, "")}`;
 }
 
+const PROXIED_IMAGE_HOSTS = new Set(["play-lh.googleusercontent.com", "lh3.googleusercontent.com"]);
+
+/**
+ * Image URL to render. Play Store artwork goes through /api/img (CDN-cached)
+ * because hot-linking Google's image host gets visitors rate-limited.
+ */
+export function mediaSrc(url: string): string;
+export function mediaSrc(url: string | null | undefined): string | null;
+export function mediaSrc(url: string | null | undefined): string | null {
+  if (!url) return null;
+  try {
+    if (PROXIED_IMAGE_HOSTS.has(new URL(url).hostname)) return `/api/img?u=${encodeURIComponent(url)}`;
+  } catch {
+    /* not an absolute URL — use as-is */
+  }
+  return url;
+}
+
 export type SourceKind = "playstore" | "github" | "gitlab" | "npm" | "pypi" | "web";
 
 /** What a project's source link points at — drives the button label and icon. */
