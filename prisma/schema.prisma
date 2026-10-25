@@ -72,6 +72,7 @@ model SiteConfig {
   avatarUrl     String @default("")
   resumeUrl     String @default("")
   heroProjectIds String @default("[]") // JSON string[] — up to 3 project ids for the home hero cards
+  featuredProjectIds String @default("[]") // JSON string[] — up to 6 project ids for "Featured projects"
   updatedAt     DateTime @updatedAt
 }
 

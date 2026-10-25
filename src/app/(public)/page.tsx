@@ -7,7 +7,13 @@ import AboutSection from "@/components/sections/AboutSection";
 import ContactSection from "@/components/sections/ContactSection";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
-import { getPublishedProjects, getProjectStats, getSiteConfig, pickHeroProjects } from "@/lib/projects";
+import {
+  getPublishedProjects,
+  getProjectStats,
+  getSiteConfig,
+  pickChosenProjects,
+  pickHeroProjects,
+} from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 import { CATEGORY_META, cn, truncate } from "@/lib/utils";
 import type { Category } from "@/lib/validators";
@@ -44,7 +50,8 @@ export default async function HomePage() {
     getSiteConfig(),
   ]);
 
-  const featured = projects.slice(0, 6);
+  // chosen in Studio → Settings → Featured projects (newest 6 when none picked)
+  const featured = pickChosenProjects(projects, config.featuredProjectIds, 6);
 
   const heroCards = pickHeroProjects(projects, config.heroProjectIds).map((p) => ({
     slug: p.slug,

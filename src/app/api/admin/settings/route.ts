@@ -44,11 +44,12 @@ export async function PATCH(req: NextRequest) {
     return jsonError(400, zodErrorMessage(parsed.error), zodErrorDetails(parsed.error));
   }
 
-  // heroProjectIds is a JSON-encoded string[] column
-  const { heroProjectIds, ...rest } = parsed.data;
+  // heroProjectIds / featuredProjectIds are JSON-encoded string[] columns
+  const { heroProjectIds, featuredProjectIds, ...rest } = parsed.data;
   const data = {
     ...rest,
     ...(heroProjectIds !== undefined ? { heroProjectIds: JSON.stringify(heroProjectIds) } : {}),
+    ...(featuredProjectIds !== undefined ? { featuredProjectIds: JSON.stringify(featuredProjectIds) } : {}),
   };
   const settings = await db.siteConfig.upsert({
     where: { id: 1 },

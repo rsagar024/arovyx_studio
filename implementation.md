@@ -403,6 +403,13 @@ GitHub Pages was ruled out because it's static-only: it can't run `/studio` auth
   - Proxy: 200 + 1-year cache; other host, http and garbage → 400; upstream failure → 502 no-store.
 - Live fetcher publisher check: Play "Fossify", npm "Colin McDonnell", GitHub returns the repo's *current* owner after a transfer.
 
+## Phase 12 — Admin-picked "Featured projects" ✅ DONE
+
+- `SiteConfig.featuredProjectIds` (additive, JSON `string[]`, max 6). Zod: cuid ids, max 6. The settings route JSON-encodes it like `heroProjectIds`.
+- `pickChosenProjects(published, idsJson, limit)` (generalised from `pickHeroProjects`, which is now a thin wrapper): chosen order, skips unpublished or deleted projects, falls back to the newest N. The home page uses it for the featured grid, so with no picks it behaves exactly as before.
+- **Studio → Settings → Featured projects**: the picker UI was extracted into a reusable `ProjectPicker` (ordered picks with ▲/▼, checkbox grid with category chips, max-reached toast). It's now shared by Hero showcase (max 3) and Featured projects (max 6). Dirty tracking and Reset cover both lists.
+- Verified **16/16**: fallback newest 6; picks shown in order; 7 ids / invalid id → 400; an unpublished pick is dropped; the hero picker is independent; clearing restores the fallback. The real Studio UI was driven in Playwright: tick, reorder, save → home grid order; 7th tick refused with a toast; Reset reverts.
+
 ## Build Order (summary)
 
 | # | Phase | Depends on |
