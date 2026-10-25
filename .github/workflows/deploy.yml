@@ -80,6 +80,10 @@ jobs:
       - run: npm ci
       - run: npm install --global vercel@${{ env.VERCEL_CLI_VERSION }}
 
+      # `vercel env` needs the project settings that `vercel pull` writes to .vercel/
+      - name: Link Vercel project
+        run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+
       # DATABASE_URL is not synced: the Neon ↔ Vercel integration manages it
       # at runtime (same database). The GitHub secret is used by the schema
       # push and seed steps below.
@@ -96,8 +100,9 @@ jobs:
                       ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL; do
             value="${!name}"
             [ -z "$value" ] && { echo "skip $name (not set; app default applies)"; continue; }
-            vercel env rm "$name" production --yes --token="$VERCEL_TOKEN" >/dev/null 2>&1 || true
-            printf '%s' "$value" | vercel env add "$name" production --token="$VERCEL_TOKEN" >/dev/null
+            # --force overwrites an existing value; --sensitive stores it as a secret in Vercel
+            printf '%s' "$value" | vercel env add "$name" --environment production \
+              --force --sensitive --yes --token="$VERCEL_TOKEN"
             echo "synced $name"
           done
 
@@ -108,7 +113,8 @@ jobs:
       - name: Seed empty database
         run: npx tsx prisma/seed.ts --if-empty
 
-      - name: Pull Vercel project settings
+      # pull again so the build sees the freshly synced values
+      - name: Pull Vercel project settings + env
         run: vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
 
       - name: Build
