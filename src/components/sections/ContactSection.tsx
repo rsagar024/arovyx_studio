@@ -1,6 +1,7 @@
 import ContactForm from "@/components/ContactForm";
 import ContactLinks from "@/components/ContactLinks";
 import Reveal from "@/components/Reveal";
+import SplitText from "@/components/motion/SplitText";
 import type { getSiteConfig } from "@/lib/projects";
 
 type SiteConfig = Awaited<ReturnType<typeof getSiteConfig>>;
@@ -11,9 +12,13 @@ export default function ContactSection({ config }: { config: SiteConfig }) {
     <section id="contact" aria-labelledby="contact-heading" className="container-page scroll-mt-20 pt-24">
       <Reveal>
         <p className="micro-label">Say hello</p>
-        <h2 id="contact-heading" className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          Contact
-        </h2>
+      </Reveal>
+      <SplitText
+        id="contact-heading"
+        text="Contact"
+        className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-5xl"
+      />
+      <Reveal delay={150}>
         <p className="mt-4 max-w-2xl text-[var(--muted)]">
           Project inquiries, collaboration ideas, bug reports or just a hello — the form lands
           straight in the studio inbox.
@@ -21,7 +26,7 @@ export default function ContactSection({ config }: { config: SiteConfig }) {
       </Reveal>
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[1.3fr_1fr]">
-        <Reveal delay={80}>
+        <Reveal delay={80} variant="left">
           <div className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6 sm:p-8">
             <h3 id="contact-form-heading" className="mb-5 font-display text-xl font-semibold">
               Send a message
@@ -30,7 +35,7 @@ export default function ContactSection({ config }: { config: SiteConfig }) {
           </div>
         </Reveal>
 
-        <Reveal delay={140}>
+        <Reveal delay={140} variant="right">
           <div className="space-y-5">
             <h3 id="contact-links-heading" className="font-display text-xl font-semibold">
               Reach me directly

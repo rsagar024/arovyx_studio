@@ -66,6 +66,31 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-100%)" },
+        },
+        "page-in": {
+          "0%": { opacity: "0", transform: "translateY(12px)" },
+          "100%": { opacity: "1", transform: "none" },
+        },
+        "word-up": {
+          "0%": { opacity: "0", transform: "translateY(110%)" },
+          "100%": { opacity: "1", transform: "none" },
+        },
+        settle: {
+          "0%": { transform: "scale(1.12)" },
+          "100%": { transform: "scale(1)" },
+        },
+        pop: {
+          "0%": { transform: "scale(0.6) rotate(-12deg)", opacity: "0" },
+          "60%": { transform: "scale(1.08) rotate(3deg)", opacity: "1" },
+          "100%": { transform: "scale(1) rotate(0)", opacity: "1" },
+        },
+        "bounce-y": {
+          "0%, 100%": { transform: "translateY(0)", opacity: "0.4" },
+          "50%": { transform: "translateY(8px)", opacity: "1" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both",
@@ -74,6 +99,12 @@ const config: Config = {
         "pulse-glow": "pulse-glow 4s ease-in-out infinite",
         "caret-blink": "caret-blink 1s step-end infinite",
         float: "float 6s ease-in-out infinite",
+        marquee: "marquee 40s linear infinite",
+        "bounce-y": "bounce-y 1.8s ease-in-out infinite",
+        "page-in": "page-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both",
+        "word-up": "word-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both",
+        settle: "settle 1.6s cubic-bezier(0.16, 1, 0.3, 1) both",
+        pop: "pop 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both",
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(34, 211, 238, 0.25), 0 0 32px -8px rgba(34, 211, 238, 0.35)",

@@ -10,6 +10,7 @@ import ProjectCard from "@/components/ProjectCard";
 import GooglePlayIcon from "@/components/icons/GooglePlayIcon";
 import SafeImg from "@/components/SafeImg";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import SplitText from "@/components/motion/SplitText";
 import { getProjectBySlug, getSimilarProjects } from "@/lib/projects";
 import { markdownToHtml } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/seo";
@@ -98,7 +99,7 @@ export default async function ProjectDetailPage({ params }: Props) {
         </Link>
       </Reveal>
 
-      <Reveal delay={60}>
+      <Reveal delay={60} variant="scale">
         <header
           className={cn(
             "relative mt-6",
@@ -115,7 +116,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               src={mediaSrc(project.bannerUrl)}
               alt=""
               aria-hidden
-              className="block aspect-[1024/500] max-h-[22rem] w-full border-b border-[var(--border)] object-cover"
+              className="block aspect-[1024/500] max-h-[22rem] w-full border-b border-[var(--border)] object-cover motion-safe:animate-settle"
             />
           )}
 
@@ -138,13 +139,17 @@ export default async function ProjectDetailPage({ params }: Props) {
                   alt={`${project.title} icon`}
                   width={80}
                   height={80}
-                  className="h-16 w-16 shrink-0 rounded-2xl border border-[var(--border)] object-cover shadow-card sm:h-20 sm:w-20"
+                  className="h-16 w-16 shrink-0 rounded-2xl border border-[var(--border)] object-cover shadow-card motion-safe:animate-pop sm:h-20 sm:w-20"
                 />
               )}
               <div className="min-w-0">
-                <h1 className="font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-                  {project.title}
-                </h1>
+                <SplitText
+                  as="h1"
+                  onMount
+                  delay={0.25}
+                  text={project.title}
+                  className="font-display text-4xl font-semibold tracking-tight sm:text-5xl"
+                />
                 {project.publisher && (
                   <p className="mt-1.5 text-sm text-[var(--muted)]">
                     by <span className="font-medium text-[var(--fg)]">{project.publisher}</span>

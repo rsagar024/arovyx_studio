@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import ProjectExplorer from "@/components/ProjectExplorer";
 import Reveal from "@/components/Reveal";
+import SplitText from "@/components/motion/SplitText";
 import { getPublishedProjects } from "@/lib/projects";
 import { pageMetadata } from "@/lib/seo";
 import { categorySchema } from "@/lib/validators";
@@ -29,9 +30,14 @@ export default async function ProjectsPage({
     <div className="container-page py-16">
       <Reveal>
         <p className="micro-label">The work</p>
-        <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-5xl">
-          All projects
-        </h1>
+      </Reveal>
+      <SplitText
+        as="h1"
+        onMount
+        text="All projects"
+        className="mt-3 font-display text-4xl font-semibold tracking-tight sm:text-6xl"
+      />
+      <Reveal delay={200}>
         <p className="mt-4 max-w-2xl text-[var(--muted)]">
           Apps, games, packages and plugins — filter by category or search across titles,
           tags and tech stacks.

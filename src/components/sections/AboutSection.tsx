@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight, Code2, Cpu, FileText, Rocket } from "lucide-react";
 import Reveal from "@/components/Reveal";
+import SplitText from "@/components/motion/SplitText";
 import SectionLink from "@/components/SectionLink";
 import { CATEGORY_META, formatDate } from "@/lib/utils";
 import type { ProjectDTO } from "@/lib/validators";
@@ -38,14 +39,16 @@ export default function AboutSection({
     <section id="about" aria-labelledby="about-heading" className="container-page scroll-mt-20 pt-24">
       <Reveal>
         <p className="micro-label">The maker</p>
-        <h2 id="about-heading" className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
-          About Arovyx
-        </h2>
       </Reveal>
+      <SplitText
+        id="about-heading"
+        text="About Arovyx"
+        className="mt-3 font-display text-3xl font-semibold tracking-tight sm:text-5xl"
+      />
 
       <div className="mt-10 grid gap-12 lg:grid-cols-[1.4fr_1fr]">
         {/* bio */}
-        <Reveal delay={80}>
+        <Reveal delay={80} variant="left">
           <section aria-labelledby="bio-heading" className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6 sm:p-8">
             <div className="flex items-center gap-4">
               {config.avatarUrl && (
@@ -136,7 +139,7 @@ export default function AboutSection({
         </Reveal>
 
         {/* tech arsenal */}
-        <Reveal delay={140}>
+        <Reveal delay={140} variant="right">
           <section aria-labelledby="arsenal-heading" className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-6">
             <h3 id="arsenal-heading" className="flex items-center gap-2 font-display text-xl font-semibold">
               <Cpu className="h-5 w-5 text-accent-500" aria-hidden />

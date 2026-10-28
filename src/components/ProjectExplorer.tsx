@@ -2,8 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence, m } from "motion/react";
 import { Search, SearchX } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
+import { EASE_OUT, SPRING_SNAPPY } from "@/lib/motion";
 import { CATEGORY_META, cn } from "@/lib/utils";
 import type { Category, ProjectDTO } from "@/lib/validators";
 
@@ -94,13 +96,22 @@ export default function ProjectExplorer({
                 type="button"
                 onClick={() => onCategory(tab.value)}
                 className={cn(
-                  "rounded-lg border px-3.5 py-1.5 text-sm transition-colors",
-                  !active && "border-transparent text-[var(--muted)] hover:text-[var(--fg)]",
-                  active && !meta && "border-transparent bg-accent-500 font-medium text-ink-950",
-                  active && meta && cn("font-medium", meta.chip)
+                  "relative rounded-lg px-3.5 py-1.5 text-sm transition-colors",
+                  !active && "text-[var(--muted)] hover:text-[var(--fg)]",
+                  active && !meta && "font-medium text-ink-950",
+                  active && meta && cn("font-medium", meta.accentText)
                 )}
               >
-                {tab.label}
+                {/* highlight slides from the old tab to the new one */}
+                {active && (
+                  <m.span
+                    layoutId="explorer-tab"
+                    aria-hidden
+                    transition={SPRING_SNAPPY}
+                    className={cn("absolute inset-0 rounded-lg border", meta ? meta.chip : "border-transparent bg-accent-500")}
+                  />
+                )}
+                <span className="relative">{tab.label}</span>
               </button>
             );
           })}
@@ -149,19 +160,27 @@ export default function ProjectExplorer({
           </button>
         </div>
       ) : (
-        // Keyed on category so switching tabs replays the stagger; while
-        // searching, cards that newly match animate in and the rest stay put.
-        <div key={category} className="mt-8 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project, index) => (
-            <div
-              key={project.id}
-              className="motion-safe:animate-fade-up"
-              style={{ animationDelay: `${Math.min(index, 8) * 60}ms` }}
-            >
-              <ProjectCard project={project} />
-            </div>
-          ))}
-        </div>
+        // Cards that drop out of the filter shrink away, the rest glide to
+        // their new grid slots, and newly matching ones pop in.
+        <m.div layout className="mt-8 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {visible.map((project, index) => (
+              <m.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                transition={{
+                  layout: SPRING_SNAPPY,
+                  default: { duration: 0.5, ease: EASE_OUT, delay: Math.min(index, 8) * 0.05 },
+                }}
+              >
+                <ProjectCard project={project} />
+              </m.div>
+            ))}
+          </AnimatePresence>
+        </m.div>
       )}
     </div>
   );
