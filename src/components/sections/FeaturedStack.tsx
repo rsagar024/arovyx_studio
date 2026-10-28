@@ -6,9 +6,9 @@ import { useRef } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import CategoryBadge from "@/components/CategoryBadge";
 import ProjectCard from "@/components/ProjectCard";
-import SafeImg from "@/components/SafeImg";
+import DeviceMockup from "@/components/DeviceMockup";
 import TechChip from "@/components/TechChip";
-import { CATEGORY_META, cn, mediaSrc } from "@/lib/utils";
+import { CATEGORY_META, cn } from "@/lib/utils";
 import type { ProjectDTO } from "@/lib/validators";
 
 /** Sticky offset of the first card; each later card sits a little lower. */
@@ -58,14 +58,13 @@ function StackCard({
   // shrink once the cards behind this one start arriving
   const scale = useTransform(progress, [index / total, 1], [1, 1 - (total - 1 - index) * 0.04]);
   const dim = useTransform(progress, [index / total, 1], [0, last ? 0 : 0.35]);
-  const shot = project.screenshots[0] ?? project.imageUrl;
 
   return (
     <div className={cn("sticky", !last && "mb-[18vh]")} style={{ top: TOP + index * STEP }}>
       <m.article
         style={{ scale }}
         className={cn(
-          "group relative grid h-[26rem] origin-top grid-cols-[1fr_1.1fr] overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--panel)] shadow-card",
+          "panel-solid group relative grid h-[26rem] origin-top grid-cols-[1fr_1.1fr] overflow-hidden rounded-3xl border border-[var(--border)] shadow-card",
           meta.hoverBorder
         )}
       >
@@ -104,24 +103,23 @@ function StackCard({
           </span>
         </div>
 
-        {/* screenshot in a browser-ish frame, nudged off the edge */}
-        <div className="relative translate-x-6 translate-y-10 overflow-hidden rounded-tl-2xl border-l border-t border-[var(--border)] bg-[var(--panel-2)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-3 group-hover:translate-y-6">
-          <div className="flex gap-1.5 border-b border-[var(--border)] px-4 py-3" aria-hidden>
-            <span className="h-2.5 w-2.5 rounded-full bg-red-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400/70" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/70" />
-          </div>
-          {shot ? (
-            <SafeImg
-              src={mediaSrc(shot)}
-              alt=""
-              className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.04]"
-            />
-          ) : (
-            <div className={cn("flex h-full items-center justify-center font-display text-8xl font-semibold opacity-30", meta.accentText)}>
-              {project.title.charAt(0)}
-            </div>
-          )}
+        {/* media stage: category glow + faint grid, device mockup on top */}
+        <div className="relative overflow-hidden border-l border-[var(--border)]">
+          <span
+            aria-hidden
+            className={cn("absolute inset-0 bg-gradient-to-tl via-transparent to-transparent opacity-50", meta.line)}
+          />
+          <span
+            aria-hidden
+            className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(var(--fg)_1px,transparent_1px),linear-gradient(90deg,var(--fg)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(circle_at_center,black,transparent_75%)]"
+          />
+          <DeviceMockup
+            title={project.title}
+            screenshots={project.screenshots}
+            bannerUrl={project.bannerUrl}
+            iconUrl={project.imageUrl}
+            className="relative h-full"
+          />
         </div>
 
         {/* darkens as the next card covers this one */}

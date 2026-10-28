@@ -102,6 +102,13 @@ body::before {
   }
 }
 
+/* Opaque panel: the theme's --panel tint over the page color. Dark --panel is
+   ~4% white, so anything layered (the pinned featured cards) would show the
+   content behind it straight through. */
+.panel-solid {
+  background: linear-gradient(var(--panel), var(--panel)), var(--bg);
+}
+
 /* Gradient-filled heading text — defined outside @layer so its
    background-clip/text-transparent pairing can never be overridden by
    another utility's shorthand reset. */

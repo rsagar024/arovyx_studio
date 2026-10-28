@@ -335,7 +335,10 @@ function FloatingCard({
           <TiltCard max={10} className="rounded-xl">
             <Link
               href={`/projects/${card.slug}`}
-              className={cn("glass block rounded-xl p-4 shadow-card transition-colors duration-300", meta.hoverBorder)}
+              className={cn(
+                "glass block rounded-xl p-4 shadow-card transition-colors duration-300 dark:bg-[rgb(var(--bg-rgb)/0.55)]",
+                meta.hoverBorder
+              )}
             >
               <div className="flex items-center justify-between">
                 <span className={`text-[10px] font-semibold uppercase tracking-micro ${meta.accentText}`}>

@@ -46,8 +46,10 @@ export default function TiltCard({
   }
 
   return (
-    <div className="h-full [perspective:1000px]" onPointerMove={onMove} onPointerLeave={onLeave}>
-      <m.div className={cn("relative h-full [transform-style:preserve-3d]", className)} style={{ rotateX, rotateY }}>
+    // perspective is per-element (transformPerspective), not preserve-3d on a
+    // parent: a 3D rendering context switches off backdrop-filter (glass cards)
+    <div className="h-full" onPointerMove={onMove} onPointerLeave={onLeave}>
+      <m.div className={cn("relative h-full", className)} style={{ rotateX, rotateY, transformPerspective: 1000 }}>
         {children}
         <m.span
           aria-hidden

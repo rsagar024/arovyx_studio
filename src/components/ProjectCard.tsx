@@ -11,6 +11,9 @@ import GooglePlayIcon from "@/components/icons/GooglePlayIcon";
 import SafeImg from "@/components/SafeImg";
 import TiltCard from "@/components/motion/TiltCard";
 
+/** 1.2K, 500M — download counts can run into the hundreds of millions. */
+const compactCount = new Intl.NumberFormat("en", { notation: "compact", maximumFractionDigits: 1 });
+
 /** Small preview tile used in hero collage / detail pages. */
 export default function ProjectCard({
   project,
@@ -115,9 +118,7 @@ export default function ProjectCard({
             {project.downloads != null && (
               <span className="inline-flex items-center gap-1">
                 <Download className="h-3.5 w-3.5" aria-hidden />{" "}
-                {project.downloads >= 1000
-                  ? `${(project.downloads / 1000).toFixed(1)}k`
-                  : project.downloads}
+                {compactCount.format(project.downloads)}
               </span>
             )}
             {project.version && <span className="font-mono">v{project.version}</span>}

@@ -5,6 +5,7 @@ import { m } from "motion/react";
 import { ArrowRight, Boxes, Gamepad2, Package, Puzzle } from "lucide-react";
 import AnimatedTabs from "@/components/motion/AnimatedTabs";
 import CountUp from "@/components/CountUp";
+import DeviceMockup from "@/components/DeviceMockup";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
 import SafeImg from "@/components/SafeImg";
@@ -30,7 +31,7 @@ const ORDER: Category[] = ["APP", "GAME", "PACKAGE", "PLUGIN"];
 
 /**
  * "Browse by type" — monday-style tabbed showcase. Each tab shows the
- * category's pitch, count, a fan of its screenshots and its newest projects.
+ * category's pitch, count, a preview of its screenshots (or icons) and its newest projects.
  */
 export default function CategoryShowcase({
   projects,
@@ -43,7 +44,6 @@ export default function CategoryShowcase({
     const meta = CATEGORY_META[category];
     const Icon = CATEGORY_ICONS[category];
     const items = projects.filter((p) => p.category === category);
-    const shots = items.flatMap((p) => (p.screenshots[0] ? [p.screenshots[0]] : p.imageUrl ? [p.imageUrl] : [])).slice(0, 3);
 
     return {
       id: category,
@@ -70,10 +70,10 @@ export default function CategoryShowcase({
               Browse all {meta.plural.toLowerCase()}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden />
             </Link>
-            {shots.length > 0 && <ShotFan shots={shots} />}
+            <Preview items={items} glow={meta.line} />
           </div>
 
-          <div className="grid gap-x-5 gap-y-8 sm:grid-cols-2">
+          <div className="grid content-start gap-x-5 gap-y-8 sm:grid-cols-2">
             {items.slice(0, 4).map((project, index) => (
               <m.div
                 data-reveal=""
@@ -99,32 +99,35 @@ export default function CategoryShowcase({
   );
 }
 
-/** Stacked screenshots that fan out when hovered. */
-function ShotFan({ shots }: { shots: string[] }) {
-  const spread = [
-    { rest: { rotate: -6, x: -10, y: 0 }, open: { rotate: -14, x: -70, y: -6 } },
-    { rest: { rotate: 3, x: 6, y: 0 }, open: { rotate: 0, x: 0, y: -14 } },
-    { rest: { rotate: 9, x: 18, y: 0 }, open: { rotate: 14, x: 70, y: -6 } },
-  ];
+/** Category preview: phone mockups of its screenshots, or its app icons. */
+function Preview({ items, glow }: { items: ProjectDTO[]; glow: string }) {
+  const shots = items.flatMap((p) => p.screenshots.slice(0, 1)).slice(0, 3);
+  const icons = items.filter((p) => p.imageUrl).slice(0, 5);
+  if (shots.length === 0 && icons.length === 0) return null;
+
   return (
-    <m.div
-      aria-hidden
-      initial="rest"
-      animate="rest"
-      whileHover="open"
-      className="relative mx-auto mt-10 hidden h-44 w-60 sm:block lg:mx-0 lg:ml-16"
-    >
-      {shots.map((src, index) => (
-        <m.div
-          key={src}
-          variants={spread[index]}
-          transition={{ type: "spring", stiffness: 220, damping: 18 }}
-          className="absolute inset-0 overflow-hidden rounded-xl border border-[var(--border)] bg-[var(--panel-2)] shadow-card"
-          style={{ zIndex: index }}
-        >
-          <SafeImg src={mediaSrc(src)} alt="" className="h-full w-full object-cover" />
-        </m.div>
-      ))}
-    </m.div>
+    <div className="group relative mt-10 flex h-64 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)]">
+      <span aria-hidden className={cn("absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-40", glow)} />
+      <span
+        aria-hidden
+        className="absolute inset-0 opacity-[0.07] [background-image:linear-gradient(var(--fg)_1px,transparent_1px),linear-gradient(90deg,var(--fg)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(circle_at_center,black,transparent_75%)]"
+      />
+      {shots.length > 0 ? (
+        <DeviceMockup title={items[0]!.title} screenshots={shots} size="sm" className="relative h-full w-full" />
+      ) : (
+        // overlapping app icons that spread apart on hover
+        <ul className="relative flex -space-x-4 transition-all duration-500 group-hover:space-x-2">
+          {icons.map((p, index) => (
+            <li
+              key={p.id}
+              className="h-20 w-20 overflow-hidden rounded-[1.25rem] bg-white p-2.5 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.8)] ring-2 ring-[var(--bg)]"
+              style={{ transform: `rotate(${(index - (icons.length - 1) / 2) * 6}deg)`, zIndex: icons.length - index }}
+            >
+              <SafeImg src={mediaSrc(p.imageUrl) ?? undefined} alt={`${p.title} icon`} className="h-full w-full object-contain" />
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }

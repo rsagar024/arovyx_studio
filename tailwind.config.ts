@@ -101,7 +101,9 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         marquee: "marquee 40s linear infinite",
         "bounce-y": "bounce-y 1.8s ease-in-out infinite",
-        "page-in": "page-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both",
+        // `backwards`, not `both`: a held opacity animation makes the wrapper a
+        // backdrop root, which stops the glass cards blurring what is behind them
+        "page-in": "page-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards",
         "word-up": "word-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) both",
         settle: "settle 1.6s cubic-bezier(0.16, 1, 0.3, 1) both",
         pop: "pop 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both",
