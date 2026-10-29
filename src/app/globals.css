@@ -175,6 +175,17 @@ html.light .footer-wordmark {
   }
 }
 
+/* Outlined display text (Built-with ticker). Uses `color`, not
+   -webkit-text-fill-color, so a hover:text-* utility can fill it in. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(231 237 243 / 0.45);
+}
+
+html.light .text-outline {
+  -webkit-text-stroke-color: rgb(11 14 17 / 0.45);
+}
+
 /* Focus visibility for accessibility */
 :focus-visible {
   outline: 2px solid var(--accent);

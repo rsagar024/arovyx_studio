@@ -3,6 +3,7 @@ import { ArrowRight, Code2, Cpu, FileText, Rocket } from "lucide-react";
 import Reveal from "@/components/Reveal";
 import SplitText from "@/components/motion/SplitText";
 import SectionLink from "@/components/SectionLink";
+import { techUsage } from "@/lib/tech";
 import { CATEGORY_META, formatDate } from "@/lib/utils";
 import type { ProjectDTO } from "@/lib/validators";
 import type { getSiteConfig } from "@/lib/projects";
@@ -18,14 +19,8 @@ export default function AboutSection({
   /** Published projects, newest first. */
   projects: ProjectDTO[];
 }) {
-  // Tech arsenal: every tech across published projects, with usage counts
-  const counts = new Map<string, number>();
-  for (const project of projects) {
-    for (const tech of project.techStack) {
-      counts.set(tech, (counts.get(tech) ?? 0) + 1);
-    }
-  }
-  const arsenal = [...counts.entries()].sort((a, b) => b[1] - a[1]);
+  // Tech arsenal: every tech across published projects (case-insensitive), with usage counts
+  const arsenal = techUsage(projects);
 
   // Timeline: group shipped projects by year
   const byYear = new Map<number, typeof projects>();
@@ -149,12 +144,12 @@ export default function AboutSection({
               Tools used across {projects.length} published {projects.length === 1 ? "project" : "projects"}.
             </p>
             <ul className="mt-5 flex flex-wrap gap-2">
-              {arsenal.map(([tech, count]) => (
+              {arsenal.map(({ key, label, count }) => (
                 <li
-                  key={tech}
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-1.5 text-sm"
+                  key={key}
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-1.5 font-mono text-xs uppercase tracking-wider"
                 >
-                  {tech}
+                  {label}
                   <span className="rounded-full bg-accent-400/15 px-1.5 text-[10px] font-semibold text-accent-700 dark:text-accent-300">
                     {count}
                   </span>
