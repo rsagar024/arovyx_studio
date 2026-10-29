@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, m } from "motion/react";
 import { Search, SearchX } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
-import { EASE_OUT, SPRING_SNAPPY } from "@/lib/motion";
+import { EASE_OUT, SPRING_SNAPPY, VIEWPORT, revealVariants } from "@/lib/motion";
 import { CATEGORY_META, cn } from "@/lib/utils";
 import type { Category, ProjectDTO } from "@/lib/validators";
 
@@ -79,7 +79,13 @@ export default function ProjectExplorer({
   return (
     <div>
       {/* controls */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <m.div
+        data-reveal=""
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: EASE_OUT, delay: 0.3 }}
+        className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between"
+      >
         <div
           role="tablist"
           aria-label="Filter by category"
@@ -128,21 +134,47 @@ export default function ProjectExplorer({
             onChange={(event) => onQuery(event.target.value)}
             placeholder="Search title, tag or tech…"
             aria-label="Search projects"
-            className="w-full rounded-xl border border-[var(--border)] bg-[var(--panel)] py-2.5 pl-9 pr-3 text-sm text-[var(--fg)] placeholder:text-[var(--muted)] focus:border-accent-500/60 focus:outline-none"
+            className="w-full rounded-xl border border-[var(--border)] bg-[var(--panel)] py-2.5 pl-9 pr-3 text-sm text-[var(--fg)] transition-shadow duration-300 placeholder:text-[var(--muted)] focus:border-accent-500/60 focus:shadow-glow focus:outline-none"
           />
         </div>
-      </div>
+      </m.div>
 
       {/* results */}
       <p className="mt-6 text-xs uppercase tracking-micro text-[var(--muted)]" aria-live="polite">
-        {visible.length} {visible.length === 1 ? "project" : "projects"}
+        {/* the number flips whenever the filter changes it */}
+        <span className="inline-flex overflow-hidden align-bottom">
+          <AnimatePresence mode="popLayout" initial={false}>
+            <m.span
+              key={visible.length}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: "0%", opacity: 1 }}
+              exit={{ y: "-100%", opacity: 0 }}
+              transition={{ duration: 0.3, ease: EASE_OUT }}
+              className="inline-block font-semibold text-[var(--fg)]"
+            >
+              {visible.length}
+            </m.span>
+          </AnimatePresence>
+        </span>{" "}
+        {visible.length === 1 ? "project" : "projects"}
         {category !== "ALL" && ` in ${CATEGORY_META[category as Category].plural}`}
         {query && ` matching “${query}”`}
       </p>
 
       {visible.length === 0 ? (
-        <div className="mt-10 flex flex-col items-center gap-3 rounded-xl border border-dashed border-[var(--border)] py-16 text-center">
-          <SearchX className="h-8 w-8 text-[var(--muted)]" aria-hidden />
+        <m.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, ease: EASE_OUT }}
+          className="mt-10 flex flex-col items-center gap-3 rounded-xl border border-dashed border-[var(--border)] py-16 text-center"
+        >
+          <m.span
+            className="flex"
+            animate={{ rotate: [0, -14, 10, -6, 0] }}
+            transition={{ duration: 1.2, ease: "easeInOut", delay: 0.2 }}
+          >
+            <SearchX className="h-8 w-8 text-[var(--muted)]" aria-hidden />
+          </m.span>
           <p className="font-display text-lg font-semibold">Nothing matches that</p>
           <p className="max-w-sm text-sm text-[var(--muted)]">
             Try a different keyword or switch categories.
@@ -158,23 +190,24 @@ export default function ProjectExplorer({
           >
             Reset filters
           </button>
-        </div>
+        </m.div>
       ) : (
-        // Cards that drop out of the filter shrink away, the rest glide to
-        // their new grid slots, and newly matching ones pop in.
+        // Cards rise in row by row as they scroll into view (staggered by
+        // column). On filtering, cards that drop out shrink away, the rest
+        // glide to their new grid slots, and newly matching ones rise in.
         <m.div layout className="mt-8 grid gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout" initial={false}>
+          <AnimatePresence mode="popLayout">
             {visible.map((project, index) => (
               <m.div
                 key={project.id}
+                data-reveal=""
                 layout
-                initial={{ opacity: 0, y: 24, scale: 0.96 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
+                variants={revealVariants("up", (index % 3) * 0.09)}
+                initial="hidden"
+                whileInView="show"
+                viewport={VIEWPORT}
                 exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-                transition={{
-                  layout: SPRING_SNAPPY,
-                  default: { duration: 0.5, ease: EASE_OUT, delay: Math.min(index, 8) * 0.05 },
-                }}
+                transition={{ layout: SPRING_SNAPPY }}
               >
                 <ProjectCard project={project} />
               </m.div>

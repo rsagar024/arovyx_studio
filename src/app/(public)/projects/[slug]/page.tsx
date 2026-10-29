@@ -10,7 +10,11 @@ import ProjectCard from "@/components/ProjectCard";
 import GooglePlayIcon from "@/components/icons/GooglePlayIcon";
 import SafeImg from "@/components/SafeImg";
 import ScreenshotGallery from "@/components/ScreenshotGallery";
+import CountUp from "@/components/CountUp";
+import Magnetic from "@/components/motion/Magnetic";
+import ScrollZoom from "@/components/motion/ScrollZoom";
 import SplitText from "@/components/motion/SplitText";
+import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { getProjectBySlug, getSimilarProjects } from "@/lib/projects";
 import { markdownToHtml } from "@/lib/markdown";
 import { pageMetadata } from "@/lib/seo";
@@ -75,13 +79,15 @@ export default async function ProjectDetailPage({ params }: Props) {
   return (
     <div className="container-page relative py-16">
       {/* diagonal accent line in the category color — grid-breaking detail (spec §9) */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 hidden overflow-hidden sm:block">
-        <div
-          className={cn(
-            "absolute top-0 right-[12%] h-[380px] w-px rotate-[24deg] bg-gradient-to-b to-transparent",
-            meta.line
-          )}
-        />
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute right-[12%] top-0 h-[380px] w-px rotate-[24deg]">
+          <div
+            className={cn(
+              "h-full w-full origin-top bg-gradient-to-b to-transparent motion-safe:animate-draw-y",
+              meta.line
+            )}
+          />
+        </div>
       </div>
 
       <script
@@ -112,25 +118,33 @@ export default async function ProjectDetailPage({ params }: Props) {
               their own lettering, so text is never drawn on top of it. If the image
               fails to load it removes itself and the card simply starts with the text. */}
           {project.bannerUrl && (
-            <SafeImg
-              src={mediaSrc(project.bannerUrl)}
-              alt=""
-              aria-hidden
-              className="block aspect-[1024/500] max-h-[22rem] w-full border-b border-[var(--border)] object-cover motion-safe:animate-settle"
-            />
+            <ScrollZoom className="border-b border-[var(--border)]">
+              <SafeImg
+                src={mediaSrc(project.bannerUrl)}
+                alt=""
+                aria-hidden
+                className="block aspect-[1024/500] max-h-[22rem] w-full object-cover motion-safe:animate-settle"
+              />
+            </ScrollZoom>
           )}
 
           <div className={cn("relative", project.bannerUrl && "px-5 pb-8 pt-6 sm:px-10")}>
-            <div className="flex flex-wrap items-center gap-2">
-              <CategoryBadge category={project.category} />
-              <StatusBadge status={project.status} />
+            <Stagger className="flex flex-wrap items-center gap-2" delay={0.2}>
+              <StaggerItem variant="scale">
+                <CategoryBadge category={project.category} />
+              </StaggerItem>
+              <StaggerItem variant="scale">
+                <StatusBadge status={project.status} />
+              </StaggerItem>
               {project.version && (
-                <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] px-2.5 py-0.5 font-mono text-[11px] text-[var(--muted)]">
-                  <Tag className="h-3 w-3" aria-hidden />
-                  v{project.version}
-                </span>
+                <StaggerItem variant="scale">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] px-2.5 py-0.5 font-mono text-[11px] text-[var(--muted)]">
+                    <Tag className="h-3 w-3" aria-hidden />
+                    v{project.version}
+                  </span>
+                </StaggerItem>
               )}
-            </div>
+            </Stagger>
 
             <div className="mt-5 flex items-center gap-4">
               {project.imageUrl && (
@@ -148,7 +162,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                   onMount
                   delay={0.25}
                   text={project.title}
-                  className="font-display text-4xl font-semibold tracking-tight sm:text-5xl"
+                  className="font-display text-3xl font-semibold tracking-tight [overflow-wrap:anywhere] sm:text-5xl"
                 />
                 {project.publisher && (
                   <p className="mt-1.5 text-sm text-[var(--muted)]">
@@ -157,7 +171,7 @@ export default async function ProjectDetailPage({ params }: Props) {
                 )}
               </div>
             </div>
-            <p className="mt-4 max-w-3xl text-lg leading-relaxed text-[var(--muted)]">
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-[var(--muted)] [overflow-wrap:anywhere] sm:text-lg">
               {project.shortDescription}
             </p>
 
@@ -178,15 +192,22 @@ export default async function ProjectDetailPage({ params }: Props) {
                 </a>
               )}
               {project.sourceUrl && source.kind !== "playstore" && (
-                <a
-                  href={project.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-all hover:bg-accent-400 hover:shadow-glow"
-                >
-                  <SourceIcon className="h-4 w-4" aria-hidden />
-                  {source.label}
-                </a>
+                <Magnetic>
+                  <a
+                    href={project.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative inline-flex items-center gap-2 overflow-hidden rounded-lg bg-accent-500 px-5 py-2.5 text-sm font-semibold text-ink-950 transition-all hover:bg-accent-400 hover:shadow-glow"
+                  >
+                    {/* shine sweep on hover */}
+                    <span
+                      aria-hidden
+                      className="absolute inset-y-0 -left-1/2 w-1/3 -skew-x-12 bg-white/40 opacity-0 transition-all duration-700 group-hover:left-[120%] group-hover:opacity-100"
+                    />
+                    <SourceIcon className="relative h-4 w-4" aria-hidden />
+                    <span className="relative">{source.label}</span>
+                  </a>
+                </Magnetic>
               )}
               {project.demoUrl && (
                 <a
@@ -199,10 +220,11 @@ export default async function ProjectDetailPage({ params }: Props) {
                   Live demo
                 </a>
               )}
-              <span className="ml-auto hidden items-center gap-4 text-xs text-[var(--muted)] sm:flex">
+              {/* on phones the stats wrap onto their own line below the buttons */}
+              <span className="flex w-full flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[var(--muted)] sm:ml-auto sm:w-auto">
                 {project.stars != null && (
                   <span className="inline-flex items-center gap-1">
-                    <Star className="h-3.5 w-3.5" aria-hidden /> {project.stars} stars
+                    <Star className="h-3.5 w-3.5" aria-hidden /> <CountUp value={project.stars} pad={1} /> stars
                   </span>
                 )}
                 {project.downloads != null && (
@@ -230,72 +252,90 @@ export default async function ProjectDetailPage({ params }: Props) {
 
       <div className="mt-12 grid gap-12 lg:grid-cols-[1.6fr_1fr]">
         {/* main content */}
-        <Reveal delay={120}>
+        {/* min-w-0: a wide code block must scroll inside its box, not widen the page */}
+        <Reveal delay={120} className="min-w-0">
           <article
-            className="max-w-none text-[15px]"
+            className="max-w-none text-[15px] [overflow-wrap:anywhere] [&_pre]:max-w-full"
             dangerouslySetInnerHTML={{ __html: html }}
           />
         </Reveal>
 
         {/* sidebar */}
-        <Reveal delay={160} className="space-y-8">
-          <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
-            <h2 className="micro-label">Tech stack</h2>
-            <div className="mt-3 flex flex-wrap gap-1.5">
+        {/* sidebar: panels rise in one after another, their chips pop in */}
+        <Stagger className="min-w-0 space-y-8" step={0.12} delay={0.15}>
+          <StaggerItem variant="up">
+            <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
+              <h2 className="micro-label">Tech stack</h2>
               {project.techStack.length ? (
-                project.techStack.map((tech) => <TechChip key={tech} label={tech} />)
+                <Stagger className="mt-3 flex flex-wrap gap-1.5" step={0.04} delay={0.2}>
+                  {project.techStack.map((tech) => (
+                    <StaggerItem key={tech} variant="scale">
+                      <TechChip label={tech} />
+                    </StaggerItem>
+                  ))}
+                </Stagger>
               ) : (
-                <p className="text-sm text-[var(--muted)]">Not specified.</p>
+                <p className="mt-3 text-sm text-[var(--muted)]">Not specified.</p>
               )}
-            </div>
-          </aside>
+            </aside>
+          </StaggerItem>
 
-          <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
-            <h2 className="micro-label">Tags</h2>
-            <div className="mt-3 flex flex-wrap gap-1.5">
+          <StaggerItem variant="up">
+            <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
+              <h2 className="micro-label">Tags</h2>
               {project.tags.length ? (
-                project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full border border-[var(--border)] px-2.5 py-0.5 text-[11px] text-[var(--muted)]"
-                  >
-                    #{tag}
-                  </span>
-                ))
+                <Stagger className="mt-3 flex flex-wrap gap-1.5" step={0.04} delay={0.2}>
+                  {project.tags.map((tag) => (
+                    <StaggerItem key={tag} variant="scale">
+                      <span className="block rounded-full border border-[var(--border)] px-2.5 py-0.5 text-[11px] text-[var(--muted)] [overflow-wrap:anywhere]">
+                        #{tag}
+                      </span>
+                    </StaggerItem>
+                  ))}
+                </Stagger>
               ) : (
-                <p className="text-sm text-[var(--muted)]">No tags yet.</p>
+                <p className="mt-3 text-sm text-[var(--muted)]">No tags yet.</p>
               )}
-            </div>
-          </aside>
+            </aside>
+          </StaggerItem>
 
           {project.features.length > 0 && (
-            <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
-              <h2 className="micro-label">Features</h2>
-              <ul className="mt-3 space-y-2">
-                {project.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex items-start gap-2 text-sm text-[var(--muted)]"
-                  >
-                    <span className={cn("mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full", meta.dot)} aria-hidden />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </aside>
+            <StaggerItem variant="up">
+              <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
+                <h2 className="micro-label">Features</h2>
+                <Stagger as="ul" className="mt-3 space-y-2" step={0.06} delay={0.2}>
+                  {project.features.map((feature) => (
+                    <StaggerItem
+                      as="li"
+                      key={feature}
+                      variant="left"
+                      className="flex items-start gap-2 text-sm text-[var(--muted)] [overflow-wrap:anywhere]"
+                    >
+                      <span className="relative mt-1.5 flex h-1.5 w-1.5 shrink-0" aria-hidden>
+                        <span className={cn("absolute inset-0 rounded-full motion-safe:animate-ping-once", meta.dot)} />
+                        <span className={cn("relative h-1.5 w-1.5 rounded-full", meta.dot)} />
+                      </span>
+                      {feature}
+                    </StaggerItem>
+                  ))}
+                </Stagger>
+              </aside>
+            </StaggerItem>
           )}
 
-          <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
-            <h2 className="micro-label">Meta</h2>
-            <dl className="mt-3 space-y-2 text-sm">
-              <MetaRow label="Category" value={meta.label} />
-              <MetaRow label="Status" value={project.status.replace("_", " ")} />
-              {project.version && <MetaRow label="Version" value={`v${project.version}`} />}
-              <MetaRow label="Added" value={formatDate(project.createdAt)} />
-              <MetaRow label="Source" value={safeHostname(project.sourceUrl)} />
-            </dl>
-          </aside>
-        </Reveal>
+          <StaggerItem variant="up">
+            <aside className="rounded-xl border border-[var(--border)] bg-[var(--panel)] p-5">
+              <h2 className="micro-label">Meta</h2>
+              <dl className="mt-3 space-y-2 text-sm">
+                <MetaRow label="Category" value={meta.label} />
+                <MetaRow label="Status" value={project.status.replace("_", " ")} />
+                {project.version && <MetaRow label="Version" value={`v${project.version}`} />}
+                <MetaRow label="Added" value={formatDate(project.createdAt)} />
+                <MetaRow label="Source" value={safeHostname(project.sourceUrl)} />
+              </dl>
+            </aside>
+          </StaggerItem>
+        </Stagger>
       </div>
 
       {/* similar projects */}
@@ -323,8 +363,10 @@ export default async function ProjectDetailPage({ params }: Props) {
 function MetaRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex items-center justify-between gap-3">
-      <dt className="text-[var(--muted)]">{label}</dt>
-      <dd className="font-medium capitalize text-[var(--fg)]">{value}</dd>
+      <dt className="shrink-0 text-[var(--muted)]">{label}</dt>
+      <dd className="min-w-0 truncate font-medium capitalize text-[var(--fg)]" title={value}>
+        {value}
+      </dd>
     </div>
   );
 }

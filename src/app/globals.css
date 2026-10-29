@@ -136,6 +136,45 @@ html.light .gradient-text {
   }
 }
 
+/* Footer wordmark letters: cyan outline + a vertical gradient fill that
+   slowly breathes. Per letter (each one animates in on its own), so the
+   gradient runs top-to-bottom — every letter shares the same phase. */
+.footer-wordmark {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgb(34 211 238 / 0.45);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(34 211 238 / 0.5),
+    rgb(34 211 238 / 0.06) 50%,
+    rgb(34 211 238 / 0.5)
+  );
+  background-size: 100% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: wordmark-breathe 7s ease-in-out infinite;
+}
+
+html.light .footer-wordmark {
+  -webkit-text-stroke-color: rgb(14 116 144 / 0.55);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(14 116 144 / 0.4),
+    rgb(14 116 144 / 0.05) 50%,
+    rgb(14 116 144 / 0.4)
+  );
+}
+
+@keyframes wordmark-breathe {
+  0%,
+  100% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+}
+
 /* Focus visibility for accessibility */
 :focus-visible {
   outline: 2px solid var(--accent);

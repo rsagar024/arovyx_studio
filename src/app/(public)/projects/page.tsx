@@ -27,7 +27,16 @@ export default async function ProjectsPage({
   const query = searchParams.q ?? "";
 
   return (
-    <div className="container-page py-16">
+    <div className="container-page relative py-16">
+      {/* ambient backdrop: breathing glow, faint grid and a diagonal line that draws in */}
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-80 overflow-hidden">
+        <div className="absolute -left-20 -top-24 h-72 w-72 rounded-full bg-accent-500/20 blur-3xl motion-safe:animate-pulse-glow" />
+        <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(var(--fg)_1px,transparent_1px),linear-gradient(90deg,var(--fg)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]" />
+        <div className="absolute right-[10%] top-0 h-80 w-px rotate-[24deg]">
+          <div className="h-full w-full origin-top bg-gradient-to-b from-accent-500/60 to-transparent motion-safe:animate-draw-y" />
+        </div>
+      </div>
+
       <Reveal>
         <p className="micro-label">The work</p>
       </Reveal>

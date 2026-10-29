@@ -6,9 +6,9 @@ import { cn, mediaSrc } from "@/lib/utils";
 
 /** Fan position per phone: centre phone in front, the others tucked behind. */
 const FAN = [
-  "z-20 translate-x-0 rotate-0 group-hover:-translate-y-2",
-  "z-10 -translate-x-[62%] -rotate-[8deg] scale-90 group-hover:-translate-x-[78%] group-hover:-rotate-[12deg]",
-  "z-10 translate-x-[62%] rotate-[8deg] scale-90 group-hover:translate-x-[78%] group-hover:rotate-[12deg]",
+  "z-20 translate-x-0 rotate-0 group-hover:-translate-y-2 group-active-touch:-translate-y-2",
+  "z-10 -translate-x-[62%] -rotate-[8deg] scale-90 group-hover:-translate-x-[78%] group-hover:-rotate-[12deg] group-active-touch:-translate-x-[78%] group-active-touch:-rotate-[12deg]",
+  "z-10 translate-x-[62%] rotate-[8deg] scale-90 group-hover:translate-x-[78%] group-hover:rotate-[12deg] group-active-touch:translate-x-[78%] group-active-touch:rotate-[12deg]",
 ];
 
 /**
@@ -17,7 +17,8 @@ const FAN = [
  * - portrait screenshots → a fan of phone mockups (whole screen visible)
  * - a landscape first screenshot or a store banner → a browser window
  * - only an icon/logo → a large app-icon tile
- * Hover effects key off a `group` class on an ancestor.
+ * Hover effects key off a `group` class on an ancestor; on touch screens the
+ * same effects play when that ancestor sets data-active="true".
  */
 export default function DeviceMockup({
   title,
@@ -53,7 +54,7 @@ export default function DeviceMockup({
             className={cn(
               "absolute aspect-[9/19.5] overflow-hidden rounded-[1.4rem] border-[5px] border-ink-950 bg-ink-950 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]",
               phone,
-              shots.length === 1 ? "rotate-[4deg] group-hover:rotate-0" : FAN[index]
+              shots.length === 1 ? "rotate-[4deg] group-hover:rotate-0 group-active-touch:rotate-0" : FAN[index]
             )}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -83,7 +84,7 @@ export default function DeviceMockup({
   if (wide) {
     return (
       <div className={cn("flex items-center justify-center", className)}>
-        <div className="w-[88%] overflow-hidden rounded-xl border border-white/10 bg-ink-900 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:scale-[1.02]">
+        <div className="w-[88%] overflow-hidden rounded-xl border border-white/10 bg-ink-900 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:scale-[1.02] group-active-touch:-translate-y-2 group-active-touch:scale-[1.02]">
           <div className="flex gap-1.5 border-b border-white/10 px-3 py-2" aria-hidden>
             <span className="h-2 w-2 rounded-full bg-red-400/70" />
             <span className="h-2 w-2 rounded-full bg-amber-400/70" />
@@ -103,7 +104,7 @@ export default function DeviceMockup({
         <span aria-hidden className="absolute h-40 w-40 rounded-full border border-white/10 motion-safe:animate-pulse-glow" />
         <div
           className={cn(
-            "relative flex items-center justify-center overflow-hidden rounded-[1.75rem] bg-white p-4 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:rotate-[-4deg]",
+            "relative flex items-center justify-center overflow-hidden rounded-[1.75rem] bg-white p-4 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.8)] ring-1 ring-white/10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-2 group-hover:rotate-[-4deg] group-active-touch:-translate-y-2 group-active-touch:rotate-[-4deg]",
             size === "lg" ? "h-32 w-32" : "h-24 w-24"
           )}
         >

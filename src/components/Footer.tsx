@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Github, Instagram, Linkedin, Mail } from "lucide-react";
 import BrandMark from "@/components/BrandMark";
 import Parallax from "@/components/motion/Parallax";
+import Wordmark from "@/components/motion/Wordmark";
 import { Stagger, StaggerItem } from "@/components/motion/Stagger";
 import { getSiteConfig } from "@/lib/projects";
 
@@ -59,13 +60,12 @@ export default async function Footer() {
       </Stagger>
 
       {/* oversized wordmark peeking up from the bottom edge */}
-      <Parallax offset={30} className="pointer-events-none select-none">
-        <p
-          aria-hidden
-          className="-mb-[0.22em] text-center font-display text-[clamp(4rem,19vw,16rem)] font-semibold leading-none tracking-tightest text-transparent [-webkit-text-stroke:1px_var(--border)] [background:linear-gradient(to_bottom,rgb(34_211_238/0.18),transparent_75%)] [-webkit-background-clip:text] [background-clip:text]"
-        >
-          AROVYX
-        </p>
+      <Parallax offset={20} className="pointer-events-none select-none">
+        <Wordmark
+          text="AROVYX"
+          // phones: breathing room below so the whole word sits clear of the screen edge
+          className="mb-10 font-display sm:-mb-[0.08em] text-[clamp(4rem,19vw,16rem)] font-semibold leading-none tracking-tightest"
+        />
       </Parallax>
     </footer>
   );

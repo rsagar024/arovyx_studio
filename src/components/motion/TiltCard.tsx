@@ -8,7 +8,7 @@ const SPRING = { stiffness: 220, damping: 20, mass: 0.5 };
 
 /**
  * 3D tilt that follows the mouse, with a soft glare where the pointer is.
- * Mouse only — touch and reduced motion get a flat card.
+ * Mouse only — touch gets a press-in on tap instead, reduced motion a flat card.
  */
 export default function TiltCard({
   children,
@@ -49,7 +49,11 @@ export default function TiltCard({
     // perspective is per-element (transformPerspective), not preserve-3d on a
     // parent: a 3D rendering context switches off backdrop-filter (glass cards)
     <div className="h-full" onPointerMove={onMove} onPointerLeave={onLeave}>
-      <m.div className={cn("relative h-full", className)} style={{ rotateX, rotateY, transformPerspective: 1000 }}>
+      <m.div
+        className={cn("relative h-full", className)}
+        style={{ rotateX, rotateY, transformPerspective: 1000 }}
+        whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+      >
         {children}
         <m.span
           aria-hidden

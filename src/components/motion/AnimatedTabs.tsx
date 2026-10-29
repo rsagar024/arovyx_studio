@@ -55,7 +55,8 @@ export default function AnimatedTabs({
         aria-label={label}
         onKeyDown={onKeyDown}
         className={cn(
-          "inline-flex max-w-full gap-1 overflow-x-auto rounded-full border border-[var(--border)] bg-[var(--panel)] p-1",
+          // phones: a 2×2 grid so every tab stays on screen (a scrolling row hid the last ones)
+          "grid max-w-full grid-cols-2 gap-1 rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-1 sm:inline-flex sm:overflow-x-auto sm:rounded-full",
           listClassName
         )}
       >
@@ -75,7 +76,7 @@ export default function AnimatedTabs({
               tabIndex={selected ? 0 : -1}
               onClick={() => setActive(tab.id)}
               className={cn(
-                "relative shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+                "relative flex shrink-0 justify-center rounded-full px-4 py-2 text-sm font-medium transition-colors",
                 selected ? "text-ink-950" : "text-[var(--muted)] hover:text-[var(--fg)]"
               )}
             >

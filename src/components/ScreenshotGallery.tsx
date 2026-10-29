@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, m } from "motion/react";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useSmoothScroll } from "@/components/motion/SmoothScroll";
-import { EASE_OUT, SPRING_SOFT } from "@/lib/motion";
+import { EASE_OUT, SPRING_SOFT, VIEWPORT } from "@/lib/motion";
 
 /**
  * Horizontal phone-screenshot gallery. Screenshots that fail to load are
@@ -66,7 +66,16 @@ export default function ScreenshotGallery({
       </h2>
       <ul className="mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4" data-lenis-prevent-horizontal="">
         {visible.map((src, index) => (
-          <li key={src} className="shrink-0 snap-start">
+          // each shot slides in as it enters view (incl. when the strip is swiped)
+          <m.li
+            key={src}
+            data-reveal=""
+            className="shrink-0 snap-start"
+            initial={{ opacity: 0, x: 48, rotate: 2 }}
+            whileInView={{ opacity: 1, x: 0, rotate: 0 }}
+            viewport={VIEWPORT}
+            transition={{ duration: 0.6, ease: EASE_OUT, delay: Math.min(index, 4) * 0.08 }}
+          >
             <a
               href={src}
               target="_blank"
@@ -88,7 +97,7 @@ export default function ScreenshotGallery({
                 className="h-[22rem] w-auto max-w-none object-cover transition-transform duration-500 group-hover:scale-[1.03] sm:h-[26rem]"
               />
             </a>
-          </li>
+          </m.li>
         ))}
       </ul>
 

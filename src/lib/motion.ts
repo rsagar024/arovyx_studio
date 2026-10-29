@@ -44,4 +44,6 @@ export function staggerContainer(step = 0.08, delayChildren = 0): Variants {
 }
 
 /** Shared in-view trigger: fire a little before the element is fully on screen. */
-export const VIEWPORT = { once: true, amount: 0.15, margin: "0px 0px -40px 0px" } as const;
+// `amount: "some"` (not a fraction): on phones a stacked column can be many
+// screens tall, and a 15% threshold would never be reached.
+export const VIEWPORT = { once: true, amount: "some", margin: "0px 0px -10% 0px" } as const;

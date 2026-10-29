@@ -234,10 +234,10 @@ export default function Hero({
           </div>
         </m.div>
 
-        {/* ---------- right: orb + floating cards (tablet & up) ---------- */}
+        {/* ---------- right: orb + floating cards (below the copy on phones) ---------- */}
         <m.div
           style={{ y: rightY }}
-          className="relative mx-auto hidden w-full max-w-[22rem] justify-self-center md:flex lg:max-w-md"
+          className="relative mx-auto flex w-full max-w-[20rem] justify-self-center sm:max-w-[22rem] lg:max-w-md"
         >
           <Layer x={sx} y={sy} depth={-14} className="absolute -inset-6">
             <div aria-hidden className="h-full w-full animate-pulse-glow rounded-full bg-gradient-to-tr from-accent-500/30 via-accent-400/10 to-transparent blur-3xl" />

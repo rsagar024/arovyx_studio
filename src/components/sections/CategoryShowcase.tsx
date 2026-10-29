@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { m } from "motion/react";
+import { useRef } from "react";
+import { m, useInView } from "motion/react";
 import { ArrowRight, Boxes, Gamepad2, Package, Puzzle } from "lucide-react";
 import AnimatedTabs from "@/components/motion/AnimatedTabs";
 import CountUp from "@/components/CountUp";
@@ -103,10 +104,17 @@ export default function CategoryShowcase({
 function Preview({ items, glow }: { items: ProjectDTO[]; glow: string }) {
   const shots = items.flatMap((p) => p.screenshots.slice(0, 1)).slice(0, 3);
   const icons = items.filter((p) => p.imageUrl).slice(0, 5);
+  // touch screens have no hover: fan out once the preview is mostly in view
+  const box = useRef<HTMLDivElement | null>(null);
+  const inView = useInView(box, { amount: 0.6 });
   if (shots.length === 0 && icons.length === 0) return null;
 
   return (
-    <div className="group relative mt-10 flex h-64 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)]">
+    <div
+      ref={box}
+      data-active={inView}
+      className="group relative mt-10 flex h-64 items-center justify-center overflow-hidden rounded-2xl border border-[var(--border)]"
+    >
       <span aria-hidden className={cn("absolute inset-0 bg-gradient-to-t via-transparent to-transparent opacity-40", glow)} />
       <span
         aria-hidden
@@ -115,12 +123,12 @@ function Preview({ items, glow }: { items: ProjectDTO[]; glow: string }) {
       {shots.length > 0 ? (
         <DeviceMockup title={items[0]!.title} screenshots={shots} size="sm" className="relative h-full w-full" />
       ) : (
-        // overlapping app icons that spread apart on hover
-        <ul className="relative flex -space-x-4 transition-all duration-500 group-hover:space-x-2">
+        // overlapping app icons that spread apart on hover (in view on touch)
+        <ul className="relative flex -space-x-4 transition-all duration-500 group-hover:space-x-2 group-active-touch:-space-x-2">
           {icons.map((p, index) => (
             <li
               key={p.id}
-              className="h-20 w-20 overflow-hidden rounded-[1.25rem] bg-white p-2.5 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.8)] ring-2 ring-[var(--bg)]"
+              className="h-16 w-16 overflow-hidden rounded-[1.25rem] sm:h-20 sm:w-20 bg-white p-2.5 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.8)] ring-2 ring-[var(--bg)]"
               style={{ transform: `rotate(${(index - (icons.length - 1) / 2) * 6}deg)`, zIndex: icons.length - index }}
             >
               <SafeImg src={mediaSrc(p.imageUrl) ?? undefined} alt={`${p.title} icon`} className="h-full w-full object-contain" />

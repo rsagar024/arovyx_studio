@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -87,6 +88,16 @@ const config: Config = {
           "60%": { transform: "scale(1.08) rotate(3deg)", opacity: "1" },
           "100%": { transform: "scale(1) rotate(0)", opacity: "1" },
         },
+        // one ripple out from a bullet dot as it appears
+        "ping-once": {
+          "0%": { transform: "scale(1)", opacity: "0.7" },
+          "100%": { transform: "scale(3.5)", opacity: "0" },
+        },
+        // accent lines drawing themselves top-down (pair with origin-top)
+        "draw-y": {
+          "0%": { transform: "scaleY(0)", opacity: "0" },
+          "100%": { transform: "scaleY(1)", opacity: "1" },
+        },
         "bounce-y": {
           "0%, 100%": { transform: "translateY(0)", opacity: "0.4" },
           "50%": { transform: "translateY(8px)", opacity: "1" },
@@ -101,6 +112,8 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         marquee: "marquee 40s linear infinite",
         "bounce-y": "bounce-y 1.8s ease-in-out infinite",
+        "ping-once": "ping-once 1.2s cubic-bezier(0, 0, 0.2, 1) 0.8s both",
+        "draw-y": "draw-y 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both",
         // `backwards`, not `both`: a held opacity animation makes the wrapper a
         // backdrop root, which stops the glass cards blurring what is behind them
         "page-in": "page-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) backwards",
@@ -115,7 +128,15 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // Touch screens have no hover: `touch:` targets them, and
+    // `group-active-touch:` plays a hover effect once its `.group` ancestor
+    // sets data-active="true" (scrolled into view).
+    plugin(({ addVariant }) => {
+      addVariant("touch", "@media (hover: none)");
+      addVariant("group-active-touch", '@media (hover: none) { .group[data-active="true"] & }');
+    }),
+  ],
 };
 
 export default config;
