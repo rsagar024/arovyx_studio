@@ -17,7 +17,8 @@ Visitors browse read-only; there are no public accounts.
 ## Stack
 
 - **Next.js 14** (App Router) · **React 18** · **TypeScript** (strict)
-- **Tailwind CSS**: custom components only, CSS-only motion (no UI or animation libraries)
+- **Tailwind CSS**: custom components only (no UI library)
+- **Motion** (`motion/react`) + **Lenis** smooth scrolling for the public site's animations. Shared pieces live in `src/components/motion/`: `Reveal` / `Stagger` scroll reveals, `SplitText` word-by-word headings, `Marquee`, `Parallax`, `TiltCard`, `Magnetic`, `AnimatedTabs` and `ScrollProgress`. Variants and easings are in `src/lib/motion.ts`. All of it respects `prefers-reduced-motion`, and `/studio` loads none of it.
 - **Prisma + PostgreSQL** (hosted on **Neon**, free tier)
 - Hosting on **Vercel**, deployed by **GitHub Actions** on every merge to `master`
 - **NVIDIA NIM** (OpenAI-compatible `chat/completions`, called with plain `fetch`)

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { MouseEvent, ReactNode } from "react";
+import { useSmoothScroll } from "@/components/motion/SmoothScroll";
 
 /** Height of the sticky navbar — sections stop just below it. */
 export const NAV_OFFSET = 80;
@@ -28,6 +29,7 @@ export default function SectionLink({
   "aria-current"?: "page" | "location";
 }) {
   const pathname = usePathname();
+  const lenis = useSmoothScroll();
 
   function onClick(event: MouseEvent<HTMLAnchorElement>) {
     if (pathname !== "/" || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
@@ -36,9 +38,13 @@ export default function SectionLink({
     if (id && !target) return; // section missing — let the browser handle it
 
     event.preventDefault();
-    const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const top = target ? target.getBoundingClientRect().top + window.scrollY - NAV_OFFSET : 0;
-    window.scrollTo({ top, behavior: smooth ? "smooth" : "auto" });
+    if (lenis) {
+      lenis.scrollTo(top, { duration: 1.2 });
+    } else {
+      const smooth = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top, behavior: smooth ? "smooth" : "auto" });
+    }
     history.replaceState(null, "", id ? `/#${id}` : "/");
     onNavigate?.();
   }

@@ -102,6 +102,13 @@ body::before {
   }
 }
 
+/* Opaque panel: the theme's --panel tint over the page color. Dark --panel is
+   ~4% white, so anything layered (the pinned featured cards) would show the
+   content behind it straight through. */
+.panel-solid {
+  background: linear-gradient(var(--panel), var(--panel)), var(--bg);
+}
+
 /* Gradient-filled heading text — defined outside @layer so its
    background-clip/text-transparent pairing can never be overridden by
    another utility's shorthand reset. */
@@ -127,6 +134,56 @@ html.light .gradient-text {
     color: var(--accent);
     -webkit-text-fill-color: var(--accent);
   }
+}
+
+/* Footer wordmark letters: cyan outline + a vertical gradient fill that
+   slowly breathes. Per letter (each one animates in on its own), so the
+   gradient runs top-to-bottom — every letter shares the same phase. */
+.footer-wordmark {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1px rgb(34 211 238 / 0.45);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(34 211 238 / 0.5),
+    rgb(34 211 238 / 0.06) 50%,
+    rgb(34 211 238 / 0.5)
+  );
+  background-size: 100% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: wordmark-breathe 7s ease-in-out infinite;
+}
+
+html.light .footer-wordmark {
+  -webkit-text-stroke-color: rgb(14 116 144 / 0.55);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(14 116 144 / 0.4),
+    rgb(14 116 144 / 0.05) 50%,
+    rgb(14 116 144 / 0.4)
+  );
+}
+
+@keyframes wordmark-breathe {
+  0%,
+  100% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+}
+
+/* Outlined display text (Built-with ticker). Uses `color`, not
+   -webkit-text-fill-color, so a hover:text-* utility can fill it in. */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(231 237 243 / 0.45);
+}
+
+html.light .text-outline {
+  -webkit-text-stroke-color: rgb(11 14 17 / 0.45);
 }
 
 /* Focus visibility for accessibility */
