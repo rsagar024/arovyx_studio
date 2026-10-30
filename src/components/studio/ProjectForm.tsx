@@ -16,6 +16,7 @@ import {
   STATUSES,
   type Category,
   type FetchedDataDTO,
+  type ProjectDTO,
   type ProjectDraft,
   type Status,
 } from "@/lib/validators";
@@ -38,6 +39,8 @@ interface FormState {
   demoUrl: string;
   imageUrl: string;
   bannerUrl: string;
+  privacyPolicyUrl: string;
+  termsAndConditionsUrl: string;
   screenshotsText: string;
   publisher: string;
   stars: string;
@@ -66,6 +69,8 @@ export type ProjectFormInitial = Partial<{
   demoUrl: string | null;
   imageUrl: string | null;
   bannerUrl: string | null;
+  privacyPolicyUrl: string | null;
+  termsAndConditionsUrl: string | null;
   screenshots: string[];
   publisher: string | null;
   stars: number | null;
@@ -113,6 +118,8 @@ function seedToForm(seed?: ProjectFormProps["initial"]): FormState {
     demoUrl: seed?.demoUrl ?? "",
     imageUrl: seed?.imageUrl ?? "",
     bannerUrl: seed?.bannerUrl ?? "",
+    privacyPolicyUrl: seed?.privacyPolicyUrl ?? "",
+    termsAndConditionsUrl: seed?.termsAndConditionsUrl ?? "",
     publisher: seed?.publisher ?? "",
     screenshotsText: (seed?.screenshots ?? []).join("\n"),
     stars: seed?.stars != null ? String(seed.stars) : "",
@@ -145,6 +152,7 @@ export default function ProjectForm({
   const [saving, setSaving] = useState(false);
   const [improving, setImproving] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
+  const [refetching, setRefetching] = useState(false);
   const [extraInstruction, setExtraInstruction] = useState("");
 
   const set =
@@ -224,6 +232,8 @@ export default function ProjectForm({
       demoUrl: form.demoUrl.trim() || null,
       imageUrl: form.imageUrl.trim() || null,
       bannerUrl: form.bannerUrl.trim() || null,
+      privacyPolicyUrl: form.privacyPolicyUrl.trim() || null,
+      termsAndConditionsUrl: form.termsAndConditionsUrl.trim() || null,
       publisher: form.publisher.trim() || null,
       screenshots: splitLines(form.screenshotsText),
       stars: form.stars === "" ? null : Number(form.stars),
@@ -365,6 +375,56 @@ export default function ProjectForm({
     }
   }
 
+  async function refetchDetails() {
+    if (!projectId || refetching) return;
+    setRefetching(true);
+    try {
+      const res = await fetch(`/api/admin/projects/${projectId}/refetch`, {
+        method: "POST",
+      });
+      const payload = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        project?: ProjectDTO;
+      };
+      if (!res.ok || !payload.ok || !payload.project) {
+        throw new Error(payload.error ?? "Re-fetch failed");
+      }
+      const project = payload.project!;
+      setForm({
+        title: project.title,
+        shortDescription: project.shortDescription,
+        longDescription: project.longDescription,
+        category: project.category,
+        status: project.status,
+        version: project.version ?? "",
+        sourceUrl: project.sourceUrl,
+        demoUrl: project.demoUrl ?? "",
+        imageUrl: project.imageUrl ?? "",
+        bannerUrl: project.bannerUrl ?? "",
+        privacyPolicyUrl: project.privacyPolicyUrl ?? "",
+        termsAndConditionsUrl: project.termsAndConditionsUrl ?? "",
+        publisher: project.publisher ?? "",
+        screenshotsText: (project.screenshots ?? []).join("\n"),
+        stars: project.stars != null ? String(project.stars) : "",
+        downloads: project.downloads != null ? String(project.downloads) : "",
+        tagsText: (project.tags ?? []).join(", "),
+        techText: (project.techStack ?? []).join(", "),
+        featuresText: (project.features ?? []).join("\n"),
+        isPublished: project.isPublished,
+      });
+      setFieldErrors({});
+      setFormError(null);
+      setDirty(true);
+      toast.success(`“${project.title}” details refreshed.`);
+    } catch (err) {
+      setFormError(err instanceof Error ? err.message : "Re-fetch failed.");
+      toast.error(err instanceof Error ? err.message : "Re-fetch failed.");
+    } finally {
+      setRefetching(false);
+    }
+  }
+
   const improveDisabled =
     improving ||
     !form.shortDescription.trim() ||
@@ -404,6 +464,27 @@ export default function ProjectForm({
             {form.isPublished ? "Will go live" : "Draft"}
           </span>
         </div>
+        {mode === "edit" && projectId && form.sourceUrl && (
+          <button
+            type="button"
+            onClick={() => void refetchDetails()}
+            disabled={refetching}
+            aria-label={`Re-fetch details for ${form.title}`}
+            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-3 py-2 text-xs font-medium text-[var(--muted)] transition-colors disabled:opacity-60 hover:border-accent-500/40 hover:text-accent-600 dark:hover:text-accent-400"
+          >
+            {refetching ? (
+              <>
+                <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
+                Re-fetching…
+              </>
+            ) : (
+              <>
+                <RotateCw className="h-3.5 w-3.5" aria-hidden />
+                Re-fetch details
+              </>
+            )}
+          </button>
+        )}
       </div>
 
       {formError && (
@@ -650,6 +731,40 @@ export default function ProjectForm({
               className={inputClass}
             />
             {fieldErrors.demoUrl && <span className={errorClass}>{fieldErrors.demoUrl}</span>}
+          </div>
+          <div>
+            <label htmlFor="pf-privacy" className={labelClass}>
+              Privacy Policy URL <span className="normal-case tracking-normal">(optional)</span>
+            </label>
+            <input
+              id="pf-privacy"
+              type="url"
+              value={form.privacyPolicyUrl}
+              onChange={set("privacyPolicyUrl")}
+              placeholder="https://…"
+              aria-invalid={Boolean(fieldErrors.privacyPolicyUrl)}
+              className={inputClass}
+            />
+            {fieldErrors.privacyPolicyUrl && (
+              <span className={errorClass}>{fieldErrors.privacyPolicyUrl}</span>
+            )}
+          </div>
+          <div>
+            <label htmlFor="pf-terms" className={labelClass}>
+              Terms &amp; Conditions URL <span className="normal-case tracking-normal">(optional)</span>
+            </label>
+            <input
+              id="pf-terms"
+              type="url"
+              value={form.termsAndConditionsUrl}
+              onChange={set("termsAndConditionsUrl")}
+              placeholder="https://…"
+              aria-invalid={Boolean(fieldErrors.termsAndConditionsUrl)}
+              className={inputClass}
+            />
+            {fieldErrors.termsAndConditionsUrl && (
+              <span className={errorClass}>{fieldErrors.termsAndConditionsUrl}</span>
+            )}
           </div>
         </div>
 

@@ -127,6 +127,10 @@ export const projectInputSchema = z.object({
   demoUrl: nullableUrl(z.string().url()).default(null),
   imageUrl: nullableUrl(z.string().url()).default(null),
   bannerUrl: nullableUrl(z.string().url()).default(null),
+  /** Link to the project's privacy policy (optional). */
+  privacyPolicyUrl: nullableUrl(z.string().url()).default(null),
+  /** Link to the project's terms & conditions (optional). */
+  termsAndConditionsUrl: nullableUrl(z.string().url()).default(null),
   /** "Published by" — developer, owner or author. Empty → null. */
   publisher: z
     .string()
