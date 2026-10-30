@@ -34,6 +34,8 @@ model Project {
   imageUrl         String? // app icon / thumbnail
   bannerUrl        String? // feature graphic / header background
   publisher        String? // "published by" — developer / owner / author
+  privacyPolicyUrl String? // link to the project's privacy policy
+  termsAndConditionsUrl String? // link to the project's terms & conditions
   screenshots      String   @default("[]") // JSON string[] (phone screenshots)
   stars            Int?
   downloads        Int?

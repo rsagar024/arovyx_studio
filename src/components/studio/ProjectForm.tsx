@@ -39,6 +39,8 @@ interface FormState {
   demoUrl: string;
   imageUrl: string;
   bannerUrl: string;
+  privacyPolicyUrl: string;
+  termsAndConditionsUrl: string;
   screenshotsText: string;
   publisher: string;
   stars: string;
@@ -67,6 +69,8 @@ export type ProjectFormInitial = Partial<{
   demoUrl: string | null;
   imageUrl: string | null;
   bannerUrl: string | null;
+  privacyPolicyUrl: string | null;
+  termsAndConditionsUrl: string | null;
   screenshots: string[];
   publisher: string | null;
   stars: number | null;
@@ -114,6 +118,8 @@ function seedToForm(seed?: ProjectFormProps["initial"]): FormState {
     demoUrl: seed?.demoUrl ?? "",
     imageUrl: seed?.imageUrl ?? "",
     bannerUrl: seed?.bannerUrl ?? "",
+    privacyPolicyUrl: seed?.privacyPolicyUrl ?? "",
+    termsAndConditionsUrl: seed?.termsAndConditionsUrl ?? "",
     publisher: seed?.publisher ?? "",
     screenshotsText: (seed?.screenshots ?? []).join("\n"),
     stars: seed?.stars != null ? String(seed.stars) : "",
@@ -226,6 +232,8 @@ export default function ProjectForm({
       demoUrl: form.demoUrl.trim() || null,
       imageUrl: form.imageUrl.trim() || null,
       bannerUrl: form.bannerUrl.trim() || null,
+      privacyPolicyUrl: form.privacyPolicyUrl.trim() || null,
+      termsAndConditionsUrl: form.termsAndConditionsUrl.trim() || null,
       publisher: form.publisher.trim() || null,
       screenshots: splitLines(form.screenshotsText),
       stars: form.stars === "" ? null : Number(form.stars),
@@ -394,6 +402,8 @@ export default function ProjectForm({
         demoUrl: project.demoUrl ?? "",
         imageUrl: project.imageUrl ?? "",
         bannerUrl: project.bannerUrl ?? "",
+        privacyPolicyUrl: project.privacyPolicyUrl ?? "",
+        termsAndConditionsUrl: project.termsAndConditionsUrl ?? "",
         publisher: project.publisher ?? "",
         screenshotsText: (project.screenshots ?? []).join("\n"),
         stars: project.stars != null ? String(project.stars) : "",
@@ -721,6 +731,40 @@ export default function ProjectForm({
               className={inputClass}
             />
             {fieldErrors.demoUrl && <span className={errorClass}>{fieldErrors.demoUrl}</span>}
+          </div>
+          <div>
+            <label htmlFor="pf-privacy" className={labelClass}>
+              Privacy Policy URL <span className="normal-case tracking-normal">(optional)</span>
+            </label>
+            <input
+              id="pf-privacy"
+              type="url"
+              value={form.privacyPolicyUrl}
+              onChange={set("privacyPolicyUrl")}
+              placeholder="https://…"
+              aria-invalid={Boolean(fieldErrors.privacyPolicyUrl)}
+              className={inputClass}
+            />
+            {fieldErrors.privacyPolicyUrl && (
+              <span className={errorClass}>{fieldErrors.privacyPolicyUrl}</span>
+            )}
+          </div>
+          <div>
+            <label htmlFor="pf-terms" className={labelClass}>
+              Terms &amp; Conditions URL <span className="normal-case tracking-normal">(optional)</span>
+            </label>
+            <input
+              id="pf-terms"
+              type="url"
+              value={form.termsAndConditionsUrl}
+              onChange={set("termsAndConditionsUrl")}
+              placeholder="https://…"
+              aria-invalid={Boolean(fieldErrors.termsAndConditionsUrl)}
+              className={inputClass}
+            />
+            {fieldErrors.termsAndConditionsUrl && (
+              <span className={errorClass}>{fieldErrors.termsAndConditionsUrl}</span>
+            )}
           </div>
         </div>
 
