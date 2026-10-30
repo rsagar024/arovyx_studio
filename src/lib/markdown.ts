@@ -82,7 +82,7 @@ export function markdownToHtml(markdown: string): string {
     if (line.startsWith("```")) {
       if (codeBlock) {
         html.push(
-          `<pre class="mb-5 overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--code-bg)] p-4 text-sm leading-relaxed text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`
+          `<pre class="mb-5 max-w-full overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--code-bg)] p-4 text-sm leading-relaxed text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`
         );
         codeBlock = null;
       } else {
@@ -156,7 +156,7 @@ export function markdownToHtml(markdown: string): string {
   }
 
   if (codeBlock) {
-    html.push(`<pre class="mb-5 overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--code-bg)] p-4 text-sm text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`);
+    html.push(`<pre class="mb-5 max-w-full overflow-x-auto rounded-lg border border-[var(--border)] bg-[var(--code-bg)] p-4 text-sm text-accent-600 dark:text-accent-300"><code>${codeBlock.join("\n")}</code></pre>`);
   }
   flushParagraph();
   flushList();

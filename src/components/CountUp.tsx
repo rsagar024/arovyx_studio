@@ -1,9 +1,9 @@
 "use client";
 
+import { animate, useInView, useReducedMotion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 
-const DURATION_MS = 1200;
-const easeOutCubic = (t: number) => 1 - (1 - t) ** 3;
+const DURATION_S = 1.4;
 const format = (n: number, pad: number) => String(n).padStart(pad, "0");
 
 /**
@@ -25,43 +25,31 @@ export default function CountUp({
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement | null>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const reduceMotion = useReducedMotion();
   const [display, setDisplay] = useState(value);
+  const [armed, setArmed] = useState(false);
+
+  // drop to 0 after hydration so the count-up has somewhere to start from
+  useEffect(() => {
+    if (value > 0 && !reduceMotion) {
+      setDisplay(0);
+      setArmed(true);
+    } else {
+      setDisplay(value);
+    }
+  }, [value, reduceMotion]);
 
   useEffect(() => {
-    const node = ref.current;
-    if (!node || value <= 0) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    if (typeof IntersectionObserver === "undefined") return;
-
-    let frame = 0;
-    let timer: ReturnType<typeof setTimeout> | undefined;
-    setDisplay(0);
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        observer.disconnect();
-        timer = setTimeout(() => {
-          const start = performance.now();
-          const tick = (now: number) => {
-            const t = Math.min(1, (now - start) / DURATION_MS);
-            setDisplay(Math.round(easeOutCubic(t) * value));
-            if (t < 1) frame = requestAnimationFrame(tick);
-          };
-          frame = requestAnimationFrame(tick);
-        }, delay);
-      },
-      { threshold: 0.4 }
-    );
-    observer.observe(node);
-
-    return () => {
-      observer.disconnect();
-      if (timer) clearTimeout(timer);
-      cancelAnimationFrame(frame);
-      setDisplay(value);
-    };
-  }, [value, delay]);
+    if (!armed || !inView) return;
+    const controls = animate(0, value, {
+      duration: DURATION_S,
+      delay: delay / 1000,
+      ease: [0.16, 1, 0.3, 1],
+      onUpdate: (latest) => setDisplay(Math.round(latest)),
+    });
+    return () => controls.stop();
+  }, [armed, inView, value, delay]);
 
   return (
     <span ref={ref} className={className}>
