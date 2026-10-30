@@ -27,6 +27,7 @@ export default function AdminProjectsList() {
   const [query, setQuery] = useState("");
   const [busyId, setBusyId] = useState<string | null>(null);
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
+  const [refetchingId, setRefetchingId] = useState<string | null>(null);
 
   const load = useCallback(async () => {
     try {
@@ -98,6 +99,35 @@ export default function AdminProjectsList() {
       toast.error(err instanceof Error ? err.message : "Update failed");
     } finally {
       setBusyId(null);
+    }
+  }
+
+  async function refetchDetails(project: ProjectDTO) {
+    if (!project.sourceUrl) return;
+    setRefetchingId(project.id);
+    try {
+      const res = await fetch(`/api/admin/projects/${project.id}/refetch`, {
+        method: "POST",
+      });
+      const payload = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        project?: ProjectDTO;
+      };
+      if (!res.ok || !payload.ok || !payload.project) {
+        throw new Error(payload.error ?? "Re-fetch failed");
+      }
+      setState((prev) => ({
+        ...prev,
+        projects: prev.projects.map((p) =>
+          p.id === payload.project!.id ? payload.project! : p
+        ),
+      }));
+      toast.success(`“${payload.project.title}” details refreshed.`);
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "Re-fetch failed.");
+    } finally {
+      setRefetchingId(null);
     }
   }
 
@@ -284,6 +314,23 @@ export default function AdminProjectsList() {
                     <Pencil className="h-3.5 w-3.5" aria-hidden />
                     Edit
                   </Link>
+
+                  {project.sourceUrl && (
+                    <button
+                      type="button"
+                      onClick={() => void refetchDetails(project)}
+                      disabled={refetchingId === project.id}
+                      aria-label={`Re-fetch details for ${project.title}`}
+                      className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border)] px-3 py-2 text-xs font-medium text-[var(--muted)] transition-colors disabled:opacity-60 hover:border-accent-500/40 hover:text-accent-600 dark:hover:text-accent-400"
+                    >
+                      {refetchingId === project.id ? (
+                        <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
+                      ) : (
+                        <RotateCw className="h-3.5 w-3.5" aria-hidden />
+                      )}
+                      Re-fetch details
+                    </button>
+                  )}
 
                   {project.demoUrl && (
                     <a

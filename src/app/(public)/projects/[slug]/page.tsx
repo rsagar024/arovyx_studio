@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Download, ExternalLink, Github, Gitlab, Globe, Package, Star, Tag } from "lucide-react";
+import { ArrowLeft, Download, ExternalLink, FileText, Github, Gitlab, Globe, Package, Star, Tag } from "lucide-react";
 import CategoryBadge from "@/components/CategoryBadge";
 import StatusBadge from "@/components/StatusBadge";
 import TechChip from "@/components/TechChip";
@@ -218,6 +218,28 @@ export default async function ProjectDetailPage({ params }: Props) {
                 >
                   <ExternalLink className="h-4 w-4" aria-hidden />
                   Live demo
+                </a>
+              )}
+              {project.privacyPolicyUrl && (
+                <a
+                  href={project.privacyPolicyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--panel)] px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent-500/60"
+                >
+                  <FileText className="h-4 w-4" aria-hidden />
+                  Privacy Policy
+                </a>
+              )}
+              {project.termsAndConditionsUrl && (
+                <a
+                  href={project.termsAndConditionsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--panel)] px-5 py-2.5 text-sm font-medium transition-colors hover:border-accent-500/60"
+                >
+                  <FileText className="h-4 w-4" aria-hidden />
+                  Terms &amp; Conditions
                 </a>
               )}
               {/* on phones the stats wrap onto their own line below the buttons */}
