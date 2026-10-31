@@ -9,6 +9,8 @@ import {
   Loader2,
   RotateCw,
   Save,
+  Sparkles,
+  Undo2,
   Wand2,
 } from "lucide-react";
 import {
@@ -16,7 +18,6 @@ import {
   STATUSES,
   type Category,
   type FetchedDataDTO,
-  type ProjectDTO,
   type ProjectDraft,
   type Status,
 } from "@/lib/validators";
@@ -101,6 +102,13 @@ function isHttpUrl(value: string): boolean {
   }
 }
 
+function friendlyError(status: number, fallback: string): string {
+  if (status === 401) return "Session expired — unlock the studio again and retry.";
+  if (status === 429) return "Rate limited — wait a moment, then retry.";
+  if (status === 504) return "The AI request timed out. Retry, or try again shortly.";
+  return fallback;
+}
+
 const splitCommas = (value: string) =>
   value.split(",").map((s) => s.trim()).filter(Boolean);
 const splitLines = (value: string) =>
@@ -153,7 +161,50 @@ export default function ProjectForm({
   const [improving, setImproving] = useState(false);
   const [regenerating, setRegenerating] = useState(false);
   const [refetching, setRefetching] = useState(false);
+  /** Snapshot of the form just before a re-fetch — drives change highlights. */
+  const [refetchBase, setRefetchBase] = useState<FormState | null>(null);
+  /** Fetch context from a re-fetch on the edit screen — enables Regenerate. */
+  const [refetchAi, setRefetchAi] = useState<AiContext | null>(null);
   const [extraInstruction, setExtraInstruction] = useState("");
+  const aiCtx = ai ?? refetchAi;
+
+  const isChanged = (key: keyof FormState) =>
+    refetchBase !== null && form[key] !== refetchBase[key];
+  const changedClass = (key: keyof FormState) =>
+    isChanged(key)
+      ? "!border-amber-500/70 ring-1 ring-amber-500/30 !bg-amber-400/10"
+      : "";
+  const changedCount = refetchBase
+    ? (Object.keys(form) as Array<keyof FormState>).filter(isChanged).length
+    : 0;
+
+  function revertField(key: keyof FormState) {
+    if (!refetchBase) return;
+    setForm((prev) => ({ ...prev, [key]: refetchBase[key] }));
+  }
+
+  function discardRefetch() {
+    if (!refetchBase) return;
+    setForm(refetchBase);
+    setRefetchBase(null);
+  }
+
+  function changedNote(k: keyof FormState) {
+    if (!isChanged(k)) return null;
+    return (
+      <span className="mt-1 flex items-center gap-2 text-[11px] text-amber-600 dark:text-amber-300">
+        Updated by re-fetch
+        <button
+          type="button"
+          onClick={() => revertField(k)}
+          className="inline-flex items-center gap-1 underline underline-offset-2 hover:text-amber-700 dark:hover:text-amber-200"
+        >
+          <Undo2 className="h-3 w-3" aria-hidden />
+          Revert
+        </button>
+      </span>
+    );
+  }
 
   const set =
     (key: keyof FormState) =>
@@ -270,6 +321,7 @@ export default function ProjectForm({
       }
 
       setDirty(false);
+      setRefetchBase(null);
       toast.success(mode === "create" ? "Project saved." : "Changes saved.");
       if (mode === "create") {
         router.push("/studio/projects");
@@ -323,6 +375,7 @@ export default function ProjectForm({
   }
 
   async function regenerate() {
+    const ai = aiCtx;
     if (!ai || regenerating) return;
     if (dirty && !window.confirm("Regenerate replaces your edits with fresh AI content. Continue?"))
       return;
@@ -376,47 +429,74 @@ export default function ProjectForm({
   }
 
   async function refetchDetails() {
-    if (!projectId || refetching) return;
+    const url = form.sourceUrl.trim();
+    if (refetching || !isHttpUrl(url)) return;
     setRefetching(true);
+    setFormError(null);
     try {
-      const res = await fetch(`/api/admin/projects/${projectId}/refetch`, {
+      // Same fetch → AI pipeline as Add Project. Nothing is written to the
+      // DB here — results land in the form for review until "Save changes".
+      const res = await fetch("/api/admin/ai/generate", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url, category: form.category }),
       });
-      const payload = (await res.json().catch(() => ({}))) as {
+      const data = (await res.json().catch(() => ({}))) as {
         ok?: boolean;
         error?: string;
-        project?: ProjectDTO;
+        project?: ProjectDraft;
+        stars?: number | null;
+        fetched?: FetchedDataDTO;
       };
-      if (!res.ok || !payload.ok || !payload.project) {
-        throw new Error(payload.error ?? "Re-fetch failed");
+      if (!res.ok || !data.ok || !data.project || !data.fetched) {
+        throw new Error(friendlyError(res.status, data.error ?? "Re-fetch failed."));
       }
-      const project = payload.project!;
-      setForm({
-        title: project.title,
-        shortDescription: project.shortDescription,
-        longDescription: project.longDescription,
-        category: project.category,
-        status: project.status,
-        version: project.version ?? "",
-        sourceUrl: project.sourceUrl,
-        demoUrl: project.demoUrl ?? "",
-        imageUrl: project.imageUrl ?? "",
-        bannerUrl: project.bannerUrl ?? "",
-        privacyPolicyUrl: project.privacyPolicyUrl ?? "",
-        termsAndConditionsUrl: project.termsAndConditionsUrl ?? "",
-        publisher: project.publisher ?? "",
-        screenshotsText: (project.screenshots ?? []).join("\n"),
-        stars: project.stars != null ? String(project.stars) : "",
-        downloads: project.downloads != null ? String(project.downloads) : "",
-        tagsText: (project.tags ?? []).join(", "),
-        techText: (project.techStack ?? []).join(", "),
-        featuresText: (project.features ?? []).join("\n"),
-        isPublished: project.isPublished,
-      });
+      const draft = data.project;
+      const fetched = data.fetched;
+      const base = form;
+
+      // Only take a new value when there is one — otherwise keep what's there.
+      const pick = (next: string | null | undefined, prev: string) =>
+        next != null && next.trim() !== "" ? next : prev;
+      const pickList = (next: string[] | null | undefined, prev: string, sep: string) =>
+        next && next.length > 0 ? next.join(sep) : prev;
+
+      const merged: FormState = {
+        ...base,
+        title: pick(draft.title, base.title),
+        shortDescription: pick(draft.shortDescription, base.shortDescription),
+        longDescription: pick(draft.longDescription, base.longDescription),
+        category: draft.category ?? base.category,
+        status: draft.status ?? base.status,
+        version: pick(draft.version, base.version),
+        demoUrl: pick(draft.demoUrl, base.demoUrl),
+        imageUrl: pick(draft.imageUrl, base.imageUrl),
+        bannerUrl: pick(draft.bannerUrl, base.bannerUrl),
+        publisher: pick(draft.publisher, base.publisher),
+        screenshotsText: pickList(draft.screenshots, base.screenshotsText, "\n"),
+        tagsText: pickList(draft.tags, base.tagsText, ", "),
+        techText: pickList(draft.techStack, base.techText, ", "),
+        featuresText: pickList(draft.features, base.featuresText, "\n"),
+        stars: data.stars != null ? String(data.stars) : base.stars,
+        downloads: fetched.downloads != null ? String(fetched.downloads) : base.downloads,
+      };
+
+      setRefetchAi({ url, fetched });
+      const changed = (Object.keys(merged) as Array<keyof FormState>).filter(
+        (k) => merged[k] !== base[k]
+      ).length;
+      if (changed === 0) {
+        toast.success("Re-fetched — no changes found.");
+        return;
+      }
+      // Keep the earliest snapshot if re-fetching again before saving.
+      setRefetchBase((prev) => prev ?? base);
+      setForm(merged);
       setFieldErrors({});
-      setFormError(null);
       setDirty(true);
-      toast.success(`“${project.title}” details refreshed.`);
+      toast.success(
+        `Re-fetched — ${changed} field${changed === 1 ? "" : "s"} changed. Review, then save.`
+      );
     } catch (err) {
       setFormError(err instanceof Error ? err.message : "Re-fetch failed.");
       toast.error(err instanceof Error ? err.message : "Re-fetch failed.");
@@ -475,7 +555,7 @@ export default function ProjectForm({
             {refetching ? (
               <>
                 <Loader2 className="h-3.5 w-3.5 animate-spin" aria-hidden />
-                Re-fetching…
+                Re-fetching with AI…
               </>
             ) : (
               <>
@@ -486,6 +566,30 @@ export default function ProjectForm({
           </button>
         )}
       </div>
+
+      {changedCount > 0 && (
+        <div
+          role="status"
+          className="flex flex-col gap-3 rounded-xl border border-amber-500/40 bg-amber-400/10 p-4 sm:flex-row sm:items-center sm:justify-between"
+        >
+          <p className="flex items-start gap-2 text-sm text-amber-700 dark:text-amber-200">
+            <Sparkles className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+            <span>
+              Re-fetched with AI — <strong>{changedCount}</strong> field
+              {changedCount === 1 ? "" : "s"} changed. Review the highlighted fields, then click{" "}
+              <strong>Save changes</strong>. Nothing is saved until you do.
+            </span>
+          </p>
+          <button
+            type="button"
+            onClick={discardRefetch}
+            className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-amber-500/40 px-3 py-2 text-xs font-medium text-amber-700 transition-colors hover:bg-amber-400/20 dark:text-amber-200"
+          >
+            <Undo2 className="h-3.5 w-3.5" aria-hidden />
+            Discard re-fetch
+          </button>
+        </div>
+      )}
 
       {formError && (
         <p
@@ -498,7 +602,7 @@ export default function ProjectForm({
       )}
 
       {/* Regenerate (AI flow only) */}
-      {ai && (
+      {aiCtx && (
         <div className="glass space-y-3 rounded-xl p-4">
           <p className="micro-label">Regenerate with AI</p>
           <textarea
@@ -547,8 +651,9 @@ export default function ProjectForm({
             onChange={set("title")}
             maxLength={120}
             aria-invalid={Boolean(fieldErrors.title)}
-            className={inputClass}
+            className={cn(inputClass, changedClass("title"))}
           />
+          {changedNote("title")}
           {fieldErrors.title && <span className={errorClass}>{fieldErrors.title}</span>}
         </div>
 
@@ -563,8 +668,9 @@ export default function ProjectForm({
             onChange={set("shortDescription")}
             maxLength={300}
             aria-invalid={Boolean(fieldErrors.shortDescription)}
-            className={cn(inputClass, "resize-y")}
+            className={cn(inputClass, "resize-y", changedClass("shortDescription"))}
           />
+          {changedNote("shortDescription")}
           <span className="mt-1 block text-right text-[11px] text-[var(--muted)]">
             {form.shortDescription.length}/300
           </span>
@@ -608,8 +714,9 @@ export default function ProjectForm({
             value={form.longDescription}
             onChange={set("longDescription")}
             aria-invalid={Boolean(fieldErrors.longDescription)}
-            className={cn(inputClass, "resize-y font-mono text-[13px]")}
+            className={cn(inputClass, "resize-y font-mono text-[13px]", changedClass("longDescription"))}
           />
+          {changedNote("longDescription")}
           {fieldErrors.longDescription && (
             <span className={errorClass}>{fieldErrors.longDescription}</span>
           )}
@@ -624,8 +731,9 @@ export default function ProjectForm({
             rows={6}
             value={form.featuresText}
             onChange={set("featuresText")}
-            className={cn(inputClass, "resize-y")}
+            className={cn(inputClass, "resize-y", changedClass("featuresText"))}
           />
+          {changedNote("featuresText")}
           {fieldErrors.features && <span className={errorClass}>{fieldErrors.features}</span>}
         </div>
 
@@ -639,8 +747,9 @@ export default function ProjectForm({
               type="text"
               value={form.tagsText}
               onChange={set("tagsText")}
-              className={inputClass}
+              className={cn(inputClass, changedClass("tagsText"))}
             />
+            {changedNote("tagsText")}
           </div>
           <div>
             <label htmlFor="pf-tech" className={labelClass}>
@@ -651,8 +760,9 @@ export default function ProjectForm({
               type="text"
               value={form.techText}
               onChange={set("techText")}
-              className={inputClass}
+              className={cn(inputClass, changedClass("techText"))}
             />
+            {changedNote("techText")}
           </div>
         </div>
 
@@ -665,7 +775,7 @@ export default function ProjectForm({
               id="pf-category"
               value={form.category}
               onChange={set("category")}
-              className={inputClass}
+              className={cn(inputClass, changedClass("category"))}
             >
               {CATEGORIES.map((c) => (
                 <option key={c} value={c}>
@@ -673,18 +783,20 @@ export default function ProjectForm({
                 </option>
               ))}
             </select>
+            {changedNote("category")}
           </div>
           <div>
             <label htmlFor="pf-status" className={labelClass}>
               Status
             </label>
-            <select id="pf-status" value={form.status} onChange={set("status")} className={inputClass}>
+            <select id="pf-status" value={form.status} onChange={set("status")} className={cn(inputClass, changedClass("status"))}>
               {STATUSES.map((s) => (
                 <option key={s} value={s}>
                   {STATUS_META[s].label}
                 </option>
               ))}
             </select>
+            {changedNote("status")}
           </div>
           <div>
             <label htmlFor="pf-version" className={labelClass}>
@@ -696,8 +808,9 @@ export default function ProjectForm({
               value={form.version}
               onChange={set("version")}
               placeholder="1.0.0"
-              className={inputClass}
+              className={cn(inputClass, changedClass("version"))}
             />
+            {changedNote("version")}
           </div>
         </div>
 
@@ -728,8 +841,9 @@ export default function ProjectForm({
               onChange={set("demoUrl")}
               placeholder="https://…"
               aria-invalid={Boolean(fieldErrors.demoUrl)}
-              className={inputClass}
+              className={cn(inputClass, changedClass("demoUrl"))}
             />
+            {changedNote("demoUrl")}
             {fieldErrors.demoUrl && <span className={errorClass}>{fieldErrors.demoUrl}</span>}
           </div>
           <div>
@@ -783,8 +897,9 @@ export default function ProjectForm({
             maxLength={120}
             placeholder="e.g. Fossify, your GitHub username…"
             aria-invalid={Boolean(fieldErrors.publisher)}
-            className={inputClass}
+            className={cn(inputClass, changedClass("publisher"))}
           />
+          {changedNote("publisher")}
           {fieldErrors.publisher && <span className={errorClass}>{fieldErrors.publisher}</span>}
         </div>
 
@@ -812,8 +927,9 @@ export default function ProjectForm({
                 onChange={set("imageUrl")}
                 placeholder="https://…"
                 aria-invalid={Boolean(fieldErrors.imageUrl)}
-                className={inputClass}
+                className={cn(inputClass, changedClass("imageUrl"))}
               />
+              {changedNote("imageUrl")}
               {fieldErrors.imageUrl && <span className={errorClass}>{fieldErrors.imageUrl}</span>}
             </div>
           </div>
@@ -830,8 +946,9 @@ export default function ProjectForm({
               onChange={set("bannerUrl")}
               placeholder="https://…"
               aria-invalid={Boolean(fieldErrors.bannerUrl)}
-              className={inputClass}
+              className={cn(inputClass, changedClass("bannerUrl"))}
             />
+            {changedNote("bannerUrl")}
             {fieldErrors.bannerUrl && <span className={errorClass}>{fieldErrors.bannerUrl}</span>}
             {isHttpUrl(form.bannerUrl.trim()) && (
               // eslint-disable-next-line @next/next/no-img-element
@@ -854,8 +971,9 @@ export default function ProjectForm({
               onChange={set("screenshotsText")}
               placeholder="https://…"
               aria-invalid={Boolean(fieldErrors.screenshots)}
-              className={cn(inputClass, "resize-y font-mono text-[12px]")}
+              className={cn(inputClass, "resize-y font-mono text-[12px]", changedClass("screenshotsText"))}
             />
+            {changedNote("screenshotsText")}
             {fieldErrors.screenshots && <span className={errorClass}>{fieldErrors.screenshots}</span>}
             {splitLines(form.screenshotsText).some(isHttpUrl) && (
               <div className="mt-2 flex gap-2 overflow-x-auto pb-1">
@@ -890,8 +1008,9 @@ export default function ProjectForm({
               onChange={set("stars")}
               placeholder="—"
               aria-invalid={Boolean(fieldErrors.stars)}
-              className={inputClass}
+              className={cn(inputClass, changedClass("stars"))}
             />
+            {changedNote("stars")}
             {fieldErrors.stars && <span className={errorClass}>{fieldErrors.stars}</span>}
           </div>
           <div>
@@ -906,8 +1025,9 @@ export default function ProjectForm({
               onChange={set("downloads")}
               placeholder="—"
               aria-invalid={Boolean(fieldErrors.downloads)}
-              className={inputClass}
+              className={cn(inputClass, changedClass("downloads"))}
             />
+            {changedNote("downloads")}
             {fieldErrors.downloads && <span className={errorClass}>{fieldErrors.downloads}</span>}
           </div>
         </div>
