@@ -11,12 +11,13 @@ import {
   type ProjectDraft,
 } from "@/lib/validators";
 
-// Note: meta/llama-3.3-70b-instruct was retired from integrate.api.nvidia.com
-// (HTTP 410 Gone, verified 2026-10), and hosted NIM accounts only have
-// entitlement to a subset of catalog models (others return 404). This is a
-// default that works on a standard build.nvidia.com key — override via
-// NVIDIA_NIM_MODEL if your account has other models enabled.
-const DEFAULT_MODEL = "meta/llama-3.2-11b-vision-instruct";
+// Note: hosted NIM retires models (HTTP 410 Gone — e.g. the llama-3.1/3.3
+// instruct family) and only entitles accounts to a subset of the catalog
+// (others return 404 — meta/llama-3.2-11b-vision-instruct started 404ing
+// 2026-10-31). Verified working on a standard build.nvidia.com key on
+// 2026-10-31: nvidia/nemotron-3.5-lightning-30b-a3b (fast, clean JSON) and
+// openai/gpt-oss-20b. Override via NVIDIA_NIM_MODEL.
+const DEFAULT_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
 const DEFAULT_BASE_URL = "https://integrate.api.nvidia.com/v1";
 const DEFAULT_TIMEOUT_MS = 60_000;
 
