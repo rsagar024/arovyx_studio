@@ -17,6 +17,12 @@ import {
 // 2026-10-31). Verified working on a standard build.nvidia.com key on
 // 2026-10-31: nvidia/nemotron-3.5-lightning-30b-a3b (fast, clean JSON) and
 // openai/gpt-oss-20b. Override via NVIDIA_NIM_MODEL.
+//
+// Nemotron 3.5 is a reasoning model: hidden `reasoning_content` tokens count
+// against max_tokens, and on large fetched inputs they used the whole budget,
+// leaving `content` empty. nimChat therefore sends
+// chat_template_kwargs.enable_thinking=false (0 reasoning tokens, ~4 s vs
+// ~25 s, verified 2026-10-31); `/no_think` and reasoning_effort did NOT work.
 const DEFAULT_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
 const DEFAULT_BASE_URL = "https://integrate.api.nvidia.com/v1";
 const DEFAULT_TIMEOUT_MS = 60_000;
@@ -98,11 +104,15 @@ export async function nimChat(
     temperature,
     // Explicit cap — hosted endpoints otherwise apply a small default that
     // truncates mid-JSON.
-    max_tokens: 4096,
+    max_tokens: 8192,
+    // Turn off hidden reasoning on thinking models (Nemotron 3.x etc.) so the
+    // token budget goes to the answer. Ignored by models without it.
+    chat_template_kwargs: { enable_thinking: false },
     ...(opts.json ? { response_format: { type: "json_object" } } : {}),
   };
 
   let useResponseFormat = Boolean(opts.json);
+  let useTemplateKwargs = true;
   let lastError: NIMError | null = null;
 
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
@@ -132,9 +142,22 @@ export async function nimChat(
         }
         const content = choice?.message?.content;
         if (typeof content !== "string" || content.trim().length === 0) {
+          if (choice?.finish_reason === "length") {
+            throw new NIMError(
+              "The AI ran out of output tokens before answering — retry, or pick a non-reasoning model via NVIDIA_NIM_MODEL.",
+              "invalid_response"
+            );
+          }
           throw new NIMError("NIM returned an empty response.", "invalid_response");
         }
         return content;
+      }
+
+      // Models that reject chat_template_kwargs — retry once without it.
+      if (res.status === 400 && useTemplateKwargs) {
+        useTemplateKwargs = false;
+        delete body.chat_template_kwargs;
+        continue;
       }
 
       // Some deployments reject response_format — retry once without it.
