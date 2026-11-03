@@ -1,0 +1,10 @@
+{
+  "description": "The Monday weekly_summary push (part 7.d). One topic for every language, so English only. Rotated by ISO week number. {week} is the week that just ended, e.g. 42. Never names a player: display names are user-written and this goes to everyone.",
+  "templates": [
+    {"title": "🏆 Week {week} results are in!", "body": "The weekly leaderboard is final. See where you ranked, then start climbing this week's board."},
+    {"title": "🏆 The Week {week} board is final", "body": "Who topped the charts? Check your rank and grab a head start on the new week."},
+    {"title": "📊 Your weekly rank is ready", "body": "Week {week} is done and dusted. See how you stacked up, and start fresh this week."},
+    {"title": "🥇 Week {week} champions crowned!", "body": "The weekly leaderboard just closed. Tap to see the winners and your own rank."},
+    {"title": "🔥 A new quiz week starts now", "body": "Week {week} standings are final. Check your rank, then play to top this week's board."}
+  ]
+}

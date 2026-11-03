@@ -75,6 +75,10 @@ export interface NimOptions {
   /** Automatic retries on 429/5xx/network errors. Default 2. */
   retries?: number;
   backoffMs?: number;
+  /** Per-call model id. Default: NVIDIA_NIM_MODEL, else DEFAULT_MODEL. */
+  model?: string;
+  /** Output token cap. Default 8192. */
+  maxTokens?: number;
 }
 
 export async function nimChat(
@@ -96,7 +100,7 @@ export async function nimChat(
   const backoffMs = opts.backoffMs ?? 1_000;
 
   const body: Record<string, unknown> = {
-    model: model(),
+    model: opts.model || model(),
     messages: [
       { role: "system", content: system },
       { role: "user", content: user },
@@ -104,7 +108,7 @@ export async function nimChat(
     temperature,
     // Explicit cap — hosted endpoints otherwise apply a small default that
     // truncates mid-JSON.
-    max_tokens: 8192,
+    max_tokens: opts.maxTokens ?? 8192,
     // Turn off hidden reasoning on thinking models (Nemotron 3.x etc.) so the
     // token budget goes to the answer. Ignored by models without it.
     chat_template_kwargs: { enable_thinking: false },

@@ -1,0 +1,455 @@
+{
+  "category": "technology",
+  "questions": [
+    {
+      "groupId": "te_001",
+      "difficulty": "easy",
+      "subcategory": "abbreviations",
+      "correctIndex": 2,
+      "tags": ["hardware", "abbreviations"],
+      "en": { "question": "What does CPU stand for?", "options": ["Central Program Utility", "Computer Processing Unit", "Central Processing Unit", "Control Processing Unit"], "explanation": "The CPU carries out the instructions of programs, which is why it is often called the brain of the computer." },
+      "hi": { "question": "सीपीयू का पूरा नाम क्या है?", "options": ["सेंट्रल प्रोग्राम यूटिलिटी", "कंप्यूटर प्रोसेसिंग यूनिट", "सेंट्रल प्रोसेसिंग यूनिट", "कंट्रोल प्रोसेसिंग यूनिट"], "explanation": "सीपीयू प्रोग्राम के निर्देशों को पूरा करता है, इसीलिए इसे कंप्यूटर का दिमाग कहा जाता है।" },
+      "hi-Latn": { "question": "CPU ka full form kya hai?", "options": ["Central Program Utility", "Computer Processing Unit", "Central Processing Unit", "Control Processing Unit"], "explanation": "CPU programs ke instructions execute karta hai, isliye ise computer ka brain kaha jaata hai." }
+    },
+    {
+      "groupId": "te_002",
+      "difficulty": "easy",
+      "subcategory": "abbreviations",
+      "correctIndex": 0,
+      "tags": ["hardware", "memory", "abbreviations"],
+      "en": { "question": "What does RAM stand for?", "options": ["Random Access Memory", "Read Access Memory", "Rapid Action Memory", "Run Access Module"], "explanation": "RAM is temporary working memory: its data is lost when the device is switched off." },
+      "hi": { "question": "रैम का पूरा नाम क्या है?", "options": ["रैंडम एक्सेस मेमोरी", "रीड एक्सेस मेमोरी", "रैपिड एक्शन मेमोरी", "रन एक्सेस मॉड्यूल"], "explanation": "रैम अस्थायी कामकाजी मेमोरी है, डिवाइस बंद होते ही इसका डेटा मिट जाता है।" },
+      "hi-Latn": { "question": "RAM ka full form kya hai?", "options": ["Random Access Memory", "Read Access Memory", "Rapid Action Memory", "Run Access Module"], "explanation": "RAM temporary working memory hai, device band hote hi iska data chala jaata hai." }
+    },
+    {
+      "groupId": "te_003",
+      "difficulty": "easy",
+      "subcategory": "inventions",
+      "correctIndex": 1,
+      "tags": ["inventions", "telecom"],
+      "en": { "question": "Who is credited with inventing the telephone?", "options": ["Thomas Edison", "Alexander Graham Bell", "Guglielmo Marconi", "Nikola Tesla"], "explanation": "Bell received the US patent for the telephone in 1876, and his first words over it were to his assistant Watson." },
+      "hi": { "question": "टेलीफोन के आविष्कार का श्रेय किसे दिया जाता है?", "options": ["थॉमस एडिसन", "अलेक्जेंडर ग्राहम बेल", "गुग्लिएल्मो मार्कोनी", "निकोला टेस्ला"], "explanation": "बेल को 1876 में टेलीफोन का अमेरिकी पेटेंट मिला था, और उन्होंने पहली बात अपने सहायक वॉटसन से की थी।" },
+      "hi-Latn": { "question": "Telephone ke invention ka credit kise diya jaata hai?", "options": ["Thomas Edison", "Alexander Graham Bell", "Guglielmo Marconi", "Nikola Tesla"], "explanation": "Bell ko 1876 mein telephone ka US patent mila tha, aur unhone pehli baat apne assistant Watson se ki thi." }
+    },
+    {
+      "groupId": "te_004",
+      "difficulty": "easy",
+      "subcategory": "internet",
+      "correctIndex": 3,
+      "tags": ["internet", "abbreviations"],
+      "en": { "question": "What does WWW stand for in a website address?", "options": ["World Wide Wire", "Wide World Web", "Web World Wide", "World Wide Web"], "explanation": "The World Wide Web is the system of linked pages that runs on top of the internet; the two are not the same thing." },
+      "hi": { "question": "वेबसाइट के पते में डब्ल्यूडब्ल्यूडब्ल्यू का क्या अर्थ है?", "options": ["वर्ल्ड वाइड वायर", "वाइड वर्ल्ड वेब", "वेब वर्ल्ड वाइड", "वर्ल्ड वाइड वेब"], "explanation": "वर्ल्ड वाइड वेब आपस में जुड़े पन्नों की व्यवस्था है जो इंटरनेट पर चलती है, दोनों एक ही चीज़ नहीं हैं।" },
+      "hi-Latn": { "question": "Website address mein WWW ka matlab kya hai?", "options": ["World Wide Wire", "Wide World Web", "Web World Wide", "World Wide Web"], "explanation": "World Wide Web linked pages ka system hai jo internet par chalta hai, dono same cheez nahi hain." }
+    },
+    {
+      "groupId": "te_005",
+      "difficulty": "easy",
+      "subcategory": "tech_companies",
+      "correctIndex": 2,
+      "tags": ["companies", "founders"],
+      "en": { "question": "Who co-founded Microsoft along with Paul Allen?", "options": ["Steve Jobs", "Larry Page", "Bill Gates", "Mark Zuckerberg"], "explanation": "Bill Gates and his childhood friend Paul Allen started Microsoft in 1975." },
+      "hi": { "question": "पॉल एलन के साथ मिलकर माइक्रोसॉफ्ट की स्थापना किसने की?", "options": ["स्टीव जॉब्स", "लैरी पेज", "बिल गेट्स", "मार्क ज़करबर्ग"], "explanation": "बिल गेट्स और उनके बचपन के दोस्त पॉल एलन ने 1975 में माइक्रोसॉफ्ट शुरू की थी।" },
+      "hi-Latn": { "question": "Paul Allen ke saath milkar Microsoft kisne start ki?", "options": ["Steve Jobs", "Larry Page", "Bill Gates", "Mark Zuckerberg"], "explanation": "Bill Gates aur unke bachpan ke dost Paul Allen ne 1975 mein Microsoft shuru ki thi." }
+    },
+    {
+      "groupId": "te_006",
+      "difficulty": "easy",
+      "subcategory": "computer_basics",
+      "correctIndex": 1,
+      "tags": ["hardware", "computer_basics"],
+      "en": { "question": "Which part is called the 'brain of the computer'?", "options": ["Monitor", "CPU", "Keyboard", "Mouse"], "explanation": "The CPU does the calculations and decision-making, while the other parts only take input or show output." },
+      "hi": { "question": "कंप्यूटर का 'दिमाग' किस भाग को कहा जाता है?", "options": ["मॉनिटर", "सीपीयू", "कीबोर्ड", "माउस"], "explanation": "गणना और फैसले सीपीयू करता है, बाकी हिस्से सिर्फ इनपुट लेते हैं या आउटपुट दिखाते हैं।" },
+      "hi-Latn": { "question": "Computer ka 'brain' kis part ko kehte hain?", "options": ["Monitor", "CPU", "Keyboard", "Mouse"], "explanation": "Calculations aur decisions CPU karta hai, baaki parts sirf input lete hain ya output dikhate hain." }
+    },
+    {
+      "groupId": "te_007",
+      "difficulty": "easy",
+      "subcategory": "computer_basics",
+      "correctIndex": 3,
+      "tags": ["shortcuts", "computer_basics"],
+      "en": { "question": "On most computers, what does the shortcut Ctrl + C do?", "options": ["Cut", "Paste", "Close", "Copy"], "explanation": "Ctrl + C copies the selection to the clipboard; Ctrl + V pastes it and Ctrl + X cuts it." },
+      "hi": { "question": "ज़्यादातर कंप्यूटरों पर कंट्रोल + सी शॉर्टकट क्या करता है?", "options": ["कट", "पेस्ट", "क्लोज़", "कॉपी"], "explanation": "कंट्रोल + सी चुनी हुई चीज़ को क्लिपबोर्ड पर कॉपी करता है, जबकि कंट्रोल + वी उसे पेस्ट करता है।" },
+      "hi-Latn": { "question": "Zyadatar computers par Ctrl + C shortcut kya karta hai?", "options": ["Cut", "Paste", "Close", "Copy"], "explanation": "Ctrl + C selected cheez ko clipboard par copy karta hai, aur Ctrl + V use paste karta hai." }
+    },
+    {
+      "groupId": "te_008",
+      "difficulty": "easy",
+      "subcategory": "tech_companies",
+      "correctIndex": 0,
+      "tags": ["companies", "founders", "social_media"],
+      "en": { "question": "Who founded Facebook while studying at Harvard?", "options": ["Mark Zuckerberg", "Jeff Bezos", "Elon Musk", "Jack Dorsey"], "explanation": "Mark Zuckerberg launched it from his Harvard dorm room in 2004 with a few fellow students." },
+      "hi": { "question": "हार्वर्ड में पढ़ाई के दौरान फेसबुक की स्थापना किसने की?", "options": ["मार्क ज़करबर्ग", "जेफ बेज़ोस", "एलन मस्क", "जैक डोर्सी"], "explanation": "मार्क ज़करबर्ग ने 2004 में अपने कुछ साथी छात्रों के साथ हार्वर्ड के हॉस्टल के कमरे से इसे शुरू किया था।" },
+      "hi-Latn": { "question": "Harvard mein padhai ke time Facebook kisne start kiya?", "options": ["Mark Zuckerberg", "Jeff Bezos", "Elon Musk", "Jack Dorsey"], "explanation": "Mark Zuckerberg ne 2004 mein kuch classmates ke saath Harvard ke dorm room se ise launch kiya tha." }
+    },
+    {
+      "groupId": "te_009",
+      "difficulty": "easy",
+      "subcategory": "computer_basics",
+      "correctIndex": 2,
+      "tags": ["hardware", "input_devices"],
+      "en": { "question": "Which of these is an input device?", "options": ["Monitor", "Printer", "Keyboard", "Speaker"], "explanation": "A keyboard sends data into the computer, while monitors, printers and speakers present data coming out of it." },
+      "hi": { "question": "इनमें से कौन-सा इनपुट डिवाइस है?", "options": ["मॉनिटर", "प्रिंटर", "कीबोर्ड", "स्पीकर"], "explanation": "कीबोर्ड कंप्यूटर में डेटा भेजता है, जबकि मॉनिटर, प्रिंटर और स्पीकर कंप्यूटर से निकलने वाला आउटपुट दिखाते या सुनाते हैं।" },
+      "hi-Latn": { "question": "Inmein se kaunsa input device hai?", "options": ["Monitor", "Printer", "Keyboard", "Speaker"], "explanation": "Keyboard computer mein data bhejta hai, jabki monitor, printer aur speaker output dete hain." }
+    },
+    {
+      "groupId": "te_010",
+      "difficulty": "easy",
+      "subcategory": "abbreviations",
+      "correctIndex": 1,
+      "tags": ["hardware", "abbreviations"],
+      "en": { "question": "What does USB stand for?", "options": ["Universal System Bus", "Universal Serial Bus", "United Serial Board", "Unified Storage Bus"], "explanation": "USB was designed in the mid-1990s to replace the many different ports computers once needed with one standard plug." },
+      "hi": { "question": "यूएसबी का पूरा नाम क्या है?", "options": ["यूनिवर्सल सिस्टम बस", "यूनिवर्सल सीरियल बस", "यूनाइटेड सीरियल बोर्ड", "यूनिफाइड स्टोरेज बस"], "explanation": "यूएसबी 1990 के दशक के मध्य में इसलिए बनाया गया ताकि कंप्यूटर के कई अलग-अलग पोर्ट की जगह एक ही मानक प्लग हो।" },
+      "hi-Latn": { "question": "USB ka full form kya hai?", "options": ["Universal System Bus", "Universal Serial Bus", "United Serial Board", "Unified Storage Bus"], "explanation": "USB 1990s ke middle mein banaya gaya taaki alag-alag ports ki jagah ek hi standard plug ho." }
+    },
+    {
+      "groupId": "te_011",
+      "difficulty": "easy",
+      "subcategory": "computer_basics",
+      "correctIndex": 3,
+      "tags": ["data_units", "computer_basics"],
+      "en": { "question": "How many bits make up one byte?", "options": ["4", "16", "32", "8"], "explanation": "A byte has 8 bits, enough to store 256 different values, such as one English character." },
+      "hi": { "question": "एक बाइट में कितने बिट होते हैं?", "options": ["4", "16", "32", "8"], "explanation": "एक बाइट में 8 बिट होते हैं, जिनसे 256 अलग-अलग मान बन सकते हैं, जैसे अंग्रेज़ी का एक अक्षर।" },
+      "hi-Latn": { "question": "Ek byte mein kitne bits hote hain?", "options": ["4", "16", "32", "8"], "explanation": "Ek byte mein 8 bits hote hain, jisse 256 alag values ban sakti hain, jaise English ka ek character." }
+    },
+    {
+      "groupId": "te_012",
+      "difficulty": "easy",
+      "subcategory": "indian_tech",
+      "correctIndex": 0,
+      "tags": ["india", "payments", "abbreviations"],
+      "en": { "question": "What does UPI stand for in India's digital payments?", "options": ["Unified Payments Interface", "Universal Payment Identity", "United Payments India", "Unified Phone Interface"], "explanation": "UPI, run by NPCI, lets you send money instantly between bank accounts using just a phone and a UPI ID." },
+      "hi": { "question": "भारत के डिजिटल भुगतान में यूपीआई का पूरा नाम क्या है?", "options": ["यूनिफाइड पेमेंट्स इंटरफेस", "यूनिवर्सल पेमेंट आइडेंटिटी", "यूनाइटेड पेमेंट्स इंडिया", "यूनिफाइड फोन इंटरफेस"], "explanation": "एनपीसीआई द्वारा चलाया जाने वाला यूपीआई सिर्फ फोन और यूपीआई आईडी से बैंक खातों के बीच तुरंत पैसे भेजने देता है।" },
+      "hi-Latn": { "question": "India ke digital payments mein UPI ka full form kya hai?", "options": ["Unified Payments Interface", "Universal Payment Identity", "United Payments India", "Unified Phone Interface"], "explanation": "NPCI ka UPI sirf phone aur UPI ID se bank accounts ke beech turant paise bhejne deta hai." }
+    },
+    {
+      "groupId": "te_013",
+      "difficulty": "easy",
+      "subcategory": "abbreviations",
+      "correctIndex": 2,
+      "tags": ["file_formats", "abbreviations"],
+      "en": { "question": "What does PDF stand for?", "options": ["Printed Document File", "Public Data Format", "Portable Document Format", "Personal Document File"], "explanation": "Adobe created PDF in the early 1990s so a document looks the same on any device or printer." },
+      "hi": { "question": "पीडीएफ का पूरा नाम क्या है?", "options": ["प्रिंटेड डॉक्यूमेंट फाइल", "पब्लिक डेटा फॉर्मेट", "पोर्टेबल डॉक्यूमेंट फॉर्मेट", "पर्सनल डॉक्यूमेंट फाइल"], "explanation": "एडोबी ने 1990 के दशक की शुरुआत में पीडीएफ बनाया ताकि दस्तावेज़ हर डिवाइस और प्रिंटर पर एक जैसा दिखे।" },
+      "hi-Latn": { "question": "PDF ka full form kya hai?", "options": ["Printed Document File", "Public Data Format", "Portable Document Format", "Personal Document File"], "explanation": "Adobe ne early 1990s mein PDF banaya taaki document har device aur printer par same dikhe." }
+    },
+    {
+      "groupId": "te_014",
+      "difficulty": "easy",
+      "subcategory": "tech_companies",
+      "correctIndex": 1,
+      "tags": ["companies", "founders", "search_engines"],
+      "en": { "question": "Who founded Google?", "options": ["Bill Gates and Paul Allen", "Larry Page and Sergey Brin", "Steve Jobs and Steve Wozniak", "Bill Hewlett and David Packard"], "explanation": "Page and Brin were PhD students at Stanford when they built the search engine and founded Google in 1998." },
+      "hi": { "question": "गूगल की स्थापना किसने की?", "options": ["बिल गेट्स और पॉल एलन", "लैरी पेज और सर्गेई ब्रिन", "स्टीव जॉब्स और स्टीव वोज़्नियाक", "बिल ह्यूलेट और डेविड पैकार्ड"], "explanation": "पेज और ब्रिन स्टैनफोर्ड में पीएचडी के छात्र थे जब उन्होंने यह सर्च इंजन बनाया और 1998 में गूगल की स्थापना की।" },
+      "hi-Latn": { "question": "Google kisne found kiya?", "options": ["Bill Gates aur Paul Allen", "Larry Page aur Sergey Brin", "Steve Jobs aur Steve Wozniak", "Bill Hewlett aur David Packard"], "explanation": "Page aur Brin Stanford mein PhD students the jab unhone ye search engine banaya aur 1998 mein Google found kiya." }
+    },
+    {
+      "groupId": "te_015",
+      "difficulty": "easy",
+      "subcategory": "digital_security",
+      "correctIndex": 3,
+      "tags": ["security", "abbreviations"],
+      "en": { "question": "In online banking, what does OTP stand for?", "options": ["Online Transaction Password", "Open Token Protocol", "Official Transfer Pin", "One Time Password"], "explanation": "An OTP works only once and expires quickly, so never share it with anyone, even someone claiming to be from your bank." },
+      "hi": { "question": "ऑनलाइन बैंकिंग में ओटीपी का पूरा नाम क्या है?", "options": ["ऑनलाइन ट्रांज़ैक्शन पासवर्ड", "ओपन टोकन प्रोटोकॉल", "ऑफिशियल ट्रांसफर पिन", "वन टाइम पासवर्ड"], "explanation": "ओटीपी सिर्फ एक बार काम करता है और जल्दी खत्म हो जाता है, इसलिए इसे किसी को न बताएं, चाहे वह खुद को बैंक वाला ही क्यों न बताए।" },
+      "hi-Latn": { "question": "Online banking mein OTP ka full form kya hai?", "options": ["Online Transaction Password", "Open Token Protocol", "Official Transfer Pin", "One Time Password"], "explanation": "OTP sirf ek baar kaam karta hai aur jaldi expire ho jaata hai, isliye ise kisi ko share mat karo, chahe wo khud ko bank wala bataye." }
+    },
+    {
+      "groupId": "te_016",
+      "difficulty": "medium",
+      "subcategory": "computing_history",
+      "correctIndex": 0,
+      "tags": ["history", "pioneers"],
+      "en": { "question": "Who is known as the 'Father of the Computer'?", "options": ["Charles Babbage", "Alan Turing", "John von Neumann", "Blaise Pascal"], "explanation": "In the 1800s Babbage designed the Analytical Engine, a mechanical general-purpose computer that was never fully built in his lifetime." },
+      "hi": { "question": "'कंप्यूटर का जनक' किसे कहा जाता है?", "options": ["चार्ल्स बैबेज", "एलन ट्यूरिंग", "जॉन वॉन न्यूमैन", "ब्लेज़ पास्कल"], "explanation": "1800 के दशक में बैबेज ने एनालिटिकल इंजन का डिज़ाइन बनाया, जो एक यांत्रिक सामान्य-उद्देश्य कंप्यूटर था पर उनके जीवनकाल में पूरा नहीं बन सका।" },
+      "hi-Latn": { "question": "'Father of the Computer' kise kaha jaata hai?", "options": ["Charles Babbage", "Alan Turing", "John von Neumann", "Blaise Pascal"], "explanation": "1800s mein Babbage ne Analytical Engine design kiya tha, ek mechanical general-purpose computer jo unke time mein poora ban nahi paaya." }
+    },
+    {
+      "groupId": "te_017",
+      "difficulty": "medium",
+      "subcategory": "abbreviations",
+      "correctIndex": 2,
+      "tags": ["internet", "protocols", "abbreviations"],
+      "en": { "question": "What does HTTP stand for?", "options": ["High Transfer Text Protocol", "HyperText Transmission Program", "HyperText Transfer Protocol", "Hyperlink Text Transfer Process"], "explanation": "HTTP is the set of rules browsers and web servers use to exchange pages; the 'S' in HTTPS means the connection is encrypted." },
+      "hi": { "question": "एचटीटीपी का पूरा नाम क्या है?", "options": ["हाई ट्रांसफर टेक्स्ट प्रोटोकॉल", "हाइपरटेक्स्ट ट्रांसमिशन प्रोग्राम", "हाइपरटेक्स्ट ट्रांसफर प्रोटोकॉल", "हाइपरलिंक टेक्स्ट ट्रांसफर प्रोसेस"], "explanation": "एचटीटीपी वे नियम हैं जिनसे ब्राउज़र और वेब सर्वर पन्नों का लेन-देन करते हैं, और एचटीटीपीएस में 'एस' का मतलब है कि कनेक्शन एन्क्रिप्टेड है।" },
+      "hi-Latn": { "question": "HTTP ka full form kya hai?", "options": ["High Transfer Text Protocol", "HyperText Transmission Program", "HyperText Transfer Protocol", "Hyperlink Text Transfer Process"], "explanation": "HTTP wo rules hain jinse browser aur web server pages exchange karte hain, aur HTTPS ka 'S' batata hai ki connection encrypted hai." }
+    },
+    {
+      "groupId": "te_018",
+      "difficulty": "medium",
+      "subcategory": "internet",
+      "correctIndex": 3,
+      "tags": ["internet", "pioneers", "history"],
+      "en": { "question": "Who invented the World Wide Web?", "options": ["Vint Cerf", "Bill Gates", "Marc Andreessen", "Tim Berners-Lee"], "explanation": "Tim Berners-Lee proposed the Web in 1989 while working at CERN, the physics lab near Geneva." },
+      "hi": { "question": "वर्ल्ड वाइड वेब का आविष्कार किसने किया?", "options": ["विंट सर्फ", "बिल गेट्स", "मार्क एंड्रीसेन", "टिम बर्नर्स-ली"], "explanation": "टिम बर्नर्स-ली ने 1989 में जिनेवा के पास स्थित भौतिकी प्रयोगशाला सर्न में काम करते हुए वेब का प्रस्ताव रखा था।" },
+      "hi-Latn": { "question": "World Wide Web ka invention kisne kiya?", "options": ["Vint Cerf", "Bill Gates", "Marc Andreessen", "Tim Berners-Lee"], "explanation": "Tim Berners-Lee ne 1989 mein Geneva ke paas CERN lab mein kaam karte hue Web ka proposal diya tha." }
+    },
+    {
+      "groupId": "te_019",
+      "difficulty": "medium",
+      "subcategory": "programming_languages",
+      "correctIndex": 1,
+      "tags": ["programming", "python", "pioneers"],
+      "en": { "question": "Who created the Python programming language?", "options": ["James Gosling", "Guido van Rossum", "Dennis Ritchie", "Bjarne Stroustrup"], "explanation": "Guido van Rossum released Python in 1991 and named it after the comedy show Monty Python, not the snake." },
+      "hi": { "question": "पायथन प्रोग्रामिंग भाषा किसने बनाई?", "options": ["जेम्स गॉसलिंग", "गीडो वैन रोसुम", "डेनिस रिची", "ब्यार्ने स्ट्राउस्ट्रप"], "explanation": "गीडो वैन रोसुम ने 1991 में पायथन जारी की और इसका नाम साँप पर नहीं, बल्कि कॉमेडी शो मॉन्टी पायथन पर रखा।" },
+      "hi-Latn": { "question": "Python programming language kisne banayi?", "options": ["James Gosling", "Guido van Rossum", "Dennis Ritchie", "Bjarne Stroustrup"], "explanation": "Guido van Rossum ne 1991 mein Python release ki aur iska naam saanp nahi, comedy show Monty Python par rakha." }
+    },
+    {
+      "groupId": "te_020",
+      "difficulty": "medium",
+      "subcategory": "programming_languages",
+      "correctIndex": 0,
+      "tags": ["programming", "java", "companies"],
+      "en": { "question": "Java was originally developed at which company?", "options": ["Sun Microsystems", "Microsoft", "IBM", "Oracle"], "explanation": "James Gosling's team at Sun built Java in the 1990s; Oracle got it only later, when it bought Sun in 2010." },
+      "hi": { "question": "जावा मूल रूप से किस कंपनी में विकसित की गई थी?", "options": ["सन माइक्रोसिस्टम्स", "माइक्रोसॉफ्ट", "आईबीएम", "ओरेकल"], "explanation": "सन में जेम्स गॉसलिंग की टीम ने 1990 के दशक में जावा बनाई, ओरेकल के पास यह बाद में 2010 में सन को खरीदने पर आई।" },
+      "hi-Latn": { "question": "Java originally kis company mein develop hui thi?", "options": ["Sun Microsystems", "Microsoft", "IBM", "Oracle"], "explanation": "Sun mein James Gosling ki team ne 1990s mein Java banayi, Oracle ke paas ye baad mein 2010 mein Sun ko khareedne par aayi." }
+    },
+    {
+      "groupId": "te_021",
+      "difficulty": "medium",
+      "subcategory": "inventions",
+      "correctIndex": 2,
+      "tags": ["inventions", "television", "history"],
+      "en": { "question": "Who gave the first public demonstration of a working television in 1926?", "options": ["Thomas Edison", "Guglielmo Marconi", "John Logie Baird", "Alexander Graham Bell"], "explanation": "Scottish inventor Baird showed moving images on his mechanical TV system to scientists in London in January 1926." },
+      "hi": { "question": "1926 में चलते-फिरते टेलीविज़न का पहला सार्वजनिक प्रदर्शन किसने किया?", "options": ["थॉमस एडिसन", "गुग्लिएल्मो मार्कोनी", "जॉन लोगी बेयर्ड", "अलेक्जेंडर ग्राहम बेल"], "explanation": "स्कॉटलैंड के आविष्कारक बेयर्ड ने जनवरी 1926 में लंदन में वैज्ञानिकों को अपने यांत्रिक टीवी पर चलती तस्वीरें दिखाई थीं।" },
+      "hi-Latn": { "question": "1926 mein working television ka pehla public demonstration kisne kiya?", "options": ["Thomas Edison", "Guglielmo Marconi", "John Logie Baird", "Alexander Graham Bell"], "explanation": "Scottish inventor Baird ne January 1926 mein London mein scientists ko apne mechanical TV par moving images dikhayi thi." }
+    },
+    {
+      "groupId": "te_022",
+      "difficulty": "medium",
+      "subcategory": "indian_tech",
+      "correctIndex": 3,
+      "tags": ["india", "companies", "founding_year"],
+      "en": { "question": "In which year was Infosys founded?", "options": ["1975", "1991", "1968", "1981"], "explanation": "N. R. Narayana Murthy and six colleagues started Infosys in Pune in 1981 with about 10,000 rupees borrowed from Sudha Murty." },
+      "hi": { "question": "इंफोसिस की स्थापना किस वर्ष हुई थी?", "options": ["1975", "1991", "1968", "1981"], "explanation": "एन. आर. नारायण मूर्ति और छह साथियों ने 1981 में पुणे में इंफोसिस शुरू की, जिसके लिए सुधा मूर्ति से लगभग 10,000 रुपये उधार लिए गए थे।" },
+      "hi-Latn": { "question": "Infosys kis saal shuru hui thi?", "options": ["1975", "1991", "1968", "1981"], "explanation": "N. R. Narayana Murthy aur chhe saathiyon ne 1981 mein Pune mein Infosys shuru ki, Sudha Murty se lagbhag 10,000 rupaye udhaar lekar." }
+    },
+    {
+      "groupId": "te_023",
+      "difficulty": "medium",
+      "subcategory": "indian_tech",
+      "correctIndex": 1,
+      "tags": ["india", "payments", "milestones"],
+      "en": { "question": "In which year was UPI launched in India?", "options": ["2014", "2016", "2018", "2012"], "explanation": "NPCI launched UPI in April 2016, and it soon became the most popular way to pay digitally in India." },
+      "hi": { "question": "भारत में यूपीआई किस वर्ष लॉन्च हुआ था?", "options": ["2014", "2016", "2018", "2012"], "explanation": "एनपीसीआई ने अप्रैल 2016 में यूपीआई लॉन्च किया और जल्द ही यह भारत में डिजिटल भुगतान का सबसे लोकप्रिय तरीका बन गया।" },
+      "hi-Latn": { "question": "India mein UPI kis saal launch hua tha?", "options": ["2014", "2016", "2018", "2012"], "explanation": "NPCI ne April 2016 mein UPI launch kiya aur jaldi hi ye India mein digital payment ka sabse popular tareeka ban gaya." }
+    },
+    {
+      "groupId": "te_024",
+      "difficulty": "medium",
+      "subcategory": "tech_companies",
+      "correctIndex": 0,
+      "tags": ["companies", "ecommerce", "history"],
+      "en": { "question": "Amazon started out in 1994 as an online what?", "options": ["Bookstore", "Music store", "Electronics shop", "Grocery store"], "explanation": "Jeff Bezos began by selling books from his garage near Seattle because there were far more titles than any physical shop could stock." },
+      "hi": { "question": "अमेज़न ने 1994 में किस तरह की ऑनलाइन दुकान के रूप में शुरुआत की थी?", "options": ["किताबों की दुकान", "संगीत की दुकान", "इलेक्ट्रॉनिक्स की दुकान", "किराने की दुकान"], "explanation": "जेफ बेज़ोस ने सिएटल के पास अपने गैराज से किताबें बेचना शुरू किया, क्योंकि किताबों के इतने शीर्षक थे जितने कोई असली दुकान नहीं रख सकती।" },
+      "hi-Latn": { "question": "Amazon ne 1994 mein kis tarah ke online store ke roop mein shuruaat ki thi?", "options": ["Bookstore", "Music store", "Electronics shop", "Grocery store"], "explanation": "Jeff Bezos ne Seattle ke paas apne garage se books bechna shuru kiya, kyunki itne titles koi physical shop nahi rakh sakti thi." }
+    },
+    {
+      "groupId": "te_025",
+      "difficulty": "medium",
+      "subcategory": "mobile_telecom",
+      "correctIndex": 2,
+      "tags": ["mobile", "telecom", "abbreviations"],
+      "en": { "question": "What does SIM stand for in 'SIM card'?", "options": ["System Information Module", "Secure Identity Memory", "Subscriber Identity Module", "Subscriber Internet Mode"], "explanation": "The SIM securely stores the identity that lets your mobile network recognise you as its subscriber." },
+      "hi": { "question": "'सिम कार्ड' में सिम का पूरा नाम क्या है?", "options": ["सिस्टम इन्फॉर्मेशन मॉड्यूल", "सिक्योर आइडेंटिटी मेमोरी", "सब्सक्राइबर आइडेंटिटी मॉड्यूल", "सब्सक्राइबर इंटरनेट मोड"], "explanation": "सिम में आपकी पहचान सुरक्षित रहती है, जिससे मोबाइल नेटवर्क आपको अपने ग्राहक के रूप में पहचानता है।" },
+      "hi-Latn": { "question": "'SIM card' mein SIM ka full form kya hai?", "options": ["System Information Module", "Secure Identity Memory", "Subscriber Identity Module", "Subscriber Internet Mode"], "explanation": "SIM mein aapki identity securely store hoti hai, jisse mobile network aapko apne subscriber ke roop mein pehchaanta hai." }
+    },
+    {
+      "groupId": "te_026",
+      "difficulty": "medium",
+      "subcategory": "digital_security",
+      "correctIndex": 3,
+      "tags": ["security", "scams"],
+      "en": { "question": "A fake email or message that tricks you into revealing passwords is called what?", "options": ["Cookie", "Firewall", "Caching", "Phishing"], "explanation": "The word plays on 'fishing': scammers throw out bait and wait for someone to bite." },
+      "hi": { "question": "पासवर्ड चुराने के लिए भेजा गया नकली ईमेल या मैसेज क्या कहलाता है?", "options": ["कुकी", "फ़ायरवॉल", "कैशिंग", "फ़िशिंग"], "explanation": "यह शब्द मछली पकड़ने वाली 'फ़िशिंग' से बना है, जिसमें ठग चारा डालकर किसी के फँसने का इंतज़ार करते हैं।" },
+      "hi-Latn": { "question": "Password churane ke liye bheja gaya fake email ya message kya kehlata hai?", "options": ["Cookie", "Firewall", "Caching", "Phishing"], "explanation": "Ye word 'fishing' se bana hai, scammers chaara daalte hain aur kisi ke phansne ka wait karte hain." }
+    },
+    {
+      "groupId": "te_027",
+      "difficulty": "medium",
+      "subcategory": "programming_languages",
+      "correctIndex": 1,
+      "tags": ["programming", "pioneers"],
+      "en": { "question": "Which programming language did Dennis Ritchie create at Bell Labs?", "options": ["Java", "C", "Python", "Pascal"], "explanation": "Ritchie developed C in the early 1970s, and it was soon used to rewrite the Unix operating system." },
+      "hi": { "question": "डेनिस रिची ने बेल लैब्स में कौन-सी प्रोग्रामिंग भाषा बनाई?", "options": ["जावा", "सी", "पायथन", "पास्कल"], "explanation": "रिची ने 1970 के दशक की शुरुआत में सी भाषा बनाई और जल्द ही यूनिक्स ऑपरेटिंग सिस्टम को इसी में दोबारा लिखा गया।" },
+      "hi-Latn": { "question": "Dennis Ritchie ne Bell Labs mein kaunsi programming language banayi?", "options": ["Java", "C", "Python", "Pascal"], "explanation": "Ritchie ne early 1970s mein C banayi aur jaldi hi Unix operating system ko isi mein dobara likha gaya." }
+    },
+    {
+      "groupId": "te_028",
+      "difficulty": "medium",
+      "subcategory": "abbreviations",
+      "correctIndex": 0,
+      "tags": ["navigation", "satellites", "abbreviations"],
+      "en": { "question": "What does GPS stand for?", "options": ["Global Positioning System", "General Positioning Satellite", "Geo Positioning Service", "Global Path System"], "explanation": "A GPS receiver works out your location by timing signals from several satellites at once." },
+      "hi": { "question": "जीपीएस का पूरा नाम क्या है?", "options": ["ग्लोबल पोज़िशनिंग सिस्टम", "जनरल पोज़िशनिंग सैटेलाइट", "जियो पोज़िशनिंग सर्विस", "ग्लोबल पाथ सिस्टम"], "explanation": "जीपीएस रिसीवर कई उपग्रहों से आने वाले संकेतों के समय को मापकर आपकी जगह का पता लगाता है।" },
+      "hi-Latn": { "question": "GPS ka full form kya hai?", "options": ["Global Positioning System", "General Positioning Satellite", "Geo Positioning Service", "Global Path System"], "explanation": "GPS receiver kai satellites se aane wale signals ka time measure karke aapki location nikaalta hai." }
+    },
+    {
+      "groupId": "te_029",
+      "difficulty": "medium",
+      "subcategory": "indian_tech",
+      "correctIndex": 2,
+      "tags": ["india", "supercomputers"],
+      "en": { "question": "Which organisation developed PARAM, India's first supercomputer?", "options": ["ISRO", "DRDO", "C-DAC", "BARC"], "explanation": "C-DAC was set up in 1988 after India was denied a Cray supercomputer, and it delivered PARAM 8000 in 1991." },
+      "hi": { "question": "भारत का पहला सुपरकंप्यूटर परम किस संस्था ने विकसित किया?", "options": ["इसरो", "डीआरडीओ", "सी-डैक", "बार्क"], "explanation": "भारत को क्रे सुपरकंप्यूटर न मिलने के बाद 1988 में सी-डैक बना, और उसने 1991 में परम 8000 तैयार किया।" },
+      "hi-Latn": { "question": "India ka pehla supercomputer PARAM kis organisation ne develop kiya?", "options": ["ISRO", "DRDO", "C-DAC", "BARC"], "explanation": "India ko Cray supercomputer na milne ke baad 1988 mein C-DAC bana, aur usne 1991 mein PARAM 8000 taiyaar kiya." }
+    },
+    {
+      "groupId": "te_030",
+      "difficulty": "medium",
+      "subcategory": "abbreviations",
+      "correctIndex": 3,
+      "tags": ["banking", "abbreviations"],
+      "en": { "question": "In banking, what does ATM stand for?", "options": ["Any Time Money", "Automatic Transaction Machine", "Automated Transfer Mode", "Automated Teller Machine"], "explanation": "A 'teller' is the bank clerk who handles cash, and the ATM automates that job round the clock." },
+      "hi": { "question": "बैंकिंग में एटीएम का पूरा नाम क्या है?", "options": ["एनी टाइम मनी", "ऑटोमैटिक ट्रांज़ैक्शन मशीन", "ऑटोमेटेड ट्रांसफर मोड", "ऑटोमेटेड टेलर मशीन"], "explanation": "'टेलर' बैंक का वह कर्मचारी होता है जो नकदी संभालता है, और एटीएम यही काम चौबीसों घंटे अपने आप करता है।" },
+      "hi-Latn": { "question": "Banking mein ATM ka full form kya hai?", "options": ["Any Time Money", "Automatic Transaction Machine", "Automated Transfer Mode", "Automated Teller Machine"], "explanation": "'Teller' bank ka wo employee hota hai jo cash handle karta hai, aur ATM yahi kaam 24 ghante automatically karta hai." }
+    },
+    {
+      "groupId": "te_031",
+      "difficulty": "hard",
+      "subcategory": "programming_languages",
+      "correctIndex": 0,
+      "tags": ["programming", "pioneers"],
+      "en": { "question": "Who created the C++ programming language?", "options": ["Bjarne Stroustrup", "Dennis Ritchie", "Ken Thompson", "James Gosling"], "explanation": "Stroustrup began it at Bell Labs in 1979 as 'C with Classes'; the '++' is C's increment operator." },
+      "hi": { "question": "सी++ प्रोग्रामिंग भाषा किसने बनाई?", "options": ["ब्यार्ने स्ट्राउस्ट्रप", "डेनिस रिची", "केन थॉम्पसन", "जेम्स गॉसलिंग"], "explanation": "स्ट्राउस्ट्रप ने 1979 में बेल लैब्स में इसे 'सी विद क्लासेज़' नाम से शुरू किया, और '++' सी भाषा का इंक्रीमेंट ऑपरेटर है।" },
+      "hi-Latn": { "question": "C++ programming language kisne banayi?", "options": ["Bjarne Stroustrup", "Dennis Ritchie", "Ken Thompson", "James Gosling"], "explanation": "Stroustrup ne 1979 mein Bell Labs mein ise 'C with Classes' naam se shuru kiya, aur '++' C ka increment operator hai." }
+    },
+    {
+      "groupId": "te_032",
+      "difficulty": "hard",
+      "subcategory": "internet",
+      "correctIndex": 1,
+      "tags": ["internet", "history", "arpanet"],
+      "en": { "question": "What was the first message sent over ARPANET in 1969?", "options": ["HELLO", "LO", "TEST", "WORLD"], "explanation": "Researchers tried to type 'LOGIN', but the system crashed after the first two letters." },
+      "hi": { "question": "1969 में अरपानेट पर भेजा गया पहला संदेश क्या था?", "options": ["HELLO", "LO", "TEST", "WORLD"], "explanation": "शोधकर्ता 'लॉगिन' टाइप करना चाहते थे, लेकिन पहले दो अक्षरों के बाद ही सिस्टम क्रैश हो गया।" },
+      "hi-Latn": { "question": "1969 mein ARPANET par bheja gaya pehla message kya tha?", "options": ["HELLO", "LO", "TEST", "WORLD"], "explanation": "Researchers 'LOGIN' type karna chahte the, lekin pehle do letters ke baad hi system crash ho gaya." }
+    },
+    {
+      "groupId": "te_033",
+      "difficulty": "hard",
+      "subcategory": "computing_history",
+      "correctIndex": 2,
+      "tags": ["history", "pioneers", "programming"],
+      "en": { "question": "Who is widely regarded as the first computer programmer?", "options": ["Grace Hopper", "Alan Turing", "Ada Lovelace", "Charles Babbage"], "explanation": "In 1843 Ada Lovelace published an algorithm for Babbage's Analytical Engine to calculate Bernoulli numbers." },
+      "hi": { "question": "किसे व्यापक रूप से दुनिया का पहला कंप्यूटर प्रोग्रामर माना जाता है?", "options": ["ग्रेस हॉपर", "एलन ट्यूरिंग", "एडा लवलेस", "चार्ल्स बैबेज"], "explanation": "1843 में एडा लवलेस ने बैबेज के एनालिटिकल इंजन के लिए बर्नूली संख्याएँ निकालने का एल्गोरिदम प्रकाशित किया था।" },
+      "hi-Latn": { "question": "Kise duniya ka pehla computer programmer maana jaata hai?", "options": ["Grace Hopper", "Alan Turing", "Ada Lovelace", "Charles Babbage"], "explanation": "1843 mein Ada Lovelace ne Babbage ke Analytical Engine ke liye Bernoulli numbers nikaalne ka algorithm publish kiya tha." }
+    },
+    {
+      "groupId": "te_034",
+      "difficulty": "hard",
+      "subcategory": "operating_systems",
+      "correctIndex": 0,
+      "tags": ["linux", "open_source", "history"],
+      "en": { "question": "In which year did Linus Torvalds first release the Linux kernel?", "options": ["1991", "1985", "1995", "1979"], "explanation": "Torvalds, then a student in Helsinki, announced it as 'just a hobby' project on a Usenet group." },
+      "hi": { "question": "लिनस टॉरवाल्ड्स ने लिनक्स कर्नेल पहली बार किस वर्ष जारी किया?", "options": ["1991", "1985", "1995", "1979"], "explanation": "उस समय हेलसिंकी में छात्र रहे टॉरवाल्ड्स ने यूज़नेट समूह पर इसे 'सिर्फ एक शौक' वाला प्रोजेक्ट बताकर घोषित किया था।" },
+      "hi-Latn": { "question": "Linus Torvalds ne Linux kernel pehli baar kis saal release kiya?", "options": ["1991", "1985", "1995", "1979"], "explanation": "Us waqt Helsinki mein student Torvalds ne Usenet group par ise 'just a hobby' project bolkar announce kiya tha." }
+    },
+    {
+      "groupId": "te_035",
+      "difficulty": "hard",
+      "subcategory": "internet",
+      "correctIndex": 3,
+      "tags": ["internet", "protocols", "pioneers"],
+      "en": { "question": "Who designed the TCP/IP protocols that the internet runs on?", "options": ["Tim Berners-Lee and Robert Cailliau", "Ken Thompson and Dennis Ritchie", "Larry Page and Sergey Brin", "Vint Cerf and Bob Kahn"], "explanation": "Cerf and Kahn published the TCP design in 1974, which is why both are called 'fathers of the internet'." },
+      "hi": { "question": "इंटरनेट जिन टीसीपी/आईपी प्रोटोकॉल पर चलता है, उन्हें किसने डिज़ाइन किया?", "options": ["टिम बर्नर्स-ली और रॉबर्ट कैलियो", "केन थॉम्पसन और डेनिस रिची", "लैरी पेज और सर्गेई ब्रिन", "विंट सर्फ और बॉब कान"], "explanation": "सर्फ और कान ने 1974 में टीसीपी का डिज़ाइन प्रकाशित किया, इसीलिए दोनों को 'इंटरनेट के जनक' कहा जाता है।" },
+      "hi-Latn": { "question": "Internet jin TCP/IP protocols par chalta hai, unhe kisne design kiya?", "options": ["Tim Berners-Lee aur Robert Cailliau", "Ken Thompson aur Dennis Ritchie", "Larry Page aur Sergey Brin", "Vint Cerf aur Bob Kahn"], "explanation": "Cerf aur Kahn ne 1974 mein TCP ka design publish kiya, isliye dono ko 'fathers of the internet' kaha jaata hai." }
+    },
+    {
+      "groupId": "te_036",
+      "difficulty": "hard",
+      "subcategory": "indian_tech",
+      "correctIndex": 0,
+      "tags": ["india", "mobile", "milestones"],
+      "en": { "question": "India's first mobile phone call, in 1995, was made from which city?", "options": ["Kolkata", "Mumbai", "Chennai", "Bengaluru"], "explanation": "On 31 July 1995, West Bengal CM Jyoti Basu called Union Telecom Minister Sukh Ram in Delhi from Kolkata." },
+      "hi": { "question": "1995 में भारत की पहली मोबाइल फोन कॉल किस शहर से की गई थी?", "options": ["कोलकाता", "मुंबई", "चेन्नई", "बेंगलुरु"], "explanation": "31 जुलाई 1995 को पश्चिम बंगाल के मुख्यमंत्री ज्योति बसु ने कोलकाता से दिल्ली में केंद्रीय दूरसंचार मंत्री सुखराम को कॉल किया था।" },
+      "hi-Latn": { "question": "1995 mein India ki pehli mobile phone call kis sheher se ki gayi thi?", "options": ["Kolkata", "Mumbai", "Chennai", "Bengaluru"], "explanation": "31 July 1995 ko West Bengal ke CM Jyoti Basu ne Kolkata se Delhi mein Telecom Minister Sukh Ram ko call kiya tha." }
+    },
+    {
+      "groupId": "te_037",
+      "difficulty": "hard",
+      "subcategory": "programming_languages",
+      "correctIndex": 1,
+      "tags": ["programming", "javascript", "web"],
+      "en": { "question": "Who created JavaScript at Netscape in 1995?", "options": ["Douglas Crockford", "Brendan Eich", "Ryan Dahl", "Guido van Rossum"], "explanation": "Brendan Eich wrote the first version in about 10 days; it was briefly called Mocha and then LiveScript." },
+      "hi": { "question": "1995 में नेटस्केप में जावास्क्रिप्ट किसने बनाई?", "options": ["डगलस क्रॉकफोर्ड", "ब्रेंडन आइक", "रयान डाल", "गीडो वैन रोसुम"], "explanation": "ब्रेंडन आइक ने इसका पहला संस्करण लगभग 10 दिनों में लिखा था, और पहले इसका नाम मोचा और फिर लाइवस्क्रिप्ट रखा गया।" },
+      "hi-Latn": { "question": "1995 mein Netscape mein JavaScript kisne banayi?", "options": ["Douglas Crockford", "Brendan Eich", "Ryan Dahl", "Guido van Rossum"], "explanation": "Brendan Eich ne iska pehla version lagbhag 10 din mein likha tha, pehle iska naam Mocha aur phir LiveScript tha." }
+    },
+    {
+      "groupId": "te_038",
+      "difficulty": "hard",
+      "subcategory": "computing_history",
+      "correctIndex": 2,
+      "tags": ["history", "hardware"],
+      "en": { "question": "ENIAC, an early electronic computer, was built mainly using what?", "options": ["Transistors", "Integrated circuits", "Vacuum tubes", "Microprocessors"], "explanation": "ENIAC used about 18,000 vacuum tubes, filled a large room and weighed roughly 30 tonnes." },
+      "hi": { "question": "शुरुआती इलेक्ट्रॉनिक कंप्यूटर एनिएक मुख्य रूप से किससे बना था?", "options": ["ट्रांजिस्टर", "इंटीग्रेटेड सर्किट", "वैक्यूम ट्यूब", "माइक्रोप्रोसेसर"], "explanation": "एनिएक में लगभग 18,000 वैक्यूम ट्यूब लगी थीं, यह एक बड़े कमरे जितना था और इसका वज़न करीब 30 टन था।" },
+      "hi-Latn": { "question": "Early electronic computer ENIAC mainly kis cheez se bana tha?", "options": ["Transistors", "Integrated circuits", "Vacuum tubes", "Microprocessors"], "explanation": "ENIAC mein lagbhag 18,000 vacuum tubes thi, ye ek bade kamre jitna tha aur iska weight kareeb 30 ton tha." }
+    },
+    {
+      "groupId": "te_039",
+      "difficulty": "hard",
+      "subcategory": "hardware",
+      "correctIndex": 0,
+      "tags": ["hardware", "microprocessors", "history"],
+      "en": { "question": "Which was the first commercially available microprocessor, released in 1971?", "options": ["Intel 4004", "Intel 8086", "Zilog Z80", "Motorola 6800"], "explanation": "The 4-bit Intel 4004 was first made for a Japanese calculator company, Busicom." },
+      "hi": { "question": "1971 में आया पहला व्यावसायिक रूप से उपलब्ध माइक्रोप्रोसेसर कौन-सा था?", "options": ["इंटेल 4004", "इंटेल 8086", "ज़ाइलॉग Z80", "मोटोरोला 6800"], "explanation": "4-बिट वाला इंटेल 4004 पहले एक जापानी कैलकुलेटर कंपनी बिज़ीकॉम के लिए बनाया गया था।" },
+      "hi-Latn": { "question": "1971 mein aaya pehla commercially available microprocessor kaunsa tha?", "options": ["Intel 4004", "Intel 8086", "Zilog Z80", "Motorola 6800"], "explanation": "4-bit Intel 4004 pehle ek Japanese calculator company Busicom ke liye banaya gaya tha." }
+    },
+    {
+      "groupId": "te_040",
+      "difficulty": "hard",
+      "subcategory": "programming_languages",
+      "correctIndex": 3,
+      "tags": ["programming", "pioneers", "history"],
+      "en": { "question": "Grace Hopper's work is most closely linked to which business-oriented language?", "options": ["FORTRAN", "BASIC", "Lisp", "COBOL"], "explanation": "Her English-like FLOW-MATIC language was a major basis for COBOL, designed in 1959 for business data processing." },
+      "hi": { "question": "ग्रेस हॉपर का काम किस व्यावसायिक प्रोग्रामिंग भाषा से सबसे ज़्यादा जुड़ा है?", "options": ["FORTRAN", "BASIC", "Lisp", "COBOL"], "explanation": "उनकी अंग्रेज़ी जैसी भाषा फ़्लो-मैटिक कोबोल का मुख्य आधार बनी, जिसे 1959 में व्यापारिक डेटा प्रोसेसिंग के लिए बनाया गया था।" },
+      "hi-Latn": { "question": "Grace Hopper ka kaam kis business-oriented language se sabse zyada juda hai?", "options": ["FORTRAN", "BASIC", "Lisp", "COBOL"], "explanation": "Unki English jaisi language FLOW-MATIC COBOL ka main base bani, jo 1959 mein business data processing ke liye design hui thi." }
+    },
+    {
+      "groupId": "te_041",
+      "difficulty": "hard",
+      "subcategory": "networking",
+      "correctIndex": 1,
+      "tags": ["networking", "protocols", "security"],
+      "en": { "question": "What is the default port number for HTTPS?", "options": ["80", "443", "21", "8080"], "explanation": "Plain HTTP uses port 80, while encrypted HTTPS uses 443 by default, so browsers rarely need you to type it." },
+      "hi": { "question": "एचटीटीपीएस का डिफ़ॉल्ट पोर्ट नंबर क्या है?", "options": ["80", "443", "21", "8080"], "explanation": "सादा एचटीटीपी पोर्ट 80 इस्तेमाल करता है, जबकि एन्क्रिप्टेड एचटीटीपीएस डिफ़ॉल्ट रूप से 443 पर चलता है।" },
+      "hi-Latn": { "question": "HTTPS ka default port number kya hai?", "options": ["80", "443", "21", "8080"], "explanation": "Plain HTTP port 80 use karta hai, jabki encrypted HTTPS by default 443 par chalta hai." }
+    },
+    {
+      "groupId": "te_042",
+      "difficulty": "hard",
+      "subcategory": "computing_history",
+      "correctIndex": 2,
+      "tags": ["history", "artificial_intelligence", "pioneers"],
+      "en": { "question": "In which year did Alan Turing propose the 'imitation game', now called the Turing test?", "options": ["1936", "1945", "1950", "1965"], "explanation": "It appeared in his 1950 paper 'Computing Machinery and Intelligence', which asked 'Can machines think?'" },
+      "hi": { "question": "एलन ट्यूरिंग ने 'इमिटेशन गेम', जिसे अब ट्यूरिंग टेस्ट कहते हैं, किस वर्ष प्रस्तावित किया?", "options": ["1936", "1945", "1950", "1965"], "explanation": "यह उनके 1950 के शोधपत्र 'कंप्यूटिंग मशीनरी एंड इंटेलिजेंस' में आया, जिसमें पूछा गया था कि क्या मशीनें सोच सकती हैं।" },
+      "hi-Latn": { "question": "Alan Turing ne 'imitation game', yaani Turing test, kis saal propose kiya?", "options": ["1936", "1945", "1950", "1965"], "explanation": "Ye unke 1950 ke paper 'Computing Machinery and Intelligence' mein aaya, jismein poocha gaya tha 'Can machines think?'" }
+    },
+    {
+      "groupId": "te_043",
+      "difficulty": "hard",
+      "subcategory": "operating_systems",
+      "correctIndex": 0,
+      "tags": ["unix", "history"],
+      "en": { "question": "Where was the Unix operating system originally developed?", "options": ["Bell Labs", "Xerox PARC", "IBM", "Stanford University"], "explanation": "Ken Thompson and Dennis Ritchie built Unix at AT&T's Bell Labs around 1969, and its ideas live on in Linux and macOS." },
+      "hi": { "question": "यूनिक्स ऑपरेटिंग सिस्टम मूल रूप से कहाँ विकसित हुआ था?", "options": ["बेल लैब्स", "ज़ेरॉक्स पार्क", "आईबीएम", "स्टैनफोर्ड यूनिवर्सिटी"], "explanation": "केन थॉम्पसन और डेनिस रिची ने लगभग 1969 में एटी एंड टी की बेल लैब्स में यूनिक्स बनाया, और इसके विचार आज लिनक्स और मैकओएस में दिखते हैं।" },
+      "hi-Latn": { "question": "Unix operating system originally kahan develop hua tha?", "options": ["Bell Labs", "Xerox PARC", "IBM", "Stanford University"], "explanation": "Ken Thompson aur Dennis Ritchie ne lagbhag 1969 mein AT&T ki Bell Labs mein Unix banaya, aur iske ideas aaj Linux aur macOS mein dikhte hain." }
+    },
+    {
+      "groupId": "te_044",
+      "difficulty": "hard",
+      "subcategory": "networking",
+      "correctIndex": 3,
+      "tags": ["networking", "ip_address"],
+      "en": { "question": "How many bits long is an IPv4 address?", "options": ["64", "128", "16", "32"], "explanation": "32 bits allow only about 4.3 billion addresses, which is why the much larger 128-bit IPv6 was introduced." },
+      "hi": { "question": "आईपीवी4 पता कितने बिट का होता है?", "options": ["64", "128", "16", "32"], "explanation": "32 बिट से केवल लगभग 4.3 अरब पते बन सकते हैं, इसीलिए कहीं बड़ा 128-बिट वाला आईपीवी6 लाया गया।" },
+      "hi-Latn": { "question": "IPv4 address kitne bits ka hota hai?", "options": ["64", "128", "16", "32"], "explanation": "32 bits se sirf lagbhag 4.3 billion addresses ban sakte hain, isliye bada 128-bit wala IPv6 laaya gaya." }
+    },
+    {
+      "groupId": "te_045",
+      "difficulty": "hard",
+      "subcategory": "indian_tech",
+      "correctIndex": 1,
+      "tags": ["india", "supercomputers", "pioneers"],
+      "en": { "question": "Who is known as the father of India's PARAM supercomputer?", "options": ["Raj Reddy", "Vijay Bhatkar", "Sam Pitroda", "N. R. Narayana Murthy"], "explanation": "Vijay Bhatkar was the founding director of C-DAC, which built PARAM 8000 in 1991." },
+      "hi": { "question": "भारत के परम सुपरकंप्यूटर का जनक किसे कहा जाता है?", "options": ["राज रेड्डी", "विजय भटकर", "सैम पित्रोदा", "एन. आर. नारायण मूर्ति"], "explanation": "विजय भटकर सी-डैक के संस्थापक निदेशक थे, जिसने 1991 में परम 8000 बनाया था।" },
+      "hi-Latn": { "question": "India ke PARAM supercomputer ka father kise kaha jaata hai?", "options": ["Raj Reddy", "Vijay Bhatkar", "Sam Pitroda", "N. R. Narayana Murthy"], "explanation": "Vijay Bhatkar C-DAC ke founding director the, jisne 1991 mein PARAM 8000 banaya tha." }
+    }
+  ]
+}

@@ -1,0 +1,995 @@
+{
+  "category": "space",
+  "questions": [
+    {
+      "groupId": "sp_001",
+      "difficulty": "easy",
+      "subcategory": "planets",
+      "correctIndex": 1,
+      "tags": ["planets", "solar_system", "saturn"],
+      "en": {
+        "question": "Which planet is most famous for its spectacular ring system?",
+        "options": ["Mars", "Saturn", "Mercury", "Venus"],
+        "explanation": "Saturn's rings are made of countless chunks of ice and rock, and they are bright enough to be seen with a small telescope from Earth."
+      },
+      "hi": {
+        "question": "कौन सा ग्रह अपने शानदार वलयों के लिए सबसे प्रसिद्ध है?",
+        "options": ["मंगल", "शनि", "बुध", "शुक्र"],
+        "explanation": "शनि के वलय बर्फ़ और चट्टान के अनगिनत टुकड़ों से बने हैं और इन्हें पृथ्वी से एक छोटी दूरबीन से भी देखा जा सकता है।"
+      },
+      "hi-Latn": {
+        "question": "Kaun sa planet apne shandaar rings ke liye sabse famous hai?",
+        "options": ["Mangal (Mars)", "Shani (Saturn)", "Budh (Mercury)", "Shukra (Venus)"],
+        "explanation": "Saturn ke rings barf aur chattan ke anginat tukdon se bane hain, aur inhe Earth se ek chhote telescope se bhi dekha ja sakta hai."
+      }
+    },
+    {
+      "groupId": "sp_002",
+      "difficulty": "easy",
+      "subcategory": "sun",
+      "correctIndex": 2,
+      "tags": ["sun", "solar_system", "stars"],
+      "en": {
+        "question": "Which star lies at the centre of our solar system?",
+        "options": ["Polaris", "Sirius", "The Sun", "Alpha Centauri"],
+        "explanation": "The Sun holds about 99.8% of the solar system's mass, and its gravity keeps all the planets in orbit around it."
+      },
+      "hi": {
+        "question": "हमारे सौरमंडल के केंद्र में कौन सा तारा है?",
+        "options": ["ध्रुव तारा", "व्याध (सिरियस)", "सूर्य", "अल्फ़ा सेंटॉरी"],
+        "explanation": "सौरमंडल के कुल द्रव्यमान का लगभग 99.8% हिस्सा सूर्य में है, और उसका गुरुत्वाकर्षण सभी ग्रहों को अपनी कक्षा में बाँधे रखता है।"
+      },
+      "hi-Latn": {
+        "question": "Hamare solar system ke centre mein kaun sa star hai?",
+        "options": ["Dhruv Tara (Polaris)", "Sirius", "Suraj (Sun)", "Alpha Centauri"],
+        "explanation": "Solar system ke total mass ka lagbhag 99.8% Sun mein hai, aur uski gravity saare planets ko orbit mein bandhe rakhti hai."
+      }
+    },
+    {
+      "groupId": "sp_003",
+      "difficulty": "easy",
+      "subcategory": "astronauts",
+      "correctIndex": 0,
+      "tags": ["astronauts", "history", "firsts"],
+      "en": {
+        "question": "Who was the first human to travel into space?",
+        "options": ["Yuri Gagarin", "Neil Armstrong", "Alan Shepard", "John Glenn"],
+        "explanation": "Soviet cosmonaut Yuri Gagarin orbited Earth once aboard Vostok 1 on 12 April 1961, a flight lasting about 108 minutes."
+      },
+      "hi": {
+        "question": "अंतरिक्ष में जाने वाले पहले मनुष्य कौन थे?",
+        "options": ["यूरी गागरिन", "नील आर्मस्ट्रांग", "एलन शेपर्ड", "जॉन ग्लेन"],
+        "explanation": "सोवियत अंतरिक्ष यात्री यूरी गागरिन ने 12 अप्रैल 1961 को वोस्तोक 1 में पृथ्वी की एक परिक्रमा की, जो लगभग 108 मिनट चली।"
+      },
+      "hi-Latn": {
+        "question": "Space mein jaane wale pehle insaan kaun the?",
+        "options": ["Yuri Gagarin", "Neil Armstrong", "Alan Shepard", "John Glenn"],
+        "explanation": "Soviet cosmonaut Yuri Gagarin ne 12 April 1961 ko Vostok 1 mein Earth ka ek chakkar lagaya, jo lagbhag 108 minute chala."
+      }
+    },
+    {
+      "groupId": "sp_004",
+      "difficulty": "easy",
+      "subcategory": "astronauts",
+      "correctIndex": 3,
+      "tags": ["astronauts", "india", "firsts"],
+      "en": {
+        "question": "Who was the first Indian citizen to travel into space?",
+        "options": ["Kalpana Chawla", "Sunita Williams", "Ravish Malhotra", "Rakesh Sharma"],
+        "explanation": "Rakesh Sharma flew on a Soviet Soyuz mission in 1984 and famously told PM Indira Gandhi that India looks 'Saare Jahan Se Achha' from space."
+      },
+      "hi": {
+        "question": "अंतरिक्ष में जाने वाले पहले भारतीय नागरिक कौन थे?",
+        "options": ["कल्पना चावला", "सुनीता विलियम्स", "रवीश मल्होत्रा", "राकेश शर्मा"],
+        "explanation": "राकेश शर्मा 1984 में सोवियत सोयुज़ मिशन से अंतरिक्ष गए और प्रधानमंत्री इंदिरा गांधी से कहा कि अंतरिक्ष से भारत 'सारे जहाँ से अच्छा' दिखता है।"
+      },
+      "hi-Latn": {
+        "question": "Space mein jaane wale pehle Indian citizen kaun the?",
+        "options": ["Kalpana Chawla", "Sunita Williams", "Ravish Malhotra", "Rakesh Sharma"],
+        "explanation": "Rakesh Sharma 1984 mein Soviet Soyuz mission se space gaye aur PM Indira Gandhi se kaha ki space se India 'Saare Jahan Se Achha' dikhta hai."
+      }
+    },
+    {
+      "groupId": "sp_005",
+      "difficulty": "easy",
+      "subcategory": "galaxies",
+      "correctIndex": 1,
+      "tags": ["galaxies", "milky_way"],
+      "en": {
+        "question": "What is the name of the galaxy that contains our solar system?",
+        "options": ["Andromeda", "Milky Way", "Whirlpool", "Sombrero"],
+        "explanation": "The Milky Way is a barred spiral galaxy with hundreds of billions of stars; the hazy band we see in a dark sky is our edge-on view of its disc."
+      },
+      "hi": {
+        "question": "हमारा सौरमंडल किस आकाशगंगा में स्थित है?",
+        "options": ["एंड्रोमेडा", "मिल्की वे (आकाशगंगा)", "व्हर्लपूल", "सोम्ब्रेरो"],
+        "explanation": "मिल्की वे एक सर्पिल आकाशगंगा है जिसमें अरबों तारे हैं; अँधेरे आसमान में दिखने वाली धुंधली पट्टी उसकी तश्तरी का किनारे से दिखने वाला रूप है।"
+      },
+      "hi-Latn": {
+        "question": "Hamara solar system kis galaxy mein hai?",
+        "options": ["Andromeda", "Milky Way (Akashganga)", "Whirlpool", "Sombrero"],
+        "explanation": "Milky Way ek spiral galaxy hai jisme arabon stars hain; andhere aasmaan mein dikhne wali dhundhli patti uski disc ka side view hai."
+      }
+    },
+    {
+      "groupId": "sp_006",
+      "difficulty": "easy",
+      "subcategory": "planets",
+      "correctIndex": 2,
+      "tags": ["planets", "venus", "solar_system"],
+      "en": {
+        "question": "Which is the hottest planet in our solar system?",
+        "options": ["Mercury", "Mars", "Venus", "Jupiter"],
+        "explanation": "Venus's thick carbon dioxide atmosphere traps heat in a runaway greenhouse effect, making it hotter than Mercury even though Mercury is closer to the Sun."
+      },
+      "hi": {
+        "question": "हमारे सौरमंडल का सबसे गर्म ग्रह कौन सा है?",
+        "options": ["बुध", "मंगल", "शुक्र", "बृहस्पति"],
+        "explanation": "शुक्र का घना कार्बन डाइऑक्साइड वायुमंडल भयंकर ग्रीनहाउस प्रभाव से गर्मी को कैद कर लेता है, इसलिए यह सूर्य के ज़्यादा पास वाले बुध से भी गर्म है।"
+      },
+      "hi-Latn": {
+        "question": "Hamare solar system ka sabse garam planet kaun sa hai?",
+        "options": ["Budh (Mercury)", "Mangal (Mars)", "Shukra (Venus)", "Brihaspati (Jupiter)"],
+        "explanation": "Venus ka thick carbon dioxide atmosphere zabardast greenhouse effect se heat trap kar leta hai, isliye ye Sun ke zyada paas wale Mercury se bhi garam hai."
+      }
+    },
+    {
+      "groupId": "sp_007",
+      "difficulty": "easy",
+      "subcategory": "missions",
+      "correctIndex": 0,
+      "tags": ["missions", "moon", "apollo"],
+      "en": {
+        "question": "Which mission first landed humans on the Moon in 1969?",
+        "options": ["Apollo 11", "Apollo 13", "Gemini 4", "Vostok 1"],
+        "explanation": "On 20 July 1969, Apollo 11's lunar module 'Eagle' touched down in the Sea of Tranquility with Neil Armstrong and Buzz Aldrin aboard."
+      },
+      "hi": {
+        "question": "1969 में किस मिशन ने पहली बार मनुष्यों को चंद्रमा पर उतारा?",
+        "options": ["अपोलो 11", "अपोलो 13", "जेमिनी 4", "वोस्तोक 1"],
+        "explanation": "20 जुलाई 1969 को अपोलो 11 का लूनर मॉड्यूल 'ईगल' नील आर्मस्ट्रांग और बज़ एल्ड्रिन को लेकर 'शांति सागर' में उतरा।"
+      },
+      "hi-Latn": {
+        "question": "1969 mein kis mission ne pehli baar insaanon ko Moon par utaara?",
+        "options": ["Apollo 11", "Apollo 13", "Gemini 4", "Vostok 1"],
+        "explanation": "20 July 1969 ko Apollo 11 ka lunar module 'Eagle' Neil Armstrong aur Buzz Aldrin ko lekar Sea of Tranquility mein utra."
+      }
+    },
+    {
+      "groupId": "sp_008",
+      "difficulty": "easy",
+      "subcategory": "isro",
+      "correctIndex": 3,
+      "tags": ["isro", "satellites", "india"],
+      "en": {
+        "question": "What was the name of India's first satellite, launched in 1975?",
+        "options": ["Bhaskara", "Rohini", "INSAT-1A", "Aryabhata"],
+        "explanation": "Aryabhata was named after the 5th-century Indian mathematician-astronomer and was launched on a Soviet rocket on 19 April 1975."
+      },
+      "hi": {
+        "question": "1975 में प्रक्षेपित भारत के पहले उपग्रह का नाम क्या था?",
+        "options": ["भास्कर", "रोहिणी", "इनसैट-1ए", "आर्यभट"],
+        "explanation": "आर्यभट उपग्रह का नाम 5वीं सदी के भारतीय गणितज्ञ-खगोलशास्त्री के नाम पर रखा गया था और इसे 19 अप्रैल 1975 को सोवियत रॉकेट से छोड़ा गया।"
+      },
+      "hi-Latn": {
+        "question": "1975 mein launch hue India ke pehle satellite ka naam kya tha?",
+        "options": ["Bhaskara", "Rohini", "INSAT-1A", "Aryabhata"],
+        "explanation": "Aryabhata ka naam 5th century ke Indian mathematician-astronomer par rakha gaya tha, aur ise 19 April 1975 ko Soviet rocket se launch kiya gaya."
+      }
+    },
+    {
+      "groupId": "sp_009",
+      "difficulty": "easy",
+      "subcategory": "planets",
+      "correctIndex": 2,
+      "tags": ["planets", "neptune", "solar_system"],
+      "en": {
+        "question": "Which planet is the farthest from the Sun?",
+        "options": ["Uranus", "Saturn", "Neptune", "Jupiter"],
+        "explanation": "Neptune orbits about 30 times farther from the Sun than Earth does, so one Neptunian year lasts roughly 165 Earth years."
+      },
+      "hi": {
+        "question": "सूर्य से सबसे दूर कौन सा ग्रह है?",
+        "options": ["अरुण (यूरेनस)", "शनि", "वरुण (नेपच्यून)", "बृहस्पति"],
+        "explanation": "वरुण सूर्य से पृथ्वी की तुलना में लगभग 30 गुना दूर परिक्रमा करता है, इसलिए वहाँ का एक साल पृथ्वी के लगभग 165 साल के बराबर है।"
+      },
+      "hi-Latn": {
+        "question": "Sun se sabse door kaun sa planet hai?",
+        "options": ["Uranus (Arun)", "Saturn (Shani)", "Neptune (Varun)", "Jupiter (Brihaspati)"],
+        "explanation": "Neptune Sun se Earth ke comparison mein lagbhag 30 guna door orbit karta hai, isliye wahan ka ek saal Earth ke lagbhag 165 saal ke barabar hai."
+      }
+    },
+    {
+      "groupId": "sp_010",
+      "difficulty": "easy",
+      "subcategory": "isro",
+      "correctIndex": 0,
+      "tags": ["isro", "india", "space_agencies"],
+      "en": {
+        "question": "In which city is the headquarters of ISRO located?",
+        "options": ["Bengaluru", "Sriharikota", "Thiruvananthapuram", "Hyderabad"],
+        "explanation": "ISRO is headquartered in Bengaluru, while Sriharikota hosts its launch pad and Thiruvananthapuram hosts its main rocket-development centre (VSSC)."
+      },
+      "hi": {
+        "question": "इसरो का मुख्यालय किस शहर में है?",
+        "options": ["बेंगलुरु", "श्रीहरिकोटा", "तिरुवनंतपुरम", "हैदराबाद"],
+        "explanation": "इसरो का मुख्यालय बेंगलुरु में है, जबकि श्रीहरिकोटा में इसका प्रक्षेपण केंद्र और तिरुवनंतपुरम में रॉकेट विकास केंद्र (वीएसएससी) है।"
+      },
+      "hi-Latn": {
+        "question": "ISRO ka headquarters kis city mein hai?",
+        "options": ["Bengaluru", "Sriharikota", "Thiruvananthapuram", "Hyderabad"],
+        "explanation": "ISRO ka HQ Bengaluru mein hai, jabki Sriharikota mein iska launch pad aur Thiruvananthapuram mein main rocket development centre (VSSC) hai."
+      }
+    },
+    {
+      "groupId": "sp_011",
+      "difficulty": "easy",
+      "subcategory": "dwarf_planets",
+      "correctIndex": 3,
+      "tags": ["dwarf_planets", "pluto", "solar_system"],
+      "en": {
+        "question": "Which former 'ninth planet' was reclassified as a dwarf planet in 2006?",
+        "options": ["Ceres", "Eris", "Makemake", "Pluto"],
+        "explanation": "The International Astronomical Union reclassified Pluto because it has not cleared its orbital neighbourhood of other objects, one of the three rules for a full planet."
+      },
+      "hi": {
+        "question": "2006 में किस पूर्व 'नौवें ग्रह' को बौना ग्रह घोषित कर दिया गया?",
+        "options": ["सेरेस", "एरिस", "माकेमाके", "प्लूटो (यम)"],
+        "explanation": "अंतरराष्ट्रीय खगोलीय संघ ने प्लूटो का दर्जा इसलिए बदला क्योंकि यह अपनी कक्षा के आसपास से दूसरे पिंडों को साफ़ नहीं कर पाया है, जो पूर्ण ग्रह की तीन शर्तों में से एक है।"
+      },
+      "hi-Latn": {
+        "question": "2006 mein kis purane 'ninth planet' ko dwarf planet declare kar diya gaya?",
+        "options": ["Ceres", "Eris", "Makemake", "Pluto"],
+        "explanation": "International Astronomical Union ne Pluto ka status isliye badla kyunki ye apne orbit ke aas-paas se doosre objects ko clear nahi kar paaya, jo full planet banne ki teen shart mein se ek hai."
+      }
+    },
+    {
+      "groupId": "sp_012",
+      "difficulty": "easy",
+      "subcategory": "space_physics",
+      "correctIndex": 2,
+      "tags": ["space_physics", "light_year", "units"],
+      "en": {
+        "question": "A 'light-year' is a unit used to measure what?",
+        "options": ["Time", "Brightness", "Distance", "Speed"],
+        "explanation": "Despite the word 'year', a light-year is the distance light travels in one year, roughly 9.46 trillion kilometres."
+      },
+      "hi": {
+        "question": "'प्रकाश वर्ष' किस चीज़ को मापने की इकाई है?",
+        "options": ["समय", "चमक", "दूरी", "गति"],
+        "explanation": "नाम में 'वर्ष' होने के बावजूद प्रकाश वर्ष वह दूरी है जो प्रकाश एक साल में तय करता है, यानी लगभग 9.46 लाख करोड़ किलोमीटर।"
+      },
+      "hi-Latn": {
+        "question": "'Light-year' kis cheez ko measure karne ki unit hai?",
+        "options": ["Time", "Brightness (chamak)", "Distance (doori)", "Speed"],
+        "explanation": "Naam mein 'year' hone ke bawajood light-year woh distance hai jo light ek saal mein travel karti hai, yaani lagbhag 9.46 trillion kilometre."
+      }
+    },
+    {
+      "groupId": "sp_013",
+      "difficulty": "easy",
+      "subcategory": "sun",
+      "correctIndex": 1,
+      "tags": ["sun", "stars", "composition"],
+      "en": {
+        "question": "Which element makes up most of the Sun?",
+        "options": ["Helium", "Hydrogen", "Oxygen", "Carbon"],
+        "explanation": "About three-quarters of the Sun's mass is hydrogen, which its core fuses into helium, releasing the energy that lights and warms Earth."
+      },
+      "hi": {
+        "question": "सूर्य का अधिकांश भाग किस तत्व से बना है?",
+        "options": ["हीलियम", "हाइड्रोजन", "ऑक्सीजन", "कार्बन"],
+        "explanation": "सूर्य के द्रव्यमान का लगभग तीन-चौथाई भाग हाइड्रोजन है, जिसे उसका केंद्र हीलियम में बदलता है और यही ऊर्जा पृथ्वी को रोशनी और गर्मी देती है।"
+      },
+      "hi-Latn": {
+        "question": "Sun ka zyadatar hissa kis element se bana hai?",
+        "options": ["Helium", "Hydrogen", "Oxygen", "Carbon"],
+        "explanation": "Sun ke mass ka lagbhag teen-chauthai hissa hydrogen hai, jise uska core fuse karke helium banata hai, aur wahi energy Earth ko roshni aur garmi deti hai."
+      }
+    },
+    {
+      "groupId": "sp_014",
+      "difficulty": "easy",
+      "subcategory": "isro",
+      "correctIndex": 2,
+      "tags": ["isro", "moon", "chandrayaan"],
+      "en": {
+        "question": "Which Indian mission soft-landed near the Moon's south pole in August 2023?",
+        "options": ["Chandrayaan-1", "Chandrayaan-2", "Chandrayaan-3", "Mangalyaan"],
+        "explanation": "Chandrayaan-3's lander touched down on 23 August 2023, making India the first country to soft-land near the lunar south pole; the date is now celebrated as National Space Day."
+      },
+      "hi": {
+        "question": "अगस्त 2023 में किस भारतीय मिशन ने चंद्रमा के दक्षिणी ध्रुव के पास सॉफ़्ट लैंडिंग की?",
+        "options": ["चंद्रयान-1", "चंद्रयान-2", "चंद्रयान-3", "मंगलयान"],
+        "explanation": "चंद्रयान-3 का लैंडर 23 अगस्त 2023 को उतरा और भारत चंद्र दक्षिणी ध्रुव के पास सॉफ़्ट लैंडिंग करने वाला पहला देश बना; यह दिन अब राष्ट्रीय अंतरिक्ष दिवस के रूप में मनाया जाता है।"
+      },
+      "hi-Latn": {
+        "question": "August 2023 mein kis Indian mission ne Moon ke south pole ke paas soft landing ki?",
+        "options": ["Chandrayaan-1", "Chandrayaan-2", "Chandrayaan-3", "Mangalyaan"],
+        "explanation": "Chandrayaan-3 ka lander 23 August 2023 ko utra aur India lunar south pole ke paas soft landing karne wala pehla desh bana; ye din ab National Space Day ke roop mein manaya jaata hai."
+      }
+    },
+    {
+      "groupId": "sp_015",
+      "difficulty": "easy",
+      "subcategory": "constellations",
+      "correctIndex": 1,
+      "tags": ["constellations", "india", "stars"],
+      "en": {
+        "question": "The 'Saptarishi' star pattern known in India belongs to which constellation?",
+        "options": ["Orion", "Ursa Major", "Cassiopeia", "Scorpius"],
+        "explanation": "Saptarishi is the seven-star 'Big Dipper' in Ursa Major (the Great Bear); two of its stars point towards Dhruv Tara, the Pole Star."
+      },
+      "hi": {
+        "question": "भारत में प्रसिद्ध 'सप्तर्षि' तारामंडल किस नक्षत्रमंडल का हिस्सा है?",
+        "options": ["ओरायन (मृग)", "उर्सा मेजर (बड़ा भालू)", "कैसियोपिया", "स्कॉर्पियस (वृश्चिक)"],
+        "explanation": "सप्तर्षि सात तारों का समूह है जो उर्सा मेजर यानी 'बड़ा भालू' नक्षत्रमंडल में आता है; इसके दो तारे ध्रुव तारे की ओर इशारा करते हैं।"
+      },
+      "hi-Latn": {
+        "question": "India mein famous 'Saptarishi' taaron ka pattern kis constellation ka hissa hai?",
+        "options": ["Orion", "Ursa Major", "Cassiopeia", "Scorpius"],
+        "explanation": "Saptarishi saat taaron ka group hai jo Ursa Major yaani 'Great Bear' mein aata hai; iske do taare Dhruv Tara (Pole Star) ki taraf point karte hain."
+      }
+    },
+    {
+      "groupId": "sp_016",
+      "difficulty": "medium",
+      "subcategory": "astronauts",
+      "correctIndex": 3,
+      "tags": ["astronauts", "history", "firsts"],
+      "en": {
+        "question": "Who was the first woman to travel into space?",
+        "options": ["Sally Ride", "Svetlana Savitskaya", "Kalpana Chawla", "Valentina Tereshkova"],
+        "explanation": "Valentina Tereshkova flew solo aboard Vostok 6 in June 1963, orbiting Earth 48 times in nearly three days."
+      },
+      "hi": {
+        "question": "अंतरिक्ष में जाने वाली पहली महिला कौन थीं?",
+        "options": ["सैली राइड", "स्वेतलाना सवित्स्काया", "कल्पना चावला", "वेलेंटीना तेरेश्कोवा"],
+        "explanation": "वेलेंटीना तेरेश्कोवा ने जून 1963 में वोस्तोक 6 में अकेले उड़ान भरी और लगभग तीन दिनों में पृथ्वी की 48 परिक्रमाएँ कीं।"
+      },
+      "hi-Latn": {
+        "question": "Space mein jaane wali pehli mahila kaun thi?",
+        "options": ["Sally Ride", "Svetlana Savitskaya", "Kalpana Chawla", "Valentina Tereshkova"],
+        "explanation": "Valentina Tereshkova ne June 1963 mein Vostok 6 mein akele udaan bhari aur lagbhag teen din mein Earth ke 48 chakkar lagaye."
+      }
+    },
+    {
+      "groupId": "sp_017",
+      "difficulty": "medium",
+      "subcategory": "isro",
+      "correctIndex": 0,
+      "tags": ["isro", "chandrayaan", "moon"],
+      "en": {
+        "question": "What was the name of Chandrayaan-3's lander?",
+        "options": ["Vikram", "Pragyan", "Garuda", "Kalpana"],
+        "explanation": "The lander Vikram is named after Vikram Sarabhai, father of India's space programme; it carried the rover Pragyan, Sanskrit for 'wisdom'."
+      },
+      "hi": {
+        "question": "चंद्रयान-3 के लैंडर का नाम क्या था?",
+        "options": ["विक्रम", "प्रज्ञान", "गरुड़", "कल्पना"],
+        "explanation": "लैंडर 'विक्रम' का नाम भारतीय अंतरिक्ष कार्यक्रम के जनक विक्रम साराभाई के नाम पर है; इसके अंदर रोवर 'प्रज्ञान' था, जिसका अर्थ है 'बुद्धि'।"
+      },
+      "hi-Latn": {
+        "question": "Chandrayaan-3 ke lander ka naam kya tha?",
+        "options": ["Vikram", "Pragyan", "Garuda", "Kalpana"],
+        "explanation": "Lander 'Vikram' ka naam Indian space programme ke father Vikram Sarabhai par rakha gaya; iske andar rover 'Pragyan' tha, jiska matlab hai 'buddhi' ya wisdom."
+      }
+    },
+    {
+      "groupId": "sp_018",
+      "difficulty": "medium",
+      "subcategory": "isro",
+      "correctIndex": 2,
+      "tags": ["isro", "sun", "aditya_l1"],
+      "en": {
+        "question": "ISRO's Aditya-L1 mission, launched in 2023, was built to study which body?",
+        "options": ["Mars", "The Moon", "The Sun", "Venus"],
+        "explanation": "'Aditya' is a Sanskrit name for the Sun; the observatory watches the Sun continuously from the L1 point, about 1.5 million km from Earth."
+      },
+      "hi": {
+        "question": "2023 में प्रक्षेपित इसरो का आदित्य-एल1 मिशन किसके अध्ययन के लिए बना है?",
+        "options": ["मंगल", "चंद्रमा", "सूर्य", "शुक्र"],
+        "explanation": "'आदित्य' सूर्य का संस्कृत नाम है; यह वेधशाला पृथ्वी से लगभग 15 लाख किलोमीटर दूर एल1 बिंदु से लगातार सूर्य पर नज़र रखती है।"
+      },
+      "hi-Latn": {
+        "question": "2023 mein launch hua ISRO ka Aditya-L1 mission kis cheez ko study karne ke liye bana hai?",
+        "options": ["Mars", "Moon", "Sun", "Venus"],
+        "explanation": "'Aditya' Sun ka Sanskrit naam hai; ye observatory Earth se lagbhag 15 lakh km door L1 point se lagaatar Sun par nazar rakhti hai."
+      }
+    },
+    {
+      "groupId": "sp_019",
+      "difficulty": "medium",
+      "subcategory": "planets",
+      "correctIndex": 3,
+      "tags": ["planets", "jupiter", "storms"],
+      "en": {
+        "question": "The 'Great Red Spot', a giant long-lived storm, is found on which planet?",
+        "options": ["Saturn", "Neptune", "Mars", "Jupiter"],
+        "explanation": "Jupiter's Great Red Spot is an enormous anticyclone wider than Earth that has been observed for well over 150 years."
+      },
+      "hi": {
+        "question": "'ग्रेट रेड स्पॉट' नाम का विशाल और लंबे समय से चल रहा तूफ़ान किस ग्रह पर है?",
+        "options": ["शनि", "वरुण", "मंगल", "बृहस्पति"],
+        "explanation": "बृहस्पति का ग्रेट रेड स्पॉट पृथ्वी से भी चौड़ा एक विशाल चक्रवाती तूफ़ान है, जिसे 150 से अधिक वर्षों से देखा जा रहा है।"
+      },
+      "hi-Latn": {
+        "question": "'Great Red Spot' naam ka bahut bada aur lambe time se chal raha toofan kis planet par hai?",
+        "options": ["Saturn", "Neptune", "Mars", "Jupiter"],
+        "explanation": "Jupiter ka Great Red Spot Earth se bhi chauda ek huge storm hai, jise 150 se zyada saalon se observe kiya ja raha hai."
+      }
+    },
+    {
+      "groupId": "sp_020",
+      "difficulty": "medium",
+      "subcategory": "isro",
+      "correctIndex": 1,
+      "tags": ["isro", "launch_sites", "india"],
+      "en": {
+        "question": "Sriharikota, home of ISRO's main launch centre, is in which state?",
+        "options": ["Tamil Nadu", "Andhra Pradesh", "Odisha", "Kerala"],
+        "explanation": "The Satish Dhawan Space Centre sits on Sriharikota island in Andhra Pradesh; its east-coast location lets rockets climb over the Bay of Bengal."
+      },
+      "hi": {
+        "question": "इसरो का मुख्य प्रक्षेपण केंद्र श्रीहरिकोटा किस राज्य में है?",
+        "options": ["तमिलनाडु", "आंध्र प्रदेश", "ओडिशा", "केरल"],
+        "explanation": "सतीश धवन अंतरिक्ष केंद्र आंध्र प्रदेश के श्रीहरिकोटा द्वीप पर है; पूर्वी तट पर होने से रॉकेट बंगाल की खाड़ी के ऊपर से उड़ान भरते हैं।"
+      },
+      "hi-Latn": {
+        "question": "ISRO ka main launch centre Sriharikota kis state mein hai?",
+        "options": ["Tamil Nadu", "Andhra Pradesh", "Odisha", "Kerala"],
+        "explanation": "Satish Dhawan Space Centre Andhra Pradesh ke Sriharikota island par hai; east coast par hone se rockets Bay of Bengal ke upar se udaan bharte hain."
+      }
+    },
+    {
+      "groupId": "sp_021",
+      "difficulty": "medium",
+      "subcategory": "astronauts",
+      "correctIndex": 2,
+      "tags": ["astronauts", "india", "space_shuttle"],
+      "en": {
+        "question": "Kalpana Chawla lost her life in 2003 aboard which Space Shuttle?",
+        "options": ["Challenger", "Discovery", "Columbia", "Atlantis"],
+        "explanation": "Space Shuttle Columbia broke apart during re-entry on 1 February 2003 because of wing damage from foam that struck it during launch."
+      },
+      "hi": {
+        "question": "कल्पना चावला ने 2003 में किस स्पेस शटल हादसे में अपनी जान गँवाई?",
+        "options": ["चैलेंजर", "डिस्कवरी", "कोलंबिया", "अटलांटिस"],
+        "explanation": "स्पेस शटल कोलंबिया 1 फ़रवरी 2003 को पृथ्वी के वायुमंडल में लौटते समय टूट गया, क्योंकि प्रक्षेपण के दौरान फ़ोम के टुकड़े से उसके पंख को नुकसान पहुँचा था।"
+      },
+      "hi-Latn": {
+        "question": "Kalpana Chawla ne 2003 mein kis Space Shuttle haadse mein apni jaan gavaayi?",
+        "options": ["Challenger", "Discovery", "Columbia", "Atlantis"],
+        "explanation": "Space Shuttle Columbia 1 February 2003 ko re-entry ke time toot gaya, kyunki launch ke dauraan foam ke tukde se uske wing ko damage hua tha."
+      }
+    },
+    {
+      "groupId": "sp_022",
+      "difficulty": "medium",
+      "subcategory": "sun",
+      "correctIndex": 1,
+      "tags": ["sun", "light", "space_physics"],
+      "en": {
+        "question": "Roughly how long does sunlight take to reach Earth?",
+        "options": ["8 seconds", "8 minutes", "8 hours", "8 days"],
+        "explanation": "Light covers the ~150 million km from the Sun in about 8 minutes 20 seconds, so we always see the Sun as it was a few minutes ago."
+      },
+      "hi": {
+        "question": "सूर्य का प्रकाश पृथ्वी तक पहुँचने में लगभग कितना समय लेता है?",
+        "options": ["8 सेकंड", "8 मिनट", "8 घंटे", "8 दिन"],
+        "explanation": "प्रकाश सूर्य से पृथ्वी तक की लगभग 15 करोड़ किलोमीटर दूरी करीब 8 मिनट 20 सेकंड में तय करता है, इसलिए हम सूर्य को हमेशा कुछ मिनट पहले वाली स्थिति में देखते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Sunlight ko Earth tak pahunchne mein lagbhag kitna time lagta hai?",
+        "options": ["8 second", "8 minute", "8 ghante", "8 din"],
+        "explanation": "Light Sun se Earth tak ka lagbhag 15 crore km ka safar kareeb 8 minute 20 second mein karti hai, isliye hum Sun ko hamesha kuch minute purani state mein dekhte hain."
+      }
+    },
+    {
+      "groupId": "sp_023",
+      "difficulty": "medium",
+      "subcategory": "planets",
+      "correctIndex": 0,
+      "tags": ["planets", "uranus", "axial_tilt"],
+      "en": {
+        "question": "Which planet spins almost on its side, with an axial tilt of about 98 degrees?",
+        "options": ["Uranus", "Neptune", "Saturn", "Mercury"],
+        "explanation": "Because Uranus is tipped over, each of its poles gets about 42 years of continuous sunlight followed by 42 years of darkness."
+      },
+      "hi": {
+        "question": "कौन सा ग्रह लगभग 98 डिग्री झुकाव के साथ लगभग करवट लेकर घूमता है?",
+        "options": ["अरुण (यूरेनस)", "वरुण (नेपच्यून)", "शनि", "बुध"],
+        "explanation": "अरुण के इतना झुके होने के कारण उसके हर ध्रुव पर लगभग 42 साल लगातार धूप और फिर 42 साल अँधेरा रहता है।"
+      },
+      "hi-Latn": {
+        "question": "Kaun sa planet lagbhag 98 degree jhukav ke saath almost side mein let kar ghoomta hai?",
+        "options": ["Uranus", "Neptune", "Saturn", "Mercury"],
+        "explanation": "Uranus itna tilted hai ki uske har pole par lagbhag 42 saal lagaatar dhoop aur phir 42 saal andhera rehta hai."
+      }
+    },
+    {
+      "groupId": "sp_024",
+      "difficulty": "medium",
+      "subcategory": "comets",
+      "correctIndex": 2,
+      "tags": ["comets", "halley", "solar_system"],
+      "en": {
+        "question": "Halley's Comet returns to the inner solar system roughly every how many years?",
+        "options": ["25", "50", "76", "100"],
+        "explanation": "Edmond Halley correctly predicted its return using Newton's laws; it was last seen near Earth in 1986 and is due back around 2061."
+      },
+      "hi": {
+        "question": "हैली धूमकेतु लगभग कितने वर्षों में आंतरिक सौरमंडल में लौटता है?",
+        "options": ["25", "50", "76", "100"],
+        "explanation": "एडमंड हैली ने न्यूटन के नियमों से इसकी वापसी की सही भविष्यवाणी की थी; यह पिछली बार 1986 में दिखा और लगभग 2061 में फिर लौटेगा।"
+      },
+      "hi-Latn": {
+        "question": "Halley's Comet lagbhag kitne saal mein inner solar system mein wapas aata hai?",
+        "options": ["25", "50", "76", "100"],
+        "explanation": "Edmond Halley ne Newton ke laws se iski wapsi ki sahi prediction ki thi; ye pichhli baar 1986 mein dikha tha aur lagbhag 2061 mein phir aayega."
+      }
+    },
+    {
+      "groupId": "sp_025",
+      "difficulty": "medium",
+      "subcategory": "telescopes",
+      "correctIndex": 1,
+      "tags": ["telescopes", "hubble", "missions"],
+      "en": {
+        "question": "In which year was the Hubble Space Telescope launched?",
+        "options": ["1985", "1990", "1995", "2000"],
+        "explanation": "Hubble was carried up by Space Shuttle Discovery in April 1990; a flaw in its mirror was fixed by astronauts during a 1993 servicing mission."
+      },
+      "hi": {
+        "question": "हबल अंतरिक्ष दूरबीन किस वर्ष प्रक्षेपित की गई थी?",
+        "options": ["1985", "1990", "1995", "2000"],
+        "explanation": "हबल को अप्रैल 1990 में स्पेस शटल डिस्कवरी से अंतरिक्ष में पहुँचाया गया; इसके दर्पण की खराबी को 1993 में अंतरिक्ष यात्रियों ने मरम्मत मिशन में ठीक किया।"
+      },
+      "hi-Latn": {
+        "question": "Hubble Space Telescope kis saal launch hua tha?",
+        "options": ["1985", "1990", "1995", "2000"],
+        "explanation": "Hubble ko April 1990 mein Space Shuttle Discovery se space mein le jaaya gaya; iske mirror ki kharabi ko 1993 mein astronauts ne ek servicing mission mein theek kiya."
+      }
+    },
+    {
+      "groupId": "sp_026",
+      "difficulty": "medium",
+      "subcategory": "planets",
+      "correctIndex": 3,
+      "tags": ["planets", "mars", "volcanoes"],
+      "en": {
+        "question": "Olympus Mons, a gigantic volcano about 2.5 times taller than Everest, is on which world?",
+        "options": ["Venus", "Io", "Earth", "Mars"],
+        "explanation": "Mars has low gravity and no moving tectonic plates, so lava kept piling up in one place for ages, building this colossal shield volcano."
+      },
+      "hi": {
+        "question": "एवरेस्ट से लगभग 2.5 गुना ऊँचा विशाल ज्वालामुखी ओलंपस मॉन्स कहाँ है?",
+        "options": ["शुक्र", "आयो", "पृथ्वी", "मंगल"],
+        "explanation": "मंगल पर गुरुत्वाकर्षण कम है और टेक्टोनिक प्लेटें नहीं खिसकतीं, इसलिए लावा युगों तक एक ही जगह जमा होता रहा और यह विशाल ज्वालामुखी बन गया।"
+      },
+      "hi-Latn": {
+        "question": "Everest se lagbhag 2.5 guna ooncha giant volcano Olympus Mons kahan hai?",
+        "options": ["Venus", "Io", "Earth", "Mars"],
+        "explanation": "Mars par gravity kam hai aur tectonic plates move nahi karti, isliye lava yugon tak ek hi jagah jama hota raha aur ye huge volcano ban gaya."
+      }
+    },
+    {
+      "groupId": "sp_027",
+      "difficulty": "medium",
+      "subcategory": "astronauts",
+      "correctIndex": 1,
+      "tags": ["astronauts", "apollo", "moon"],
+      "en": {
+        "question": "Who was the second person to walk on the Moon, right after Neil Armstrong?",
+        "options": ["Michael Collins", "Buzz Aldrin", "Yuri Gagarin", "John Glenn"],
+        "explanation": "Buzz Aldrin followed Armstrong onto the surface, while the third Apollo 11 crew member, Michael Collins, stayed in lunar orbit aboard Columbia."
+      },
+      "hi": {
+        "question": "नील आर्मस्ट्रांग के ठीक बाद चंद्रमा पर चलने वाले दूसरे व्यक्ति कौन थे?",
+        "options": ["माइकल कॉलिन्स", "बज़ एल्ड्रिन", "यूरी गागरिन", "जॉन ग्लेन"],
+        "explanation": "बज़ एल्ड्रिन आर्मस्ट्रांग के बाद सतह पर उतरे, जबकि अपोलो 11 के तीसरे सदस्य माइकल कॉलिन्स 'कोलंबिया' यान में चंद्रमा की कक्षा में ही रहे।"
+      },
+      "hi-Latn": {
+        "question": "Neil Armstrong ke theek baad Moon par chalne wale doosre insaan kaun the?",
+        "options": ["Michael Collins", "Buzz Aldrin", "Yuri Gagarin", "John Glenn"],
+        "explanation": "Buzz Aldrin Armstrong ke baad surface par utre, jabki Apollo 11 ke teesre member Michael Collins 'Columbia' module mein Moon ke orbit mein hi rahe."
+      }
+    },
+    {
+      "groupId": "sp_028",
+      "difficulty": "medium",
+      "subcategory": "asteroids",
+      "correctIndex": 3,
+      "tags": ["asteroids", "solar_system"],
+      "en": {
+        "question": "The main asteroid belt lies between the orbits of which two planets?",
+        "options": ["Jupiter and Saturn", "Earth and Mars", "Venus and Earth", "Mars and Jupiter"],
+        "explanation": "Jupiter's strong gravity stopped this material from ever forming a planet; the largest object there, Ceres, is classified as a dwarf planet."
+      },
+      "hi": {
+        "question": "मुख्य क्षुद्रग्रह पट्टी किन दो ग्रहों की कक्षाओं के बीच स्थित है?",
+        "options": ["बृहस्पति और शनि", "पृथ्वी और मंगल", "शुक्र और पृथ्वी", "मंगल और बृहस्पति"],
+        "explanation": "बृहस्पति के तेज़ गुरुत्वाकर्षण ने इस सामग्री को कभी ग्रह नहीं बनने दिया; यहाँ का सबसे बड़ा पिंड सेरेस एक बौना ग्रह माना जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Main asteroid belt kin do planets ke orbits ke beech mein hai?",
+        "options": ["Jupiter aur Saturn", "Earth aur Mars", "Venus aur Earth", "Mars aur Jupiter"],
+        "explanation": "Jupiter ki strong gravity ne is material ko kabhi planet nahi banne diya; yahan ka sabse bada object Ceres ek dwarf planet maana jaata hai."
+      }
+    },
+    {
+      "groupId": "sp_029",
+      "difficulty": "medium",
+      "subcategory": "missions",
+      "correctIndex": 0,
+      "tags": ["missions", "voyager", "interstellar"],
+      "en": {
+        "question": "Which spacecraft became the first human-made object to enter interstellar space, in 2012?",
+        "options": ["Voyager 1", "Pioneer 10", "New Horizons", "Voyager 2"],
+        "explanation": "Launched in 1977, Voyager 1 crossed the heliopause in August 2012; it carries a Golden Record of sounds and images from Earth."
+      },
+      "hi": {
+        "question": "2012 में अंतरतारकीय अंतरिक्ष में प्रवेश करने वाली पहली मानव-निर्मित वस्तु कौन सी थी?",
+        "options": ["वॉयजर 1", "पायनियर 10", "न्यू होराइज़न्स", "वॉयजर 2"],
+        "explanation": "1977 में प्रक्षेपित वॉयजर 1 ने अगस्त 2012 में हीलियोपॉज़ पार किया; इसमें पृथ्वी की आवाज़ों और चित्रों वाला एक 'गोल्डन रिकॉर्ड' रखा है।"
+      },
+      "hi-Latn": {
+        "question": "2012 mein interstellar space mein enter karne wala pehla man-made object kaun sa tha?",
+        "options": ["Voyager 1", "Pioneer 10", "New Horizons", "Voyager 2"],
+        "explanation": "1977 mein launch hua Voyager 1 ne August 2012 mein heliopause cross kiya; isme Earth ki awaazon aur photos wala ek 'Golden Record' rakha hai."
+      }
+    },
+    {
+      "groupId": "sp_030",
+      "difficulty": "medium",
+      "subcategory": "stars",
+      "correctIndex": 0,
+      "tags": ["stars", "proxima_centauri"],
+      "en": {
+        "question": "Which is the nearest known star to the Sun?",
+        "options": ["Proxima Centauri", "Sirius", "Betelgeuse", "Vega"],
+        "explanation": "Proxima Centauri, a faint red dwarf about 4.2 light-years away, is too dim to see with the naked eye despite being our closest stellar neighbour."
+      },
+      "hi": {
+        "question": "सूर्य के सबसे नज़दीक ज्ञात तारा कौन सा है?",
+        "options": ["प्रॉक्सिमा सेंटॉरी", "व्याध (सिरियस)", "बीटलज्यूस (आर्द्रा)", "अभिजित (वेगा)"],
+        "explanation": "प्रॉक्सिमा सेंटॉरी लगभग 4.2 प्रकाश वर्ष दूर एक धुंधला लाल बौना तारा है, जो सबसे नज़दीकी तारा होने के बावजूद नंगी आँखों से नहीं दिखता।"
+      },
+      "hi-Latn": {
+        "question": "Sun ke sabse nazdeek jaana-maana star kaun sa hai?",
+        "options": ["Proxima Centauri", "Sirius", "Betelgeuse", "Vega"],
+        "explanation": "Proxima Centauri lagbhag 4.2 light-year door ek dhundhla red dwarf star hai, jo sabse nazdeek hone ke bawajood naked eye se nahi dikhta."
+      }
+    },
+    {
+      "groupId": "sp_031",
+      "difficulty": "hard",
+      "subcategory": "telescopes",
+      "correctIndex": 1,
+      "tags": ["telescopes", "jwst", "lagrange_points"],
+      "en": {
+        "question": "The James Webb Space Telescope operates around which Sun–Earth Lagrange point?",
+        "options": ["L1", "L2", "L3", "L4"],
+        "explanation": "At L2, about 1.5 million km beyond Earth, Webb can keep the Sun, Earth and Moon behind its sunshield and stay cold enough for infrared observing."
+      },
+      "hi": {
+        "question": "जेम्स वेब अंतरिक्ष दूरबीन सूर्य-पृथ्वी के किस लैग्रेंज बिंदु के आसपास काम करती है?",
+        "options": ["एल1", "एल2", "एल3", "एल4"],
+        "explanation": "पृथ्वी से लगभग 15 लाख किलोमीटर आगे एल2 पर वेब सूर्य, पृथ्वी और चंद्रमा को अपनी सनशील्ड के पीछे रख पाती है और इन्फ्रारेड अवलोकन के लिए ठंडी बनी रहती है।"
+      },
+      "hi-Latn": {
+        "question": "James Webb Space Telescope Sun-Earth ke kis Lagrange point ke aas-paas kaam karta hai?",
+        "options": ["L1", "L2", "L3", "L4"],
+        "explanation": "Earth se lagbhag 15 lakh km aage L2 par Webb Sun, Earth aur Moon ko apni sunshield ke peeche rakh paata hai aur infrared observation ke liye thanda rehta hai."
+      }
+    },
+    {
+      "groupId": "sp_032",
+      "difficulty": "hard",
+      "subcategory": "isro",
+      "correctIndex": 3,
+      "tags": ["isro", "mangalyaan", "rockets"],
+      "en": {
+        "question": "Which ISRO rocket launched the Mars Orbiter Mission (Mangalyaan) in 2013?",
+        "options": ["GSLV", "SLV-3", "ASLV", "PSLV"],
+        "explanation": "A PSLV-XL (flight C25) placed Mangalyaan in an Earth orbit, and the spacecraft then raised its orbit step by step before heading to Mars."
+      },
+      "hi": {
+        "question": "2013 में मंगलयान (मार्स ऑर्बिटर मिशन) को इसरो के किस रॉकेट ने प्रक्षेपित किया?",
+        "options": ["जीएसएलवी", "एसएलवी-3", "एएसएलवी", "पीएसएलवी"],
+        "explanation": "पीएसएलवी-एक्सएल (उड़ान सी25) ने मंगलयान को पृथ्वी की कक्षा में पहुँचाया, जिसके बाद यान ने धीरे-धीरे अपनी कक्षा बढ़ाकर मंगल की ओर यात्रा शुरू की।"
+      },
+      "hi-Latn": {
+        "question": "2013 mein Mangalyaan (Mars Orbiter Mission) ko ISRO ke kis rocket ne launch kiya?",
+        "options": ["GSLV", "SLV-3", "ASLV", "PSLV"],
+        "explanation": "PSLV-XL (flight C25) ne Mangalyaan ko Earth orbit mein pahunchaya, jiske baad spacecraft ne dheere-dheere apna orbit badha kar Mars ki taraf safar shuru kiya."
+      }
+    },
+    {
+      "groupId": "sp_033",
+      "difficulty": "hard",
+      "subcategory": "isro",
+      "correctIndex": 0,
+      "tags": ["isro", "chandrayaan", "rockets"],
+      "en": {
+        "question": "Which rocket launched Chandrayaan-3 in July 2023?",
+        "options": ["LVM3", "PSLV", "GSLV Mk II", "SSLV"],
+        "explanation": "LVM3, earlier called GSLV Mk III, is ISRO's heaviest-lift rocket and also launched Chandrayaan-2 in 2019."
+      },
+      "hi": {
+        "question": "जुलाई 2023 में चंद्रयान-3 को किस रॉकेट ने प्रक्षेपित किया?",
+        "options": ["एलवीएम3", "पीएसएलवी", "जीएसएलवी एमके II", "एसएसएलवी"],
+        "explanation": "एलवीएम3, जिसे पहले जीएसएलवी एमके III कहा जाता था, इसरो का सबसे भारी पेलोड उठाने वाला रॉकेट है और इसने 2019 में चंद्रयान-2 को भी प्रक्षेपित किया था।"
+      },
+      "hi-Latn": {
+        "question": "July 2023 mein Chandrayaan-3 ko kis rocket ne launch kiya?",
+        "options": ["LVM3", "PSLV", "GSLV Mk II", "SSLV"],
+        "explanation": "LVM3, jise pehle GSLV Mk III kehte the, ISRO ka sabse heavy-lift rocket hai aur isne 2019 mein Chandrayaan-2 ko bhi launch kiya tha."
+      }
+    },
+    {
+      "groupId": "sp_034",
+      "difficulty": "hard",
+      "subcategory": "space_physics",
+      "correctIndex": 2,
+      "tags": ["space_physics", "escape_velocity", "gravity"],
+      "en": {
+        "question": "What is the approximate escape velocity from Earth's surface?",
+        "options": ["7.9 km/s", "3.0 km/s", "11.2 km/s", "25.0 km/s"],
+        "explanation": "An object must reach about 11.2 km/s to break free of Earth's gravity without further thrust; about 7.9 km/s is enough only for a low orbit."
+      },
+      "hi": {
+        "question": "पृथ्वी की सतह से पलायन वेग लगभग कितना है?",
+        "options": ["7.9 किमी/सेकंड", "3.0 किमी/सेकंड", "11.2 किमी/सेकंड", "25.0 किमी/सेकंड"],
+        "explanation": "किसी वस्तु को बिना अतिरिक्त धक्के के पृथ्वी के गुरुत्वाकर्षण से छूटने के लिए लगभग 11.2 किमी/सेकंड की गति चाहिए; लगभग 7.9 किमी/सेकंड केवल निचली कक्षा के लिए काफ़ी है।"
+      },
+      "hi-Latn": {
+        "question": "Earth ki surface se escape velocity lagbhag kitni hai?",
+        "options": ["7.9 km/s", "3.0 km/s", "11.2 km/s", "25.0 km/s"],
+        "explanation": "Kisi object ko bina extra thrust ke Earth ki gravity se chhootne ke liye lagbhag 11.2 km/s chahiye; lagbhag 7.9 km/s sirf low orbit ke liye kaafi hai."
+      }
+    },
+    {
+      "groupId": "sp_035",
+      "difficulty": "hard",
+      "subcategory": "stars",
+      "correctIndex": 0,
+      "tags": ["stars", "chandrasekhar_limit", "india"],
+      "en": {
+        "question": "The Chandrasekhar limit (about 1.4 solar masses) is the maximum mass of a stable what?",
+        "options": ["White dwarf", "Neutron star", "Red giant", "Brown dwarf"],
+        "explanation": "Indian-born astrophysicist Subrahmanyan Chandrasekhar showed that above this mass electron pressure cannot hold a white dwarf up; he won the 1983 Nobel Prize in Physics."
+      },
+      "hi": {
+        "question": "चंद्रशेखर सीमा (लगभग 1.4 सौर द्रव्यमान) किस स्थिर पिंड का अधिकतम द्रव्यमान है?",
+        "options": ["श्वेत बौना तारा", "न्यूट्रॉन तारा", "लाल दानव तारा", "भूरा बौना"],
+        "explanation": "भारत में जन्मे खगोलभौतिकीविद् सुब्रह्मण्यन चंद्रशेखर ने दिखाया कि इससे अधिक द्रव्यमान पर इलेक्ट्रॉन दबाव श्वेत बौने को टिका नहीं सकता; उन्हें 1983 में भौतिकी का नोबेल पुरस्कार मिला।"
+      },
+      "hi-Latn": {
+        "question": "Chandrasekhar limit (lagbhag 1.4 solar mass) kis stable object ka maximum mass hai?",
+        "options": ["White dwarf", "Neutron star", "Red giant", "Brown dwarf"],
+        "explanation": "India mein janme astrophysicist Subrahmanyan Chandrasekhar ne dikhaya ki isse zyada mass par electron pressure white dwarf ko sambhaal nahi sakta; unhe 1983 mein Physics ka Nobel Prize mila."
+      }
+    },
+    {
+      "groupId": "sp_036",
+      "difficulty": "hard",
+      "subcategory": "astronauts",
+      "correctIndex": 1,
+      "tags": ["astronauts", "india", "space_stations"],
+      "en": {
+        "question": "In 1984, Rakesh Sharma spent about a week aboard which Soviet space station?",
+        "options": ["Mir", "Salyut 7", "Skylab", "Salyut 6"],
+        "explanation": "Rakesh Sharma reached Salyut 7 on Soyuz T-11 in April 1984, and did experiments including yoga sessions to study its effect in weightlessness."
+      },
+      "hi": {
+        "question": "1984 में राकेश शर्मा ने लगभग एक सप्ताह किस सोवियत अंतरिक्ष स्टेशन पर बिताया?",
+        "options": ["मीर", "सल्यूत 7", "स्काईलैब", "सल्यूत 6"],
+        "explanation": "राकेश शर्मा अप्रैल 1984 में सोयुज़ टी-11 से सल्यूत 7 पहुँचे और वहाँ भारहीनता में योग के असर सहित कई प्रयोग किए।"
+      },
+      "hi-Latn": {
+        "question": "1984 mein Rakesh Sharma ne lagbhag ek hafta kis Soviet space station par bitaya?",
+        "options": ["Mir", "Salyut 7", "Skylab", "Salyut 6"],
+        "explanation": "Rakesh Sharma April 1984 mein Soyuz T-11 se Salyut 7 pahunche aur wahan weightlessness mein yoga ke effect samet kai experiments kiye."
+      }
+    },
+    {
+      "groupId": "sp_037",
+      "difficulty": "hard",
+      "subcategory": "black_holes",
+      "correctIndex": 3,
+      "tags": ["black_holes", "space_physics"],
+      "en": {
+        "question": "What is the boundary around a black hole beyond which nothing, not even light, can escape?",
+        "options": ["Photosphere", "Accretion disc", "Singularity", "Event horizon"],
+        "explanation": "The event horizon is a point of no return; its size for a non-spinning black hole is set by the Schwarzschild radius, which grows with the black hole's mass."
+      },
+      "hi": {
+        "question": "ब्लैक होल के चारों ओर वह सीमा क्या कहलाती है जिसके पार से प्रकाश भी बाहर नहीं निकल सकता?",
+        "options": ["प्रकाशमंडल", "अभिवृद्धि चक्र", "विलक्षणता (सिंगुलैरिटी)", "घटना क्षितिज (इवेंट होराइज़न)"],
+        "explanation": "घटना क्षितिज वापसी न होने की सीमा है; न घूमने वाले ब्लैक होल के लिए इसका आकार श्वार्ज़शिल्ड त्रिज्या से तय होता है, जो द्रव्यमान के साथ बढ़ती है।"
+      },
+      "hi-Latn": {
+        "question": "Black hole ke chaaron taraf woh boundary kya kehlati hai jiske paar se light bhi bahar nahi nikal sakti?",
+        "options": ["Photosphere", "Accretion disc", "Singularity", "Event horizon"],
+        "explanation": "Event horizon point of no return hai; non-spinning black hole ke liye iska size Schwarzschild radius se tay hota hai, jo mass ke saath badhta hai."
+      }
+    },
+    {
+      "groupId": "sp_038",
+      "difficulty": "hard",
+      "subcategory": "stars",
+      "correctIndex": 2,
+      "tags": ["stars", "sirius", "night_sky"],
+      "en": {
+        "question": "Which is the brightest star in Earth's night sky?",
+        "options": ["Canopus", "Vega", "Sirius", "Polaris"],
+        "explanation": "Sirius, the 'Dog Star' in Canis Major, shines so brightly because it is both intrinsically luminous and only about 8.6 light-years away."
+      },
+      "hi": {
+        "question": "पृथ्वी के रात्रि आकाश का सबसे चमकीला तारा कौन सा है?",
+        "options": ["अगस्त्य (कैनोपस)", "अभिजित (वेगा)", "व्याध (सिरियस)", "ध्रुव तारा"],
+        "explanation": "व्याध यानी सिरियस इतना चमकीला इसलिए दिखता है क्योंकि यह स्वयं बहुत तेजस्वी है और हमसे केवल लगभग 8.6 प्रकाश वर्ष दूर है।"
+      },
+      "hi-Latn": {
+        "question": "Earth ke raat ke aasmaan ka sabse chamkeela star kaun sa hai?",
+        "options": ["Canopus (Agastya)", "Vega (Abhijit)", "Sirius (Vyadh)", "Polaris (Dhruv Tara)"],
+        "explanation": "Sirius itna bright isliye dikhta hai kyunki ye khud bahut luminous hai aur humse sirf lagbhag 8.6 light-year door hai."
+      }
+    },
+    {
+      "groupId": "sp_039",
+      "difficulty": "hard",
+      "subcategory": "constellations",
+      "correctIndex": 0,
+      "tags": ["constellations", "orion", "stars"],
+      "en": {
+        "question": "Which red supergiant star marks a shoulder of the constellation Orion?",
+        "options": ["Betelgeuse", "Rigel", "Bellatrix", "Aldebaran"],
+        "explanation": "Betelgeuse's reddish-orange colour comes from its relatively cool surface; it is so huge that it would swallow the orbits of the inner planets if placed at the Sun."
+      },
+      "hi": {
+        "question": "कौन सा लाल महादानव तारा ओरायन (मृग) नक्षत्रमंडल के एक कंधे को दर्शाता है?",
+        "options": ["बीटलज्यूस (आर्द्रा)", "राइजेल", "बेलाट्रिक्स", "एल्डेबरन (रोहिणी)"],
+        "explanation": "बीटलज्यूस का लाल-नारंगी रंग इसकी अपेक्षाकृत ठंडी सतह के कारण है; यह इतना विशाल है कि सूर्य की जगह रखने पर भीतरी ग्रहों की कक्षाओं को निगल लेगा।"
+      },
+      "hi-Latn": {
+        "question": "Kaun sa red supergiant star Orion constellation ke ek kandhe (shoulder) ko mark karta hai?",
+        "options": ["Betelgeuse (Ardra)", "Rigel", "Bellatrix", "Aldebaran (Rohini)"],
+        "explanation": "Betelgeuse ka laal-orange rang iski relatively thandi surface ki wajah se hai; ye itna bada hai ki Sun ki jagah rakhne par inner planets ke orbits ko nigal lega."
+      }
+    },
+    {
+      "groupId": "sp_040",
+      "difficulty": "hard",
+      "subcategory": "galaxies",
+      "correctIndex": 2,
+      "tags": ["galaxies", "andromeda"],
+      "en": {
+        "question": "Which is the nearest large spiral galaxy to the Milky Way?",
+        "options": ["Triangulum", "Large Magellanic Cloud", "Andromeda", "Whirlpool"],
+        "explanation": "Andromeda, about 2.5 million light-years away, is the most distant object easily visible to the naked eye and is moving towards the Milky Way."
+      },
+      "hi": {
+        "question": "मिल्की वे के सबसे नज़दीक बड़ी सर्पिल आकाशगंगा कौन सी है?",
+        "options": ["ट्राएंगुलम", "लार्ज मैगेलैनिक क्लाउड", "एंड्रोमेडा (देवयानी)", "व्हर्लपूल"],
+        "explanation": "लगभग 25 लाख प्रकाश वर्ष दूर एंड्रोमेडा नंगी आँखों से आसानी से दिखने वाली सबसे दूर की वस्तु है और यह मिल्की वे की ओर बढ़ रही है।"
+      },
+      "hi-Latn": {
+        "question": "Milky Way ke sabse nazdeek badi spiral galaxy kaun si hai?",
+        "options": ["Triangulum", "Large Magellanic Cloud", "Andromeda", "Whirlpool"],
+        "explanation": "Lagbhag 25 lakh light-year door Andromeda naked eye se aasaani se dikhne wala sabse door ka object hai, aur ye Milky Way ki taraf badh rahi hai."
+      }
+    },
+    {
+      "groupId": "sp_041",
+      "difficulty": "hard",
+      "subcategory": "moons",
+      "correctIndex": 3,
+      "tags": ["moons", "mars"],
+      "en": {
+        "question": "Which of these is a moon of Mars?",
+        "options": ["Titan", "Europa", "Triton", "Phobos"],
+        "explanation": "Phobos, whose name means 'fear', orbits so close to Mars that it circles the planet about three times a day and is slowly spiralling inward."
+      },
+      "hi": {
+        "question": "इनमें से कौन सा मंगल ग्रह का चंद्रमा है?",
+        "options": ["टाइटन", "यूरोपा", "ट्राइटन", "फ़ोबोस"],
+        "explanation": "'भय' अर्थ वाले नाम का फ़ोबोस मंगल के इतना पास घूमता है कि एक दिन में लगभग तीन परिक्रमाएँ कर लेता है और धीरे-धीरे ग्रह की ओर खिसक रहा है।"
+      },
+      "hi-Latn": {
+        "question": "Inme se kaun sa Mars ka moon hai?",
+        "options": ["Titan", "Europa", "Triton", "Phobos"],
+        "explanation": "Phobos, jiske naam ka matlab 'dar' hai, Mars ke itna paas ghoomta hai ki ek din mein lagbhag teen chakkar laga leta hai aur dheere-dheere planet ki taraf khisak raha hai."
+      }
+    },
+    {
+      "groupId": "sp_042",
+      "difficulty": "hard",
+      "subcategory": "moons",
+      "correctIndex": 0,
+      "tags": ["moons", "saturn", "titan"],
+      "en": {
+        "question": "Which moon of Saturn has a thick nitrogen-rich atmosphere and lakes of liquid methane?",
+        "options": ["Titan", "Enceladus", "Io", "Callisto"],
+        "explanation": "Titan is the only moon with a dense atmosphere; in 2005 the Huygens probe landed on it, the farthest landing ever made from Earth at the time."
+      },
+      "hi": {
+        "question": "शनि के किस चंद्रमा पर नाइट्रोजन से भरपूर घना वायुमंडल और तरल मीथेन की झीलें हैं?",
+        "options": ["टाइटन", "एन्सेलाडस", "आयो", "कैलिस्टो"],
+        "explanation": "टाइटन घने वायुमंडल वाला एकमात्र चंद्रमा है; 2005 में ह्यूजेन्स प्रोब इस पर उतरा, जो उस समय पृथ्वी से सबसे दूर की गई लैंडिंग थी।"
+      },
+      "hi-Latn": {
+        "question": "Saturn ke kis moon par nitrogen se bhara thick atmosphere aur liquid methane ki jheelein hain?",
+        "options": ["Titan", "Enceladus", "Io", "Callisto"],
+        "explanation": "Titan dense atmosphere wala akela moon hai; 2005 mein Huygens probe ispar utra, jo us time Earth se sabse door ki gayi landing thi."
+      }
+    },
+    {
+      "groupId": "sp_043",
+      "difficulty": "hard",
+      "subcategory": "space_physics",
+      "correctIndex": 2,
+      "tags": ["space_physics", "orbits", "kepler"],
+      "en": {
+        "question": "According to Kepler's first law, what is the shape of a planet's orbit around the Sun?",
+        "options": ["Perfect circle", "Parabola", "Ellipse", "Spiral"],
+        "explanation": "Each planet moves in an ellipse with the Sun at one focus, which is why Earth is slightly closer to the Sun in early January than in early July."
+      },
+      "hi": {
+        "question": "केप्लर के पहले नियम के अनुसार सूर्य के चारों ओर ग्रह की कक्षा का आकार कैसा होता है?",
+        "options": ["पूर्ण वृत्त", "परवलय", "दीर्घवृत्त", "सर्पिल"],
+        "explanation": "हर ग्रह दीर्घवृत्त में घूमता है जिसके एक नाभि पर सूर्य होता है, इसीलिए पृथ्वी जुलाई की शुरुआत की तुलना में जनवरी की शुरुआत में सूर्य के थोड़ा ज़्यादा पास होती है।"
+      },
+      "hi-Latn": {
+        "question": "Kepler ke first law ke hisaab se Sun ke around planet ke orbit ka shape kaisa hota hai?",
+        "options": ["Perfect circle", "Parabola", "Ellipse", "Spiral"],
+        "explanation": "Har planet ellipse mein ghoomta hai jiske ek focus par Sun hota hai, isiliye Earth July ke shuru ke comparison mein January ke shuru mein Sun ke thoda zyada paas hoti hai."
+      }
+    },
+    {
+      "groupId": "sp_044",
+      "difficulty": "hard",
+      "subcategory": "isro",
+      "correctIndex": 1,
+      "tags": ["isro", "chandrayaan", "rockets"],
+      "en": {
+        "question": "Which rocket launched India's first Moon mission, Chandrayaan-1, in October 2008?",
+        "options": ["GSLV Mk II", "PSLV", "LVM3", "ASLV"],
+        "explanation": "A PSLV-XL (flight C11) lifted Chandrayaan-1 from Sriharikota; the orbiter also dropped a Moon Impact Probe carrying the Indian tricolour onto the lunar surface."
+      },
+      "hi": {
+        "question": "अक्टूबर 2008 में भारत के पहले चंद्र मिशन चंद्रयान-1 को किस रॉकेट ने प्रक्षेपित किया?",
+        "options": ["जीएसएलवी एमके II", "पीएसएलवी", "एलवीएम3", "एएसएलवी"],
+        "explanation": "पीएसएलवी-एक्सएल (उड़ान सी11) ने श्रीहरिकोटा से चंद्रयान-1 को छोड़ा; इस ऑर्बिटर ने तिरंगे वाला 'मून इम्पैक्ट प्रोब' भी चंद्रमा की सतह पर गिराया।"
+      },
+      "hi-Latn": {
+        "question": "October 2008 mein India ke pehle Moon mission Chandrayaan-1 ko kis rocket ne launch kiya?",
+        "options": ["GSLV Mk II", "PSLV", "LVM3", "ASLV"],
+        "explanation": "PSLV-XL (flight C11) ne Sriharikota se Chandrayaan-1 launch kiya; is orbiter ne tiranga lagi 'Moon Impact Probe' bhi Moon ki surface par giraayi."
+      }
+    },
+    {
+      "groupId": "sp_045",
+      "difficulty": "hard",
+      "subcategory": "missions",
+      "correctIndex": 3,
+      "tags": ["missions", "pluto", "dwarf_planets"],
+      "en": {
+        "question": "Which spacecraft made the first close flyby of Pluto, in July 2015?",
+        "options": ["Voyager 2", "Cassini", "Juno", "New Horizons"],
+        "explanation": "New Horizons revealed a huge heart-shaped plain on Pluto, later named Tombaugh Regio after Clyde Tombaugh, who discovered Pluto in 1930."
+      },
+      "hi": {
+        "question": "जुलाई 2015 में किस अंतरिक्ष यान ने पहली बार प्लूटो के पास से उड़ान भरी?",
+        "options": ["वॉयजर 2", "कैसिनी", "जूनो", "न्यू होराइज़न्स"],
+        "explanation": "न्यू होराइज़न्स ने प्लूटो पर दिल के आकार का विशाल मैदान दिखाया, जिसका नाम 1930 में प्लूटो की खोज करने वाले क्लाइड टॉमबॉ के नाम पर 'टॉमबॉ रीजियो' रखा गया।"
+      },
+      "hi-Latn": {
+        "question": "July 2015 mein kis spacecraft ne pehli baar Pluto ke paas se flyby kiya?",
+        "options": ["Voyager 2", "Cassini", "Juno", "New Horizons"],
+        "explanation": "New Horizons ne Pluto par dil ke shape ka huge maidaan dikhaya, jiska naam 1930 mein Pluto discover karne wale Clyde Tombaugh par 'Tombaugh Regio' rakha gaya."
+      }
+    }
+  ]
+}

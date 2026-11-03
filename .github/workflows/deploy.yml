@@ -44,6 +44,7 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: npx prisma validate
+      - run: npm test
 
   deploy:
     name: Deploy production
@@ -80,6 +81,26 @@ jobs:
       - run: npm ci
       - run: npm install --global vercel@${{ env.VERCEL_CLI_VERSION }}
 
+      # Studio → Quiz Master: catch a mis-pasted Firebase key here rather
+      # than at the first run. Never prints the key. Missing = warning only
+      # (the tab then does dry runs); present but broken = fail the deploy.
+      - name: Check Quiz Master Firebase key
+        env:
+          QUIZMASTER_FIREBASE_SERVICE_ACCOUNT: ${{ secrets.QUIZMASTER_FIREBASE_SERVICE_ACCOUNT }}
+          QUIZMASTER_FIREBASE_PROJECT_ID: ${{ vars.QUIZMASTER_FIREBASE_PROJECT_ID }}
+        run: |
+          if [ -z "$QUIZMASTER_FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::warning::QUIZMASTER_FIREBASE_SERVICE_ACCOUNT is not set: Studio → Quiz Master can only do dry runs"
+            exit 0
+          fi
+          project=$(printf '%s' "$QUIZMASTER_FIREBASE_SERVICE_ACCOUNT" | jq -er 'select(.type == "service_account" and (.private_key | length) > 0 and (.client_email | length) > 0) | .project_id') \
+            || { echo "::error::QUIZMASTER_FIREBASE_SERVICE_ACCOUNT is not a valid service-account key JSON (paste it on one line: jq -c . key.json | gh secret set QUIZMASTER_FIREBASE_SERVICE_ACCOUNT)"; exit 1; }
+          want="${QUIZMASTER_FIREBASE_PROJECT_ID:-$project}"
+          if [ "$project" != "$want" ]; then
+            echo "::error::the Quiz Master key is for project $project, but QUIZMASTER_FIREBASE_PROJECT_ID is $want"; exit 1
+          fi
+          echo "Quiz Master Firebase key OK (project $project)"
+
       # Uses the Vercel REST API (upsert) rather than `vercel env add`, whose
       # generic "Could not retrieve Project Settings" error hid the real cause
       # in CI. Any failure here prints the actual HTTP status + API message.
@@ -94,11 +115,19 @@ jobs:
           ADMIN_SECRET_KEY: ${{ secrets.ADMIN_SECRET_KEY }}
           ADMIN_JWT_SECRET: ${{ secrets.ADMIN_JWT_SECRET }}
           NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+          # Studio → Quiz Master (optional: the tab only does dry runs without the key)
+          QUIZMASTER_FIREBASE_SERVICE_ACCOUNT: ${{ secrets.QUIZMASTER_FIREBASE_SERVICE_ACCOUNT }}
+          QUIZMASTER_FIREBASE_PROJECT_ID: ${{ vars.QUIZMASTER_FIREBASE_PROJECT_ID }}
+          QUIZMASTER_GEN_MODEL: ${{ vars.QUIZMASTER_GEN_MODEL }}
+          QUIZMASTER_VERIFY_MODEL: ${{ vars.QUIZMASTER_VERIFY_MODEL }}
+          QUIZMASTER_TRANSLATE_MODEL: ${{ vars.QUIZMASTER_TRANSLATE_MODEL }}
         run: |
           api="https://api.vercel.com/v10/projects/$VERCEL_PROJECT_ID/env?upsert=true&teamId=$VERCEL_ORG_ID"
           failed=0
           for name in DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
-                      ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL; do
+                      ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL \
+                      QUIZMASTER_FIREBASE_SERVICE_ACCOUNT QUIZMASTER_FIREBASE_PROJECT_ID \
+                      QUIZMASTER_GEN_MODEL QUIZMASTER_VERIFY_MODEL QUIZMASTER_TRANSLATE_MODEL; do
             value="${!name}"
             [ -z "$value" ] && { echo "skip $name (not set; app default applies)"; continue; }
             # GitHub Secrets → "sensitive" (encrypted, never readable back; runtime-only).
@@ -106,6 +135,7 @@ jobs:
             # inlined at build time; a sensitive value would pull as "[SENSITIVE]").
             case "$name" in
               NEXT_PUBLIC_SITE_URL|NVIDIA_NIM_MODEL|NVIDIA_NIM_BASE_URL) type=plain ;;
+              QUIZMASTER_FIREBASE_PROJECT_ID|QUIZMASTER_GEN_MODEL|QUIZMASTER_VERIFY_MODEL|QUIZMASTER_TRANSLATE_MODEL) type=plain ;;
               *) type=sensitive ;;
             esac
             body=$(jq -n --arg k "$name" --arg v "$value" --arg t "$type" \

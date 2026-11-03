@@ -1,0 +1,455 @@
+{
+  "category": "geography",
+  "questions": [
+    {
+      "groupId": "ge_001",
+      "difficulty": "easy",
+      "subcategory": "world_capitals",
+      "correctIndex": 2,
+      "tags": ["europe", "capitals"],
+      "en": { "question": "What is the capital of France?", "options": ["London", "Berlin", "Paris", "Rome"], "explanation": "Paris sits on the River Seine and is home to the Eiffel Tower, built for the 1889 World's Fair." },
+      "hi": { "question": "फ्रांस की राजधानी क्या है?", "options": ["लंदन", "बर्लिन", "पेरिस", "रोम"], "explanation": "पेरिस सीन नदी के किनारे बसा है और यहीं एफिल टावर है, जिसे 1889 के विश्व मेले के लिए बनाया गया था।" },
+      "hi-Latn": { "question": "France ki capital kya hai?", "options": ["London", "Berlin", "Paris", "Rome"], "explanation": "Paris Seine river ke kinare basa hai aur yahin Eiffel Tower hai, jo 1889 ke World's Fair ke liye bana tha." }
+    },
+    {
+      "groupId": "ge_002",
+      "difficulty": "easy",
+      "subcategory": "indian_rivers",
+      "correctIndex": 0,
+      "tags": ["india", "rivers"],
+      "en": { "question": "Which is the longest river flowing within India?", "options": ["Ganga", "Godavari", "Yamuna", "Brahmaputra"], "explanation": "The Ganga runs about 2,500 km within India from Gangotri glacier to the Bay of Bengal; the Brahmaputra is longer overall but most of it lies outside India." },
+      "hi": { "question": "भारत के भीतर बहने वाली सबसे लंबी नदी कौन-सी है?", "options": ["गंगा", "गोदावरी", "यमुना", "ब्रह्मपुत्र"], "explanation": "गंगा गंगोत्री हिमनद से बंगाल की खाड़ी तक भारत में लगभग 2,500 किमी बहती है; ब्रह्मपुत्र कुल मिलाकर लंबी है, पर उसका ज़्यादातर हिस्सा भारत के बाहर है।" },
+      "hi-Latn": { "question": "India ke andar behne wali sabse lambi river kaun si hai?", "options": ["Ganga", "Godavari", "Yamuna", "Brahmaputra"], "explanation": "Ganga Gangotri glacier se Bay of Bengal tak India mein lagbhag 2,500 km behti hai; Brahmaputra overall lambi hai, par uska zyada hissa India ke bahar hai." }
+    },
+    {
+      "groupId": "ge_003",
+      "difficulty": "easy",
+      "subcategory": "oceans",
+      "correctIndex": 1,
+      "tags": ["oceans", "world"],
+      "en": { "question": "Which is the largest ocean on Earth?", "options": ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"], "explanation": "The Pacific covers roughly a third of Earth's surface, more than all the land on the planet combined." },
+      "hi": { "question": "पृथ्वी का सबसे बड़ा महासागर कौन-सा है?", "options": ["अटलांटिक महासागर", "प्रशांत महासागर", "हिंद महासागर", "आर्कटिक महासागर"], "explanation": "प्रशांत महासागर पृथ्वी की सतह के लगभग एक-तिहाई हिस्से में फैला है, जो धरती के कुल भू-भाग से भी ज़्यादा है।" },
+      "hi-Latn": { "question": "Earth ka sabse bada ocean kaun sa hai?", "options": ["Atlantic Ocean", "Pacific Ocean", "Indian Ocean", "Arctic Ocean"], "explanation": "Pacific Ocean Earth ki surface ke lagbhag ek-tihai hisse mein phaila hai, jo duniya ki saari zameen se bhi zyada hai." }
+    },
+    {
+      "groupId": "ge_004",
+      "difficulty": "easy",
+      "subcategory": "indian_states_capitals",
+      "correctIndex": 3,
+      "tags": ["india", "capitals"],
+      "en": { "question": "What is the capital of Rajasthan?", "options": ["Udaipur", "Jodhpur", "Ajmer", "Jaipur"], "explanation": "Jaipur, the 'Pink City', was founded in 1727 by Maharaja Sawai Jai Singh II and is one of India's earliest planned cities." },
+      "hi": { "question": "राजस्थान की राजधानी क्या है?", "options": ["उदयपुर", "जोधपुर", "अजमेर", "जयपुर"], "explanation": "'गुलाबी नगरी' जयपुर की स्थापना 1727 में महाराजा सवाई जयसिंह द्वितीय ने की थी और यह भारत के शुरुआती नियोजित शहरों में से एक है।" },
+      "hi-Latn": { "question": "Rajasthan ki capital kya hai?", "options": ["Udaipur", "Jodhpur", "Ajmer", "Jaipur"], "explanation": "'Pink City' Jaipur ko 1727 mein Maharaja Sawai Jai Singh II ne basaya tha, aur ye India ke sabse purane planned cities mein se ek hai." }
+    },
+    {
+      "groupId": "ge_005",
+      "difficulty": "easy",
+      "subcategory": "deserts",
+      "correctIndex": 2,
+      "tags": ["africa", "deserts"],
+      "en": { "question": "Which is the largest hot desert in the world?", "options": ["Thar Desert", "Gobi Desert", "Sahara Desert", "Kalahari Desert"], "explanation": "The Sahara spans much of North Africa and is almost as big as the USA; only the cold deserts of Antarctica and the Arctic are larger." },
+      "hi": { "question": "दुनिया का सबसे बड़ा गर्म मरुस्थल कौन-सा है?", "options": ["थार मरुस्थल", "गोबी मरुस्थल", "सहारा मरुस्थल", "कालाहारी मरुस्थल"], "explanation": "सहारा उत्तरी अफ्रीका के बड़े हिस्से में फैला है और लगभग अमेरिका जितना बड़ा है; इससे बड़े केवल अंटार्कटिका और आर्कटिक के ठंडे मरुस्थल हैं।" },
+      "hi-Latn": { "question": "Duniya ka sabse bada hot desert kaun sa hai?", "options": ["Thar Desert", "Gobi Desert", "Sahara Desert", "Kalahari Desert"], "explanation": "Sahara North Africa ke bade hisse mein phaila hai aur lagbhag USA jitna bada hai; isse bade sirf Antarctica aur Arctic ke cold deserts hain." }
+    },
+    {
+      "groupId": "ge_006",
+      "difficulty": "easy",
+      "subcategory": "mountains",
+      "correctIndex": 0,
+      "tags": ["asia", "mountains"],
+      "en": { "question": "Which is the highest mountain peak in the world?", "options": ["Mount Everest", "K2", "Kangchenjunga", "Lhotse"], "explanation": "Everest, on the Nepal–China border, rises about 8,849 m above sea level; in Nepal it is called Sagarmatha." },
+      "hi": { "question": "दुनिया की सबसे ऊँची पर्वत चोटी कौन-सी है?", "options": ["माउंट एवरेस्ट", "के2", "कंचनजंगा", "ल्होत्से"], "explanation": "नेपाल-चीन सीमा पर स्थित एवरेस्ट समुद्र तल से लगभग 8,849 मीटर ऊँचा है; नेपाल में इसे सागरमाथा कहते हैं।" },
+      "hi-Latn": { "question": "Duniya ki sabse oonchi mountain peak kaun si hai?", "options": ["Mount Everest", "K2", "Kangchenjunga", "Lhotse"], "explanation": "Nepal-China border par Everest sea level se lagbhag 8,849 m ooncha hai; Nepal mein ise Sagarmatha kehte hain." }
+    },
+    {
+      "groupId": "ge_007",
+      "difficulty": "easy",
+      "subcategory": "national_parks",
+      "correctIndex": 1,
+      "tags": ["india", "national_parks", "wildlife"],
+      "en": { "question": "Kaziranga National Park, famous for the one-horned rhino, is in which state?", "options": ["West Bengal", "Assam", "Meghalaya", "Arunachal Pradesh"], "explanation": "Kaziranga lies on the floodplains of the Brahmaputra and holds the majority of the world's greater one-horned rhinos." },
+      "hi": { "question": "एक सींग वाले गैंडे के लिए प्रसिद्ध काज़ीरंगा राष्ट्रीय उद्यान किस राज्य में है?", "options": ["पश्चिम बंगाल", "असम", "मेघालय", "अरुणाचल प्रदेश"], "explanation": "काज़ीरंगा ब्रह्मपुत्र के बाढ़ के मैदानों में है और दुनिया के ज़्यादातर एक सींग वाले गैंडे यहीं रहते हैं।" },
+      "hi-Latn": { "question": "One-horned rhino ke liye famous Kaziranga National Park kis state mein hai?", "options": ["West Bengal", "Assam", "Meghalaya", "Arunachal Pradesh"], "explanation": "Kaziranga Brahmaputra ke floodplains mein hai aur duniya ke zyadatar one-horned rhinos yahin rehte hain." }
+    },
+    {
+      "groupId": "ge_008",
+      "difficulty": "easy",
+      "subcategory": "world_capitals",
+      "correctIndex": 3,
+      "tags": ["asia", "capitals"],
+      "en": { "question": "What is the capital of Japan?", "options": ["Kyoto", "Osaka", "Seoul", "Tokyo"], "explanation": "Tokyo, formerly called Edo, became the capital in 1868 when the emperor moved there from Kyoto." },
+      "hi": { "question": "जापान की राजधानी क्या है?", "options": ["क्योटो", "ओसाका", "सियोल", "टोक्यो"], "explanation": "टोक्यो का पुराना नाम एदो था; 1868 में सम्राट के क्योटो से यहाँ आने पर यह राजधानी बना।" },
+      "hi-Latn": { "question": "Japan ki capital kya hai?", "options": ["Kyoto", "Osaka", "Seoul", "Tokyo"], "explanation": "Tokyo ka purana naam Edo tha; 1868 mein jab emperor Kyoto se yahan aaye, tab ye capital bana." }
+    },
+    {
+      "groupId": "ge_009",
+      "difficulty": "easy",
+      "subcategory": "continents",
+      "correctIndex": 1,
+      "tags": ["continents", "world"],
+      "en": { "question": "Which is the smallest continent by area?", "options": ["Europe", "Australia", "Antarctica", "South America"], "explanation": "Australia is so compact that it is the only continent occupied by a single country." },
+      "hi": { "question": "क्षेत्रफल के हिसाब से सबसे छोटा महाद्वीप कौन-सा है?", "options": ["यूरोप", "ऑस्ट्रेलिया", "अंटार्कटिका", "दक्षिण अमेरिका"], "explanation": "ऑस्ट्रेलिया इतना छोटा है कि यह एकमात्र महाद्वीप है जिस पर पूरा एक ही देश बसा है।" },
+      "hi-Latn": { "question": "Area ke hisaab se sabse chhota continent kaun sa hai?", "options": ["Europe", "Australia", "Antarctica", "South America"], "explanation": "Australia itna compact hai ki ye akela continent hai jis par sirf ek hi country hai." }
+    },
+    {
+      "groupId": "ge_010",
+      "difficulty": "easy",
+      "subcategory": "indian_borders",
+      "correctIndex": 2,
+      "tags": ["india", "borders", "neighbours"],
+      "en": { "question": "With which country does India share its longest land border?", "options": ["China", "Pakistan", "Bangladesh", "Nepal"], "explanation": "The India–Bangladesh border runs about 4,096 km, touching West Bengal, Assam, Meghalaya, Tripura and Mizoram." },
+      "hi": { "question": "भारत की सबसे लंबी स्थलीय सीमा किस देश के साथ है?", "options": ["चीन", "पाकिस्तान", "बांग्लादेश", "नेपाल"], "explanation": "भारत-बांग्लादेश सीमा लगभग 4,096 किमी लंबी है और पश्चिम बंगाल, असम, मेघालय, त्रिपुरा व मिज़ोरम को छूती है।" },
+      "hi-Latn": { "question": "India ka sabse lamba land border kis country ke saath hai?", "options": ["China", "Pakistan", "Bangladesh", "Nepal"], "explanation": "India-Bangladesh border lagbhag 4,096 km lamba hai aur West Bengal, Assam, Meghalaya, Tripura aur Mizoram ko touch karta hai." }
+    },
+    {
+      "groupId": "ge_011",
+      "difficulty": "easy",
+      "subcategory": "indian_states_capitals",
+      "correctIndex": 0,
+      "tags": ["india", "capitals"],
+      "en": { "question": "What is the capital of Tamil Nadu?", "options": ["Chennai", "Madurai", "Coimbatore", "Tiruchirappalli"], "explanation": "Chennai, known as Madras until 1996, has Marina Beach, one of the longest urban beaches in the world." },
+      "hi": { "question": "तमिलनाडु की राजधानी क्या है?", "options": ["चेन्नई", "मदुरै", "कोयंबटूर", "तिरुचिरापल्ली"], "explanation": "1996 तक मद्रास कहलाने वाले चेन्नई में मरीना बीच है, जो दुनिया के सबसे लंबे शहरी समुद्र तटों में से एक है।" },
+      "hi-Latn": { "question": "Tamil Nadu ki capital kya hai?", "options": ["Chennai", "Madurai", "Coimbatore", "Tiruchirappalli"], "explanation": "1996 tak Madras kehlane wale Chennai mein Marina Beach hai, jo duniya ke sabse lambe urban beaches mein se ek hai." }
+    },
+    {
+      "groupId": "ge_012",
+      "difficulty": "easy",
+      "subcategory": "latitudes_longitudes",
+      "correctIndex": 2,
+      "tags": ["earth", "latitudes"],
+      "en": { "question": "Which imaginary line divides the Earth into Northern and Southern Hemispheres?", "options": ["Tropic of Cancer", "Prime Meridian", "Equator", "Arctic Circle"], "explanation": "The Equator is the 0° line of latitude; the Prime Meridian instead splits Earth into Eastern and Western Hemispheres." },
+      "hi": { "question": "कौन-सी काल्पनिक रेखा पृथ्वी को उत्तरी और दक्षिणी गोलार्ध में बाँटती है?", "options": ["कर्क रेखा", "प्रधान मध्याह्न रेखा", "भूमध्य रेखा", "आर्कटिक वृत्त"], "explanation": "भूमध्य रेखा 0° अक्षांश है; जबकि प्रधान मध्याह्न रेखा पृथ्वी को पूर्वी और पश्चिमी गोलार्ध में बाँटती है।" },
+      "hi-Latn": { "question": "Kaun si imaginary line Earth ko Northern aur Southern Hemisphere mein divide karti hai?", "options": ["Tropic of Cancer", "Prime Meridian", "Equator", "Arctic Circle"], "explanation": "Equator 0° latitude hai; Prime Meridian Earth ko Eastern aur Western Hemisphere mein baantti hai." }
+    },
+    {
+      "groupId": "ge_013",
+      "difficulty": "easy",
+      "subcategory": "indian_coastline",
+      "correctIndex": 3,
+      "tags": ["india", "coastline"],
+      "en": { "question": "Which Indian state has the longest coastline?", "options": ["Tamil Nadu", "Andhra Pradesh", "Maharashtra", "Gujarat"], "explanation": "Gujarat's coast, cut by the Gulf of Kutch and Gulf of Khambhat, is the longest of any Indian state." },
+      "hi": { "question": "किस भारतीय राज्य की तटरेखा सबसे लंबी है?", "options": ["तमिलनाडु", "आंध्र प्रदेश", "महाराष्ट्र", "गुजरात"], "explanation": "कच्छ की खाड़ी और खंभात की खाड़ी से कटी हुई गुजरात की तटरेखा भारत के सभी राज्यों में सबसे लंबी है।" },
+      "hi-Latn": { "question": "Kis Indian state ki coastline sabse lambi hai?", "options": ["Tamil Nadu", "Andhra Pradesh", "Maharashtra", "Gujarat"], "explanation": "Gulf of Kutch aur Gulf of Khambhat se kati hui Gujarat ki coastline India ke sabhi states mein sabse lambi hai." }
+    },
+    {
+      "groupId": "ge_014",
+      "difficulty": "easy",
+      "subcategory": "indian_rivers",
+      "correctIndex": 0,
+      "tags": ["india", "rivers", "floods"],
+      "en": { "question": "Which river is known as the 'Sorrow of Bihar'?", "options": ["Kosi", "Gandak", "Son", "Damodar"], "explanation": "The Kosi carries heavy silt from the Himalayas and often shifts its course, causing devastating floods; the Damodar was called the 'Sorrow of Bengal'." },
+      "hi": { "question": "किस नदी को 'बिहार का शोक' कहा जाता है?", "options": ["कोसी", "गंडक", "सोन", "दामोदर"], "explanation": "कोसी हिमालय से भारी गाद लाती है और बार-बार अपना रास्ता बदलती है, जिससे विनाशकारी बाढ़ आती है; दामोदर को 'बंगाल का शोक' कहा जाता था।" },
+      "hi-Latn": { "question": "Kis nadi ko 'Sorrow of Bihar' yaani 'Bihar ka shok' kaha jata hai?", "options": ["Kosi", "Gandak", "Son", "Damodar"], "explanation": "Kosi Himalaya se bahut silt laati hai aur baar-baar apna course badalti hai, jisse bhayanak floods aate hain; Damodar ko 'Sorrow of Bengal' kaha jata tha." }
+    },
+    {
+      "groupId": "ge_015",
+      "difficulty": "easy",
+      "subcategory": "indian_states",
+      "correctIndex": 1,
+      "tags": ["india", "states", "rivers"],
+      "en": { "question": "Which Indian state's name means 'land of five rivers'?", "options": ["Haryana", "Punjab", "Himachal Pradesh", "Uttarakhand"], "explanation": "'Punjab' comes from Persian 'panj' (five) and 'ab' (water), referring to the Jhelum, Chenab, Ravi, Beas and Sutlej." },
+      "hi": { "question": "किस भारतीय राज्य के नाम का अर्थ 'पाँच नदियों की भूमि' है?", "options": ["हरियाणा", "पंजाब", "हिमाचल प्रदेश", "उत्तराखंड"], "explanation": "'पंजाब' फ़ारसी के 'पंज' (पाँच) और 'आब' (पानी) से बना है, जो झेलम, चिनाब, रावी, ब्यास और सतलुज की ओर इशारा करता है।" },
+      "hi-Latn": { "question": "Kis Indian state ke naam ka matlab 'land of five rivers' hai?", "options": ["Haryana", "Punjab", "Himachal Pradesh", "Uttarakhand"], "explanation": "'Punjab' Persian ke 'panj' (paanch) aur 'aab' (paani) se bana hai, yaani Jhelum, Chenab, Ravi, Beas aur Sutlej." }
+    },
+    {
+      "groupId": "ge_016",
+      "difficulty": "medium",
+      "subcategory": "latitudes_longitudes",
+      "correctIndex": 2,
+      "tags": ["india", "latitudes", "states"],
+      "en": { "question": "The Tropic of Cancer does NOT pass through which of these states?", "options": ["Gujarat", "Rajasthan", "Odisha", "Mizoram"], "explanation": "The Tropic of Cancer crosses eight states, from Gujarat to Mizoram, but passes just north of Odisha." },
+      "hi": { "question": "कर्क रेखा इनमें से किस राज्य से होकर नहीं गुज़रती?", "options": ["गुजरात", "राजस्थान", "ओडिशा", "मिज़ोरम"], "explanation": "कर्क रेखा गुजरात से मिज़ोरम तक आठ राज्यों से गुज़रती है, पर ओडिशा के ठीक उत्तर से निकल जाती है।" },
+      "hi-Latn": { "question": "Tropic of Cancer inmein se kis state se hokar NAHI guzarti?", "options": ["Gujarat", "Rajasthan", "Odisha", "Mizoram"], "explanation": "Tropic of Cancer Gujarat se Mizoram tak 8 states se guzarti hai, lekin Odisha ke thoda north se nikal jaati hai." }
+    },
+    {
+      "groupId": "ge_017",
+      "difficulty": "medium",
+      "subcategory": "straits",
+      "correctIndex": 0,
+      "tags": ["india", "straits", "sri_lanka"],
+      "en": { "question": "Which strait separates India from Sri Lanka?", "options": ["Palk Strait", "Strait of Malacca", "Bab-el-Mandeb", "Strait of Hormuz"], "explanation": "The Palk Strait lies between Tamil Nadu and northern Sri Lanka; the chain of shoals called Ram Setu or Adam's Bridge lies at its southern end." },
+      "hi": { "question": "कौन-सा जलडमरूमध्य भारत को श्रीलंका से अलग करता है?", "options": ["पाक जलडमरूमध्य", "मलक्का जलडमरूमध्य", "बाब-अल-मंदेब", "होर्मुज़ जलडमरूमध्य"], "explanation": "पाक जलडमरूमध्य तमिलनाडु और उत्तरी श्रीलंका के बीच है; इसके दक्षिणी छोर पर राम सेतु या एडम्स ब्रिज नाम की उथली चट्टानों की श्रृंखला है।" },
+      "hi-Latn": { "question": "Kaun sa strait India ko Sri Lanka se alag karta hai?", "options": ["Palk Strait", "Strait of Malacca", "Bab-el-Mandeb", "Strait of Hormuz"], "explanation": "Palk Strait Tamil Nadu aur northern Sri Lanka ke beech hai; iske southern end par Ram Setu ya Adam's Bridge naam ki shoals ki chain hai." }
+    },
+    {
+      "groupId": "ge_018",
+      "difficulty": "medium",
+      "subcategory": "mountains",
+      "correctIndex": 2,
+      "tags": ["india", "mountains", "himalayas"],
+      "en": { "question": "Kangchenjunga lies on India's border with which country?", "options": ["Bhutan", "China", "Nepal", "Myanmar"], "explanation": "Kangchenjunga, the world's third-highest peak, straddles the Sikkim–Nepal border and is revered as a guardian deity in Sikkim." },
+      "hi": { "question": "कंचनजंगा भारत की किस देश के साथ लगी सीमा पर स्थित है?", "options": ["भूटान", "चीन", "नेपाल", "म्यांमार"], "explanation": "दुनिया की तीसरी सबसे ऊँची चोटी कंचनजंगा सिक्किम-नेपाल सीमा पर है और सिक्किम में इसे रक्षक देवता के रूप में पूजा जाता है।" },
+      "hi-Latn": { "question": "Kangchenjunga India ke kis country ke saath wale border par hai?", "options": ["Bhutan", "China", "Nepal", "Myanmar"], "explanation": "Duniya ki teesri sabse oonchi peak Kangchenjunga Sikkim-Nepal border par hai, aur Sikkim mein ise guardian deity maana jata hai." }
+    },
+    {
+      "groupId": "ge_019",
+      "difficulty": "medium",
+      "subcategory": "mountain_passes",
+      "correctIndex": 3,
+      "tags": ["india", "passes", "himalayas"],
+      "en": { "question": "Nathu La, a historic Himalayan pass on the old Silk Route, is in which Indian state?", "options": ["Arunachal Pradesh", "Himachal Pradesh", "Uttarakhand", "Sikkim"], "explanation": "Nathu La in Sikkim connects to Tibet's Chumbi Valley and is one of the routes used for the Kailash Mansarovar Yatra." },
+      "hi": { "question": "पुराने रेशम मार्ग का ऐतिहासिक हिमालयी दर्रा नाथू ला किस भारतीय राज्य में है?", "options": ["अरुणाचल प्रदेश", "हिमाचल प्रदेश", "उत्तराखंड", "सिक्किम"], "explanation": "सिक्किम का नाथू ला तिब्बत की चुंबी घाटी से जुड़ता है और कैलाश मानसरोवर यात्रा के रास्तों में से एक है।" },
+      "hi-Latn": { "question": "Purane Silk Route ka historic Himalayan pass Nathu La kis Indian state mein hai?", "options": ["Arunachal Pradesh", "Himachal Pradesh", "Uttarakhand", "Sikkim"], "explanation": "Sikkim ka Nathu La Tibet ki Chumbi Valley se judta hai aur Kailash Mansarovar Yatra ke routes mein se ek hai." }
+    },
+    {
+      "groupId": "ge_020",
+      "difficulty": "medium",
+      "subcategory": "indian_lakes",
+      "correctIndex": 1,
+      "tags": ["india", "lakes", "kashmir"],
+      "en": { "question": "Which is the largest freshwater lake in India?", "options": ["Dal Lake", "Wular Lake", "Loktak Lake", "Chilika Lake"], "explanation": "Wular Lake in the Kashmir valley is fed by the Jhelum; Chilika is bigger but is a brackish-water lagoon, not freshwater." },
+      "hi": { "question": "भारत की सबसे बड़ी मीठे पानी की झील कौन-सी है?", "options": ["डल झील", "वुलर झील", "लोकटक झील", "चिल्का झील"], "explanation": "कश्मीर घाटी की वुलर झील को झेलम नदी से पानी मिलता है; चिल्का इससे बड़ी है, पर वह खारे पानी का लैगून है।" },
+      "hi-Latn": { "question": "India ki sabse badi freshwater lake kaun si hai?", "options": ["Dal Lake", "Wular Lake", "Loktak Lake", "Chilika Lake"], "explanation": "Kashmir valley ki Wular Lake ko Jhelum se paani milta hai; Chilika isse badi hai, par wo brackish water lagoon hai, freshwater nahi." }
+    },
+    {
+      "groupId": "ge_021",
+      "difficulty": "medium",
+      "subcategory": "world_capitals",
+      "correctIndex": 2,
+      "tags": ["oceania", "capitals"],
+      "en": { "question": "What is the capital of Australia?", "options": ["Sydney", "Melbourne", "Canberra", "Perth"], "explanation": "Canberra was purpose-built as a compromise because rivals Sydney and Melbourne both wanted to be the capital." },
+      "hi": { "question": "ऑस्ट्रेलिया की राजधानी क्या है?", "options": ["सिडनी", "मेलबर्न", "कैनबरा", "पर्थ"], "explanation": "सिडनी और मेलबर्न दोनों राजधानी बनना चाहते थे, इसलिए समझौते के तौर पर कैनबरा को खास तौर पर राजधानी के रूप में बसाया गया।" },
+      "hi-Latn": { "question": "Australia ki capital kya hai?", "options": ["Sydney", "Melbourne", "Canberra", "Perth"], "explanation": "Sydney aur Melbourne dono capital banna chahte the, isliye compromise ke taur par Canberra ko specially capital ke roop mein banaya gaya." }
+    },
+    {
+      "groupId": "ge_022",
+      "difficulty": "medium",
+      "subcategory": "indian_rivers",
+      "correctIndex": 1,
+      "tags": ["india", "rivers", "peninsula"],
+      "en": { "question": "Which is the longest river of peninsular India?", "options": ["Krishna", "Godavari", "Kaveri", "Narmada"], "explanation": "The Godavari rises near Nashik and flows about 1,465 km to the Bay of Bengal, earning the name 'Dakshin Ganga'." },
+      "hi": { "question": "प्रायद्वीपीय भारत की सबसे लंबी नदी कौन-सी है?", "options": ["कृष्णा", "गोदावरी", "कावेरी", "नर्मदा"], "explanation": "गोदावरी नासिक के पास से निकलकर लगभग 1,465 किमी बहकर बंगाल की खाड़ी में मिलती है, इसलिए इसे 'दक्षिण गंगा' कहते हैं।" },
+      "hi-Latn": { "question": "Peninsular India ki sabse lambi river kaun si hai?", "options": ["Krishna", "Godavari", "Kaveri", "Narmada"], "explanation": "Godavari Nashik ke paas se nikalkar lagbhag 1,465 km beh kar Bay of Bengal mein milti hai, isliye ise 'Dakshin Ganga' kehte hain." }
+    },
+    {
+      "groupId": "ge_023",
+      "difficulty": "medium",
+      "subcategory": "indian_rivers",
+      "correctIndex": 0,
+      "tags": ["india", "rivers", "rift_valley"],
+      "en": { "question": "Which river flows westward through a rift valley into the Arabian Sea?", "options": ["Narmada", "Mahanadi", "Godavari", "Krishna"], "explanation": "The Narmada rises at Amarkantak and flows west between the Vindhya and Satpura ranges, forming an estuary rather than a delta." },
+      "hi": { "question": "कौन-सी नदी भ्रंश घाटी से होकर पश्चिम की ओर बहती हुई अरब सागर में गिरती है?", "options": ["नर्मदा", "महानदी", "गोदावरी", "कृष्णा"], "explanation": "नर्मदा अमरकंटक से निकलकर विंध्य और सतपुड़ा पर्वतमालाओं के बीच पश्चिम की ओर बहती है और डेल्टा की जगह ज्वारनदमुख बनाती है।" },
+      "hi-Latn": { "question": "Kaun si river rift valley se hokar west ki taraf behti hai aur Arabian Sea mein girti hai?", "options": ["Narmada", "Mahanadi", "Godavari", "Krishna"], "explanation": "Narmada Amarkantak se nikalkar Vindhya aur Satpura ranges ke beech west ki taraf behti hai, aur delta ki jagah estuary banati hai." }
+    },
+    {
+      "groupId": "ge_024",
+      "difficulty": "medium",
+      "subcategory": "national_parks",
+      "correctIndex": 3,
+      "tags": ["india", "national_parks", "wildlife"],
+      "en": { "question": "Gir National Park, the last wild home of the Asiatic lion, is in which state?", "options": ["Rajasthan", "Madhya Pradesh", "Maharashtra", "Gujarat"], "explanation": "Gir in Gujarat's Saurashtra region is the only place in the world where Asiatic lions live in the wild." },
+      "hi": { "question": "एशियाई शेरों का अंतिम प्राकृतिक घर गिर राष्ट्रीय उद्यान किस राज्य में है?", "options": ["राजस्थान", "मध्य प्रदेश", "महाराष्ट्र", "गुजरात"], "explanation": "गुजरात के सौराष्ट्र क्षेत्र का गिर दुनिया की इकलौती जगह है जहाँ एशियाई शेर जंगल में प्राकृतिक रूप से रहते हैं।" },
+      "hi-Latn": { "question": "Asiatic lions ka aakhri natural ghar Gir National Park kis state mein hai?", "options": ["Rajasthan", "Madhya Pradesh", "Maharashtra", "Gujarat"], "explanation": "Gujarat ke Saurashtra region ka Gir duniya ki akeli jagah hai jahan Asiatic lions wild mein rehte hain." }
+    },
+    {
+      "groupId": "ge_025",
+      "difficulty": "medium",
+      "subcategory": "indian_borders",
+      "correctIndex": 2,
+      "tags": ["india", "neighbours", "borders"],
+      "en": { "question": "Which of these countries does NOT share a land border with India?", "options": ["Bhutan", "Myanmar", "Thailand", "Nepal"], "explanation": "Thailand is close to India's Andaman Islands by sea, but Myanmar lies between the two on land." },
+      "hi": { "question": "इनमें से किस देश की भारत के साथ स्थलीय सीमा नहीं है?", "options": ["भूटान", "म्यांमार", "थाईलैंड", "नेपाल"], "explanation": "थाईलैंड समुद्र के रास्ते भारत के अंडमान द्वीपों के पास है, लेकिन ज़मीन पर दोनों के बीच म्यांमार स्थित है।" },
+      "hi-Latn": { "question": "Inmein se kis country ka India ke saath land border NAHI hai?", "options": ["Bhutan", "Myanmar", "Thailand", "Nepal"], "explanation": "Thailand sea ke raaste India ke Andaman Islands ke paas hai, lekin zameen par dono ke beech Myanmar hai." }
+    },
+    {
+      "groupId": "ge_026",
+      "difficulty": "medium",
+      "subcategory": "straits",
+      "correctIndex": 1,
+      "tags": ["europe", "africa", "straits"],
+      "en": { "question": "The Strait of Gibraltar connects the Atlantic Ocean with which sea?", "options": ["Red Sea", "Mediterranean Sea", "Black Sea", "North Sea"], "explanation": "At its narrowest the Strait of Gibraltar is only about 14 km wide, separating Spain in Europe from Morocco in Africa." },
+      "hi": { "question": "जिब्राल्टर जलडमरूमध्य अटलांटिक महासागर को किस सागर से जोड़ता है?", "options": ["लाल सागर", "भूमध्य सागर", "काला सागर", "उत्तरी सागर"], "explanation": "सबसे संकरी जगह पर जिब्राल्टर जलडमरूमध्य केवल लगभग 14 किमी चौड़ा है और यूरोप के स्पेन को अफ्रीका के मोरक्को से अलग करता है।" },
+      "hi-Latn": { "question": "Strait of Gibraltar Atlantic Ocean ko kis sea se jodta hai?", "options": ["Red Sea", "Mediterranean Sea", "Black Sea", "North Sea"], "explanation": "Sabse narrow point par Strait of Gibraltar sirf lagbhag 14 km chauda hai, aur Europe ke Spain ko Africa ke Morocco se alag karta hai." }
+    },
+    {
+      "groupId": "ge_027",
+      "difficulty": "medium",
+      "subcategory": "world_capitals",
+      "correctIndex": 3,
+      "tags": ["north_america", "capitals"],
+      "en": { "question": "What is the capital of Canada?", "options": ["Toronto", "Vancouver", "Montreal", "Ottawa"], "explanation": "Ottawa was chosen by Queen Victoria in 1857, partly because it sat between English-speaking and French-speaking regions." },
+      "hi": { "question": "कनाडा की राजधानी क्या है?", "options": ["टोरंटो", "वैंकूवर", "मॉन्ट्रियल", "ओटावा"], "explanation": "1857 में महारानी विक्टोरिया ने ओटावा को चुना, आंशिक रूप से इसलिए कि यह अंग्रेज़ी और फ़्रेंच भाषी क्षेत्रों के बीच स्थित था।" },
+      "hi-Latn": { "question": "Canada ki capital kya hai?", "options": ["Toronto", "Vancouver", "Montreal", "Ottawa"], "explanation": "1857 mein Queen Victoria ne Ottawa ko chuna, kuch had tak isliye kyunki ye English aur French bolne wale regions ke beech mein tha." }
+    },
+    {
+      "groupId": "ge_028",
+      "difficulty": "medium",
+      "subcategory": "waterfalls",
+      "correctIndex": 0,
+      "tags": ["south_america", "waterfalls"],
+      "en": { "question": "Angel Falls, the world's highest uninterrupted waterfall, is in which country?", "options": ["Venezuela", "Brazil", "Colombia", "Peru"], "explanation": "Angel Falls drops about 979 m from a flat-topped tepui mountain in Venezuela's Canaima National Park." },
+      "hi": { "question": "दुनिया का सबसे ऊँचा अखंड जलप्रपात एंजेल फॉल्स किस देश में है?", "options": ["वेनेज़ुएला", "ब्राज़ील", "कोलंबिया", "पेरू"], "explanation": "एंजेल फॉल्स वेनेज़ुएला के कनाइमा राष्ट्रीय उद्यान में एक सपाट चोटी वाले टेपुई पर्वत से लगभग 979 मीटर नीचे गिरता है।" },
+      "hi-Latn": { "question": "Duniya ka sabse ooncha uninterrupted waterfall Angel Falls kis country mein hai?", "options": ["Venezuela", "Brazil", "Colombia", "Peru"], "explanation": "Angel Falls Venezuela ke Canaima National Park mein ek flat-top tepui mountain se lagbhag 979 m neeche girta hai." }
+    },
+    {
+      "groupId": "ge_029",
+      "difficulty": "medium",
+      "subcategory": "islands",
+      "correctIndex": 3,
+      "tags": ["islands", "world"],
+      "en": { "question": "Which is the largest island in the world (excluding continents)?", "options": ["Borneo", "New Guinea", "Madagascar", "Greenland"], "explanation": "Greenland is about 80% covered by an ice sheet, and politically it is an autonomous territory of Denmark." },
+      "hi": { "question": "महाद्वीपों को छोड़कर दुनिया का सबसे बड़ा द्वीप कौन-सा है?", "options": ["बोर्नियो", "न्यू गिनी", "मेडागास्कर", "ग्रीनलैंड"], "explanation": "ग्रीनलैंड का लगभग 80% भाग बर्फ की चादर से ढका है और राजनीतिक रूप से यह डेनमार्क का स्वायत्त क्षेत्र है।" },
+      "hi-Latn": { "question": "Continents ko chhodkar duniya ka sabse bada island kaun sa hai?", "options": ["Borneo", "New Guinea", "Madagascar", "Greenland"], "explanation": "Greenland ka lagbhag 80% hissa ice sheet se dhaka hai, aur politically ye Denmark ka autonomous territory hai." }
+    },
+    {
+      "groupId": "ge_030",
+      "difficulty": "medium",
+      "subcategory": "indian_lakes",
+      "correctIndex": 0,
+      "tags": ["india", "lakes", "northeast"],
+      "en": { "question": "Loktak Lake, famous for its floating 'phumdis', is in which state?", "options": ["Manipur", "Mizoram", "Nagaland", "Tripura"], "explanation": "Loktak hosts Keibul Lamjao, the world's only floating national park and home of the endangered Sangai deer." },
+      "hi": { "question": "तैरते 'फुमदी' के लिए प्रसिद्ध लोकटक झील किस राज्य में है?", "options": ["मणिपुर", "मिज़ोरम", "नागालैंड", "त्रिपुरा"], "explanation": "लोकटक में केबुल लामजाओ है, जो दुनिया का एकमात्र तैरता राष्ट्रीय उद्यान है और लुप्तप्राय संगाई हिरण का घर है।" },
+      "hi-Latn": { "question": "Floating 'phumdis' ke liye famous Loktak Lake kis state mein hai?", "options": ["Manipur", "Mizoram", "Nagaland", "Tripura"], "explanation": "Loktak mein Keibul Lamjao hai, jo duniya ka akela floating national park hai aur endangered Sangai deer ka ghar hai." }
+    },
+    {
+      "groupId": "ge_031",
+      "difficulty": "hard",
+      "subcategory": "oceans",
+      "correctIndex": 2,
+      "tags": ["oceans", "pacific", "trenches"],
+      "en": { "question": "Which ocean trench contains the deepest known point on Earth?", "options": ["Puerto Rico Trench", "Tonga Trench", "Mariana Trench", "Java Trench"], "explanation": "The Challenger Deep in the Mariana Trench is nearly 11 km deep — Mount Everest would sink there with over 2 km of water above it." },
+      "hi": { "question": "पृथ्वी का सबसे गहरा ज्ञात बिंदु किस समुद्री खाई में है?", "options": ["प्यूर्टो रिको खाई", "टोंगा खाई", "मारियाना खाई", "जावा खाई"], "explanation": "मारियाना खाई का चैलेंजर डीप लगभग 11 किमी गहरा है; माउंट एवरेस्ट भी यहाँ डूब जाए तो उसके ऊपर 2 किमी से ज़्यादा पानी रहेगा।" },
+      "hi-Latn": { "question": "Earth ka sabse gehra known point kis ocean trench mein hai?", "options": ["Puerto Rico Trench", "Tonga Trench", "Mariana Trench", "Java Trench"], "explanation": "Mariana Trench ka Challenger Deep lagbhag 11 km gehra hai; Mount Everest bhi yahan doob jaaye to uske upar 2 km se zyada paani rahega." }
+    },
+    {
+      "groupId": "ge_032",
+      "difficulty": "hard",
+      "subcategory": "mountain_passes",
+      "correctIndex": 1,
+      "tags": ["india", "passes", "rivers"],
+      "en": { "question": "Shipki La, the pass through which the Sutlej enters India, is in which state?", "options": ["Uttarakhand", "Himachal Pradesh", "Sikkim", "Arunachal Pradesh"], "explanation": "Shipki La lies in Kinnaur district of Himachal Pradesh, where the Sutlej cuts through the Himalayas after flowing from Tibet." },
+      "hi": { "question": "शिपकी ला दर्रा, जहाँ से सतलुज नदी भारत में प्रवेश करती है, किस राज्य में है?", "options": ["उत्तराखंड", "हिमाचल प्रदेश", "सिक्किम", "अरुणाचल प्रदेश"], "explanation": "शिपकी ला हिमाचल प्रदेश के किन्नौर ज़िले में है, जहाँ तिब्बत से आने वाली सतलुज हिमालय को काटकर भारत में आती है।" },
+      "hi-Latn": { "question": "Shipki La pass, jahan se Sutlej India mein enter karti hai, kis state mein hai?", "options": ["Uttarakhand", "Himachal Pradesh", "Sikkim", "Arunachal Pradesh"], "explanation": "Shipki La Himachal Pradesh ke Kinnaur district mein hai, jahan Tibet se aane wali Sutlej Himalaya ko kaatkar India mein aati hai." }
+    },
+    {
+      "groupId": "ge_033",
+      "difficulty": "hard",
+      "subcategory": "world_lakes",
+      "correctIndex": 3,
+      "tags": ["asia", "lakes"],
+      "en": { "question": "Lake Baikal, the world's deepest lake, is in which country?", "options": ["Mongolia", "Kazakhstan", "China", "Russia"], "explanation": "Baikal in Siberia is over 1,600 m deep and holds roughly a fifth of the world's unfrozen surface fresh water." },
+      "hi": { "question": "दुनिया की सबसे गहरी झील बैकाल किस देश में है?", "options": ["मंगोलिया", "कज़ाख़िस्तान", "चीन", "रूस"], "explanation": "साइबेरिया की बैकाल झील 1,600 मीटर से ज़्यादा गहरी है और इसमें दुनिया के सतही ताज़े पानी का लगभग पाँचवाँ हिस्सा है।" },
+      "hi-Latn": { "question": "Duniya ki sabse gehri lake Baikal kis country mein hai?", "options": ["Mongolia", "Kazakhstan", "China", "Russia"], "explanation": "Siberia ki Lake Baikal 1,600 m se zyada gehri hai aur ismein duniya ke surface fresh water ka lagbhag 1/5 hissa hai." }
+    },
+    {
+      "groupId": "ge_034",
+      "difficulty": "hard",
+      "subcategory": "indian_extremities",
+      "correctIndex": 1,
+      "tags": ["india", "islands", "extreme_points"],
+      "en": { "question": "Which is the southernmost point of Indian territory?", "options": ["Kanyakumari", "Indira Point", "Rameswaram", "Port Blair"], "explanation": "Indira Point on Great Nicobar Island lies far south of Kanyakumari, which is only the southern tip of mainland India." },
+      "hi": { "question": "भारतीय भू-भाग का सबसे दक्षिणी बिंदु कौन-सा है?", "options": ["कन्याकुमारी", "इंदिरा पॉइंट", "रामेश्वरम", "पोर्ट ब्लेयर"], "explanation": "ग्रेट निकोबार द्वीप पर स्थित इंदिरा पॉइंट कन्याकुमारी से काफ़ी दक्षिण में है; कन्याकुमारी केवल मुख्य भूमि का दक्षिणी छोर है।" },
+      "hi-Latn": { "question": "Indian territory ka sabse southern point kaun sa hai?", "options": ["Kanyakumari", "Indira Point", "Rameswaram", "Port Blair"], "explanation": "Great Nicobar Island par Indira Point Kanyakumari se kaafi south mein hai; Kanyakumari sirf mainland India ka southern tip hai." }
+    },
+    {
+      "groupId": "ge_035",
+      "difficulty": "hard",
+      "subcategory": "deserts",
+      "correctIndex": 2,
+      "tags": ["south_america", "deserts"],
+      "en": { "question": "The Atacama, one of the driest places on Earth, lies mainly in which country?", "options": ["Peru", "Argentina", "Chile", "Bolivia"], "explanation": "Some weather stations in Chile's Atacama have never recorded rain, and NASA has tested Mars rovers in its soil." },
+      "hi": { "question": "पृथ्वी की सबसे सूखी जगहों में से एक अटाकामा मरुस्थल मुख्य रूप से किस देश में है?", "options": ["पेरू", "अर्जेंटीना", "चिली", "बोलीविया"], "explanation": "चिली के अटाकामा के कुछ मौसम केंद्रों में कभी बारिश दर्ज नहीं हुई, और नासा ने यहाँ की मिट्टी में मंगल रोवरों का परीक्षण किया है।" },
+      "hi-Latn": { "question": "Earth ki sabse sookhi jagahon mein se ek Atacama Desert mainly kis country mein hai?", "options": ["Peru", "Argentina", "Chile", "Bolivia"], "explanation": "Chile ke Atacama ke kuch weather stations mein kabhi baarish record nahi hui, aur NASA ne yahan Mars rovers test kiye hain." }
+    },
+    {
+      "groupId": "ge_036",
+      "difficulty": "hard",
+      "subcategory": "indian_rivers",
+      "correctIndex": 2,
+      "tags": ["india", "rivers", "tibet"],
+      "en": { "question": "Which river is known as the Yarlung Tsangpo in Tibet?", "options": ["Indus", "Sutlej", "Brahmaputra", "Ganga"], "explanation": "The Tsangpo makes a dramatic U-turn around Namcha Barwa, enters Arunachal Pradesh as the Siang, and becomes the Brahmaputra in Assam." },
+      "hi": { "question": "तिब्बत में यारलुंग त्सांगपो के नाम से कौन-सी नदी जानी जाती है?", "options": ["सिंधु", "सतलुज", "ब्रह्मपुत्र", "गंगा"], "explanation": "त्सांगपो नामचा बरवा के चारों ओर तीखा मोड़ लेकर अरुणाचल प्रदेश में सियांग के रूप में आती है और असम में ब्रह्मपुत्र बन जाती है।" },
+      "hi-Latn": { "question": "Tibet mein Yarlung Tsangpo ke naam se kaun si river jaani jaati hai?", "options": ["Indus", "Sutlej", "Brahmaputra", "Ganga"], "explanation": "Tsangpo Namcha Barwa ke around U-turn leti hai, Arunachal Pradesh mein Siang bankar aati hai aur Assam mein Brahmaputra ban jaati hai." }
+    },
+    {
+      "groupId": "ge_037",
+      "difficulty": "hard",
+      "subcategory": "world_borders",
+      "correctIndex": 1,
+      "tags": ["borders", "north_america"],
+      "en": { "question": "Which two countries share the world's longest international border?", "options": ["Russia and China", "Canada and USA", "Argentina and Chile", "Kazakhstan and Russia"], "explanation": "The Canada–US border runs about 8,900 km, including the stretch with Alaska, and is largely undefended." },
+      "hi": { "question": "किन दो देशों के बीच दुनिया की सबसे लंबी अंतरराष्ट्रीय सीमा है?", "options": ["रूस और चीन", "कनाडा और अमेरिका", "अर्जेंटीना और चिली", "कज़ाख़िस्तान और रूस"], "explanation": "अलास्का वाले हिस्से समेत कनाडा-अमेरिका सीमा लगभग 8,900 किमी लंबी है और इसका बड़ा भाग बिना सैन्य तैनाती वाला है।" },
+      "hi-Latn": { "question": "Kin do countries ke beech duniya ka sabse lamba international border hai?", "options": ["Russia aur China", "Canada aur USA", "Argentina aur Chile", "Kazakhstan aur Russia"], "explanation": "Alaska wale hisse ko milakar Canada-USA border lagbhag 8,900 km lamba hai, aur iska bada hissa bina military ke hai." }
+    },
+    {
+      "groupId": "ge_038",
+      "difficulty": "hard",
+      "subcategory": "indian_mountains",
+      "correctIndex": 0,
+      "tags": ["india", "mountains"],
+      "en": { "question": "Which is the oldest fold mountain range in India?", "options": ["Aravalli", "Vindhya", "Satpura", "Western Ghats"], "explanation": "The Aravallis are over a billion years old and have been worn down so much that their highest point, Guru Shikhar, is only about 1,722 m." },
+      "hi": { "question": "भारत की सबसे पुरानी वलित पर्वतमाला कौन-सी है?", "options": ["अरावली", "विंध्याचल", "सतपुड़ा", "पश्चिमी घाट"], "explanation": "अरावली एक अरब वर्ष से भी पुरानी है और इतनी घिस चुकी है कि इसकी सबसे ऊँची चोटी गुरु शिखर केवल लगभग 1,722 मीटर ऊँची है।" },
+      "hi-Latn": { "question": "India ki sabse purani fold mountain range kaun si hai?", "options": ["Aravalli", "Vindhya", "Satpura", "Western Ghats"], "explanation": "Aravalli ek billion saal se bhi purani hai aur itni ghis chuki hai ki iski sabse oonchi peak Guru Shikhar sirf lagbhag 1,722 m hai." }
+    },
+    {
+      "groupId": "ge_039",
+      "difficulty": "hard",
+      "subcategory": "channels",
+      "correctIndex": 2,
+      "tags": ["india", "islands", "channels"],
+      "en": { "question": "Which channel separates the Andaman Islands from the Nicobar Islands?", "options": ["Nine Degree Channel", "Eight Degree Channel", "Ten Degree Channel", "Duncan Passage"], "explanation": "The Ten Degree Channel runs along the 10°N latitude between Little Andaman and Car Nicobar." },
+      "hi": { "question": "कौन-सा चैनल अंडमान द्वीपसमूह को निकोबार द्वीपसमूह से अलग करता है?", "options": ["नौ डिग्री चैनल", "आठ डिग्री चैनल", "दस डिग्री चैनल", "डंकन पैसेज"], "explanation": "दस डिग्री चैनल 10° उत्तरी अक्षांश के साथ लिटिल अंडमान और कार निकोबार के बीच स्थित है।" },
+      "hi-Latn": { "question": "Kaun sa channel Andaman Islands ko Nicobar Islands se alag karta hai?", "options": ["Nine Degree Channel", "Eight Degree Channel", "Ten Degree Channel", "Duncan Passage"], "explanation": "Ten Degree Channel 10°N latitude ke saath Little Andaman aur Car Nicobar ke beech hai." }
+    },
+    {
+      "groupId": "ge_040",
+      "difficulty": "hard",
+      "subcategory": "volcanoes",
+      "correctIndex": 1,
+      "tags": ["india", "volcanoes", "islands"],
+      "en": { "question": "Which is India's only confirmed active volcano?", "options": ["Narcondam Island", "Barren Island", "Baratang Island", "Dhinodhar Hill"], "explanation": "Barren Island in the Andaman Sea has erupted several times since 1991; nearby Narcondam is considered dormant." },
+      "hi": { "question": "भारत का एकमात्र पुष्ट सक्रिय ज्वालामुखी कौन-सा है?", "options": ["नारकोंडम द्वीप", "बैरन द्वीप", "बाराटांग द्वीप", "धीनोधर पहाड़ी"], "explanation": "अंडमान सागर का बैरन द्वीप 1991 से कई बार फट चुका है; पास का नारकोंडम सुप्त ज्वालामुखी माना जाता है।" },
+      "hi-Latn": { "question": "India ka akela confirmed active volcano kaun sa hai?", "options": ["Narcondam Island", "Barren Island", "Baratang Island", "Dhinodhar Hill"], "explanation": "Andaman Sea ka Barren Island 1991 se kai baar erupt ho chuka hai; paas ka Narcondam dormant maana jata hai." }
+    },
+    {
+      "groupId": "ge_041",
+      "difficulty": "hard",
+      "subcategory": "landlocked_countries",
+      "correctIndex": 0,
+      "tags": ["asia", "landlocked"],
+      "en": { "question": "Which of these is a 'doubly landlocked' country, surrounded only by landlocked countries?", "options": ["Uzbekistan", "Kazakhstan", "Mongolia", "Bolivia"], "explanation": "Uzbekistan and Liechtenstein are the world's only doubly landlocked countries, so reaching the sea requires crossing at least two borders." },
+      "hi": { "question": "इनमें से कौन-सा 'दोहरा स्थलरुद्ध' देश है, जो केवल स्थलरुद्ध देशों से घिरा है?", "options": ["उज़्बेकिस्तान", "कज़ाख़िस्तान", "मंगोलिया", "बोलीविया"], "explanation": "उज़्बेकिस्तान और लिकटेंस्टाइन दुनिया के केवल दो दोहरे स्थलरुद्ध देश हैं, यानी समुद्र तक पहुँचने के लिए कम से कम दो सीमाएँ पार करनी पड़ती हैं।" },
+      "hi-Latn": { "question": "Inmein se kaun sa 'doubly landlocked' country hai, jo sirf landlocked countries se ghira hai?", "options": ["Uzbekistan", "Kazakhstan", "Mongolia", "Bolivia"], "explanation": "Uzbekistan aur Liechtenstein duniya ke sirf do doubly landlocked countries hain, yaani sea tak pahunchne ke liye kam se kam do borders cross karne padte hain." }
+    },
+    {
+      "groupId": "ge_042",
+      "difficulty": "hard",
+      "subcategory": "world_lakes",
+      "correctIndex": 0,
+      "tags": ["africa", "lakes"],
+      "en": { "question": "Which is the largest lake in Africa by area?", "options": ["Lake Victoria", "Lake Tanganyika", "Lake Malawi", "Lake Chad"], "explanation": "Lake Victoria, shared by Uganda, Kenya and Tanzania, is a major source of the White Nile." },
+      "hi": { "question": "क्षेत्रफल के हिसाब से अफ्रीका की सबसे बड़ी झील कौन-सी है?", "options": ["विक्टोरिया झील", "तांगान्यिका झील", "मलावी झील", "चाड झील"], "explanation": "युगांडा, केन्या और तंज़ानिया में फैली विक्टोरिया झील श्वेत नील नदी का प्रमुख स्रोत है।" },
+      "hi-Latn": { "question": "Area ke hisaab se Africa ki sabse badi lake kaun si hai?", "options": ["Lake Victoria", "Lake Tanganyika", "Lake Malawi", "Lake Chad"], "explanation": "Uganda, Kenya aur Tanzania mein phaili Lake Victoria White Nile ka main source hai." }
+    },
+    {
+      "groupId": "ge_043",
+      "difficulty": "hard",
+      "subcategory": "straits",
+      "correctIndex": 3,
+      "tags": ["asia", "north_america", "straits"],
+      "en": { "question": "Which strait separates Asia from North America?", "options": ["Bass Strait", "Strait of Magellan", "Davis Strait", "Bering Strait"], "explanation": "The Bering Strait between Russia and Alaska is about 82 km wide; early humans likely crossed a land bridge here during the Ice Age." },
+      "hi": { "question": "कौन-सा जलडमरूमध्य एशिया को उत्तरी अमेरिका से अलग करता है?", "options": ["बास जलडमरूमध्य", "मैगलन जलडमरूमध्य", "डेविस जलडमरूमध्य", "बेरिंग जलडमरूमध्य"], "explanation": "रूस और अलास्का के बीच बेरिंग जलडमरूमध्य लगभग 82 किमी चौड़ा है; हिमयुग में आदिमानव शायद यहीं के भू-सेतु से होकर अमेरिका पहुँचे थे।" },
+      "hi-Latn": { "question": "Kaun sa strait Asia ko North America se alag karta hai?", "options": ["Bass Strait", "Strait of Magellan", "Davis Strait", "Bering Strait"], "explanation": "Russia aur Alaska ke beech Bering Strait lagbhag 82 km chauda hai; Ice Age mein early humans shayad yahin ke land bridge se America pahunche the." }
+    },
+    {
+      "groupId": "ge_044",
+      "difficulty": "hard",
+      "subcategory": "national_parks",
+      "correctIndex": 3,
+      "tags": ["india", "national_parks", "western_ghats"],
+      "en": { "question": "Silent Valley National Park, saved from a dam project by a 1970s movement, is in which state?", "options": ["Tamil Nadu", "Karnataka", "Goa", "Kerala"], "explanation": "Silent Valley in Kerala's Palakkad district protects rare tropical rainforest and is a key home of the lion-tailed macaque." },
+      "hi": { "question": "1970 के दशक के आंदोलन से बाँध परियोजना से बचाया गया साइलेंट वैली राष्ट्रीय उद्यान किस राज्य में है?", "options": ["तमिलनाडु", "कर्नाटक", "गोवा", "केरल"], "explanation": "केरल के पालक्काड ज़िले का साइलेंट वैली दुर्लभ उष्णकटिबंधीय वर्षावन की रक्षा करता है और शेर-पूँछ वाले मकाक का प्रमुख घर है।" },
+      "hi-Latn": { "question": "1970s ke movement se dam project se bachaya gaya Silent Valley National Park kis state mein hai?", "options": ["Tamil Nadu", "Karnataka", "Goa", "Kerala"], "explanation": "Kerala ke Palakkad district ka Silent Valley rare tropical rainforest ko protect karta hai aur lion-tailed macaque ka main ghar hai." }
+    },
+    {
+      "groupId": "ge_045",
+      "difficulty": "hard",
+      "subcategory": "mountains",
+      "correctIndex": 3,
+      "tags": ["europe", "asia", "mountains"],
+      "en": { "question": "Which north–south mountain range in Russia is traditionally considered a boundary between Europe and Asia?", "options": ["Caucasus Mountains", "Alps", "Carpathian Mountains", "Ural Mountains"], "explanation": "The Urals run roughly north–south for about 2,500 km from the Arctic to Kazakhstan and are rich in minerals and gemstones." },
+      "hi": { "question": "रूस की उत्तर-दक्षिण फैली कौन-सी पर्वतमाला परंपरागत रूप से यूरोप और एशिया के बीच की सीमा मानी जाती है?", "options": ["कॉकेशस पर्वत", "आल्प्स", "कार्पेथियन पर्वत", "यूराल पर्वत"], "explanation": "यूराल पर्वत आर्कटिक से कज़ाख़िस्तान तक लगभग 2,500 किमी उत्तर-दक्षिण दिशा में फैले हैं और खनिजों व रत्नों से भरपूर हैं।" },
+      "hi-Latn": { "question": "Russia ki kaun si north-south mountain range traditionally Europe aur Asia ke beech ki boundary maani jaati hai?", "options": ["Caucasus Mountains", "Alps", "Carpathian Mountains", "Ural Mountains"], "explanation": "Ural Mountains Arctic se Kazakhstan tak lagbhag 2,500 km north-south phaile hain aur minerals aur gemstones se bhare hain." }
+    }
+  ]
+}

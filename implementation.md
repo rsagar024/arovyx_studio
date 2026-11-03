@@ -410,6 +410,17 @@ GitHub Pages was ruled out because it's static-only: it can't run `/studio` auth
 - **Studio → Settings → Featured projects**: the picker UI was extracted into a reusable `ProjectPicker` (ordered picks with ▲/▼, checkbox grid with category chips, max-reached toast). It's now shared by Hero showcase (max 3) and Featured projects (max 6). Dirty tracking and Reset cover both lists.
 - Verified **16/16**: fallback newest 6; picks shown in order; 7 ids / invalid id → 400; an unpublished pick is dropped; the hero picker is independent; clearing restores the fallback. The real Studio UI was driven in Playwright: tick, reorder, save → home grid order; 7th tick refused with a toast; Reset reverts.
 
+## Phase 13 — Quiz Master automation (Studio → Quiz Master) ✅ CODE DONE · live Firebase check pending
+
+The Quiz Master app's server jobs (question bank, daily quiz, pushes, weekly summary, guest cleanup) moved from Python on GitHub Actions (quizmaster repo, `automation/` + `tool/cleanup_guests.py`, ported from commit 1b6c5b5) into a Studio tab driven by a DB-backed countdown.
+
+- **Port** (`src/lib/quizmaster/**`, all `server-only`): IST helpers, categories, text and question checks, CPython `random` (MT19937, string seeding, `shuffle`), Python `json.dumps` formatting, gzip packing (pako = stock zlib, so the bytes and md5 match the GitHub runners'), the bank stores (Firestore / dry-run / memory), generate pipeline, publish, seed, daily quiz + notify (live Remote Config festival hint), new-questions push, weekly summary, guest cleanup.
+- **Engine** (`engine.ts`): runs as resumable steps in Postgres (`QuizSchedule`, `QuizRun`, `QuizRunStep`, `QuizLog`). Each `tick` works for at most 240 s. A per-category state machine runs prepare → generate → verify(12) → refill rounds → translate hi / hi-Latn (6) → write, up to 3 categories at once. Then publish → daily quiz (not pm) → notify(+weekly) → guest cleanup (paged). Run lease (`lockedUntil`, 10 min) plus tick lease (`tickUntil`). The verify RNG state is carried in the step state, so the shuffles match one Python process.
+- **API**: `/api/admin/quizmaster/schedule`, `/runs`, `/runs/[id]`, `/runs/[id]/tick` (`maxDuration` 300), `/runs/[id]/cancel`; Node runtime, session-checked, zod.
+- **UI**: `/studio/quizmaster`, with a stopwatch (wall-clock countdown, ring, IST next run, 11/11.5/12 h + custom interval, Pause/Run now/Reset, "next 07:00 IST"), status, manual run form (workflow inputs + categories), guest cleanup form (≥ 30 days, dry run default), and run history with a live drawer and Cancel. It drives ticks one at a time and holds a Wake Lock.
+- **Tests**: vitest, 200+ tests. Every Python test is ported, golden vectors are produced by the Python code (PRNG, daily pick, dedup hash, ISO weeks, leaks, JSON) plus stock-zlib bytes, and there are engine tests (lease, resumption, 240 s budget, pm slot, 30-day floor, schedule maths) and a 401 test per route.
+- **Verified**: typecheck, tests and `next build` all pass, and the assets are traced into the route bundles. `prisma db push` works on a fresh Postgres. Dev end-to-end against a local Postgres container with the real NIM key: dry runs, ticks resuming across the budget, timer catch-up and countdown restart. A real-Firestore run needs `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT`, which isn't available locally.
+
 ## Build Order (summary)
 
 | # | Phase | Depends on |
