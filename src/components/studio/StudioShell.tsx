@@ -12,6 +12,7 @@ import {
   Menu,
   Settings,
   Sparkles,
+  Timer,
   X,
 } from "lucide-react";
 import SkipLink from "@/components/SkipLink";
@@ -24,6 +25,7 @@ const NAV_ITEMS = [
   { href: "/studio/projects", label: "Projects", icon: FolderKanban },
   { href: "/studio/add", label: "Add Project", icon: Sparkles },
   { href: "/studio/messages", label: "Messages", icon: Inbox },
+  { href: "/studio/quizmaster", label: "Quiz Master", icon: Timer },
   { href: "/studio/settings", label: "Settings", icon: Settings },
 ];
 

@@ -1,0 +1,1844 @@
+{
+  "category": "general_knowledge",
+  "questions": [
+    {
+      "groupId": "gk_001",
+      "difficulty": "easy",
+      "subcategory": "national_symbols",
+      "correctIndex": 2,
+      "tags": [
+        "india",
+        "symbols",
+        "animals"
+      ],
+      "en": {
+        "question": "What is the national animal of India?",
+        "options": [
+          "Lion",
+          "Elephant",
+          "Tiger",
+          "Peacock"
+        ],
+        "explanation": "The tiger was adopted as the national animal in 1973, the same year Project Tiger was launched to protect it."
+      },
+      "hi": {
+        "question": "भारत का राष्ट्रीय पशु कौन सा है?",
+        "options": [
+          "शेर",
+          "हाथी",
+          "बाघ",
+          "मोर"
+        ],
+        "explanation": "बाघ को 1973 में राष्ट्रीय पशु बनाया गया, उसी साल उसकी रक्षा के लिए प्रोजेक्ट टाइगर शुरू हुआ।"
+      },
+      "hi-Latn": {
+        "question": "India ka national animal kaun sa hai?",
+        "options": [
+          "Lion",
+          "Elephant",
+          "Tiger",
+          "Peacock"
+        ],
+        "explanation": "Tiger ko 1973 mein national animal banaya gaya, usi saal uski protection ke liye Project Tiger shuru hua tha."
+      }
+    },
+    {
+      "groupId": "gk_002",
+      "difficulty": "easy",
+      "subcategory": "national_symbols",
+      "correctIndex": 0,
+      "tags": [
+        "india",
+        "symbols",
+        "plants"
+      ],
+      "en": {
+        "question": "Which is the national flower of India?",
+        "options": [
+          "Lotus",
+          "Rose",
+          "Sunflower",
+          "Marigold"
+        ],
+        "explanation": "The lotus grows in muddy water yet stays clean, which made it a symbol of purity in Indian tradition."
+      },
+      "hi": {
+        "question": "भारत का राष्ट्रीय फूल कौन सा है?",
+        "options": [
+          "कमल",
+          "गुलाब",
+          "सूरजमुखी",
+          "गेंदा"
+        ],
+        "explanation": "कमल कीचड़ वाले पानी में उगकर भी साफ रहता है, इसलिए भारतीय परंपरा में यह पवित्रता का प्रतीक है।"
+      },
+      "hi-Latn": {
+        "question": "India ka national flower kaun sa hai?",
+        "options": [
+          "Lotus",
+          "Rose",
+          "Sunflower",
+          "Marigold"
+        ],
+        "explanation": "Lotus keechad wale paani mein ugkar bhi saaf rehta hai, isliye Indian tradition mein ye purity ka symbol hai."
+      }
+    },
+    {
+      "groupId": "gk_003",
+      "difficulty": "easy",
+      "subcategory": "national_symbols",
+      "correctIndex": 1,
+      "tags": [
+        "india",
+        "symbols",
+        "literature"
+      ],
+      "en": {
+        "question": "Who wrote \"Vande Mataram\", the national song of India?",
+        "options": [
+          "Rabindranath Tagore",
+          "Bankim Chandra Chattopadhyay",
+          "Sarojini Naidu",
+          "Muhammad Iqbal"
+        ],
+        "explanation": "The song appeared in his 1882 novel \"Anandamath\" and became a rallying cry of the freedom struggle."
+      },
+      "hi": {
+        "question": "भारत का राष्ट्रीय गीत \"वंदे मातरम्\" किसने लिखा?",
+        "options": [
+          "रवींद्रनाथ टैगोर",
+          "बंकिम चंद्र चट्टोपाध्याय",
+          "सरोजिनी नायडू",
+          "मुहम्मद इक़बाल"
+        ],
+        "explanation": "यह गीत उनके 1882 के उपन्यास \"आनंदमठ\" में छपा था और स्वतंत्रता संग्राम का नारा बन गया।"
+      },
+      "hi-Latn": {
+        "question": "India ka national song \"Vande Mataram\" kisne likha tha?",
+        "options": [
+          "Rabindranath Tagore",
+          "Bankim Chandra Chattopadhyay",
+          "Sarojini Naidu",
+          "Muhammad Iqbal"
+        ],
+        "explanation": "Ye song unke 1882 ke novel \"Anandamath\" mein aaya tha aur freedom struggle ka slogan ban gaya."
+      }
+    },
+    {
+      "groupId": "gk_004",
+      "difficulty": "easy",
+      "subcategory": "national_symbols",
+      "correctIndex": 0,
+      "tags": [
+        "india",
+        "flag",
+        "symbols"
+      ],
+      "en": {
+        "question": "How many spokes does the Ashoka Chakra on the Indian flag have?",
+        "options": [
+          "24",
+          "20",
+          "22",
+          "32"
+        ],
+        "explanation": "The wheel is taken from the Lion Capital of Ashoka at Sarnath, and its 24 spokes are often linked to the 24 hours of the day."
+      },
+      "hi": {
+        "question": "भारतीय तिरंगे के अशोक चक्र में कितनी तीलियाँ होती हैं?",
+        "options": [
+          "24",
+          "20",
+          "22",
+          "32"
+        ],
+        "explanation": "यह चक्र सारनाथ के अशोक स्तंभ से लिया गया है, और इसकी 24 तीलियों को अक्सर दिन के 24 घंटों से जोड़ा जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Indian flag ke Ashoka Chakra mein kitne spokes hote hain?",
+        "options": [
+          "24",
+          "20",
+          "22",
+          "32"
+        ],
+        "explanation": "Ye chakra Sarnath ke Ashoka Lion Capital se liya gaya hai, aur iske 24 spokes ko aksar din ke 24 ghanton se joda jata hai."
+      }
+    },
+    {
+      "groupId": "gk_005",
+      "difficulty": "easy",
+      "subcategory": "currencies",
+      "correctIndex": 3,
+      "tags": [
+        "currency",
+        "world",
+        "asia"
+      ],
+      "en": {
+        "question": "What is the currency of Japan?",
+        "options": [
+          "Won",
+          "Yuan",
+          "Ringgit",
+          "Yen"
+        ],
+        "explanation": "The word \"yen\" means \"round object\" in Japanese; the Won belongs to South Korea and the Yuan to China."
+      },
+      "hi": {
+        "question": "जापान की मुद्रा क्या है?",
+        "options": [
+          "वॉन",
+          "युआन",
+          "रिंगिट",
+          "येन"
+        ],
+        "explanation": "जापानी भाषा में \"येन\" का अर्थ है \"गोल वस्तु\"; वॉन दक्षिण कोरिया की और युआन चीन की मुद्रा है।"
+      },
+      "hi-Latn": {
+        "question": "Japan ki currency kya hai?",
+        "options": [
+          "Won",
+          "Yuan",
+          "Ringgit",
+          "Yen"
+        ],
+        "explanation": "Japanese mein \"yen\" ka matlab hai \"round object\"; Won South Korea ki aur Yuan China ki currency hai."
+      }
+    },
+    {
+      "groupId": "gk_006",
+      "difficulty": "easy",
+      "subcategory": "books_and_authors",
+      "correctIndex": 2,
+      "tags": [
+        "books",
+        "authors",
+        "fiction"
+      ],
+      "en": {
+        "question": "Who wrote the \"Harry Potter\" book series?",
+        "options": [
+          "J.R.R. Tolkien",
+          "Roald Dahl",
+          "J.K. Rowling",
+          "Enid Blyton"
+        ],
+        "explanation": "The first book, \"Harry Potter and the Philosopher's Stone\", was published in 1997 after being rejected by several publishers."
+      },
+      "hi": {
+        "question": "\"हैरी पॉटर\" पुस्तक श्रृंखला किसने लिखी?",
+        "options": [
+          "जे.आर.आर. टॉल्किन",
+          "रोआल्ड डाल",
+          "जे.के. रोलिंग",
+          "एनिड ब्लाइटन"
+        ],
+        "explanation": "पहली किताब \"हैरी पॉटर एंड द फिलॉसफर्स स्टोन\" 1997 में छपी थी, जबकि कई प्रकाशकों ने इसे पहले ठुकरा दिया था।"
+      },
+      "hi-Latn": {
+        "question": "\"Harry Potter\" book series kisne likhi?",
+        "options": [
+          "J.R.R. Tolkien",
+          "Roald Dahl",
+          "J.K. Rowling",
+          "Enid Blyton"
+        ],
+        "explanation": "Pehli book \"Harry Potter and the Philosopher's Stone\" 1997 mein publish hui thi, jabki kai publishers ne ise reject kar diya tha."
+      }
+    },
+    {
+      "groupId": "gk_007",
+      "difficulty": "easy",
+      "subcategory": "sports",
+      "correctIndex": 1,
+      "tags": [
+        "olympics",
+        "sports",
+        "symbols"
+      ],
+      "en": {
+        "question": "How many rings are there in the Olympic symbol?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "explanation": "Designed by Pierre de Coubertin, the interlocking rings represent the union of the five inhabited continents."
+      },
+      "hi": {
+        "question": "ओलंपिक प्रतीक में कितने छल्ले होते हैं?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "explanation": "पियरे दे कूबर्तिन द्वारा बनाए गए ये आपस में जुड़े छल्ले पाँच बसे हुए महाद्वीपों की एकता दर्शाते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Olympic symbol mein kitne rings hote hain?",
+        "options": [
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "explanation": "Pierre de Coubertin ke design kiye ye interlocking rings paanch inhabited continents ki unity dikhate hain."
+      }
+    },
+    {
+      "groupId": "gk_008",
+      "difficulty": "easy",
+      "subcategory": "sports",
+      "correctIndex": 0,
+      "tags": [
+        "football",
+        "sports"
+      ],
+      "en": {
+        "question": "How many players does a football team have on the field at a time?",
+        "options": [
+          "11",
+          "9",
+          "12",
+          "10"
+        ],
+        "explanation": "Each side fields ten outfield players plus one goalkeeper, the only player allowed to handle the ball in the penalty area."
+      },
+      "hi": {
+        "question": "फुटबॉल की एक टीम में एक समय मैदान पर कितने खिलाड़ी होते हैं?",
+        "options": [
+          "11",
+          "9",
+          "12",
+          "10"
+        ],
+        "explanation": "हर टीम में दस मैदानी खिलाड़ी और एक गोलकीपर होता है, जो पेनल्टी क्षेत्र में गेंद को हाथ से छू सकता है।"
+      },
+      "hi-Latn": {
+        "question": "Football team mein ek time par field pe kitne players hote hain?",
+        "options": [
+          "11",
+          "9",
+          "12",
+          "10"
+        ],
+        "explanation": "Har team mein 10 outfield players aur ek goalkeeper hota hai, jo penalty area mein ball ko haath se pakad sakta hai."
+      }
+    },
+    {
+      "groupId": "gk_009",
+      "difficulty": "easy",
+      "subcategory": "world_organizations",
+      "correctIndex": 3,
+      "tags": [
+        "united_nations",
+        "organizations"
+      ],
+      "en": {
+        "question": "In which city is the headquarters of the United Nations?",
+        "options": [
+          "Geneva",
+          "Vienna",
+          "Washington D.C.",
+          "New York"
+        ],
+        "explanation": "The UN headquarters stands on land in Manhattan bought with a donation from John D. Rockefeller Jr."
+      },
+      "hi": {
+        "question": "संयुक्त राष्ट्र का मुख्यालय किस शहर में है?",
+        "options": [
+          "जिनेवा",
+          "वियना",
+          "वॉशिंगटन डी.सी.",
+          "न्यूयॉर्क"
+        ],
+        "explanation": "संयुक्त राष्ट्र मुख्यालय मैनहट्टन की उस ज़मीन पर बना है जो जॉन डी. रॉकफेलर जूनियर के दान से खरीदी गई थी।"
+      },
+      "hi-Latn": {
+        "question": "United Nations ka headquarters kis city mein hai?",
+        "options": [
+          "Geneva",
+          "Vienna",
+          "Washington D.C.",
+          "New York"
+        ],
+        "explanation": "UN headquarters Manhattan ki us land par bana hai jo John D. Rockefeller Jr. ke donation se kharidi gayi thi."
+      }
+    },
+    {
+      "groupId": "gk_010",
+      "difficulty": "easy",
+      "subcategory": "important_days",
+      "correctIndex": 1,
+      "tags": [
+        "india",
+        "important_days"
+      ],
+      "en": {
+        "question": "On which date is Teachers' Day celebrated in India?",
+        "options": [
+          "14 November",
+          "5 September",
+          "2 October",
+          "15 August"
+        ],
+        "explanation": "It marks the birth anniversary of Dr. Sarvepalli Radhakrishnan, a renowned teacher and India's second President."
+      },
+      "hi": {
+        "question": "भारत में शिक्षक दिवस किस तारीख को मनाया जाता है?",
+        "options": [
+          "14 नवंबर",
+          "5 सितंबर",
+          "2 अक्टूबर",
+          "15 अगस्त"
+        ],
+        "explanation": "यह डॉ. सर्वपल्ली राधाकृष्णन की जयंती है, जो प्रसिद्ध शिक्षक और भारत के दूसरे राष्ट्रपति थे।"
+      },
+      "hi-Latn": {
+        "question": "India mein Teachers' Day kis date ko manaya jata hai?",
+        "options": [
+          "14 November",
+          "5 September",
+          "2 October",
+          "15 August"
+        ],
+        "explanation": "Ye Dr. Sarvepalli Radhakrishnan ka birthday hai, jo famous teacher aur India ke second President the."
+      }
+    },
+    {
+      "groupId": "gk_011",
+      "difficulty": "easy",
+      "subcategory": "sports",
+      "correctIndex": 2,
+      "tags": [
+        "chess",
+        "sports"
+      ],
+      "en": {
+        "question": "How many squares are there on a standard chessboard?",
+        "options": [
+          "36",
+          "49",
+          "64",
+          "81"
+        ],
+        "explanation": "A chessboard is an 8 x 8 grid, giving 64 squares that alternate between light and dark colours."
+      },
+      "hi": {
+        "question": "एक सामान्य शतरंज की बिसात पर कितने खाने होते हैं?",
+        "options": [
+          "36",
+          "49",
+          "64",
+          "81"
+        ],
+        "explanation": "शतरंज की बिसात 8 x 8 की होती है, यानी 64 खाने जो बारी-बारी से हल्के और गहरे रंग के होते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Ek standard chessboard par kitne squares hote hain?",
+        "options": [
+          "36",
+          "49",
+          "64",
+          "81"
+        ],
+        "explanation": "Chessboard 8 x 8 ka grid hota hai, yaani 64 squares jo light aur dark colour mein alternate hote hain."
+      }
+    },
+    {
+      "groupId": "gk_012",
+      "difficulty": "easy",
+      "subcategory": "national_symbols",
+      "correctIndex": 3,
+      "tags": [
+        "india",
+        "symbols",
+        "birds"
+      ],
+      "en": {
+        "question": "Which is the national bird of India?",
+        "options": [
+          "Parrot",
+          "Sparrow",
+          "Swan",
+          "Peacock"
+        ],
+        "explanation": "The Indian peafowl was declared the national bird in 1963 and is protected under Indian wildlife law."
+      },
+      "hi": {
+        "question": "भारत का राष्ट्रीय पक्षी कौन सा है?",
+        "options": [
+          "तोता",
+          "गौरैया",
+          "हंस",
+          "मोर"
+        ],
+        "explanation": "भारतीय मोर को 1963 में राष्ट्रीय पक्षी घोषित किया गया और यह वन्यजीव कानून के तहत संरक्षित है।"
+      },
+      "hi-Latn": {
+        "question": "India ka national bird kaun sa hai?",
+        "options": [
+          "Parrot",
+          "Sparrow",
+          "Swan",
+          "Peacock"
+        ],
+        "explanation": "Indian peacock ko 1963 mein national bird declare kiya gaya tha aur ye wildlife law ke under protected hai."
+      }
+    },
+    {
+      "groupId": "gk_013",
+      "difficulty": "easy",
+      "subcategory": "national_symbols",
+      "correctIndex": 0,
+      "tags": [
+        "india",
+        "symbols",
+        "anthem"
+      ],
+      "en": {
+        "question": "Who wrote \"Jana Gana Mana\", the national anthem of India?",
+        "options": [
+          "Rabindranath Tagore",
+          "Bankim Chandra Chattopadhyay",
+          "Muhammad Iqbal",
+          "Sarojini Naidu"
+        ],
+        "explanation": "Tagore is unique in having written the national anthems of two countries: India and Bangladesh."
+      },
+      "hi": {
+        "question": "भारत का राष्ट्रगान \"जन गण मन\" किसने लिखा?",
+        "options": [
+          "रवींद्रनाथ टैगोर",
+          "बंकिम चंद्र चट्टोपाध्याय",
+          "मुहम्मद इक़बाल",
+          "सरोजिनी नायडू"
+        ],
+        "explanation": "टैगोर ने दो देशों, भारत और बांग्लादेश, के राष्ट्रगान लिखे हैं, जो अपने आप में अनोखा है।"
+      },
+      "hi-Latn": {
+        "question": "India ka national anthem \"Jana Gana Mana\" kisne likha?",
+        "options": [
+          "Rabindranath Tagore",
+          "Bankim Chandra Chattopadhyay",
+          "Muhammad Iqbal",
+          "Sarojini Naidu"
+        ],
+        "explanation": "Tagore ne do countries ke national anthem likhe hain, India aur Bangladesh, jo apne aap mein unique hai."
+      }
+    },
+    {
+      "groupId": "gk_014",
+      "difficulty": "easy",
+      "subcategory": "world_organizations",
+      "correctIndex": 1,
+      "tags": [
+        "who",
+        "organizations",
+        "health"
+      ],
+      "en": {
+        "question": "Where is the headquarters of the World Health Organization (WHO)?",
+        "options": [
+          "New York",
+          "Geneva",
+          "Paris",
+          "Rome"
+        ],
+        "explanation": "WHO was founded on 7 April 1948, which is why World Health Day is observed on 7 April every year."
+      },
+      "hi": {
+        "question": "विश्व स्वास्थ्य संगठन (WHO) का मुख्यालय कहाँ है?",
+        "options": [
+          "न्यूयॉर्क",
+          "जिनेवा",
+          "पेरिस",
+          "रोम"
+        ],
+        "explanation": "विश्व स्वास्थ्य संगठन की स्थापना 7 अप्रैल 1948 को हुई थी, इसलिए हर साल 7 अप्रैल को विश्व स्वास्थ्य दिवस मनाया जाता है।"
+      },
+      "hi-Latn": {
+        "question": "World Health Organization (WHO) ka headquarters kahan hai?",
+        "options": [
+          "New York",
+          "Geneva",
+          "Paris",
+          "Rome"
+        ],
+        "explanation": "WHO 7 April 1948 ko bana tha, isliye har saal 7 April ko World Health Day manaya jata hai."
+      }
+    },
+    {
+      "groupId": "gk_015",
+      "difficulty": "easy",
+      "subcategory": "currencies",
+      "correctIndex": 2,
+      "tags": [
+        "currency",
+        "world",
+        "europe"
+      ],
+      "en": {
+        "question": "What is the currency of the United Kingdom?",
+        "options": [
+          "Euro",
+          "Dollar",
+          "Pound sterling",
+          "Krone"
+        ],
+        "explanation": "The pound sterling is one of the oldest currencies still in use, and the UK kept it even while it was in the EU."
+      },
+      "hi": {
+        "question": "यूनाइटेड किंगडम की मुद्रा क्या है?",
+        "options": [
+          "यूरो",
+          "डॉलर",
+          "पाउंड स्टर्लिंग",
+          "क्रोन"
+        ],
+        "explanation": "पाउंड स्टर्लिंग आज भी चल रही सबसे पुरानी मुद्राओं में से एक है, और यूरोपीय संघ में रहते हुए भी ब्रिटेन ने इसे नहीं छोड़ा।"
+      },
+      "hi-Latn": {
+        "question": "United Kingdom ki currency kya hai?",
+        "options": [
+          "Euro",
+          "Dollar",
+          "Pound sterling",
+          "Krone"
+        ],
+        "explanation": "Pound sterling aaj bhi use hone wali sabse purani currencies mein se ek hai, aur EU mein rehte hue bhi UK ne ise nahi chhoda."
+      }
+    },
+    {
+      "groupId": "gk_016",
+      "difficulty": "medium",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 1,
+      "tags": [
+        "bharat_ratna",
+        "awards",
+        "science"
+      ],
+      "en": {
+        "question": "Which scientist was among the first three Bharat Ratna recipients in 1954?",
+        "options": [
+          "Homi J. Bhabha",
+          "C.V. Raman",
+          "A.P.J. Abdul Kalam",
+          "Vikram Sarabhai"
+        ],
+        "explanation": "The other two 1954 awardees were C. Rajagopalachari and Dr. Sarvepalli Radhakrishnan; Raman had already won the 1930 Nobel Prize in Physics."
+      },
+      "hi": {
+        "question": "1954 में पहले तीन भारत रत्न पाने वालों में कौन से वैज्ञानिक शामिल थे?",
+        "options": [
+          "होमी जे. भाभा",
+          "सी.वी. रमन",
+          "ए.पी.जे. अब्दुल कलाम",
+          "विक्रम साराभाई"
+        ],
+        "explanation": "1954 के बाकी दो सम्मानित सी. राजगोपालाचारी और डॉ. सर्वपल्ली राधाकृष्णन थे; रमन 1930 में भौतिकी का नोबेल पुरस्कार जीत चुके थे।"
+      },
+      "hi-Latn": {
+        "question": "1954 mein pehle teen Bharat Ratna paane walon mein kaun se scientist the?",
+        "options": [
+          "Homi J. Bhabha",
+          "C.V. Raman",
+          "A.P.J. Abdul Kalam",
+          "Vikram Sarabhai"
+        ],
+        "explanation": "1954 ke baaki do awardees C. Rajagopalachari aur Dr. Sarvepalli Radhakrishnan the; Raman 1930 mein Physics ka Nobel Prize jeet chuke the."
+      }
+    },
+    {
+      "groupId": "gk_017",
+      "difficulty": "medium",
+      "subcategory": "books_and_authors",
+      "correctIndex": 3,
+      "tags": [
+        "books",
+        "authors",
+        "india"
+      ],
+      "en": {
+        "question": "Who wrote the book \"The Discovery of India\"?",
+        "options": [
+          "Mahatma Gandhi",
+          "Rabindranath Tagore",
+          "B.R. Ambedkar",
+          "Jawaharlal Nehru"
+        ],
+        "explanation": "Nehru wrote it in 1944 while imprisoned in Ahmednagar Fort; it later inspired the TV series \"Bharat Ek Khoj\"."
+      },
+      "hi": {
+        "question": "\"द डिस्कवरी ऑफ इंडिया\" पुस्तक किसने लिखी?",
+        "options": [
+          "महात्मा गांधी",
+          "रवींद्रनाथ टैगोर",
+          "बी.आर. आंबेडकर",
+          "जवाहरलाल नेहरू"
+        ],
+        "explanation": "नेहरू ने इसे 1944 में अहमदनगर किले की जेल में लिखा था; बाद में इसी पर टीवी धारावाहिक \"भारत एक खोज\" बना।"
+      },
+      "hi-Latn": {
+        "question": "\"The Discovery of India\" book kisne likhi?",
+        "options": [
+          "Mahatma Gandhi",
+          "Rabindranath Tagore",
+          "B.R. Ambedkar",
+          "Jawaharlal Nehru"
+        ],
+        "explanation": "Nehru ne ise 1944 mein Ahmednagar Fort jail mein likha tha; baad mein isi par TV serial \"Bharat Ek Khoj\" bana."
+      }
+    },
+    {
+      "groupId": "gk_018",
+      "difficulty": "medium",
+      "subcategory": "world_organizations",
+      "correctIndex": 0,
+      "tags": [
+        "unesco",
+        "organizations"
+      ],
+      "en": {
+        "question": "In which city is the headquarters of UNESCO?",
+        "options": [
+          "Paris",
+          "Geneva",
+          "Rome",
+          "Vienna"
+        ],
+        "explanation": "UNESCO was set up in 1945 and also maintains the famous list of World Heritage Sites, including the Taj Mahal."
+      },
+      "hi": {
+        "question": "यूनेस्को का मुख्यालय किस शहर में है?",
+        "options": [
+          "पेरिस",
+          "जिनेवा",
+          "रोम",
+          "वियना"
+        ],
+        "explanation": "यूनेस्को 1945 में बना था और यही विश्व धरोहर स्थलों की प्रसिद्ध सूची बनाता है, जिसमें ताजमहल भी शामिल है।"
+      },
+      "hi-Latn": {
+        "question": "UNESCO ka headquarters kis city mein hai?",
+        "options": [
+          "Paris",
+          "Geneva",
+          "Rome",
+          "Vienna"
+        ],
+        "explanation": "UNESCO 1945 mein bana tha aur yahi World Heritage Sites ki famous list maintain karta hai, jisme Taj Mahal bhi hai."
+      }
+    },
+    {
+      "groupId": "gk_019",
+      "difficulty": "medium",
+      "subcategory": "sports",
+      "correctIndex": 2,
+      "tags": [
+        "olympics",
+        "sports",
+        "history"
+      ],
+      "en": {
+        "question": "Which city hosted the first modern Olympic Games in 1896?",
+        "options": [
+          "Paris",
+          "London",
+          "Athens",
+          "Rome"
+        ],
+        "explanation": "Athens was chosen to honour Greece as the birthplace of the ancient Olympic Games held at Olympia."
+      },
+      "hi": {
+        "question": "1896 में पहले आधुनिक ओलंपिक खेल किस शहर में हुए थे?",
+        "options": [
+          "पेरिस",
+          "लंदन",
+          "एथेंस",
+          "रोम"
+        ],
+        "explanation": "प्राचीन ओलंपिक खेलों की जन्मभूमि यूनान को सम्मान देने के लिए एथेंस को चुना गया था।"
+      },
+      "hi-Latn": {
+        "question": "1896 mein pehle modern Olympic Games kis city mein hue the?",
+        "options": [
+          "Paris",
+          "London",
+          "Athens",
+          "Rome"
+        ],
+        "explanation": "Ancient Olympics ki janmabhoomi Greece ko honour dene ke liye Athens ko choose kiya gaya tha."
+      }
+    },
+    {
+      "groupId": "gk_020",
+      "difficulty": "medium",
+      "subcategory": "sports",
+      "correctIndex": 1,
+      "tags": [
+        "olympics",
+        "india",
+        "women"
+      ],
+      "en": {
+        "question": "Who was the first Indian woman to win an Olympic medal?",
+        "options": [
+          "P.T. Usha",
+          "Karnam Malleswari",
+          "Mary Kom",
+          "Saina Nehwal"
+        ],
+        "explanation": "Malleswari won a weightlifting bronze at the 2000 Sydney Olympics; P.T. Usha famously missed a 1984 medal by a hundredth of a second."
+      },
+      "hi": {
+        "question": "ओलंपिक पदक जीतने वाली पहली भारतीय महिला कौन थीं?",
+        "options": [
+          "पी.टी. उषा",
+          "कर्णम मल्लेश्वरी",
+          "मैरी कॉम",
+          "साइना नेहवाल"
+        ],
+        "explanation": "मल्लेश्वरी ने 2000 के सिडनी ओलंपिक में भारोत्तोलन में कांस्य जीता; पी.टी. उषा 1984 में सेकंड के सौवें हिस्से से पदक चूक गई थीं।"
+      },
+      "hi-Latn": {
+        "question": "Olympic medal jeetne wali pehli Indian woman kaun thi?",
+        "options": [
+          "P.T. Usha",
+          "Karnam Malleswari",
+          "Mary Kom",
+          "Saina Nehwal"
+        ],
+        "explanation": "Malleswari ne 2000 Sydney Olympics mein weightlifting mein bronze jeeta; P.T. Usha 1984 mein second ke 100th hisse se medal miss kar gayi thi."
+      }
+    },
+    {
+      "groupId": "gk_021",
+      "difficulty": "medium",
+      "subcategory": "sports",
+      "correctIndex": 0,
+      "tags": [
+        "olympics",
+        "india",
+        "shooting"
+      ],
+      "en": {
+        "question": "Who won India's first individual Olympic gold medal?",
+        "options": [
+          "Abhinav Bindra",
+          "Rajyavardhan Singh Rathore",
+          "Neeraj Chopra",
+          "Leander Paes"
+        ],
+        "explanation": "Bindra won the 10m air rifle event at the 2008 Beijing Olympics; before that, all of India's Olympic golds had come in hockey."
+      },
+      "hi": {
+        "question": "भारत का पहला व्यक्तिगत ओलंपिक स्वर्ण पदक किसने जीता?",
+        "options": [
+          "अभिनव बिंद्रा",
+          "राज्यवर्धन सिंह राठौड़",
+          "नीरज चोपड़ा",
+          "लिएंडर पेस"
+        ],
+        "explanation": "बिंद्रा ने 2008 बीजिंग ओलंपिक में 10 मीटर एयर राइफल स्पर्धा जीती; इससे पहले भारत के सारे ओलंपिक स्वर्ण हॉकी में आए थे।"
+      },
+      "hi-Latn": {
+        "question": "India ka pehla individual Olympic gold medal kisne jeeta?",
+        "options": [
+          "Abhinav Bindra",
+          "Rajyavardhan Singh Rathore",
+          "Neeraj Chopra",
+          "Leander Paes"
+        ],
+        "explanation": "Bindra ne 2008 Beijing Olympics mein 10m air rifle event jeeta; usse pehle India ke saare Olympic gold hockey mein aaye the."
+      }
+    },
+    {
+      "groupId": "gk_022",
+      "difficulty": "medium",
+      "subcategory": "books_and_authors",
+      "correctIndex": 2,
+      "tags": [
+        "books",
+        "authors",
+        "autobiography"
+      ],
+      "en": {
+        "question": "\"Wings of Fire\" is the autobiography of which famous Indian?",
+        "options": [
+          "Ruskin Bond",
+          "R.K. Narayan",
+          "A.P.J. Abdul Kalam",
+          "Khushwant Singh"
+        ],
+        "explanation": "Co-written with Arun Tiwari and published in 1999, it traces Kalam's journey from Rameswaram to India's missile programme."
+      },
+      "hi": {
+        "question": "\"विंग्स ऑफ फायर\" किस प्रसिद्ध भारतीय की आत्मकथा है?",
+        "options": [
+          "रस्किन बॉन्ड",
+          "आर.के. नारायण",
+          "ए.पी.जे. अब्दुल कलाम",
+          "खुशवंत सिंह"
+        ],
+        "explanation": "अरुण तिवारी के साथ लिखी और 1999 में छपी यह किताब रामेश्वरम से भारत के मिसाइल कार्यक्रम तक कलाम के सफर की कहानी है।"
+      },
+      "hi-Latn": {
+        "question": "\"Wings of Fire\" kis famous Indian ki autobiography hai?",
+        "options": [
+          "Ruskin Bond",
+          "R.K. Narayan",
+          "A.P.J. Abdul Kalam",
+          "Khushwant Singh"
+        ],
+        "explanation": "Arun Tiwari ke saath likhi aur 1999 mein publish hui ye book Rameswaram se India ke missile programme tak Kalam ka safar batati hai."
+      }
+    },
+    {
+      "groupId": "gk_023",
+      "difficulty": "medium",
+      "subcategory": "currencies",
+      "correctIndex": 3,
+      "tags": [
+        "currency",
+        "world",
+        "africa"
+      ],
+      "en": {
+        "question": "What is the currency of South Africa?",
+        "options": [
+          "Peso",
+          "Shilling",
+          "Dinar",
+          "Rand"
+        ],
+        "explanation": "The rand is named after the Witwatersrand, the gold-rich ridge on which Johannesburg is built."
+      },
+      "hi": {
+        "question": "दक्षिण अफ्रीका की मुद्रा क्या है?",
+        "options": [
+          "पेसो",
+          "शिलिंग",
+          "दीनार",
+          "रैंड"
+        ],
+        "explanation": "रैंड का नाम विटवॉटर्सरैंड पर पड़ा है, वह सोने से भरपूर पहाड़ी जिस पर जोहान्सबर्ग बसा है।"
+      },
+      "hi-Latn": {
+        "question": "South Africa ki currency kya hai?",
+        "options": [
+          "Peso",
+          "Shilling",
+          "Dinar",
+          "Rand"
+        ],
+        "explanation": "Rand ka naam Witwatersrand se aaya hai, wo gold se bhari ridge jis par Johannesburg basa hai."
+      }
+    },
+    {
+      "groupId": "gk_024",
+      "difficulty": "medium",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 1,
+      "tags": [
+        "nobel_prize",
+        "awards",
+        "india"
+      ],
+      "en": {
+        "question": "Who was the first Indian to win a Nobel Prize?",
+        "options": [
+          "C.V. Raman",
+          "Rabindranath Tagore",
+          "Mother Teresa",
+          "Amartya Sen"
+        ],
+        "explanation": "Tagore won the 1913 Nobel Prize in Literature for \"Gitanjali\", becoming the first Asian Nobel laureate."
+      },
+      "hi": {
+        "question": "नोबेल पुरस्कार जीतने वाले पहले भारतीय कौन थे?",
+        "options": [
+          "सी.वी. रमन",
+          "रवींद्रनाथ टैगोर",
+          "मदर टेरेसा",
+          "अमर्त्य सेन"
+        ],
+        "explanation": "टैगोर को \"गीतांजलि\" के लिए 1913 का साहित्य का नोबेल मिला, और वे नोबेल पाने वाले पहले एशियाई बने।"
+      },
+      "hi-Latn": {
+        "question": "Nobel Prize jeetne wale pehle Indian kaun the?",
+        "options": [
+          "C.V. Raman",
+          "Rabindranath Tagore",
+          "Mother Teresa",
+          "Amartya Sen"
+        ],
+        "explanation": "Tagore ko \"Gitanjali\" ke liye 1913 ka Literature Nobel mila, aur wo Nobel paane wale pehle Asian bane."
+      }
+    },
+    {
+      "groupId": "gk_025",
+      "difficulty": "medium",
+      "subcategory": "sports",
+      "correctIndex": 0,
+      "tags": [
+        "football",
+        "india",
+        "tournaments"
+      ],
+      "en": {
+        "question": "The Durand Cup, first held in 1888, is associated with which sport?",
+        "options": [
+          "Football",
+          "Hockey",
+          "Polo",
+          "Badminton"
+        ],
+        "explanation": "It is named after Sir Mortimer Durand and is one of the oldest football tournaments in the world."
+      },
+      "hi": {
+        "question": "1888 में पहली बार हुआ डूरंड कप किस खेल से जुड़ा है?",
+        "options": [
+          "फुटबॉल",
+          "हॉकी",
+          "पोलो",
+          "बैडमिंटन"
+        ],
+        "explanation": "इसका नाम सर मॉर्टिमर डूरंड के नाम पर है और यह दुनिया के सबसे पुराने फुटबॉल टूर्नामेंटों में से एक है।"
+      },
+      "hi-Latn": {
+        "question": "1888 mein pehli baar hua Durand Cup kis sport se juda hai?",
+        "options": [
+          "Football",
+          "Hockey",
+          "Polo",
+          "Badminton"
+        ],
+        "explanation": "Iska naam Sir Mortimer Durand ke naam par hai aur ye duniya ke sabse purane football tournaments mein se ek hai."
+      }
+    },
+    {
+      "groupId": "gk_026",
+      "difficulty": "medium",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 2,
+      "tags": [
+        "awards",
+        "sports",
+        "india"
+      ],
+      "en": {
+        "question": "The Dronacharya Award in India is given to whom?",
+        "options": [
+          "Sportspersons",
+          "Teachers",
+          "Sports coaches",
+          "Writers"
+        ],
+        "explanation": "Named after the guru of the Pandavas and Kauravas, it has honoured outstanding sports coaches since 1985."
+      },
+      "hi": {
+        "question": "भारत में द्रोणाचार्य पुरस्कार किसे दिया जाता है?",
+        "options": [
+          "खिलाड़ियों को",
+          "शिक्षकों को",
+          "खेल प्रशिक्षकों को",
+          "लेखकों को"
+        ],
+        "explanation": "पांडवों और कौरवों के गुरु के नाम पर रखा गया यह पुरस्कार 1985 से उत्कृष्ट खेल प्रशिक्षकों को दिया जा रहा है।"
+      },
+      "hi-Latn": {
+        "question": "India mein Dronacharya Award kise diya jata hai?",
+        "options": [
+          "Sportspersons ko",
+          "Teachers ko",
+          "Sports coaches ko",
+          "Writers ko"
+        ],
+        "explanation": "Pandavon aur Kauravon ke guru ke naam par rakha gaya ye award 1985 se best sports coaches ko diya ja raha hai."
+      }
+    },
+    {
+      "groupId": "gk_027",
+      "difficulty": "medium",
+      "subcategory": "sports",
+      "correctIndex": 3,
+      "tags": [
+        "badminton",
+        "sports",
+        "trophies"
+      ],
+      "en": {
+        "question": "The Thomas Cup is associated with which sport?",
+        "options": [
+          "Tennis",
+          "Table tennis",
+          "Squash",
+          "Badminton"
+        ],
+        "explanation": "It is the men's world team badminton championship, which India won for the first time in 2022."
+      },
+      "hi": {
+        "question": "थॉमस कप किस खेल से जुड़ा है?",
+        "options": [
+          "टेनिस",
+          "टेबल टेनिस",
+          "स्क्वैश",
+          "बैडमिंटन"
+        ],
+        "explanation": "यह पुरुषों की विश्व टीम बैडमिंटन चैंपियनशिप है, जिसे भारत ने पहली बार 2022 में जीता।"
+      },
+      "hi-Latn": {
+        "question": "Thomas Cup kis sport se juda hai?",
+        "options": [
+          "Tennis",
+          "Table tennis",
+          "Squash",
+          "Badminton"
+        ],
+        "explanation": "Ye men's world team badminton championship hai, jise India ne pehli baar 2022 mein jeeta tha."
+      }
+    },
+    {
+      "groupId": "gk_028",
+      "difficulty": "medium",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 0,
+      "tags": [
+        "awards",
+        "literature",
+        "india"
+      ],
+      "en": {
+        "question": "The Jnanpith Award is given for outstanding contribution to which field?",
+        "options": [
+          "Literature",
+          "Music",
+          "Cinema",
+          "Science"
+        ],
+        "explanation": "The first Jnanpith Award went in 1965 to Malayalam poet G. Sankara Kurup for his collection \"Odakkuzhal\"."
+      },
+      "hi": {
+        "question": "ज्ञानपीठ पुरस्कार किस क्षेत्र में उत्कृष्ट योगदान के लिए दिया जाता है?",
+        "options": [
+          "साहित्य",
+          "संगीत",
+          "सिनेमा",
+          "विज्ञान"
+        ],
+        "explanation": "पहला ज्ञानपीठ पुरस्कार 1965 में मलयालम कवि जी. शंकर कुरुप को उनके संग्रह \"ओडक्कुझल\" के लिए मिला।"
+      },
+      "hi-Latn": {
+        "question": "Jnanpith Award kis field mein outstanding contribution ke liye diya jata hai?",
+        "options": [
+          "Literature",
+          "Music",
+          "Cinema",
+          "Science"
+        ],
+        "explanation": "Pehla Jnanpith Award 1965 mein Malayalam poet G. Sankara Kurup ko unke collection \"Odakkuzhal\" ke liye mila tha."
+      }
+    },
+    {
+      "groupId": "gk_029",
+      "difficulty": "medium",
+      "subcategory": "world_organizations",
+      "correctIndex": 1,
+      "tags": [
+        "united_nations",
+        "organizations",
+        "history"
+      ],
+      "en": {
+        "question": "In which year was the United Nations founded?",
+        "options": [
+          "1919",
+          "1945",
+          "1950",
+          "1939"
+        ],
+        "explanation": "The UN Charter came into force on 24 October 1945, which is why 24 October is celebrated as UN Day."
+      },
+      "hi": {
+        "question": "संयुक्त राष्ट्र की स्थापना किस वर्ष हुई?",
+        "options": [
+          "1919",
+          "1945",
+          "1950",
+          "1939"
+        ],
+        "explanation": "संयुक्त राष्ट्र चार्टर 24 अक्टूबर 1945 को लागू हुआ, इसलिए 24 अक्टूबर को संयुक्त राष्ट्र दिवस मनाया जाता है।"
+      },
+      "hi-Latn": {
+        "question": "United Nations kis year mein bana tha?",
+        "options": [
+          "1919",
+          "1945",
+          "1950",
+          "1939"
+        ],
+        "explanation": "UN Charter 24 October 1945 ko lagu hua tha, isliye 24 October ko UN Day celebrate kiya jata hai."
+      }
+    },
+    {
+      "groupId": "gk_030",
+      "difficulty": "medium",
+      "subcategory": "famous_landmarks",
+      "correctIndex": 3,
+      "tags": [
+        "monuments",
+        "world",
+        "usa"
+      ],
+      "en": {
+        "question": "Which country gifted the Statue of Liberty to the USA?",
+        "options": [
+          "Britain",
+          "Spain",
+          "Italy",
+          "France"
+        ],
+        "explanation": "The statue was a gift from the people of France, dedicated in 1886; its inner iron framework was designed by Gustave Eiffel."
+      },
+      "hi": {
+        "question": "स्टैच्यू ऑफ लिबर्टी अमेरिका को किस देश ने उपहार में दी थी?",
+        "options": [
+          "ब्रिटेन",
+          "स्पेन",
+          "इटली",
+          "फ्रांस"
+        ],
+        "explanation": "यह फ्रांस की जनता का उपहार थी, जिसका अनावरण 1886 में हुआ; इसका भीतरी लोहे का ढाँचा गुस्ताव एफिल ने बनाया था।"
+      },
+      "hi-Latn": {
+        "question": "Statue of Liberty USA ko kis country ne gift kiya tha?",
+        "options": [
+          "Britain",
+          "Spain",
+          "Italy",
+          "France"
+        ],
+        "explanation": "Ye France ke logon ka gift tha, jo 1886 mein dedicate hua; iska andar ka iron framework Gustave Eiffel ne design kiya tha."
+      }
+    },
+    {
+      "groupId": "gk_031",
+      "difficulty": "hard",
+      "subcategory": "world_organizations",
+      "correctIndex": 2,
+      "tags": [
+        "olympics",
+        "organizations",
+        "sports"
+      ],
+      "en": {
+        "question": "Where is the headquarters of the International Olympic Committee (IOC)?",
+        "options": [
+          "Geneva",
+          "Zurich",
+          "Lausanne",
+          "Paris"
+        ],
+        "explanation": "Pierre de Coubertin moved the IOC to Lausanne in 1915, and the city is now called the \"Olympic Capital\"."
+      },
+      "hi": {
+        "question": "अंतरराष्ट्रीय ओलंपिक समिति (IOC) का मुख्यालय कहाँ है?",
+        "options": [
+          "जिनेवा",
+          "ज़्यूरिख",
+          "लुसाने",
+          "पेरिस"
+        ],
+        "explanation": "पियरे दे कूबर्तिन 1915 में समिति को लुसाने ले गए, और इस शहर को \"ओलंपिक राजधानी\" कहा जाता है।"
+      },
+      "hi-Latn": {
+        "question": "International Olympic Committee (IOC) ka headquarters kahan hai?",
+        "options": [
+          "Geneva",
+          "Zurich",
+          "Lausanne",
+          "Paris"
+        ],
+        "explanation": "Pierre de Coubertin ne 1915 mein IOC ko Lausanne shift kiya, aur is city ko \"Olympic Capital\" kaha jata hai."
+      }
+    },
+    {
+      "groupId": "gk_032",
+      "difficulty": "hard",
+      "subcategory": "sports",
+      "correctIndex": 0,
+      "tags": [
+        "chess",
+        "india",
+        "firsts"
+      ],
+      "en": {
+        "question": "Who became India's first chess Grandmaster?",
+        "options": [
+          "Viswanathan Anand",
+          "Dibyendu Barua",
+          "Pravin Thipsay",
+          "Koneru Humpy"
+        ],
+        "explanation": "Anand earned the Grandmaster title in 1988 and later became a five-time world chess champion."
+      },
+      "hi": {
+        "question": "भारत के पहले शतरंज ग्रैंडमास्टर कौन बने?",
+        "options": [
+          "विश्वनाथन आनंद",
+          "दिब्येंदु बरुआ",
+          "प्रवीण थिप्से",
+          "कोनेरू हम्पी"
+        ],
+        "explanation": "आनंद ने 1988 में ग्रैंडमास्टर का खिताब पाया और बाद में पाँच बार विश्व शतरंज चैंपियन बने।"
+      },
+      "hi-Latn": {
+        "question": "India ke pehle chess Grandmaster kaun bane?",
+        "options": [
+          "Viswanathan Anand",
+          "Dibyendu Barua",
+          "Pravin Thipsay",
+          "Koneru Humpy"
+        ],
+        "explanation": "Anand ne 1988 mein Grandmaster title paaya aur baad mein 5 baar World Chess Champion bane."
+      }
+    },
+    {
+      "groupId": "gk_033",
+      "difficulty": "hard",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 1,
+      "tags": [
+        "bharat_ratna",
+        "awards",
+        "women"
+      ],
+      "en": {
+        "question": "Who was the first woman to be awarded the Bharat Ratna?",
+        "options": [
+          "Mother Teresa",
+          "Indira Gandhi",
+          "Lata Mangeshkar",
+          "M.S. Subbulakshmi"
+        ],
+        "explanation": "Indira Gandhi received it in 1971; Mother Teresa followed in 1980, M.S. Subbulakshmi in 1998 and Lata Mangeshkar in 2001."
+      },
+      "hi": {
+        "question": "भारत रत्न पाने वाली पहली महिला कौन थीं?",
+        "options": [
+          "मदर टेरेसा",
+          "इंदिरा गांधी",
+          "लता मंगेशकर",
+          "एम.एस. सुब्बुलक्ष्मी"
+        ],
+        "explanation": "इंदिरा गांधी को यह 1971 में मिला; इसके बाद मदर टेरेसा को 1980, एम.एस. सुब्बुलक्ष्मी को 1998 और लता मंगेशकर को 2001 में मिला।"
+      },
+      "hi-Latn": {
+        "question": "Bharat Ratna paane wali pehli woman kaun thi?",
+        "options": [
+          "Mother Teresa",
+          "Indira Gandhi",
+          "Lata Mangeshkar",
+          "M.S. Subbulakshmi"
+        ],
+        "explanation": "Indira Gandhi ko ye 1971 mein mila; uske baad Mother Teresa ko 1980, M.S. Subbulakshmi ko 1998 aur Lata Mangeshkar ko 2001 mein mila."
+      }
+    },
+    {
+      "groupId": "gk_034",
+      "difficulty": "hard",
+      "subcategory": "books_and_authors",
+      "correctIndex": 3,
+      "tags": [
+        "books",
+        "authors",
+        "booker_prize"
+      ],
+      "en": {
+        "question": "Who wrote the Booker Prize-winning novel \"The God of Small Things\"?",
+        "options": [
+          "Kiran Desai",
+          "Anita Desai",
+          "Jhumpa Lahiri",
+          "Arundhati Roy"
+        ],
+        "explanation": "It was Arundhati Roy's debut novel, set in Kerala, and won the Booker Prize in 1997."
+      },
+      "hi": {
+        "question": "बुकर पुरस्कार विजेता उपन्यास \"द गॉड ऑफ स्मॉल थिंग्स\" किसने लिखा?",
+        "options": [
+          "किरण देसाई",
+          "अनीता देसाई",
+          "झुम्पा लाहिड़ी",
+          "अरुंधति रॉय"
+        ],
+        "explanation": "केरल की पृष्ठभूमि पर लिखा यह अरुंधति रॉय का पहला उपन्यास था, जिसने 1997 में बुकर पुरस्कार जीता।"
+      },
+      "hi-Latn": {
+        "question": "Booker Prize jeetne wala novel \"The God of Small Things\" kisne likha?",
+        "options": [
+          "Kiran Desai",
+          "Anita Desai",
+          "Jhumpa Lahiri",
+          "Arundhati Roy"
+        ],
+        "explanation": "Kerala par based ye Arundhati Roy ka pehla novel tha, jisne 1997 mein Booker Prize jeeta."
+      }
+    },
+    {
+      "groupId": "gk_035",
+      "difficulty": "hard",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 2,
+      "tags": [
+        "awards",
+        "asia"
+      ],
+      "en": {
+        "question": "The Ramon Magsaysay Award is named after a former president of which country?",
+        "options": [
+          "Indonesia",
+          "Thailand",
+          "Philippines",
+          "Malaysia"
+        ],
+        "explanation": "Often called \"Asia's Nobel Prize\", it was set up in 1957 after President Magsaysay died in a plane crash."
+      },
+      "hi": {
+        "question": "रेमन मैग्सेसे पुरस्कार किस देश के पूर्व राष्ट्रपति के नाम पर है?",
+        "options": [
+          "इंडोनेशिया",
+          "थाईलैंड",
+          "फिलीपींस",
+          "मलेशिया"
+        ],
+        "explanation": "इसे अक्सर \"एशिया का नोबेल\" कहा जाता है; राष्ट्रपति मैग्सेसे की विमान दुर्घटना में मृत्यु के बाद 1957 में इसकी शुरुआत हुई।"
+      },
+      "hi-Latn": {
+        "question": "Ramon Magsaysay Award kis country ke former President ke naam par hai?",
+        "options": [
+          "Indonesia",
+          "Thailand",
+          "Philippines",
+          "Malaysia"
+        ],
+        "explanation": "Ise aksar \"Asia ka Nobel Prize\" kaha jata hai; President Magsaysay ki plane crash mein death ke baad 1957 mein ye shuru hua."
+      }
+    },
+    {
+      "groupId": "gk_036",
+      "difficulty": "hard",
+      "subcategory": "world_organizations",
+      "correctIndex": 3,
+      "tags": [
+        "interpol",
+        "organizations",
+        "police"
+      ],
+      "en": {
+        "question": "In which city is the headquarters of Interpol located?",
+        "options": [
+          "Brussels",
+          "The Hague",
+          "Geneva",
+          "Lyon"
+        ],
+        "explanation": "Interpol moved its General Secretariat to Lyon, France, in 1989; it helps police forces of its member countries cooperate."
+      },
+      "hi": {
+        "question": "इंटरपोल का मुख्यालय किस शहर में है?",
+        "options": [
+          "ब्रसेल्स",
+          "द हेग",
+          "जिनेवा",
+          "ल्योन"
+        ],
+        "explanation": "इंटरपोल ने 1989 में अपना महासचिवालय फ्रांस के ल्योन में स्थानांतरित किया; यह सदस्य देशों की पुलिस के बीच सहयोग कराता है।"
+      },
+      "hi-Latn": {
+        "question": "Interpol ka headquarters kis city mein hai?",
+        "options": [
+          "Brussels",
+          "The Hague",
+          "Geneva",
+          "Lyon"
+        ],
+        "explanation": "Interpol ne 1989 mein apna General Secretariat France ke Lyon mein shift kiya; ye member countries ki police ke beech cooperation karata hai."
+      }
+    },
+    {
+      "groupId": "gk_037",
+      "difficulty": "hard",
+      "subcategory": "sports",
+      "correctIndex": 0,
+      "tags": [
+        "asian_games",
+        "india",
+        "firsts"
+      ],
+      "en": {
+        "question": "Which city hosted the first Asian Games in 1951?",
+        "options": [
+          "New Delhi",
+          "Tokyo",
+          "Manila",
+          "Jakarta"
+        ],
+        "explanation": "The idea of the Asian Games was championed by Indian sports official Guru Dutt Sondhi, and Delhi hosted again in 1982."
+      },
+      "hi": {
+        "question": "1951 में पहले एशियाई खेल किस शहर में हुए थे?",
+        "options": [
+          "नई दिल्ली",
+          "टोक्यो",
+          "मनीला",
+          "जकार्ता"
+        ],
+        "explanation": "एशियाई खेलों का विचार भारतीय खेल अधिकारी गुरु दत्त सोंधी ने आगे बढ़ाया था, और दिल्ली ने 1982 में फिर इनकी मेज़बानी की।"
+      },
+      "hi-Latn": {
+        "question": "1951 mein pehle Asian Games kis city mein hue the?",
+        "options": [
+          "New Delhi",
+          "Tokyo",
+          "Manila",
+          "Jakarta"
+        ],
+        "explanation": "Asian Games ka idea Indian sports official Guru Dutt Sondhi ne aage badhaya tha, aur Delhi ne 1982 mein dobara host kiya."
+      }
+    },
+    {
+      "groupId": "gk_038",
+      "difficulty": "hard",
+      "subcategory": "books_and_authors",
+      "correctIndex": 1,
+      "tags": [
+        "books",
+        "authors",
+        "partition"
+      ],
+      "en": {
+        "question": "Who wrote the novel \"Train to Pakistan\"?",
+        "options": [
+          "Mulk Raj Anand",
+          "Khushwant Singh",
+          "Raja Rao",
+          "Amitav Ghosh"
+        ],
+        "explanation": "Published in 1956, it depicts the Partition of 1947 through the lives of people in a fictional border village called Mano Majra."
+      },
+      "hi": {
+        "question": "\"ट्रेन टू पाकिस्तान\" उपन्यास किसने लिखा?",
+        "options": [
+          "मुल्क राज आनंद",
+          "खुशवंत सिंह",
+          "राजा राव",
+          "अमिताव घोष"
+        ],
+        "explanation": "1956 में छपा यह उपन्यास मनो माजरा नाम के एक काल्पनिक सीमावर्ती गाँव के लोगों के जरिए 1947 के विभाजन को दिखाता है।"
+      },
+      "hi-Latn": {
+        "question": "\"Train to Pakistan\" novel kisne likha?",
+        "options": [
+          "Mulk Raj Anand",
+          "Khushwant Singh",
+          "Raja Rao",
+          "Amitav Ghosh"
+        ],
+        "explanation": "1956 mein publish hua ye novel Mano Majra naam ke ek fictional border village ke logon ke through 1947 ka Partition dikhata hai."
+      }
+    },
+    {
+      "groupId": "gk_039",
+      "difficulty": "hard",
+      "subcategory": "currencies",
+      "correctIndex": 2,
+      "tags": [
+        "currency",
+        "world",
+        "south_america"
+      ],
+      "en": {
+        "question": "What is the currency of Brazil?",
+        "options": [
+          "Peso",
+          "Sol",
+          "Real",
+          "Bolivar"
+        ],
+        "explanation": "The Brazilian real was introduced in 1994 to tame runaway inflation; the Sol is Peru's currency and the Bolivar is Venezuela's."
+      },
+      "hi": {
+        "question": "ब्राज़ील की मुद्रा क्या है?",
+        "options": [
+          "पेसो",
+          "सोल",
+          "रियाल",
+          "बोलिवर"
+        ],
+        "explanation": "ब्राज़ीली रियाल 1994 में बेकाबू महंगाई पर काबू पाने के लिए लाया गया; सोल पेरू की और बोलिवर वेनेज़ुएला की मुद्रा है।"
+      },
+      "hi-Latn": {
+        "question": "Brazil ki currency kya hai?",
+        "options": [
+          "Peso",
+          "Sol",
+          "Real",
+          "Bolivar"
+        ],
+        "explanation": "Brazilian real 1994 mein high inflation control karne ke liye laaya gaya; Sol Peru ki aur Bolivar Venezuela ki currency hai."
+      }
+    },
+    {
+      "groupId": "gk_040",
+      "difficulty": "hard",
+      "subcategory": "sports",
+      "correctIndex": 2,
+      "tags": [
+        "athletics",
+        "marathon",
+        "sports"
+      ],
+      "en": {
+        "question": "What is the official distance of a marathon race?",
+        "options": [
+          "40 km",
+          "41.5 km",
+          "42.195 km",
+          "45 km"
+        ],
+        "explanation": "The odd figure comes from the 1908 London Olympics course, which was fixed as the standard distance in 1921."
+      },
+      "hi": {
+        "question": "मैराथन दौड़ की आधिकारिक दूरी कितनी होती है?",
+        "options": [
+          "40 किमी",
+          "41.5 किमी",
+          "42.195 किमी",
+          "45 किमी"
+        ],
+        "explanation": "यह अजीब सी संख्या 1908 के लंदन ओलंपिक के रास्ते से आई, जिसे 1921 में मानक दूरी तय कर दिया गया।"
+      },
+      "hi-Latn": {
+        "question": "Marathon race ki official distance kitni hoti hai?",
+        "options": [
+          "40 km",
+          "41.5 km",
+          "42.195 km",
+          "45 km"
+        ],
+        "explanation": "Ye odd number 1908 London Olympics ke route se aaya, jise 1921 mein standard distance bana diya gaya."
+      }
+    },
+    {
+      "groupId": "gk_041",
+      "difficulty": "hard",
+      "subcategory": "important_days",
+      "correctIndex": 3,
+      "tags": [
+        "india",
+        "hockey",
+        "important_days"
+      ],
+      "en": {
+        "question": "National Sports Day in India is celebrated on the birth anniversary of which athlete?",
+        "options": [
+          "Milkha Singh",
+          "K.D. Jadhav",
+          "Balbir Singh Sr.",
+          "Dhyan Chand"
+        ],
+        "explanation": "Hockey wizard Dhyan Chand was born on 29 August 1905; he helped India win Olympic hockey gold in 1928, 1932 and 1936."
+      },
+      "hi": {
+        "question": "भारत में राष्ट्रीय खेल दिवस किस खिलाड़ी की जयंती पर मनाया जाता है?",
+        "options": [
+          "मिल्खा सिंह",
+          "के.डी. जाधव",
+          "बलबीर सिंह सीनियर",
+          "ध्यानचंद"
+        ],
+        "explanation": "हॉकी के जादूगर ध्यानचंद का जन्म 29 अगस्त 1905 को हुआ था; उन्होंने 1928, 1932 और 1936 में भारत को ओलंपिक हॉकी स्वर्ण दिलाने में मदद की।"
+      },
+      "hi-Latn": {
+        "question": "India mein National Sports Day kis player ke birthday par manaya jata hai?",
+        "options": [
+          "Milkha Singh",
+          "K.D. Jadhav",
+          "Balbir Singh Sr.",
+          "Dhyan Chand"
+        ],
+        "explanation": "Hockey ke jaadugar Dhyan Chand ka janm 29 August 1905 ko hua tha; unhone 1928, 1932 aur 1936 mein India ko Olympic hockey gold dilane mein madad ki."
+      }
+    },
+    {
+      "groupId": "gk_042",
+      "difficulty": "hard",
+      "subcategory": "sports",
+      "correctIndex": 0,
+      "tags": [
+        "olympics",
+        "india",
+        "wrestling"
+      ],
+      "en": {
+        "question": "In 1952, K.D. Jadhav won independent India's first individual Olympic medal in which sport?",
+        "options": [
+          "Wrestling",
+          "Boxing",
+          "Shooting",
+          "Athletics"
+        ],
+        "explanation": "Khashaba Dadasaheb Jadhav won bronze in freestyle wrestling at the Helsinki Olympics, largely funding his trip through local donations."
+      },
+      "hi": {
+        "question": "1952 में के.डी. जाधव ने स्वतंत्र भारत का पहला व्यक्तिगत ओलंपिक पदक किस खेल में जीता?",
+        "options": [
+          "कुश्ती",
+          "मुक्केबाज़ी",
+          "निशानेबाज़ी",
+          "एथलेटिक्स"
+        ],
+        "explanation": "खाशाबा दादासाहेब जाधव ने हेलसिंकी ओलंपिक में फ्रीस्टाइल कुश्ती में कांस्य जीता, और उनकी यात्रा का खर्च ज़्यादातर स्थानीय चंदे से जुटा था।"
+      },
+      "hi-Latn": {
+        "question": "1952 mein K.D. Jadhav ne independent India ka pehla individual Olympic medal kis sport mein jeeta?",
+        "options": [
+          "Wrestling",
+          "Boxing",
+          "Shooting",
+          "Athletics"
+        ],
+        "explanation": "Khashaba Dadasaheb Jadhav ne Helsinki Olympics mein freestyle wrestling mein bronze jeeta, aur unki trip ka kharcha zyada tar local donations se aaya tha."
+      }
+    },
+    {
+      "groupId": "gk_043",
+      "difficulty": "hard",
+      "subcategory": "sports",
+      "correctIndex": 1,
+      "tags": [
+        "tennis",
+        "grand_slam",
+        "sports"
+      ],
+      "en": {
+        "question": "On which surface is the French Open tennis tournament played?",
+        "options": [
+          "Grass",
+          "Clay",
+          "Hard court",
+          "Carpet"
+        ],
+        "explanation": "Played at Roland Garros in Paris, it is the only Grand Slam on red clay, which slows the ball and favours long rallies."
+      },
+      "hi": {
+        "question": "फ्रेंच ओपन टेनिस टूर्नामेंट किस सतह पर खेला जाता है?",
+        "options": [
+          "घास",
+          "क्ले (मिट्टी)",
+          "हार्ड कोर्ट",
+          "कार्पेट"
+        ],
+        "explanation": "पेरिस के रोलां गैरो में होने वाला यह लाल मिट्टी पर खेला जाने वाला एकमात्र ग्रैंड स्लैम है, जहाँ गेंद धीमी होती है और लंबी रैलियाँ चलती हैं।"
+      },
+      "hi-Latn": {
+        "question": "French Open tennis tournament kis surface par khela jata hai?",
+        "options": [
+          "Grass",
+          "Clay",
+          "Hard court",
+          "Carpet"
+        ],
+        "explanation": "Paris ke Roland Garros mein hone wala ye red clay par khela jane wala akela Grand Slam hai, jahan ball slow hoti hai aur lambi rallies chalti hain."
+      }
+    },
+    {
+      "groupId": "gk_044",
+      "difficulty": "hard",
+      "subcategory": "world_organizations",
+      "correctIndex": 0,
+      "tags": [
+        "united_nations",
+        "organizations",
+        "law"
+      ],
+      "en": {
+        "question": "Where is the International Court of Justice, the main judicial organ of the UN, located?",
+        "options": [
+          "The Hague",
+          "Geneva",
+          "Strasbourg",
+          "Vienna"
+        ],
+        "explanation": "The ICJ sits in the Peace Palace in the Netherlands and is the only principal UN organ not based in New York."
+      },
+      "hi": {
+        "question": "संयुक्त राष्ट्र का प्रमुख न्यायिक अंग, अंतरराष्ट्रीय न्यायालय, कहाँ स्थित है?",
+        "options": [
+          "द हेग",
+          "जिनेवा",
+          "स्ट्रासबर्ग",
+          "वियना"
+        ],
+        "explanation": "यह न्यायालय नीदरलैंड्स के पीस पैलेस में बैठता है और न्यूयॉर्क से बाहर स्थित संयुक्त राष्ट्र का एकमात्र प्रमुख अंग है।"
+      },
+      "hi-Latn": {
+        "question": "UN ka main judicial organ, International Court of Justice, kahan located hai?",
+        "options": [
+          "The Hague",
+          "Geneva",
+          "Strasbourg",
+          "Vienna"
+        ],
+        "explanation": "ICJ Netherlands ke Peace Palace mein baithta hai aur New York ke bahar based UN ka akela principal organ hai."
+      }
+    },
+    {
+      "groupId": "gk_045",
+      "difficulty": "hard",
+      "subcategory": "awards_and_honours",
+      "correctIndex": 3,
+      "tags": [
+        "unesco",
+        "awards",
+        "science"
+      ],
+      "en": {
+        "question": "UNESCO's Kalinga Prize, founded with an Indian donation, honours work in which area?",
+        "options": [
+          "World peace",
+          "Adult literacy",
+          "Environmental protection",
+          "Popularisation of science"
+        ],
+        "explanation": "It was instituted in 1952 with a donation from Odisha's Biju Patnaik and is named after the ancient Kalinga kingdom."
+      },
+      "hi": {
+        "question": "भारतीय दान से शुरू हुआ यूनेस्को का कलिंग पुरस्कार किस क्षेत्र में काम के लिए दिया जाता है?",
+        "options": [
+          "विश्व शांति",
+          "प्रौढ़ साक्षरता",
+          "पर्यावरण संरक्षण",
+          "विज्ञान को लोकप्रिय बनाना"
+        ],
+        "explanation": "इसकी शुरुआत 1952 में ओडिशा के बीजू पटनायक के दान से हुई थी और इसका नाम प्राचीन कलिंग राज्य पर रखा गया है।"
+      },
+      "hi-Latn": {
+        "question": "Indian donation se shuru hua UNESCO ka Kalinga Prize kis field mein kaam ke liye diya jata hai?",
+        "options": [
+          "World peace",
+          "Adult literacy",
+          "Environment protection",
+          "Science ko popular banana"
+        ],
+        "explanation": "Ye 1952 mein Odisha ke Biju Patnaik ke donation se shuru hua tha aur iska naam ancient Kalinga kingdom par rakha gaya hai."
+      }
+    }
+  ]
+}

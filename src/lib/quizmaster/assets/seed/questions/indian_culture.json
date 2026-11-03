@@ -1,0 +1,1842 @@
+{
+  "category": "indian_culture",
+  "questions": [
+    {
+      "groupId": "ic_001",
+      "difficulty": "easy",
+      "subcategory": "dance_forms",
+      "correctIndex": 2,
+      "tags": [
+        "dance",
+        "classical_dance",
+        "kerala"
+      ],
+      "en": {
+        "question": "Kathakali, the classical dance known for its elaborate makeup, belongs to which state?",
+        "options": [
+          "Tamil Nadu",
+          "Karnataka",
+          "Kerala",
+          "Odisha"
+        ],
+        "explanation": "Kathakali is a dance-drama from Kerala in which performers wear striking green face makeup and huge costumes to enact stories from the epics."
+      },
+      "hi": {
+        "question": "अपने विस्तृत श्रृंगार के लिए प्रसिद्ध शास्त्रीय नृत्य कथकली किस राज्य का है?",
+        "options": [
+          "तमिलनाडु",
+          "कर्नाटक",
+          "केरल",
+          "ओडिशा"
+        ],
+        "explanation": "कथकली केरल का नृत्य-नाटक है, जिसमें कलाकार हरे रंग का चेहरे का श्रृंगार और भारी वेशभूषा पहनकर महाकाव्यों की कथाएँ प्रस्तुत करते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Heavy makeup ke liye famous classical dance Kathakali kis state ka hai?",
+        "options": [
+          "Tamil Nadu",
+          "Karnataka",
+          "Kerala",
+          "Odisha"
+        ],
+        "explanation": "Kathakali Kerala ka dance-drama hai jisme performers green face makeup aur bade costumes pehen kar epics ki stories perform karte hain."
+      }
+    },
+    {
+      "groupId": "ic_002",
+      "difficulty": "easy",
+      "subcategory": "festivals",
+      "correctIndex": 0,
+      "tags": [
+        "festival",
+        "harvest",
+        "tamil_nadu"
+      ],
+      "en": {
+        "question": "Pongal is a harvest festival celebrated mainly in which state?",
+        "options": [
+          "Tamil Nadu",
+          "Punjab",
+          "West Bengal",
+          "Gujarat"
+        ],
+        "explanation": "Pongal is named after a sweet dish of rice boiled in milk, and the festival thanks the Sun and cattle for a good harvest."
+      },
+      "hi": {
+        "question": "पोंगल फसल का त्योहार मुख्य रूप से किस राज्य में मनाया जाता है?",
+        "options": [
+          "तमिलनाडु",
+          "पंजाब",
+          "पश्चिम बंगाल",
+          "गुजरात"
+        ],
+        "explanation": "पोंगल का नाम दूध में उबाले गए चावल के एक मीठे व्यंजन पर पड़ा है, और इस त्योहार में अच्छी फसल के लिए सूर्य और मवेशियों का आभार माना जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Pongal harvest festival mainly kis state mein manaya jata hai?",
+        "options": [
+          "Tamil Nadu",
+          "Punjab",
+          "West Bengal",
+          "Gujarat"
+        ],
+        "explanation": "Pongal ka naam doodh mein ubale chawal ki ek meethi dish par pada hai, aur is festival mein achhi fasal ke liye Surya aur cattle ko thanks kiya jata hai."
+      }
+    },
+    {
+      "groupId": "ic_003",
+      "difficulty": "easy",
+      "subcategory": "festivals",
+      "correctIndex": 3,
+      "tags": [
+        "festival",
+        "assam"
+      ],
+      "en": {
+        "question": "Bihu is the most important festival of which state?",
+        "options": [
+          "Manipur",
+          "Odisha",
+          "Tripura",
+          "Assam"
+        ],
+        "explanation": "Assam celebrates three Bihus a year, and Rongali Bihu in April marks the Assamese New Year with lively Bihu dance and songs."
+      },
+      "hi": {
+        "question": "बिहू किस राज्य का सबसे प्रमुख त्योहार है?",
+        "options": [
+          "मणिपुर",
+          "ओडिशा",
+          "त्रिपुरा",
+          "असम"
+        ],
+        "explanation": "असम में साल में तीन बिहू मनाए जाते हैं, और अप्रैल का रोंगाली बिहू असमिया नववर्ष का प्रतीक है जिसमें बिहू नृत्य और गीत होते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Bihu kis state ka sabse important festival hai?",
+        "options": [
+          "Manipur",
+          "Odisha",
+          "Tripura",
+          "Assam"
+        ],
+        "explanation": "Assam mein saal mein teen Bihu manaye jaate hain, aur April wala Rongali Bihu Assamese New Year hota hai jisme Bihu dance aur songs hote hain."
+      }
+    },
+    {
+      "groupId": "ic_004",
+      "difficulty": "easy",
+      "subcategory": "art_forms",
+      "correctIndex": 1,
+      "tags": [
+        "painting",
+        "folk_art",
+        "bihar"
+      ],
+      "en": {
+        "question": "Madhubani painting originated in which state?",
+        "options": [
+          "Rajasthan",
+          "Bihar",
+          "Maharashtra",
+          "Odisha"
+        ],
+        "explanation": "Madhubani art comes from the Mithila region of Bihar, where women traditionally painted it on walls and floors for festivals and weddings."
+      },
+      "hi": {
+        "question": "मधुबनी चित्रकला की उत्पत्ति किस राज्य में हुई?",
+        "options": [
+          "राजस्थान",
+          "बिहार",
+          "महाराष्ट्र",
+          "ओडिशा"
+        ],
+        "explanation": "मधुबनी कला बिहार के मिथिला क्षेत्र से आती है, जहाँ महिलाएँ पारंपरिक रूप से त्योहारों और विवाहों पर इसे दीवारों और फ़र्श पर बनाती थीं।"
+      },
+      "hi-Latn": {
+        "question": "Madhubani painting ki shuruaat kis state mein hui?",
+        "options": [
+          "Rajasthan",
+          "Bihar",
+          "Maharashtra",
+          "Odisha"
+        ],
+        "explanation": "Madhubani art Bihar ke Mithila region se aati hai, jahan auratein festivals aur shaadiyon par isse deewaron aur floor par banati thi."
+      }
+    },
+    {
+      "groupId": "ic_005",
+      "difficulty": "easy",
+      "subcategory": "epics_literature",
+      "correctIndex": 1,
+      "tags": [
+        "ramayana",
+        "epics",
+        "sanskrit"
+      ],
+      "en": {
+        "question": "Who is traditionally credited with composing the Sanskrit Ramayana?",
+        "options": [
+          "Ved Vyasa",
+          "Valmiki",
+          "Tulsidas",
+          "Kalidasa"
+        ],
+        "explanation": "Valmiki is honoured as the 'Adi Kavi' (first poet), while Tulsidas later retold the story in Awadhi as the Ramcharitmanas."
+      },
+      "hi": {
+        "question": "संस्कृत रामायण की रचना का श्रेय पारंपरिक रूप से किसे दिया जाता है?",
+        "options": [
+          "वेद व्यास",
+          "वाल्मीकि",
+          "तुलसीदास",
+          "कालिदास"
+        ],
+        "explanation": "वाल्मीकि को 'आदि कवि' कहा जाता है, जबकि तुलसीदास ने बाद में यही कथा अवधी में रामचरितमानस के रूप में लिखी।"
+      },
+      "hi-Latn": {
+        "question": "Sanskrit Ramayana likhne ka credit traditionally kise diya jata hai?",
+        "options": [
+          "Ved Vyasa",
+          "Valmiki",
+          "Tulsidas",
+          "Kalidasa"
+        ],
+        "explanation": "Valmiki ko 'Adi Kavi' yaani pehla kavi kaha jata hai, jabki Tulsidas ne baad mein yahi kahani Awadhi mein Ramcharitmanas ke roop mein likhi."
+      }
+    },
+    {
+      "groupId": "ic_006",
+      "difficulty": "easy",
+      "subcategory": "dance_forms",
+      "correctIndex": 3,
+      "tags": [
+        "dance",
+        "tamil_nadu"
+      ],
+      "en": {
+        "question": "Bharatanatyam, one of India's oldest classical dances, originated in which state?",
+        "options": [
+          "Kerala",
+          "Odisha",
+          "Karnataka",
+          "Tamil Nadu"
+        ],
+        "explanation": "Bharatanatyam grew out of the temple dance traditions of Tamil Nadu and is known for its fixed half-sitting posture called aramandi."
+      },
+      "hi": {
+        "question": "भरतनाट्यम, भारत के सबसे पुराने शास्त्रीय नृत्यों में से एक, किस राज्य में शुरू हुआ?",
+        "options": [
+          "केरल",
+          "ओडिशा",
+          "कर्नाटक",
+          "तमिलनाडु"
+        ],
+        "explanation": "भरतनाट्यम तमिलनाडु की मंदिर नृत्य परंपरा से विकसित हुआ और अपनी अर्ध-बैठी मुद्रा \"अरमंडी\" के लिए जाना जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Bharatanatyam, India ke sabse purane classical dances mein se ek, kis state mein shuru hua?",
+        "options": [
+          "Kerala",
+          "Odisha",
+          "Karnataka",
+          "Tamil Nadu"
+        ],
+        "explanation": "Bharatanatyam Tamil Nadu ki temple dance tradition se develop hua aur apne half-sitting posture \"aramandi\" ke liye famous hai."
+      }
+    },
+    {
+      "groupId": "ic_007",
+      "difficulty": "easy",
+      "subcategory": "festivals",
+      "correctIndex": 0,
+      "tags": [
+        "diwali",
+        "festivals"
+      ],
+      "en": {
+        "question": "Diwali is popularly known as the festival of what?",
+        "options": [
+          "Lights",
+          "Kites",
+          "Harvest",
+          "Flowers"
+        ],
+        "explanation": "Diwali gets its name from the Sanskrit \"Deepavali\", meaning a row of lamps; homes are lit with diyas to celebrate the victory of light over darkness."
+      },
+      "hi": {
+        "question": "दीवाली को लोकप्रिय रूप से किसका त्योहार कहा जाता है?",
+        "options": [
+          "रोशनी",
+          "पतंगों",
+          "फ़सल",
+          "फूलों"
+        ],
+        "explanation": "दीवाली नाम संस्कृत शब्द \"दीपावली\" से आया है, जिसका अर्थ है दीयों की पंक्ति; अंधकार पर प्रकाश की जीत के उत्सव में घरों को दीयों से सजाया जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Diwali ko popularly kis cheez ka festival kaha jaata hai?",
+        "options": [
+          "Lights",
+          "Kites",
+          "Harvest",
+          "Flowers"
+        ],
+        "explanation": "Diwali naam Sanskrit word \"Deepavali\" se aaya hai, jiska matlab hai diyon ki line; andhere par roshni ki jeet celebrate karne ke liye ghar diyon se sajaaye jaate hain."
+      }
+    },
+    {
+      "groupId": "ic_008",
+      "difficulty": "easy",
+      "subcategory": "classical_music",
+      "correctIndex": 2,
+      "tags": [
+        "music",
+        "instruments",
+        "maestros"
+      ],
+      "en": {
+        "question": "Ustad Bismillah Khan is famous for playing which instrument?",
+        "options": [
+          "Sitar",
+          "Flute",
+          "Shehnai",
+          "Sarangi"
+        ],
+        "explanation": "Bismillah Khan took the shehnai from wedding processions to the concert stage, and he played it at the Red Fort on India's first Independence Day."
+      },
+      "hi": {
+        "question": "उस्ताद बिस्मिल्लाह ख़ाँ किस वाद्य यंत्र को बजाने के लिए प्रसिद्ध हैं?",
+        "options": [
+          "सितार",
+          "बाँसुरी",
+          "शहनाई",
+          "सारंगी"
+        ],
+        "explanation": "बिस्मिल्लाह ख़ाँ ने शहनाई को शादी की बारातों से संगीत मंच तक पहुँचाया, और भारत के पहले स्वतंत्रता दिवस पर लाल क़िले पर इसे बजाया।"
+      },
+      "hi-Latn": {
+        "question": "Ustad Bismillah Khan kaunsa instrument bajane ke liye famous hain?",
+        "options": [
+          "Sitar",
+          "Bansuri",
+          "Shehnai",
+          "Sarangi"
+        ],
+        "explanation": "Bismillah Khan ne shehnai ko shaadi ki baaraat se concert stage tak pahunchaya, aur India ke pehle Independence Day par Red Fort par ise bajaya."
+      }
+    },
+    {
+      "groupId": "ic_009",
+      "difficulty": "easy",
+      "subcategory": "dance_forms",
+      "correctIndex": 3,
+      "tags": [
+        "dance",
+        "folk_dance",
+        "punjab"
+      ],
+      "en": {
+        "question": "Bhangra is a lively folk dance from which state?",
+        "options": [
+          "Haryana",
+          "Rajasthan",
+          "Gujarat",
+          "Punjab"
+        ],
+        "explanation": "Bhangra began as a harvest-time dance of Punjabi farmers, performed to the powerful beat of the dhol, especially around Baisakhi."
+      },
+      "hi": {
+        "question": "भांगड़ा किस राज्य का जोशीला लोक नृत्य है?",
+        "options": [
+          "हरियाणा",
+          "राजस्थान",
+          "गुजरात",
+          "पंजाब"
+        ],
+        "explanation": "भांगड़ा पंजाबी किसानों के फसल-कटाई के नृत्य के रूप में शुरू हुआ, जो ढोल की ज़ोरदार थाप पर ख़ासकर बैसाखी के आसपास किया जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Bhangra kis state ka energetic folk dance hai?",
+        "options": [
+          "Haryana",
+          "Rajasthan",
+          "Gujarat",
+          "Punjab"
+        ],
+        "explanation": "Bhangra Punjabi kisanon ke harvest dance ke roop mein shuru hua, jo dhol ki zordar beat par khaaskar Baisakhi ke aas-paas kiya jata hai."
+      }
+    },
+    {
+      "groupId": "ic_010",
+      "difficulty": "easy",
+      "subcategory": "festivals",
+      "correctIndex": 0,
+      "tags": [
+        "festival",
+        "holi"
+      ],
+      "en": {
+        "question": "Which Indian festival is popularly called the 'Festival of Colours'?",
+        "options": [
+          "Holi",
+          "Diwali",
+          "Navratri",
+          "Lohri"
+        ],
+        "explanation": "On Holi people throw coloured powder (gulal) and water at each other, celebrating the arrival of spring; the night before, Holika Dahan bonfires are lit."
+      },
+      "hi": {
+        "question": "किस भारतीय त्योहार को 'रंगों का त्योहार' कहा जाता है?",
+        "options": [
+          "होली",
+          "दिवाली",
+          "नवरात्रि",
+          "लोहड़ी"
+        ],
+        "explanation": "होली पर लोग एक-दूसरे पर गुलाल और रंग डालकर वसंत का स्वागत करते हैं; इससे पहली रात होलिका दहन किया जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Kis Indian festival ko 'Festival of Colours' kaha jata hai?",
+        "options": [
+          "Holi",
+          "Diwali",
+          "Navratri",
+          "Lohri"
+        ],
+        "explanation": "Holi par log ek-doosre par gulal aur rang daal kar spring ka welcome karte hain; usse pehli raat Holika Dahan hota hai."
+      }
+    },
+    {
+      "groupId": "ic_011",
+      "difficulty": "easy",
+      "subcategory": "cuisine",
+      "correctIndex": 2,
+      "tags": [
+        "food",
+        "snacks",
+        "gujarat"
+      ],
+      "en": {
+        "question": "Dhokla, the soft steamed snack, comes from which state's cuisine?",
+        "options": [
+          "Maharashtra",
+          "Rajasthan",
+          "Gujarat",
+          "Madhya Pradesh"
+        ],
+        "explanation": "Dhokla is a Gujarati favourite made from a fermented gram-flour or rice batter, which is why it turns out so spongy when steamed."
+      },
+      "hi": {
+        "question": "भाप में पकने वाला नरम नाश्ता ढोकला किस राज्य के व्यंजनों से आता है?",
+        "options": [
+          "महाराष्ट्र",
+          "राजस्थान",
+          "गुजरात",
+          "मध्य प्रदेश"
+        ],
+        "explanation": "ढोकला गुजरात का पसंदीदा व्यंजन है जो बेसन या चावल के ख़मीर उठे घोल से बनता है, इसीलिए भाप में पकने पर यह इतना स्पंजी बनता है।"
+      },
+      "hi-Latn": {
+        "question": "Steam mein banne wala soft snack Dhokla kis state ki cuisine se aata hai?",
+        "options": [
+          "Maharashtra",
+          "Rajasthan",
+          "Gujarat",
+          "Madhya Pradesh"
+        ],
+        "explanation": "Dhokla Gujarati favourite hai jo fermented besan ya chawal ke batter se banta hai, isliye steam karne par itna spongy hota hai."
+      }
+    },
+    {
+      "groupId": "ic_012",
+      "difficulty": "easy",
+      "subcategory": "epics_literature",
+      "correctIndex": 1,
+      "tags": [
+        "mahabharata",
+        "epics"
+      ],
+      "en": {
+        "question": "According to tradition, who composed the Mahabharata?",
+        "options": [
+          "Valmiki",
+          "Ved Vyasa",
+          "Narada",
+          "Kalidasa"
+        ],
+        "explanation": "In the traditional story, Ved Vyasa dictated the Mahabharata and Lord Ganesha wrote it down without pausing."
+      },
+      "hi": {
+        "question": "परंपरा के अनुसार महाभारत की रचना किसने की?",
+        "options": [
+          "वाल्मीकि",
+          "वेद व्यास",
+          "नारद",
+          "कालिदास"
+        ],
+        "explanation": "पारंपरिक कथा के अनुसार वेद व्यास ने महाभारत बोलकर लिखवाया और भगवान गणेश ने बिना रुके इसे लिखा।"
+      },
+      "hi-Latn": {
+        "question": "Tradition ke hisaab se Mahabharata kisne likhi?",
+        "options": [
+          "Valmiki",
+          "Ved Vyasa",
+          "Narada",
+          "Kalidasa"
+        ],
+        "explanation": "Traditional kahani ke mutabik Ved Vyasa ne Mahabharata bol kar likhwayi aur Lord Ganesha ne bina ruke use likha."
+      }
+    },
+    {
+      "groupId": "ic_013",
+      "difficulty": "easy",
+      "subcategory": "dance_forms",
+      "correctIndex": 0,
+      "tags": [
+        "dance",
+        "folk_dance",
+        "navratri",
+        "gujarat"
+      ],
+      "en": {
+        "question": "Garba, danced in circles during Navratri, is a folk dance of which state?",
+        "options": [
+          "Gujarat",
+          "Karnataka",
+          "Uttar Pradesh",
+          "Bihar"
+        ],
+        "explanation": "Garba is traditionally danced around a lamp or an image of the Goddess, and in 2023 'Garba of Gujarat' was added to UNESCO's intangible heritage list."
+      },
+      "hi": {
+        "question": "नवरात्रि में गोल घेरे में किया जाने वाला गरबा किस राज्य का लोक नृत्य है?",
+        "options": [
+          "गुजरात",
+          "कर्नाटक",
+          "उत्तर प्रदेश",
+          "बिहार"
+        ],
+        "explanation": "गरबा पारंपरिक रूप से दीपक या देवी की प्रतिमा के चारों ओर किया जाता है, और 2023 में 'गुजरात का गरबा' यूनेस्को की अमूर्त विरासत सूची में शामिल हुआ।"
+      },
+      "hi-Latn": {
+        "question": "Navratri mein circle mein kiya jane wala Garba kis state ka folk dance hai?",
+        "options": [
+          "Gujarat",
+          "Karnataka",
+          "Uttar Pradesh",
+          "Bihar"
+        ],
+        "explanation": "Garba traditionally ek diye ya Devi ki murti ke chaaron taraf kiya jata hai, aur 2023 mein 'Garba of Gujarat' UNESCO ki intangible heritage list mein add hua."
+      }
+    },
+    {
+      "groupId": "ic_014",
+      "difficulty": "easy",
+      "subcategory": "classical_music",
+      "correctIndex": 3,
+      "tags": [
+        "music",
+        "instruments",
+        "maestros"
+      ],
+      "en": {
+        "question": "Pandit Ravi Shankar took which Indian instrument to worldwide fame?",
+        "options": [
+          "Sarod",
+          "Tabla",
+          "Veena",
+          "Sitar"
+        ],
+        "explanation": "Ravi Shankar's sitar collaborations with violinist Yehudi Menuhin and The Beatles' George Harrison introduced Indian classical music to global audiences."
+      },
+      "hi": {
+        "question": "पंडित रविशंकर ने किस भारतीय वाद्य यंत्र को दुनिया भर में प्रसिद्ध किया?",
+        "options": [
+          "सरोद",
+          "तबला",
+          "वीणा",
+          "सितार"
+        ],
+        "explanation": "वायलिन वादक येहुदी मेनुहिन और बीटल्स के जॉर्ज हैरिसन के साथ रविशंकर के सितार के काम ने भारतीय शास्त्रीय संगीत को दुनिया तक पहुँचाया।"
+      },
+      "hi-Latn": {
+        "question": "Pandit Ravi Shankar ne kaunse Indian instrument ko worldwide famous banaya?",
+        "options": [
+          "Sarod",
+          "Tabla",
+          "Veena",
+          "Sitar"
+        ],
+        "explanation": "Violinist Yehudi Menuhin aur The Beatles ke George Harrison ke saath Ravi Shankar ke sitar collaborations ne Indian classical music ko duniya tak pahunchaya."
+      }
+    },
+    {
+      "groupId": "ic_015",
+      "difficulty": "easy",
+      "subcategory": "languages_scripts",
+      "correctIndex": 2,
+      "tags": [
+        "script",
+        "hindi"
+      ],
+      "en": {
+        "question": "In which script is standard Hindi written?",
+        "options": [
+          "Gurmukhi",
+          "Brahmi",
+          "Devanagari",
+          "Perso-Arabic"
+        ],
+        "explanation": "Devanagari is also used for Marathi, Nepali and Sanskrit, and its letters hang from a characteristic horizontal top line called the shirorekha."
+      },
+      "hi": {
+        "question": "मानक हिंदी किस लिपि में लिखी जाती है?",
+        "options": [
+          "गुरमुखी",
+          "ब्राह्मी",
+          "देवनागरी",
+          "फ़ारसी-अरबी"
+        ],
+        "explanation": "देवनागरी में मराठी, नेपाली और संस्कृत भी लिखी जाती हैं, और इसके अक्षर ऊपर की एक क्षैतिज रेखा से लटकते हैं जिसे शिरोरेखा कहते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Standard Hindi kis script mein likhi jaati hai?",
+        "options": [
+          "Gurmukhi",
+          "Brahmi",
+          "Devanagari",
+          "Perso-Arabic"
+        ],
+        "explanation": "Devanagari mein Marathi, Nepali aur Sanskrit bhi likhi jaati hain, aur iske letters upar ki ek horizontal line se latakte hain jise shirorekha kehte hain."
+      }
+    },
+    {
+      "groupId": "ic_016",
+      "difficulty": "medium",
+      "subcategory": "martial_arts",
+      "correctIndex": 1,
+      "tags": [
+        "martial_arts",
+        "kerala"
+      ],
+      "en": {
+        "question": "Kalaripayattu, one of the oldest martial arts in the world, comes from which state?",
+        "options": [
+          "Tamil Nadu",
+          "Kerala",
+          "Manipur",
+          "Punjab"
+        ],
+        "explanation": "Kalaripayattu is practised in a training pit called a 'kalari' and combines strikes, weapons, flexibility training and traditional healing massage."
+      },
+      "hi": {
+        "question": "दुनिया की सबसे पुरानी युद्ध कलाओं में से एक कलरीपयट्टू किस राज्य से है?",
+        "options": [
+          "तमिलनाडु",
+          "केरल",
+          "मणिपुर",
+          "पंजाब"
+        ],
+        "explanation": "कलरीपयट्टू का अभ्यास 'कलरी' नामक प्रशिक्षण स्थल में होता है, और इसमें प्रहार, हथियार, लचीलापन और पारंपरिक उपचार मालिश सब शामिल हैं।"
+      },
+      "hi-Latn": {
+        "question": "Duniya ke sabse purane martial arts mein se ek, Kalaripayattu kis state se hai?",
+        "options": [
+          "Tamil Nadu",
+          "Kerala",
+          "Manipur",
+          "Punjab"
+        ],
+        "explanation": "Kalaripayattu 'kalari' naam ke training space mein sikhaya jata hai, aur isme strikes, weapons, flexibility aur traditional healing massage sab shamil hain."
+      }
+    },
+    {
+      "groupId": "ic_017",
+      "difficulty": "medium",
+      "subcategory": "art_forms",
+      "correctIndex": 3,
+      "tags": [
+        "painting",
+        "tribal_art",
+        "maharashtra"
+      ],
+      "en": {
+        "question": "Warli painting, made with simple circles and triangles, is a tribal art of which state?",
+        "options": [
+          "Bihar",
+          "Odisha",
+          "Chhattisgarh",
+          "Maharashtra"
+        ],
+        "explanation": "The Warli tribe of Maharashtra's Sahyadri region paints white stick-figure scenes of daily life, traditionally using rice paste on mud walls."
+      },
+      "hi": {
+        "question": "गोल और त्रिकोण आकृतियों से बनने वाली वारली चित्रकला किस राज्य की जनजातीय कला है?",
+        "options": [
+          "बिहार",
+          "ओडिशा",
+          "छत्तीसगढ़",
+          "महाराष्ट्र"
+        ],
+        "explanation": "महाराष्ट्र के सह्याद्रि क्षेत्र की वारली जनजाति मिट्टी की दीवारों पर चावल के लेप से रोज़मर्रा के जीवन के सफ़ेद चित्र बनाती है।"
+      },
+      "hi-Latn": {
+        "question": "Circles aur triangles se banne wali Warli painting kis state ka tribal art hai?",
+        "options": [
+          "Bihar",
+          "Odisha",
+          "Chhattisgarh",
+          "Maharashtra"
+        ],
+        "explanation": "Maharashtra ke Sahyadri region ki Warli tribe mitti ki deewaron par chawal ke paste se daily life ke white stick-figure scenes banati hai."
+      }
+    },
+    {
+      "groupId": "ic_018",
+      "difficulty": "medium",
+      "subcategory": "art_forms",
+      "correctIndex": 0,
+      "tags": [
+        "painting",
+        "folk_art",
+        "odisha"
+      ],
+      "en": {
+        "question": "Pattachitra, a scroll painting tradition linked to the Jagannath temple, belongs to which state?",
+        "options": [
+          "Odisha",
+          "Andhra Pradesh",
+          "Rajasthan",
+          "Assam"
+        ],
+        "explanation": "'Patta' means cloth and 'chitra' means picture; Odisha's chitrakars paint mythological scenes on treated cloth, with Raghurajpur near Puri a famous artists' village."
+      },
+      "hi": {
+        "question": "जगन्नाथ मंदिर से जुड़ी पट्टचित्र चित्रकला किस राज्य की है?",
+        "options": [
+          "ओडिशा",
+          "आंध्र प्रदेश",
+          "राजस्थान",
+          "असम"
+        ],
+        "explanation": "'पट्ट' का अर्थ कपड़ा और 'चित्र' का अर्थ तस्वीर है; ओडिशा के चित्रकार कपड़े पर पौराणिक दृश्य बनाते हैं, और पुरी के पास रघुराजपुर इसका प्रसिद्ध गाँव है।"
+      },
+      "hi-Latn": {
+        "question": "Jagannath temple se judi Pattachitra painting kis state ki hai?",
+        "options": [
+          "Odisha",
+          "Andhra Pradesh",
+          "Rajasthan",
+          "Assam"
+        ],
+        "explanation": "'Patta' matlab kapda aur 'chitra' matlab picture; Odisha ke artists kapde par mythological scenes banate hain, aur Puri ke paas Raghurajpur iska famous artists' village hai."
+      }
+    },
+    {
+      "groupId": "ic_019",
+      "difficulty": "medium",
+      "subcategory": "dance_forms",
+      "correctIndex": 2,
+      "tags": [
+        "dance",
+        "classical_dance",
+        "andhra_pradesh"
+      ],
+      "en": {
+        "question": "The classical dance Kuchipudi is named after a village in which state?",
+        "options": [
+          "Karnataka",
+          "Tamil Nadu",
+          "Andhra Pradesh",
+          "Kerala"
+        ],
+        "explanation": "Kuchipudi village in Andhra Pradesh's Krishna district gave the dance its name; a famous feat involves dancing on the rim of a brass plate."
+      },
+      "hi": {
+        "question": "शास्त्रीय नृत्य कुचिपुड़ी का नाम किस राज्य के एक गाँव पर रखा गया है?",
+        "options": [
+          "कर्नाटक",
+          "तमिलनाडु",
+          "आंध्र प्रदेश",
+          "केरल"
+        ],
+        "explanation": "आंध्र प्रदेश के कृष्णा ज़िले के कुचिपुड़ी गाँव से इस नृत्य को नाम मिला; इसमें पीतल की थाली के किनारे पर नाचना एक मशहूर करतब है।"
+      },
+      "hi-Latn": {
+        "question": "Classical dance Kuchipudi ka naam kis state ke ek gaon par rakha gaya hai?",
+        "options": [
+          "Karnataka",
+          "Tamil Nadu",
+          "Andhra Pradesh",
+          "Kerala"
+        ],
+        "explanation": "Andhra Pradesh ke Krishna district ke Kuchipudi gaon se is dance ko naam mila; isme brass ki thaali ke kinare par dance karna ek famous kartab hai."
+      }
+    },
+    {
+      "groupId": "ic_020",
+      "difficulty": "medium",
+      "subcategory": "epics_literature",
+      "correctIndex": 0,
+      "tags": [
+        "sanskrit",
+        "literature",
+        "kalidasa"
+      ],
+      "en": {
+        "question": "Who wrote the Sanskrit play 'Abhijnanashakuntalam'?",
+        "options": [
+          "Kalidasa",
+          "Bhasa",
+          "Banabhatta",
+          "Jayadeva"
+        ],
+        "explanation": "Kalidasa's play tells the love story of King Dushyanta and Shakuntala, and its translations deeply impressed European writers such as Goethe."
+      },
+      "hi": {
+        "question": "संस्कृत नाटक 'अभिज्ञानशाकुंतलम्' किसने लिखा?",
+        "options": [
+          "कालिदास",
+          "भास",
+          "बाणभट्ट",
+          "जयदेव"
+        ],
+        "explanation": "कालिदास का यह नाटक राजा दुष्यंत और शकुंतला की प्रेम कथा है, और इसके अनुवादों ने गेटे जैसे यूरोपीय लेखकों को बहुत प्रभावित किया।"
+      },
+      "hi-Latn": {
+        "question": "Sanskrit play 'Abhijnanashakuntalam' kisne likha?",
+        "options": [
+          "Kalidasa",
+          "Bhasa",
+          "Banabhatta",
+          "Jayadeva"
+        ],
+        "explanation": "Kalidasa ka yeh play Raja Dushyanta aur Shakuntala ki love story hai, aur iske translations ne Goethe jaise European writers ko kaafi impress kiya."
+      }
+    },
+    {
+      "groupId": "ic_021",
+      "difficulty": "medium",
+      "subcategory": "classical_music",
+      "correctIndex": 1,
+      "tags": [
+        "music",
+        "instruments",
+        "maestros"
+      ],
+      "en": {
+        "question": "Ustad Zakir Hussain was a world-renowned master of which instrument?",
+        "options": [
+          "Sitar",
+          "Tabla",
+          "Santoor",
+          "Mridangam"
+        ],
+        "explanation": "Zakir Hussain learned tabla from his father, the legendary Ustad Alla Rakha, and won multiple Grammy Awards for his fusion collaborations."
+      },
+      "hi": {
+        "question": "उस्ताद ज़ाकिर हुसैन किस वाद्य यंत्र के विश्व-प्रसिद्ध उस्ताद थे?",
+        "options": [
+          "सितार",
+          "तबला",
+          "संतूर",
+          "मृदंगम"
+        ],
+        "explanation": "ज़ाकिर हुसैन ने तबला अपने पिता, महान उस्ताद अल्ला रक्खा से सीखा था, और उन्होंने अपने फ़्यूज़न संगीत के लिए कई ग्रैमी पुरस्कार जीते।"
+      },
+      "hi-Latn": {
+        "question": "Ustad Zakir Hussain kis instrument ke world-famous maestro the?",
+        "options": [
+          "Sitar",
+          "Tabla",
+          "Santoor",
+          "Mridangam"
+        ],
+        "explanation": "Zakir Hussain ne tabla apne father, legendary Ustad Alla Rakha se seekha tha, aur fusion collaborations ke liye kai Grammy Awards jeete."
+      }
+    },
+    {
+      "groupId": "ic_022",
+      "difficulty": "medium",
+      "subcategory": "temples_architecture",
+      "correctIndex": 3,
+      "tags": [
+        "temple",
+        "architecture",
+        "odisha"
+      ],
+      "en": {
+        "question": "The Konark Sun Temple in Odisha is designed in the shape of a giant what?",
+        "options": [
+          "Lotus",
+          "Boat",
+          "Elephant",
+          "Chariot"
+        ],
+        "explanation": "The temple is a stone chariot of the Sun god with 24 carved wheels pulled by seven horses; the wheels even work as sundials."
+      },
+      "hi": {
+        "question": "ओडिशा का कोणार्क सूर्य मंदिर किस विशाल आकृति के रूप में बनाया गया है?",
+        "options": [
+          "कमल",
+          "नाव",
+          "हाथी",
+          "रथ"
+        ],
+        "explanation": "यह मंदिर सूर्य देव का पत्थर का रथ है जिसमें 24 नक्काशीदार पहिए हैं और सात घोड़े इसे खींचते हैं; ये पहिए धूपघड़ी का काम भी करते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Odisha ka Konark Sun Temple kis giant shape mein bana hai?",
+        "options": [
+          "Lotus",
+          "Boat",
+          "Elephant",
+          "Chariot"
+        ],
+        "explanation": "Yeh temple Surya dev ka pathar ka rath hai jisme 24 carved wheels hain aur saat ghode ise kheenchte hain; ye wheels sundial ka kaam bhi karte hain."
+      }
+    },
+    {
+      "groupId": "ic_023",
+      "difficulty": "medium",
+      "subcategory": "epics_literature",
+      "correctIndex": 2,
+      "tags": [
+        "tagore",
+        "nobel_prize",
+        "literature"
+      ],
+      "en": {
+        "question": "In which year did Rabindranath Tagore win the Nobel Prize in Literature?",
+        "options": [
+          "1901",
+          "1928",
+          "1913",
+          "1947"
+        ],
+        "explanation": "Tagore won in 1913, largely for 'Gitanjali', becoming the first non-European to receive the Nobel Prize in Literature."
+      },
+      "hi": {
+        "question": "रवींद्रनाथ टैगोर को साहित्य का नोबेल पुरस्कार किस वर्ष मिला?",
+        "options": [
+          "1901",
+          "1928",
+          "1913",
+          "1947"
+        ],
+        "explanation": "टैगोर को यह पुरस्कार 1913 में मुख्यतः 'गीतांजलि' के लिए मिला, और वे साहित्य का नोबेल पाने वाले पहले ग़ैर-यूरोपीय बने।"
+      },
+      "hi-Latn": {
+        "question": "Rabindranath Tagore ko Literature ka Nobel Prize kis saal mila?",
+        "options": [
+          "1901",
+          "1928",
+          "1913",
+          "1947"
+        ],
+        "explanation": "Tagore ko yeh prize 1913 mein mainly 'Gitanjali' ke liye mila, aur woh Literature ka Nobel jeetne wale pehle non-European bane."
+      }
+    },
+    {
+      "groupId": "ic_024",
+      "difficulty": "medium",
+      "subcategory": "textiles_handicrafts",
+      "correctIndex": 1,
+      "tags": [
+        "textiles",
+        "silk",
+        "tamil_nadu"
+      ],
+      "en": {
+        "question": "The famous Kanjeevaram silk sarees are woven in which state?",
+        "options": [
+          "Karnataka",
+          "Tamil Nadu",
+          "Andhra Pradesh",
+          "West Bengal"
+        ],
+        "explanation": "Kanjeevaram sarees come from Kanchipuram in Tamil Nadu and are known for heavy silk with wide contrasting borders and zari work."
+      },
+      "hi": {
+        "question": "प्रसिद्ध कांजीवरम रेशमी साड़ियाँ किस राज्य में बुनी जाती हैं?",
+        "options": [
+          "कर्नाटक",
+          "तमिलनाडु",
+          "आंध्र प्रदेश",
+          "पश्चिम बंगाल"
+        ],
+        "explanation": "कांजीवरम साड़ियाँ तमिलनाडु के कांचीपुरम से आती हैं और भारी रेशम, चौड़े विपरीत रंग के बॉर्डर और ज़री के काम के लिए जानी जाती हैं।"
+      },
+      "hi-Latn": {
+        "question": "Famous Kanjeevaram silk sarees kis state mein buni jaati hain?",
+        "options": [
+          "Karnataka",
+          "Tamil Nadu",
+          "Andhra Pradesh",
+          "West Bengal"
+        ],
+        "explanation": "Kanjeevaram sarees Tamil Nadu ke Kanchipuram se aati hain aur heavy silk, wide contrast borders aur zari work ke liye famous hain."
+      }
+    },
+    {
+      "groupId": "ic_025",
+      "difficulty": "medium",
+      "subcategory": "unesco_heritage",
+      "correctIndex": 0,
+      "tags": [
+        "unesco",
+        "festival",
+        "west_bengal"
+      ],
+      "en": {
+        "question": "Which festival of Kolkata is on UNESCO's Intangible Cultural Heritage list?",
+        "options": [
+          "Durga Puja",
+          "Rath Yatra",
+          "Chhath Puja",
+          "Ganesh Chaturthi"
+        ],
+        "explanation": "Durga Puja in Kolkata was inscribed by UNESCO in 2021, recognised for its artistic pandals, idol-making and community celebration."
+      },
+      "hi": {
+        "question": "कोलकाता का कौन-सा त्योहार यूनेस्को की अमूर्त सांस्कृतिक विरासत सूची में है?",
+        "options": [
+          "दुर्गा पूजा",
+          "रथ यात्रा",
+          "छठ पूजा",
+          "गणेश चतुर्थी"
+        ],
+        "explanation": "कोलकाता की दुर्गा पूजा को 2021 में यूनेस्को सूची में शामिल किया गया, इसकी कलात्मक पंडालों, मूर्ति-निर्माण और सामुदायिक उत्सव के लिए।"
+      },
+      "hi-Latn": {
+        "question": "Kolkata ka kaunsa festival UNESCO ki Intangible Cultural Heritage list mein hai?",
+        "options": [
+          "Durga Puja",
+          "Rath Yatra",
+          "Chhath Puja",
+          "Ganesh Chaturthi"
+        ],
+        "explanation": "Kolkata ki Durga Puja 2021 mein UNESCO list mein add hui, apne artistic pandals, murti-making aur community celebration ke liye."
+      }
+    },
+    {
+      "groupId": "ic_026",
+      "difficulty": "medium",
+      "subcategory": "dance_forms",
+      "correctIndex": 3,
+      "tags": [
+        "dance",
+        "folk_dance",
+        "maharashtra"
+      ],
+      "en": {
+        "question": "Lavani, a fast-paced folk dance performed to the beat of the dholki, belongs to which state?",
+        "options": [
+          "Goa",
+          "Karnataka",
+          "Gujarat",
+          "Maharashtra"
+        ],
+        "explanation": "Lavani is a Marathi folk tradition in which women dancers in nine-yard sarees perform energetic songs set to the dholki drum."
+      },
+      "hi": {
+        "question": "ढोलकी की थाप पर होने वाला तेज़ लोक नृत्य लावणी किस राज्य का है?",
+        "options": [
+          "गोवा",
+          "कर्नाटक",
+          "गुजरात",
+          "महाराष्ट्र"
+        ],
+        "explanation": "लावणी मराठी लोक परंपरा है जिसमें नौवारी साड़ी पहने नर्तकियाँ ढोलकी की ताल पर जोशीले गीतों पर नृत्य करती हैं।"
+      },
+      "hi-Latn": {
+        "question": "Dholki ki beat par hone wala fast folk dance Lavani kis state ka hai?",
+        "options": [
+          "Goa",
+          "Karnataka",
+          "Gujarat",
+          "Maharashtra"
+        ],
+        "explanation": "Lavani ek Marathi folk tradition hai jisme nauvari saree pehni dancers dholki ki taal par energetic songs par dance karti hain."
+      }
+    },
+    {
+      "groupId": "ic_027",
+      "difficulty": "medium",
+      "subcategory": "cuisine",
+      "correctIndex": 2,
+      "tags": [
+        "food",
+        "bihar"
+      ],
+      "en": {
+        "question": "Litti chokha is a signature dish of which state?",
+        "options": [
+          "Punjab",
+          "Odisha",
+          "Bihar",
+          "Rajasthan"
+        ],
+        "explanation": "Litti are wheat balls stuffed with spiced sattu (roasted gram flour), roasted and served with chokha, a mash of roasted brinjal, tomato and potato."
+      },
+      "hi": {
+        "question": "लिट्टी चोखा किस राज्य का पहचान वाला व्यंजन है?",
+        "options": [
+          "पंजाब",
+          "ओडिशा",
+          "बिहार",
+          "राजस्थान"
+        ],
+        "explanation": "लिट्टी गेहूँ के आटे की गोलियाँ होती हैं जिनमें मसालेदार सत्तू भरा जाता है, और इन्हें भुने बैंगन, टमाटर और आलू के चोखे के साथ परोसा जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Litti chokha kis state ki signature dish hai?",
+        "options": [
+          "Punjab",
+          "Odisha",
+          "Bihar",
+          "Rajasthan"
+        ],
+        "explanation": "Litti gehun ke aate ki balls hoti hain jinme masaledar sattu bhara jata hai, aur inhe bhune baingan, tamatar aur aloo ke chokhe ke saath serve kiya jata hai."
+      }
+    },
+    {
+      "groupId": "ic_028",
+      "difficulty": "medium",
+      "subcategory": "festivals",
+      "correctIndex": 3,
+      "tags": [
+        "festival",
+        "northeast",
+        "nagaland"
+      ],
+      "en": {
+        "question": "The Hornbill Festival, showcasing many tribal cultures, is held in which state?",
+        "options": [
+          "Mizoram",
+          "Arunachal Pradesh",
+          "Meghalaya",
+          "Nagaland"
+        ],
+        "explanation": "Held every December near Kohima, the 'festival of festivals' is named after the hornbill, a bird that appears widely in Naga folklore and attire."
+      },
+      "hi": {
+        "question": "कई जनजातीय संस्कृतियों को दर्शाने वाला हॉर्नबिल उत्सव किस राज्य में होता है?",
+        "options": [
+          "मिज़ोरम",
+          "अरुणाचल प्रदेश",
+          "मेघालय",
+          "नागालैंड"
+        ],
+        "explanation": "हर दिसंबर कोहिमा के पास होने वाले इस 'उत्सवों के उत्सव' का नाम धनेश (हॉर्नबिल) पक्षी पर है, जो नागा लोककथाओं और वेशभूषा में ख़ूब दिखता है।"
+      },
+      "hi-Latn": {
+        "question": "Kai tribal cultures ko dikhane wala Hornbill Festival kis state mein hota hai?",
+        "options": [
+          "Mizoram",
+          "Arunachal Pradesh",
+          "Meghalaya",
+          "Nagaland"
+        ],
+        "explanation": "Har December Kohima ke paas hone wale is 'festival of festivals' ka naam hornbill bird par hai, jo Naga folklore aur traditional dress mein bahut dikhta hai."
+      }
+    },
+    {
+      "groupId": "ic_029",
+      "difficulty": "medium",
+      "subcategory": "dance_forms",
+      "correctIndex": 0,
+      "tags": [
+        "dance",
+        "classical_dance",
+        "assam"
+      ],
+      "en": {
+        "question": "Sattriya, one of India's classical dances, originated in which state?",
+        "options": [
+          "Assam",
+          "Manipur",
+          "West Bengal",
+          "Odisha"
+        ],
+        "explanation": "Sattriya was introduced by the saint Srimanta Sankardev in the 15th–16th century and preserved for centuries in Assam's monasteries called sattras."
+      },
+      "hi": {
+        "question": "भारत के शास्त्रीय नृत्यों में से एक सत्रिया की उत्पत्ति किस राज्य में हुई?",
+        "options": [
+          "असम",
+          "मणिपुर",
+          "पश्चिम बंगाल",
+          "ओडिशा"
+        ],
+        "explanation": "सत्रिया की शुरुआत 15वीं-16वीं सदी में संत श्रीमंत शंकरदेव ने की थी, और यह सदियों तक असम के 'सत्र' कहलाने वाले मठों में संरक्षित रहा।"
+      },
+      "hi-Latn": {
+        "question": "India ke classical dances mein se ek, Sattriya kis state mein shuru hua?",
+        "options": [
+          "Assam",
+          "Manipur",
+          "West Bengal",
+          "Odisha"
+        ],
+        "explanation": "Sattriya ko 15th-16th century mein sant Srimanta Sankardev ne shuru kiya tha, aur yeh sadiyon tak Assam ke 'sattra' naam ke monasteries mein preserve raha."
+      }
+    },
+    {
+      "groupId": "ic_030",
+      "difficulty": "medium",
+      "subcategory": "temples_architecture",
+      "correctIndex": 1,
+      "tags": [
+        "temple",
+        "architecture",
+        "madhya_pradesh"
+      ],
+      "en": {
+        "question": "The Khajuraho group of temples, famous for intricate sculptures, is in which state?",
+        "options": [
+          "Rajasthan",
+          "Madhya Pradesh",
+          "Uttar Pradesh",
+          "Karnataka"
+        ],
+        "explanation": "The Khajuraho temples were built by the Chandela dynasty roughly a thousand years ago and are a UNESCO World Heritage Site in Madhya Pradesh."
+      },
+      "hi": {
+        "question": "बारीक मूर्तिकला के लिए प्रसिद्ध खजुराहो के मंदिर किस राज्य में हैं?",
+        "options": [
+          "राजस्थान",
+          "मध्य प्रदेश",
+          "उत्तर प्रदेश",
+          "कर्नाटक"
+        ],
+        "explanation": "खजुराहो के मंदिर लगभग एक हज़ार साल पहले चंदेल राजवंश ने बनवाए थे और ये मध्य प्रदेश में यूनेस्को विश्व धरोहर स्थल हैं।"
+      },
+      "hi-Latn": {
+        "question": "Intricate sculptures ke liye famous Khajuraho temples kis state mein hain?",
+        "options": [
+          "Rajasthan",
+          "Madhya Pradesh",
+          "Uttar Pradesh",
+          "Karnataka"
+        ],
+        "explanation": "Khajuraho ke temples lagbhag ek hazaar saal pehle Chandela dynasty ne banwaye the aur ye Madhya Pradesh mein UNESCO World Heritage Site hain."
+      }
+    },
+    {
+      "groupId": "ic_031",
+      "difficulty": "hard",
+      "subcategory": "classical_music",
+      "correctIndex": 2,
+      "tags": [
+        "music",
+        "carnatic",
+        "composers"
+      ],
+      "en": {
+        "question": "Tyagaraja, Muthuswami Dikshitar and which composer form the 'Trinity' of Carnatic music?",
+        "options": [
+          "Purandara Dasa",
+          "Annamacharya",
+          "Syama Sastri",
+          "Swathi Thirunal"
+        ],
+        "explanation": "All three were born in Tiruvarur in present-day Tamil Nadu within a span of about 15 years in the 18th century."
+      },
+      "hi": {
+        "question": "त्यागराज, मुत्तुस्वामी दीक्षितार और कौन-से संगीतकार मिलकर कर्नाटक संगीत की 'त्रिमूर्ति' कहलाते हैं?",
+        "options": [
+          "पुरंदर दास",
+          "अन्नमाचार्य",
+          "श्यामा शास्त्री",
+          "स्वाति तिरुनाल"
+        ],
+        "explanation": "ये तीनों 18वीं सदी में लगभग 15 वर्षों के अंतराल में वर्तमान तमिलनाडु के तिरुवारूर में जन्मे थे।"
+      },
+      "hi-Latn": {
+        "question": "Tyagaraja, Muthuswami Dikshitar aur kaun se composer milkar Carnatic music ki 'Trinity' kehlate hain?",
+        "options": [
+          "Purandara Dasa",
+          "Annamacharya",
+          "Syama Sastri",
+          "Swathi Thirunal"
+        ],
+        "explanation": "Ye teeno 18th century mein lagbhag 15 saal ke andar aaj ke Tamil Nadu ke Tiruvarur mein paida hue the."
+      }
+    },
+    {
+      "groupId": "ic_032",
+      "difficulty": "hard",
+      "subcategory": "temples_architecture",
+      "correctIndex": 0,
+      "tags": [
+        "temple",
+        "chola",
+        "tamil_nadu"
+      ],
+      "en": {
+        "question": "Which ruler built the Brihadeeswarar Temple at Thanjavur?",
+        "options": [
+          "Rajaraja Chola I",
+          "Rajendra Chola I",
+          "Narasimhavarman I",
+          "Krishnadevaraya"
+        ],
+        "explanation": "Completed around 1010 CE, Rajaraja Chola I's temple has a towering vimana topped by a massive capstone, and is part of the 'Great Living Chola Temples' UNESCO site."
+      },
+      "hi": {
+        "question": "तंजावुर का बृहदेश्वर मंदिर किस शासक ने बनवाया था?",
+        "options": [
+          "राजराज चोल प्रथम",
+          "राजेंद्र चोल प्रथम",
+          "नरसिंहवर्मन प्रथम",
+          "कृष्णदेवराय"
+        ],
+        "explanation": "लगभग 1010 ईस्वी में पूरा हुआ राजराज चोल प्रथम का यह मंदिर अपने ऊँचे विमान और विशाल शिखर-पत्थर के लिए प्रसिद्ध है, और यूनेस्को के 'महान जीवंत चोल मंदिर' स्थल का हिस्सा है।"
+      },
+      "hi-Latn": {
+        "question": "Thanjavur ka Brihadeeswarar Temple kis ruler ne banwaya tha?",
+        "options": [
+          "Rajaraja Chola I",
+          "Rajendra Chola I",
+          "Narasimhavarman I",
+          "Krishnadevaraya"
+        ],
+        "explanation": "Lagbhag 1010 CE mein pura hua Rajaraja Chola I ka yeh temple apne unche vimana aur bhaari capstone ke liye famous hai, aur UNESCO ke 'Great Living Chola Temples' site ka hissa hai."
+      }
+    },
+    {
+      "groupId": "ic_033",
+      "difficulty": "hard",
+      "subcategory": "textiles_handicrafts",
+      "correctIndex": 1,
+      "tags": [
+        "textiles",
+        "kalamkari",
+        "andhra_pradesh"
+      ],
+      "en": {
+        "question": "The name of the textile art 'Kalamkari' refers to work done with which tool?",
+        "options": [
+          "Brush",
+          "Pen",
+          "Needle",
+          "Wooden block"
+        ],
+        "explanation": "'Kalam' means pen and 'kari' means craftwork; in the Srikalahasti style, artists draw with a bamboo pen dipped in natural dyes."
+      },
+      "hi": {
+        "question": "वस्त्र कला 'कलमकारी' का नाम किस औज़ार से किए जाने वाले काम को दर्शाता है?",
+        "options": [
+          "ब्रश",
+          "कलम",
+          "सुई",
+          "लकड़ी का ठप्पा"
+        ],
+        "explanation": "'कलम' का अर्थ क़लम और 'कारी' का अर्थ कारीगरी है; श्रीकालहस्ती शैली में कलाकार प्राकृतिक रंगों में डुबोई बाँस की क़लम से चित्र बनाते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Textile art 'Kalamkari' ka naam kis tool se kiye gaye kaam ko batata hai?",
+        "options": [
+          "Brush",
+          "Pen",
+          "Needle",
+          "Wooden block"
+        ],
+        "explanation": "'Kalam' matlab pen aur 'kari' matlab craftwork; Srikalahasti style mein artists natural dyes mein dubi bamboo pen se drawing karte hain."
+      }
+    },
+    {
+      "groupId": "ic_034",
+      "difficulty": "hard",
+      "subcategory": "classical_music",
+      "correctIndex": 3,
+      "tags": [
+        "music",
+        "instruments",
+        "maestros"
+      ],
+      "en": {
+        "question": "Ustad Amjad Ali Khan is a celebrated exponent of which instrument?",
+        "options": [
+          "Sitar",
+          "Sarangi",
+          "Santoor",
+          "Sarod"
+        ],
+        "explanation": "Amjad Ali Khan belongs to the Senia Bangash gharana, a family lineage that has played the fretless, metal-fingerboard sarod for generations."
+      },
+      "hi": {
+        "question": "उस्ताद अमजद अली ख़ाँ किस वाद्य यंत्र के प्रसिद्ध वादक हैं?",
+        "options": [
+          "सितार",
+          "सारंगी",
+          "संतूर",
+          "सरोद"
+        ],
+        "explanation": "अमजद अली ख़ाँ सेनिया बंगश घराने से हैं, जिसका परिवार पीढ़ियों से बिना पर्दों वाला, धातु की पट्टी वाला सरोद बजाता आया है।"
+      },
+      "hi-Latn": {
+        "question": "Ustad Amjad Ali Khan kis instrument ke famous player hain?",
+        "options": [
+          "Sitar",
+          "Sarangi",
+          "Santoor",
+          "Sarod"
+        ],
+        "explanation": "Amjad Ali Khan Senia Bangash gharana se hain, jiska parivaar generations se fretless, metal fingerboard wala sarod bajata aaya hai."
+      }
+    },
+    {
+      "groupId": "ic_035",
+      "difficulty": "hard",
+      "subcategory": "epics_literature",
+      "correctIndex": 2,
+      "tags": [
+        "sanskrit",
+        "poetry",
+        "odisha"
+      ],
+      "en": {
+        "question": "Who composed the 12th-century Sanskrit poem 'Gita Govinda'?",
+        "options": [
+          "Bhartrihari",
+          "Bhavabhuti",
+          "Jayadeva",
+          "Kalidasa"
+        ],
+        "explanation": "Jayadeva's lyrical poem about Radha and Krishna is still sung in Odissi music and dance, and its verses are part of rituals at Puri's Jagannath temple."
+      },
+      "hi": {
+        "question": "12वीं सदी की संस्कृत काव्य रचना 'गीत गोविंद' किसने लिखी?",
+        "options": [
+          "भर्तृहरि",
+          "भवभूति",
+          "जयदेव",
+          "कालिदास"
+        ],
+        "explanation": "राधा और कृष्ण पर जयदेव की यह गीतात्मक रचना आज भी ओडिसी संगीत और नृत्य में गाई जाती है, और पुरी के जगन्नाथ मंदिर की परंपराओं का हिस्सा है।"
+      },
+      "hi-Latn": {
+        "question": "12th century ki Sanskrit poem 'Gita Govinda' kisne likhi?",
+        "options": [
+          "Bhartrihari",
+          "Bhavabhuti",
+          "Jayadeva",
+          "Kalidasa"
+        ],
+        "explanation": "Radha aur Krishna par Jayadeva ki yeh lyrical poem aaj bhi Odissi music aur dance mein gaayi jaati hai, aur Puri ke Jagannath temple ki rituals ka hissa hai."
+      }
+    },
+    {
+      "groupId": "ic_036",
+      "difficulty": "hard",
+      "subcategory": "martial_arts",
+      "correctIndex": 3,
+      "tags": [
+        "martial_arts",
+        "northeast",
+        "manipur"
+      ],
+      "en": {
+        "question": "Thang-Ta, a martial art using the sword and the spear, comes from which state?",
+        "options": [
+          "Kerala",
+          "Punjab",
+          "Mizoram",
+          "Manipur"
+        ],
+        "explanation": "In Manipuri, 'thang' means sword and 'ta' means spear; the art is part of the wider Huyen Langlon tradition of the Meitei people."
+      },
+      "hi": {
+        "question": "तलवार और भाले से की जाने वाली युद्ध कला थांग-ता किस राज्य की है?",
+        "options": [
+          "केरल",
+          "पंजाब",
+          "मिज़ोरम",
+          "मणिपुर"
+        ],
+        "explanation": "मणिपुरी भाषा में 'थांग' का अर्थ तलवार और 'ता' का अर्थ भाला है; यह मैतेई लोगों की हुयेन लांगलोन परंपरा का हिस्सा है।"
+      },
+      "hi-Latn": {
+        "question": "Sword aur spear wala martial art Thang-Ta kis state ka hai?",
+        "options": [
+          "Kerala",
+          "Punjab",
+          "Mizoram",
+          "Manipur"
+        ],
+        "explanation": "Manipuri mein 'thang' matlab talwar aur 'ta' matlab bhala; yeh Meitei logon ki Huyen Langlon tradition ka hissa hai."
+      }
+    },
+    {
+      "groupId": "ic_037",
+      "difficulty": "hard",
+      "subcategory": "martial_arts",
+      "correctIndex": 1,
+      "tags": [
+        "martial_arts",
+        "punjab"
+      ],
+      "en": {
+        "question": "Gatka, a traditional martial art with sticks and swords, is closely associated with which state?",
+        "options": [
+          "Maharashtra",
+          "Punjab",
+          "Rajasthan",
+          "Haryana"
+        ],
+        "explanation": "Gatka is a Sikh martial tradition from Punjab, often demonstrated in processions during Gurpurab celebrations."
+      },
+      "hi": {
+        "question": "लाठी और तलवार वाली पारंपरिक युद्ध कला गतका किस राज्य से गहराई से जुड़ी है?",
+        "options": [
+          "महाराष्ट्र",
+          "पंजाब",
+          "राजस्थान",
+          "हरियाणा"
+        ],
+        "explanation": "गतका पंजाब की सिख युद्ध परंपरा है, जिसका प्रदर्शन अक्सर गुरुपर्व के नगर कीर्तन जुलूसों में होता है।"
+      },
+      "hi-Latn": {
+        "question": "Sticks aur swords wala traditional martial art Gatka kis state se juda hai?",
+        "options": [
+          "Maharashtra",
+          "Punjab",
+          "Rajasthan",
+          "Haryana"
+        ],
+        "explanation": "Gatka Punjab ki Sikh martial tradition hai, jiska demonstration aksar Gurpurab ke nagar kirtan processions mein hota hai."
+      }
+    },
+    {
+      "groupId": "ic_038",
+      "difficulty": "hard",
+      "subcategory": "textiles_handicrafts",
+      "correctIndex": 0,
+      "tags": [
+        "embroidery",
+        "textiles",
+        "uttar_pradesh"
+      ],
+      "en": {
+        "question": "Chikankari, delicate white-on-white embroidery, is most associated with which city?",
+        "options": [
+          "Lucknow",
+          "Jaipur",
+          "Varanasi",
+          "Hyderabad"
+        ],
+        "explanation": "Lucknow's chikankari flourished under Mughal and Awadhi patronage and uses fine stitches on light fabrics like muslin."
+      },
+      "hi": {
+        "question": "सफ़ेद कपड़े पर सफ़ेद धागे की नाज़ुक कढ़ाई चिकनकारी किस शहर से सबसे अधिक जुड़ी है?",
+        "options": [
+          "लखनऊ",
+          "जयपुर",
+          "वाराणसी",
+          "हैदराबाद"
+        ],
+        "explanation": "लखनऊ की चिकनकारी मुग़ल और अवधी संरक्षण में फली-फूली, और इसमें मलमल जैसे हल्के कपड़ों पर बारीक टाँके लगाए जाते हैं।"
+      },
+      "hi-Latn": {
+        "question": "White-on-white delicate embroidery Chikankari sabse zyada kis city se judi hai?",
+        "options": [
+          "Lucknow",
+          "Jaipur",
+          "Varanasi",
+          "Hyderabad"
+        ],
+        "explanation": "Lucknow ki chikankari Mughal aur Awadhi patronage mein flourish hui, aur isme muslin jaise halke kapdon par fine stitches lagte hain."
+      }
+    },
+    {
+      "groupId": "ic_039",
+      "difficulty": "hard",
+      "subcategory": "art_forms",
+      "correctIndex": 2,
+      "tags": [
+        "painting",
+        "folk_art",
+        "rajasthan"
+      ],
+      "en": {
+        "question": "Phad, a long cloth scroll painting narrating tales of folk deities, comes from which state?",
+        "options": [
+          "Gujarat",
+          "Odisha",
+          "Rajasthan",
+          "West Bengal"
+        ],
+        "explanation": "Rajasthani Phad scrolls depict heroes like Pabuji and Devnarayan, and travelling bhopa singers unroll them to perform the stories at night."
+      },
+      "hi": {
+        "question": "लोक देवताओं की कथाएँ सुनाने वाली कपड़े की लंबी चित्र-पट्टी फड़ किस राज्य की है?",
+        "options": [
+          "गुजरात",
+          "ओडिशा",
+          "राजस्थान",
+          "पश्चिम बंगाल"
+        ],
+        "explanation": "राजस्थान की फड़ पर पाबूजी और देवनारायण जैसे लोक नायकों की कथाएँ होती हैं, जिन्हें घुमंतू भोपा गायक रात में खोलकर गाते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Folk deities ki kahaniyan sunane wali lambi cloth scroll painting Phad kis state ki hai?",
+        "options": [
+          "Gujarat",
+          "Odisha",
+          "Rajasthan",
+          "West Bengal"
+        ],
+        "explanation": "Rajasthan ki Phad par Pabuji aur Devnarayan jaise folk heroes ki kahaniyan hoti hain, jinhe ghoomne wale bhopa singers raat mein khol kar gaate hain."
+      }
+    },
+    {
+      "groupId": "ic_040",
+      "difficulty": "hard",
+      "subcategory": "unesco_heritage",
+      "correctIndex": 1,
+      "tags": [
+        "unesco",
+        "theatre",
+        "ramayana"
+      ],
+      "en": {
+        "question": "Which traditional performance of the Ramayana is on UNESCO's Intangible Cultural Heritage list?",
+        "options": [
+          "Yakshagana",
+          "Ramlila",
+          "Jatra",
+          "Tamasha"
+        ],
+        "explanation": "Ramlila, staged across north India especially around Dussehra, was inscribed by UNESCO in 2008 (first proclaimed in 2005)."
+      },
+      "hi": {
+        "question": "रामायण की कौन-सी पारंपरिक प्रस्तुति यूनेस्को की अमूर्त सांस्कृतिक विरासत सूची में है?",
+        "options": [
+          "यक्षगान",
+          "रामलीला",
+          "जात्रा",
+          "तमाशा"
+        ],
+        "explanation": "उत्तर भारत में ख़ासकर दशहरे के आसपास होने वाली रामलीला को 2008 में यूनेस्को सूची में शामिल किया गया (2005 में पहली बार घोषित)।"
+      },
+      "hi-Latn": {
+        "question": "Ramayana ka kaunsa traditional performance UNESCO ki Intangible Cultural Heritage list mein hai?",
+        "options": [
+          "Yakshagana",
+          "Ramlila",
+          "Jatra",
+          "Tamasha"
+        ],
+        "explanation": "North India mein khaaskar Dussehra ke aas-paas hone wali Ramlila 2008 mein UNESCO list mein inscribe hui (2005 mein pehli baar proclaim hui thi)."
+      }
+    },
+    {
+      "groupId": "ic_041",
+      "difficulty": "hard",
+      "subcategory": "unesco_heritage",
+      "correctIndex": 0,
+      "tags": [
+        "unesco",
+        "theatre",
+        "kerala"
+      ],
+      "en": {
+        "question": "Kutiyattam, Kerala's ancient theatre tradition recognised by UNESCO, is performed in which language?",
+        "options": [
+          "Sanskrit",
+          "Tamil",
+          "Pali",
+          "Kannada"
+        ],
+        "explanation": "Kutiyattam is one of the oldest living forms of Sanskrit theatre, traditionally performed in temple theatres called koothambalams; it was among the first UNESCO proclamations in 2001."
+      },
+      "hi": {
+        "question": "यूनेस्को से मान्यता प्राप्त केरल की प्राचीन नाट्य परंपरा कूडियाट्टम किस भाषा में प्रस्तुत की जाती है?",
+        "options": [
+          "संस्कृत",
+          "तमिल",
+          "पालि",
+          "कन्नड़"
+        ],
+        "explanation": "कूडियाट्टम संस्कृत नाट्य के सबसे पुराने जीवित रूपों में से एक है, जो मंदिरों के 'कूत्तम्बलम' नामक नाट्यगृहों में होता है; 2001 में यूनेस्को की पहली घोषणाओं में यह शामिल था।"
+      },
+      "hi-Latn": {
+        "question": "UNESCO se recognised Kerala ki purani theatre tradition Kutiyattam kis language mein perform hoti hai?",
+        "options": [
+          "Sanskrit",
+          "Tamil",
+          "Pali",
+          "Kannada"
+        ],
+        "explanation": "Kutiyattam Sanskrit theatre ke sabse purane living forms mein se ek hai, jo temples ke 'koothambalam' theatres mein hota hai; 2001 mein UNESCO ki pehli proclamations mein yeh shamil tha."
+      }
+    },
+    {
+      "groupId": "ic_042",
+      "difficulty": "hard",
+      "subcategory": "languages_scripts",
+      "correctIndex": 3,
+      "tags": [
+        "script",
+        "language",
+        "tribal"
+      ],
+      "en": {
+        "question": "The Ol Chiki script was created to write which language?",
+        "options": [
+          "Bodo",
+          "Gondi",
+          "Kokborok",
+          "Santali"
+        ],
+        "explanation": "Pandit Raghunath Murmu created Ol Chiki in 1925 for Santali, which became one of India's scheduled languages in 2003."
+      },
+      "hi": {
+        "question": "ओल चिकी लिपि किस भाषा को लिखने के लिए बनाई गई थी?",
+        "options": [
+          "बोडो",
+          "गोंडी",
+          "कोकबोरोक",
+          "संथाली"
+        ],
+        "explanation": "पंडित रघुनाथ मुर्मू ने 1925 में संथाली के लिए ओल चिकी बनाई थी, और संथाली 2003 में भारत की अनुसूचित भाषाओं में शामिल हुई।"
+      },
+      "hi-Latn": {
+        "question": "Ol Chiki script kis language ko likhne ke liye banayi gayi thi?",
+        "options": [
+          "Bodo",
+          "Gondi",
+          "Kokborok",
+          "Santali"
+        ],
+        "explanation": "Pandit Raghunath Murmu ne 1925 mein Santali ke liye Ol Chiki banayi thi, aur Santali 2003 mein India ki scheduled languages mein shamil hui."
+      }
+    },
+    {
+      "groupId": "ic_043",
+      "difficulty": "hard",
+      "subcategory": "textiles_handicrafts",
+      "correctIndex": 2,
+      "tags": [
+        "textiles",
+        "ikat",
+        "telangana"
+      ],
+      "en": {
+        "question": "Pochampally Ikat, a GI-tagged weave made by tie-dyeing yarn, comes from which state?",
+        "options": [
+          "Odisha",
+          "Gujarat",
+          "Telangana",
+          "Karnataka"
+        ],
+        "explanation": "In ikat, the yarn is tied and dyed before weaving so patterns appear as the threads come together; Pochampally village in Telangana is famous for its geometric designs."
+      },
+      "hi": {
+        "question": "धागों को बाँधकर रंगने से बनने वाली जीआई-टैग प्राप्त बुनाई पोचमपल्ली इकत किस राज्य की है?",
+        "options": [
+          "ओडिशा",
+          "गुजरात",
+          "तेलंगाना",
+          "कर्नाटक"
+        ],
+        "explanation": "इकत में बुनाई से पहले धागों को बाँधकर रंगा जाता है ताकि बुनते समय डिज़ाइन उभरे; तेलंगाना का पोचमपल्ली गाँव अपने ज्यामितीय डिज़ाइनों के लिए प्रसिद्ध है।"
+      },
+      "hi-Latn": {
+        "question": "Yarn ko tie-dye karke banne wali GI-tagged weave Pochampally Ikat kis state ki hai?",
+        "options": [
+          "Odisha",
+          "Gujarat",
+          "Telangana",
+          "Karnataka"
+        ],
+        "explanation": "Ikat mein weaving se pehle dhaagon ko baandh kar rangte hain taaki bunte waqt design ubhre; Telangana ka Pochampally gaon apne geometric designs ke liye famous hai."
+      }
+    },
+    {
+      "groupId": "ic_044",
+      "difficulty": "hard",
+      "subcategory": "classical_music",
+      "correctIndex": 3,
+      "tags": [
+        "music",
+        "raga",
+        "monsoon"
+      ],
+      "en": {
+        "question": "Which family of ragas is traditionally associated with the monsoon and rain?",
+        "options": [
+          "Bhairav",
+          "Yaman",
+          "Deepak",
+          "Malhar"
+        ],
+        "explanation": "Ragas like Miyan ki Malhar and Megh Malhar are sung in the rainy season, and legend says Tansen could summon rain with Malhar."
+      },
+      "hi": {
+        "question": "पारंपरिक रूप से कौन-सा राग-समूह मानसून और बारिश से जुड़ा है?",
+        "options": [
+          "भैरव",
+          "यमन",
+          "दीपक",
+          "मल्हार"
+        ],
+        "explanation": "मियाँ की मल्हार और मेघ मल्हार जैसे राग वर्षा ऋतु में गाए जाते हैं, और किंवदंती है कि तानसेन मल्हार गाकर बारिश बुला सकते थे।"
+      },
+      "hi-Latn": {
+        "question": "Traditionally kaunsi raga family monsoon aur baarish se judi hai?",
+        "options": [
+          "Bhairav",
+          "Yaman",
+          "Deepak",
+          "Malhar"
+        ],
+        "explanation": "Miyan ki Malhar aur Megh Malhar jaise raga baarish ke mausam mein gaaye jaate hain, aur legend hai ki Tansen Malhar gaa kar baarish bula sakte the."
+      }
+    },
+    {
+      "groupId": "ic_045",
+      "difficulty": "hard",
+      "subcategory": "languages_scripts",
+      "correctIndex": 1,
+      "tags": [
+        "literature",
+        "language",
+        "sangam"
+      ],
+      "en": {
+        "question": "The ancient Sangam literature was composed in which language?",
+        "options": [
+          "Kannada",
+          "Tamil",
+          "Telugu",
+          "Malayalam"
+        ],
+        "explanation": "Sangam poetry, dated roughly to the early centuries BCE and CE, is the oldest body of Tamil literature and was said to be produced at assemblies of poets in Madurai."
+      },
+      "hi": {
+        "question": "प्राचीन संगम साहित्य किस भाषा में रचा गया था?",
+        "options": [
+          "कन्नड़",
+          "तमिल",
+          "तेलुगु",
+          "मलयालम"
+        ],
+        "explanation": "लगभग ईसा पूर्व और ईसवी की आरंभिक सदियों की संगम कविता तमिल साहित्य का सबसे पुराना संग्रह है, और कहा जाता है कि यह मदुरै में कवियों की सभाओं में रची गई।"
+      },
+      "hi-Latn": {
+        "question": "Purana Sangam literature kis language mein likha gaya tha?",
+        "options": [
+          "Kannada",
+          "Tamil",
+          "Telugu",
+          "Malayalam"
+        ],
+        "explanation": "Lagbhag BCE aur CE ki shuruaati sadiyon ki Sangam poetry Tamil literature ka sabse purana collection hai, aur kaha jata hai ki yeh Madurai mein kaviyon ki sabhaon mein rachi gayi."
+      }
+    }
+  ]
+}

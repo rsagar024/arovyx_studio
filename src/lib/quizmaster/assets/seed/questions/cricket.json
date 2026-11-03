@@ -1,0 +1,1850 @@
+{
+  "category": "cricket",
+  "questions": [
+    {
+      "groupId": "cr_001",
+      "difficulty": "easy",
+      "subcategory": "world_cup",
+      "correctIndex": 2,
+      "tags": [
+        "world_cup",
+        "india",
+        "1983"
+      ],
+      "en": {
+        "question": "In the 1983 World Cup final, which team did India defeat?",
+        "options": [
+          "England",
+          "Australia",
+          "West Indies",
+          "Pakistan"
+        ],
+        "explanation": "India defended a modest 183 at Lord's and bowled out two-time champions West Indies to win by 43 runs."
+      },
+      "hi": {
+        "question": "1983 वर्ल्ड कप फाइनल में भारत ने किस टीम को हराया था?",
+        "options": [
+          "इंग्लैंड",
+          "ऑस्ट्रेलिया",
+          "वेस्टइंडीज",
+          "पाकिस्तान"
+        ],
+        "explanation": "भारत ने लॉर्ड्स में सिर्फ 183 रन का बचाव करते हुए दो बार की चैंपियन वेस्टइंडीज को 43 रन से हराया था।"
+      },
+      "hi-Latn": {
+        "question": "1983 World Cup final mein India ne kis team ko haraya tha?",
+        "options": [
+          "England",
+          "Australia",
+          "West Indies",
+          "Pakistan"
+        ],
+        "explanation": "India ne Lord's mein sirf 183 runs defend karke two-time champion West Indies ko 43 runs se hara diya tha."
+      }
+    },
+    {
+      "groupId": "cr_002",
+      "difficulty": "easy",
+      "subcategory": "world_cup",
+      "correctIndex": 0,
+      "tags": [
+        "world_cup",
+        "india",
+        "captains"
+      ],
+      "en": {
+        "question": "Who captained India to their first World Cup title in 1983?",
+        "options": [
+          "Kapil Dev",
+          "Sunil Gavaskar",
+          "Mohinder Amarnath",
+          "Ravi Shastri"
+        ],
+        "explanation": "Kapil Dev led an underdog side, and his famous running catch to dismiss Viv Richards turned the final."
+      },
+      "hi": {
+        "question": "1983 में भारत को पहला वर्ल्ड कप खिताब किस कप्तान ने दिलाया था?",
+        "options": [
+          "कपिल देव",
+          "सुनील गावस्कर",
+          "मोहिंदर अमरनाथ",
+          "रवि शास्त्री"
+        ],
+        "explanation": "कपिल देव ने कमज़ोर मानी जा रही टीम की कप्तानी की, और फाइनल में विव रिचर्ड्स का उनका दौड़ते हुए लिया गया कैच मैच का टर्निंग पॉइंट बना।"
+      },
+      "hi-Latn": {
+        "question": "1983 mein India ko pehla World Cup kis captain ne jitaya tha?",
+        "options": [
+          "Kapil Dev",
+          "Sunil Gavaskar",
+          "Mohinder Amarnath",
+          "Ravi Shastri"
+        ],
+        "explanation": "Kapil Dev underdog team ke captain the, aur final mein Viv Richards ka unka running catch game-changer bana."
+      }
+    },
+    {
+      "groupId": "cr_003",
+      "difficulty": "easy",
+      "subcategory": "world_cup",
+      "correctIndex": 3,
+      "tags": [
+        "world_cup",
+        "india",
+        "stadiums",
+        "2011"
+      ],
+      "en": {
+        "question": "At which stadium did India win the 2011 World Cup final?",
+        "options": [
+          "M. A. Chidambaram Stadium, Chennai",
+          "Eden Gardens, Kolkata",
+          "M. Chinnaswamy Stadium, Bengaluru",
+          "Wankhede Stadium, Mumbai"
+        ],
+        "explanation": "India became the first team to win a World Cup final on home soil when they lifted the trophy on 2 April 2011."
+      },
+      "hi": {
+        "question": "2011 वर्ल्ड कप फाइनल भारत ने किस स्टेडियम में जीता था?",
+        "options": [
+          "एम. ए. चिदंबरम स्टेडियम, चेन्नई",
+          "ईडन गार्डन्स, कोलकाता",
+          "एम. चिन्नास्वामी स्टेडियम, बेंगलुरु",
+          "वानखेड़े स्टेडियम, मुंबई"
+        ],
+        "explanation": "2 अप्रैल 2011 को भारत अपनी ही धरती पर वर्ल्ड कप फाइनल जीतने वाली पहली टीम बना।"
+      },
+      "hi-Latn": {
+        "question": "2011 World Cup final India ne kis stadium mein jeeta tha?",
+        "options": [
+          "M. A. Chidambaram Stadium, Chennai",
+          "Eden Gardens, Kolkata",
+          "M. Chinnaswamy Stadium, Bengaluru",
+          "Wankhede Stadium, Mumbai"
+        ],
+        "explanation": "2 April 2011 ko India apni home ground par World Cup final jeetne wali pehli team bani."
+      }
+    },
+    {
+      "groupId": "cr_004",
+      "difficulty": "easy",
+      "subcategory": "world_cup",
+      "correctIndex": 1,
+      "tags": [
+        "world_cup",
+        "india",
+        "2011"
+      ],
+      "en": {
+        "question": "Which team did India beat in the 2011 World Cup final?",
+        "options": [
+          "Pakistan",
+          "Sri Lanka",
+          "Australia",
+          "New Zealand"
+        ],
+        "explanation": "India chased 275 thanks to Gautam Gambhir's 97 and MS Dhoni's unbeaten 91, winning by 6 wickets."
+      },
+      "hi": {
+        "question": "2011 वर्ल्ड कप फाइनल में भारत ने किस टीम को हराया था?",
+        "options": [
+          "पाकिस्तान",
+          "श्रीलंका",
+          "ऑस्ट्रेलिया",
+          "न्यूज़ीलैंड"
+        ],
+        "explanation": "गौतम गंभीर के 97 और एमएस धोनी के नाबाद 91 रन की मदद से भारत ने 275 रन का लक्ष्य 6 विकेट से हासिल किया।"
+      },
+      "hi-Latn": {
+        "question": "2011 World Cup final mein India ne kis team ko haraya tha?",
+        "options": [
+          "Pakistan",
+          "Sri Lanka",
+          "Australia",
+          "New Zealand"
+        ],
+        "explanation": "Gautam Gambhir ke 97 aur MS Dhoni ke unbeaten 91 ki wajah se India ne 275 ka target 6 wickets se chase kiya."
+      }
+    },
+    {
+      "groupId": "cr_005",
+      "difficulty": "easy",
+      "subcategory": "rules",
+      "correctIndex": 1,
+      "tags": [
+        "rules",
+        "overs"
+      ],
+      "en": {
+        "question": "In modern international cricket, how many legal deliveries make up one over?",
+        "options": [
+          "8",
+          "6",
+          "5",
+          "10"
+        ],
+        "explanation": "Eight-ball overs were once used in countries like Australia, but six-ball overs are now the universal standard."
+      },
+      "hi": {
+        "question": "आधुनिक अंतरराष्ट्रीय क्रिकेट में एक ओवर में कितनी वैध गेंदें होती हैं?",
+        "options": [
+          "8",
+          "6",
+          "5",
+          "10"
+        ],
+        "explanation": "एक समय ऑस्ट्रेलिया जैसे देशों में 8 गेंदों का ओवर होता था, लेकिन अब हर जगह 6 गेंदों का ओवर ही मानक है।"
+      },
+      "hi-Latn": {
+        "question": "Modern international cricket mein ek over mein kitni legal balls hoti hain?",
+        "options": [
+          "8",
+          "6",
+          "5",
+          "10"
+        ],
+        "explanation": "Pehle Australia jaise countries mein 8-ball overs hote the, lekin ab har jagah 6-ball over hi standard hai."
+      }
+    },
+    {
+      "groupId": "cr_006",
+      "difficulty": "easy",
+      "subcategory": "nicknames",
+      "correctIndex": 3,
+      "tags": [
+        "nicknames",
+        "legends"
+      ],
+      "en": {
+        "question": "Which Indian batter is famously nicknamed the \"Master Blaster\"?",
+        "options": [
+          "Kapil Dev",
+          "Virender Sehwag",
+          "Sourav Ganguly",
+          "Sachin Tendulkar"
+        ],
+        "explanation": "Tendulkar earned the name for his attacking strokeplay; fans also call him the \"Little Master\"."
+      },
+      "hi": {
+        "question": "किस भारतीय बल्लेबाज़ को \"मास्टर ब्लास्टर\" कहा जाता है?",
+        "options": [
+          "कपिल देव",
+          "वीरेंद्र सहवाग",
+          "सौरव गांगुली",
+          "सचिन तेंदुलकर"
+        ],
+        "explanation": "सचिन को उनकी आक्रामक बल्लेबाज़ी के लिए यह नाम मिला; फैंस उन्हें \"लिटिल मास्टर\" भी कहते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Kis Indian batsman ko \"Master Blaster\" kaha jata hai?",
+        "options": [
+          "Kapil Dev",
+          "Virender Sehwag",
+          "Sourav Ganguly",
+          "Sachin Tendulkar"
+        ],
+        "explanation": "Sachin ko unki attacking batting ki wajah se ye naam mila; fans unhe \"Little Master\" bhi bolte hain."
+      }
+    },
+    {
+      "groupId": "cr_007",
+      "difficulty": "easy",
+      "subcategory": "ipl",
+      "correctIndex": 0,
+      "tags": [
+        "ipl",
+        "history"
+      ],
+      "en": {
+        "question": "In which year was the first IPL season played?",
+        "options": [
+          "2008",
+          "2007",
+          "2009",
+          "2010"
+        ],
+        "explanation": "The league opened on 18 April 2008 with Kolkata Knight Riders taking on Royal Challengers Bangalore."
+      },
+      "hi": {
+        "question": "IPL का पहला सीज़न किस साल खेला गया था?",
+        "options": [
+          "2008",
+          "2007",
+          "2009",
+          "2010"
+        ],
+        "explanation": "लीग की शुरुआत 18 अप्रैल 2008 को कोलकाता नाइट राइडर्स और रॉयल चैलेंजर्स बैंगलोर के मुकाबले से हुई थी।"
+      },
+      "hi-Latn": {
+        "question": "IPL ka pehla season kis saal khela gaya tha?",
+        "options": [
+          "2008",
+          "2007",
+          "2009",
+          "2010"
+        ],
+        "explanation": "League 18 April 2008 ko Kolkata Knight Riders vs Royal Challengers Bangalore match se shuru hui thi."
+      }
+    },
+    {
+      "groupId": "cr_008",
+      "difficulty": "easy",
+      "subcategory": "ipl",
+      "correctIndex": 2,
+      "tags": [
+        "ipl",
+        "history",
+        "firsts"
+      ],
+      "en": {
+        "question": "Which team won the inaugural IPL title in 2008?",
+        "options": [
+          "Mumbai Indians",
+          "Chennai Super Kings",
+          "Rajasthan Royals",
+          "Deccan Chargers"
+        ],
+        "explanation": "Led by Shane Warne, the Royals beat Chennai Super Kings off the last ball of the final."
+      },
+      "hi": {
+        "question": "2008 में पहला IPL खिताब किस टीम ने जीता था?",
+        "options": [
+          "मुंबई इंडियंस",
+          "चेन्नई सुपर किंग्स",
+          "राजस्थान रॉयल्स",
+          "डेक्कन चार्जर्स"
+        ],
+        "explanation": "शेन वॉर्न की कप्तानी में रॉयल्स ने फाइनल की आखिरी गेंद पर चेन्नई सुपर किंग्स को हराया था।"
+      },
+      "hi-Latn": {
+        "question": "2008 mein pehla IPL title kis team ne jeeta tha?",
+        "options": [
+          "Mumbai Indians",
+          "Chennai Super Kings",
+          "Rajasthan Royals",
+          "Deccan Chargers"
+        ],
+        "explanation": "Shane Warne ki captaincy mein Royals ne final ki last ball par CSK ko haraya tha."
+      }
+    },
+    {
+      "groupId": "cr_009",
+      "difficulty": "easy",
+      "subcategory": "rules",
+      "correctIndex": 3,
+      "tags": [
+        "rules",
+        "terminology"
+      ],
+      "en": {
+        "question": "What does \"LBW\" stand for in cricket?",
+        "options": [
+          "Long Ball Wide",
+          "Line Behind Wicket",
+          "Leg Beside Wicket",
+          "Leg Before Wicket"
+        ],
+        "explanation": "A batter can be given out LBW when the ball would have hit the stumps but is stopped by the body instead of the bat."
+      },
+      "hi": {
+        "question": "क्रिकेट में \"LBW\" का पूरा नाम क्या है?",
+        "options": [
+          "लॉन्ग बॉल वाइड",
+          "लाइन बिहाइंड विकेट",
+          "लेग बिसाइड विकेट",
+          "लेग बिफोर विकेट"
+        ],
+        "explanation": "जब गेंद स्टंप्स पर लगने वाली हो पर बल्ले की जगह बल्लेबाज़ के शरीर से रुक जाए, तो उसे LBW आउट दिया जा सकता है।"
+      },
+      "hi-Latn": {
+        "question": "Cricket mein \"LBW\" ka full form kya hai?",
+        "options": [
+          "Long Ball Wide",
+          "Line Behind Wicket",
+          "Leg Beside Wicket",
+          "Leg Before Wicket"
+        ],
+        "explanation": "Jab ball stumps par lagne wali ho lekin bat ki jagah batsman ke body se ruk jaaye, tab LBW out diya ja sakta hai."
+      }
+    },
+    {
+      "groupId": "cr_010",
+      "difficulty": "easy",
+      "subcategory": "world_cup",
+      "correctIndex": 1,
+      "tags": [
+        "t20_world_cup",
+        "india",
+        "2007"
+      ],
+      "en": {
+        "question": "Which team won the first-ever T20 World Cup in 2007?",
+        "options": [
+          "Pakistan",
+          "India",
+          "Sri Lanka",
+          "Australia"
+        ],
+        "explanation": "Under a young MS Dhoni, India beat Pakistan by 5 runs in a thrilling final in Johannesburg."
+      },
+      "hi": {
+        "question": "2007 में पहला T20 वर्ल्ड कप किस टीम ने जीता था?",
+        "options": [
+          "पाकिस्तान",
+          "भारत",
+          "श्रीलंका",
+          "ऑस्ट्रेलिया"
+        ],
+        "explanation": "युवा एमएस धोनी की कप्तानी में भारत ने जोहान्सबर्ग के रोमांचक फाइनल में पाकिस्तान को 5 रन से हराया।"
+      },
+      "hi-Latn": {
+        "question": "2007 mein pehla T20 World Cup kis team ne jeeta tha?",
+        "options": [
+          "Pakistan",
+          "India",
+          "Sri Lanka",
+          "Australia"
+        ],
+        "explanation": "Young MS Dhoni ki captaincy mein India ne Johannesburg ke thrilling final mein Pakistan ko 5 runs se haraya."
+      }
+    },
+    {
+      "groupId": "cr_011",
+      "difficulty": "easy",
+      "subcategory": "historic_moments",
+      "correctIndex": 0,
+      "tags": [
+        "world_cup",
+        "india",
+        "2011",
+        "dhoni"
+      ],
+      "en": {
+        "question": "Who hit the winning six for India in the 2011 World Cup final?",
+        "options": [
+          "MS Dhoni",
+          "Yuvraj Singh",
+          "Gautam Gambhir",
+          "Virat Kohli"
+        ],
+        "explanation": "Dhoni sealed the chase by launching Nuwan Kulasekara over long-on, a shot fans still replay endlessly."
+      },
+      "hi": {
+        "question": "2011 वर्ल्ड कप फाइनल में भारत के लिए जीत का छक्का किसने लगाया था?",
+        "options": [
+          "एमएस धोनी",
+          "युवराज सिंह",
+          "गौतम गंभीर",
+          "विराट कोहली"
+        ],
+        "explanation": "धोनी ने नुवान कुलसेकरा की गेंद पर लॉन्ग-ऑन के ऊपर छक्का लगाकर मैच खत्म किया, जिसे फैंस आज भी बार-बार देखते हैं।"
+      },
+      "hi-Latn": {
+        "question": "2011 World Cup final mein India ke liye winning six kisne maara tha?",
+        "options": [
+          "MS Dhoni",
+          "Yuvraj Singh",
+          "Gautam Gambhir",
+          "Virat Kohli"
+        ],
+        "explanation": "Dhoni ne Nuwan Kulasekara ki ball par long-on ke upar six maarke match finish kiya, jo fans aaj bhi baar-baar dekhte hain."
+      }
+    },
+    {
+      "groupId": "cr_012",
+      "difficulty": "easy",
+      "subcategory": "rules",
+      "correctIndex": 2,
+      "tags": [
+        "rules",
+        "basics"
+      ],
+      "en": {
+        "question": "How many players does each team have on the field in a cricket match?",
+        "options": [
+          "12",
+          "9",
+          "11",
+          "10"
+        ],
+        "explanation": "Substitutes may field in place of injured players, but each side still has only 11 players on the field."
+      },
+      "hi": {
+        "question": "क्रिकेट मैच में हर टीम के कितने खिलाड़ी मैदान पर होते हैं?",
+        "options": [
+          "12",
+          "9",
+          "11",
+          "10"
+        ],
+        "explanation": "चोटिल खिलाड़ी की जगह सब्स्टीट्यूट फील्डिंग कर सकता है, लेकिन मैदान पर हर टीम के 11 ही खिलाड़ी होते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Cricket match mein har team ke kitne players field par hote hain?",
+        "options": [
+          "12",
+          "9",
+          "11",
+          "10"
+        ],
+        "explanation": "Injured player ki jagah substitute fielding kar sakta hai, lekin field par har team ke 11 hi players hote hain."
+      }
+    },
+    {
+      "groupId": "cr_013",
+      "difficulty": "easy",
+      "subcategory": "terminology",
+      "correctIndex": 2,
+      "tags": [
+        "terminology",
+        "batting"
+      ],
+      "en": {
+        "question": "What is it called when a batter is dismissed without scoring a run?",
+        "options": [
+          "Dot",
+          "Maiden",
+          "Duck",
+          "Nelson"
+        ],
+        "explanation": "The term comes from a \"0\" looking like a duck's egg; getting out first ball is called a \"golden duck\"."
+      },
+      "hi": {
+        "question": "जब कोई बल्लेबाज़ बिना कोई रन बनाए आउट हो जाए तो उसे क्या कहते हैं?",
+        "options": [
+          "डॉट",
+          "मेडन",
+          "डक",
+          "नेल्सन"
+        ],
+        "explanation": "यह नाम \"0\" के बत्तख के अंडे जैसा दिखने से आया है; पहली ही गेंद पर आउट होने को \"गोल्डन डक\" कहते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Jab koi batsman bina run banaye out ho jaaye to use kya kehte hain?",
+        "options": [
+          "Dot",
+          "Maiden",
+          "Duck",
+          "Nelson"
+        ],
+        "explanation": "Ye naam \"0\" ke duck ke egg jaisa dikhne se aaya hai; first ball par out hone ko \"golden duck\" kehte hain."
+      }
+    },
+    {
+      "groupId": "cr_014",
+      "difficulty": "easy",
+      "subcategory": "nicknames",
+      "correctIndex": 0,
+      "tags": [
+        "nicknames",
+        "legends"
+      ],
+      "en": {
+        "question": "Which Indian batter was nicknamed \"The Wall\"?",
+        "options": [
+          "Rahul Dravid",
+          "VVS Laxman",
+          "Sunil Gavaskar",
+          "Cheteshwar Pujara"
+        ],
+        "explanation": "Dravid's rock-solid defensive technique made him extremely hard to dismiss, especially in Test cricket."
+      },
+      "hi": {
+        "question": "किस भारतीय बल्लेबाज़ को \"द वॉल\" कहा जाता था?",
+        "options": [
+          "राहुल द्रविड़",
+          "वीवीएस लक्ष्मण",
+          "सुनील गावस्कर",
+          "चेतेश्वर पुजारा"
+        ],
+        "explanation": "द्रविड़ की मज़बूत डिफेंसिव तकनीक की वजह से उन्हें आउट करना, खासकर टेस्ट क्रिकेट में, बेहद मुश्किल था।"
+      },
+      "hi-Latn": {
+        "question": "Kis Indian batsman ko \"The Wall\" kaha jata tha?",
+        "options": [
+          "Rahul Dravid",
+          "VVS Laxman",
+          "Sunil Gavaskar",
+          "Cheteshwar Pujara"
+        ],
+        "explanation": "Dravid ki solid defensive technique ki wajah se unhe out karna, especially Tests mein, bahut mushkil tha."
+      }
+    },
+    {
+      "groupId": "cr_015",
+      "difficulty": "easy",
+      "subcategory": "rules",
+      "correctIndex": 3,
+      "tags": [
+        "rules",
+        "scoring"
+      ],
+      "en": {
+        "question": "How many runs are awarded when the ball clears the boundary without bouncing?",
+        "options": [
+          "8",
+          "4",
+          "5",
+          "6"
+        ],
+        "explanation": "If the ball bounces or rolls over the rope it is a four; clearing it on the full earns six runs."
+      },
+      "hi": {
+        "question": "जब गेंद बिना टप्पा खाए बाउंड्री के पार जाए तो कितने रन मिलते हैं?",
+        "options": [
+          "8",
+          "4",
+          "5",
+          "6"
+        ],
+        "explanation": "अगर गेंद टप्पा खाकर या लुढ़ककर रस्सी पार करे तो चौका होता है; सीधे हवा में पार जाने पर छक्का मिलता है।"
+      },
+      "hi-Latn": {
+        "question": "Jab ball bina bounce kiye boundary ke paar jaaye to kitne runs milte hain?",
+        "options": [
+          "8",
+          "4",
+          "5",
+          "6"
+        ],
+        "explanation": "Agar ball bounce ya roll hoke rope cross kare to four hota hai; seedha hawa mein paar jaaye to six milta hai."
+      }
+    },
+    {
+      "groupId": "cr_016",
+      "difficulty": "medium",
+      "subcategory": "historic_moments",
+      "correctIndex": 1,
+      "tags": [
+        "world_cup",
+        "india",
+        "1983",
+        "kapil_dev"
+      ],
+      "en": {
+        "question": "Kapil Dev's famous 175* in the 1983 World Cup came against which team?",
+        "options": [
+          "Australia",
+          "Zimbabwe",
+          "West Indies",
+          "Kenya"
+        ],
+        "explanation": "Kapil walked in with India at 17 for 5 at Tunbridge Wells; a BBC strike meant the innings was never televised."
+      },
+      "hi": {
+        "question": "1983 वर्ल्ड कप में कपिल देव की मशहूर 175* रन की पारी किस टीम के खिलाफ आई थी?",
+        "options": [
+          "ऑस्ट्रेलिया",
+          "ज़िम्बाब्वे",
+          "वेस्टइंडीज",
+          "केन्या"
+        ],
+        "explanation": "टनब्रिज वेल्स में भारत का स्कोर 17 रन पर 5 विकेट था जब कपिल बल्लेबाज़ी करने आए; बीबीसी की हड़ताल के कारण यह पारी टीवी पर नहीं दिखाई गई।"
+      },
+      "hi-Latn": {
+        "question": "1983 World Cup mein Kapil Dev ki famous 175* innings kis team ke against thi?",
+        "options": [
+          "Australia",
+          "Zimbabwe",
+          "West Indies",
+          "Kenya"
+        ],
+        "explanation": "Tunbridge Wells mein India 17/5 par tha jab Kapil aaye; BBC strike ki wajah se ye innings TV par telecast hi nahi hui."
+      }
+    },
+    {
+      "groupId": "cr_017",
+      "difficulty": "medium",
+      "subcategory": "firsts",
+      "correctIndex": 3,
+      "tags": [
+        "firsts",
+        "odi",
+        "records"
+      ],
+      "en": {
+        "question": "Who was the first man to score a double century in ODI cricket?",
+        "options": [
+          "Saeed Anwar",
+          "Virender Sehwag",
+          "Rohit Sharma",
+          "Sachin Tendulkar"
+        ],
+        "explanation": "Tendulkar made 200* against South Africa at Gwalior in February 2010, ending a long wait for the landmark."
+      },
+      "hi": {
+        "question": "वनडे क्रिकेट में दोहरा शतक लगाने वाले पहले पुरुष खिलाड़ी कौन थे?",
+        "options": [
+          "सईद अनवर",
+          "वीरेंद्र सहवाग",
+          "रोहित शर्मा",
+          "सचिन तेंदुलकर"
+        ],
+        "explanation": "सचिन ने फरवरी 2010 में ग्वालियर में दक्षिण अफ्रीका के खिलाफ नाबाद 200 रन बनाकर यह इतिहास रचा।"
+      },
+      "hi-Latn": {
+        "question": "ODI cricket mein double century banane wale pehle male player kaun the?",
+        "options": [
+          "Saeed Anwar",
+          "Virender Sehwag",
+          "Rohit Sharma",
+          "Sachin Tendulkar"
+        ],
+        "explanation": "Sachin ne February 2010 mein Gwalior mein South Africa ke against 200* banake ye history create ki."
+      }
+    },
+    {
+      "groupId": "cr_018",
+      "difficulty": "medium",
+      "subcategory": "world_cup",
+      "correctIndex": 0,
+      "tags": [
+        "world_cup",
+        "history",
+        "firsts"
+      ],
+      "en": {
+        "question": "In which year was the first men's Cricket World Cup held?",
+        "options": [
+          "1975",
+          "1971",
+          "1979",
+          "1983"
+        ],
+        "explanation": "The first edition, the Prudential World Cup, was held in England with 60 overs per side."
+      },
+      "hi": {
+        "question": "पुरुषों का पहला क्रिकेट वर्ल्ड कप किस साल हुआ था?",
+        "options": [
+          "1975",
+          "1971",
+          "1979",
+          "1983"
+        ],
+        "explanation": "पहला संस्करण, प्रूडेंशियल वर्ल्ड कप, इंग्लैंड में हुआ था और उसमें हर टीम 60 ओवर खेलती थी।"
+      },
+      "hi-Latn": {
+        "question": "Men's Cricket World Cup pehli baar kis saal hua tha?",
+        "options": [
+          "1975",
+          "1971",
+          "1979",
+          "1983"
+        ],
+        "explanation": "Pehla edition, Prudential World Cup, England mein hua tha aur usme har team 60 overs khelti thi."
+      }
+    },
+    {
+      "groupId": "cr_019",
+      "difficulty": "medium",
+      "subcategory": "world_cup",
+      "correctIndex": 2,
+      "tags": [
+        "world_cup",
+        "history",
+        "west_indies"
+      ],
+      "en": {
+        "question": "Which team won the first Cricket World Cup in 1975?",
+        "options": [
+          "England",
+          "Australia",
+          "West Indies",
+          "India"
+        ],
+        "explanation": "Clive Lloyd's century in the Lord's final helped West Indies beat Australia, and they retained the title in 1979."
+      },
+      "hi": {
+        "question": "1975 का पहला क्रिकेट वर्ल्ड कप किस टीम ने जीता था?",
+        "options": [
+          "इंग्लैंड",
+          "ऑस्ट्रेलिया",
+          "वेस्टइंडीज",
+          "भारत"
+        ],
+        "explanation": "लॉर्ड्स फाइनल में क्लाइव लॉयड के शतक से वेस्टइंडीज ने ऑस्ट्रेलिया को हराया और 1979 में भी खिताब बरकरार रखा।"
+      },
+      "hi-Latn": {
+        "question": "1975 ka pehla Cricket World Cup kis team ne jeeta tha?",
+        "options": [
+          "England",
+          "Australia",
+          "West Indies",
+          "India"
+        ],
+        "explanation": "Lord's final mein Clive Lloyd ki century se West Indies ne Australia ko haraya, aur 1979 mein bhi title jeeta."
+      }
+    },
+    {
+      "groupId": "cr_020",
+      "difficulty": "medium",
+      "subcategory": "historic_moments",
+      "correctIndex": 1,
+      "tags": [
+        "t20_world_cup",
+        "india",
+        "yuvraj_singh"
+      ],
+      "en": {
+        "question": "Yuvraj Singh hit six sixes in an over at the 2007 T20 World Cup against which team?",
+        "options": [
+          "Australia",
+          "England",
+          "South Africa",
+          "Pakistan"
+        ],
+        "explanation": "Yuvraj took Stuart Broad apart at Durban and reached his fifty in just 12 balls."
+      },
+      "hi": {
+        "question": "2007 T20 वर्ल्ड कप में युवराज सिंह ने किस टीम के खिलाफ एक ओवर में छह छक्के लगाए थे?",
+        "options": [
+          "ऑस्ट्रेलिया",
+          "इंग्लैंड",
+          "दक्षिण अफ्रीका",
+          "पाकिस्तान"
+        ],
+        "explanation": "युवराज ने डरबन में स्टुअर्ट ब्रॉड के ओवर में छह छक्के जड़े और सिर्फ 12 गेंदों में अर्धशतक पूरा किया।"
+      },
+      "hi-Latn": {
+        "question": "2007 T20 World Cup mein Yuvraj Singh ne kis team ke against ek over mein 6 sixes maare the?",
+        "options": [
+          "Australia",
+          "England",
+          "South Africa",
+          "Pakistan"
+        ],
+        "explanation": "Yuvraj ne Durban mein Stuart Broad ke over mein 6 sixes maare aur sirf 12 balls mein fifty poori ki."
+      }
+    },
+    {
+      "groupId": "cr_021",
+      "difficulty": "medium",
+      "subcategory": "world_cup",
+      "correctIndex": 0,
+      "tags": [
+        "world_cup",
+        "india",
+        "2011",
+        "yuvraj_singh"
+      ],
+      "en": {
+        "question": "Who was named Player of the Tournament at the 2011 World Cup?",
+        "options": [
+          "Yuvraj Singh",
+          "Sachin Tendulkar",
+          "Zaheer Khan",
+          "Tillakaratne Dilshan"
+        ],
+        "explanation": "Yuvraj scored over 350 runs and took 15 wickets, all while unknowingly battling cancer."
+      },
+      "hi": {
+        "question": "2011 वर्ल्ड कप में \"प्लेयर ऑफ द टूर्नामेंट\" किसे चुना गया था?",
+        "options": [
+          "युवराज सिंह",
+          "सचिन तेंदुलकर",
+          "ज़हीर खान",
+          "तिलकरत्ने दिलशान"
+        ],
+        "explanation": "युवराज ने 350 से ज़्यादा रन बनाए और 15 विकेट लिए, और वह भी तब जब वे अनजाने में कैंसर से जूझ रहे थे।"
+      },
+      "hi-Latn": {
+        "question": "2011 World Cup mein \"Player of the Tournament\" kise chuna gaya tha?",
+        "options": [
+          "Yuvraj Singh",
+          "Sachin Tendulkar",
+          "Zaheer Khan",
+          "Tillakaratne Dilshan"
+        ],
+        "explanation": "Yuvraj ne 350 se zyada runs banaye aur 15 wickets liye, wo bhi tab jab wo unknowingly cancer se lad rahe the."
+      }
+    },
+    {
+      "groupId": "cr_022",
+      "difficulty": "medium",
+      "subcategory": "nicknames",
+      "correctIndex": 3,
+      "tags": [
+        "nicknames",
+        "legends",
+        "kapil_dev"
+      ],
+      "en": {
+        "question": "Which Indian legend was nicknamed the \"Haryana Hurricane\"?",
+        "options": [
+          "Javagal Srinath",
+          "Virender Sehwag",
+          "Ashish Nehra",
+          "Kapil Dev"
+        ],
+        "explanation": "Kapil represented Haryana in domestic cricket and was known for his pace bowling and fearless hitting."
+      },
+      "hi": {
+        "question": "किस भारतीय दिग्गज को \"हरियाणा हरिकेन\" कहा जाता था?",
+        "options": [
+          "जवागल श्रीनाथ",
+          "वीरेंद्र सहवाग",
+          "आशीष नेहरा",
+          "कपिल देव"
+        ],
+        "explanation": "कपिल घरेलू क्रिकेट में हरियाणा के लिए खेलते थे और अपनी तेज़ गेंदबाज़ी व बेखौफ़ बल्लेबाज़ी के लिए मशहूर थे।"
+      },
+      "hi-Latn": {
+        "question": "Kis Indian legend ko \"Haryana Hurricane\" kaha jata tha?",
+        "options": [
+          "Javagal Srinath",
+          "Virender Sehwag",
+          "Ashish Nehra",
+          "Kapil Dev"
+        ],
+        "explanation": "Kapil domestic cricket mein Haryana ke liye khelte the aur apni pace bowling aur fearless hitting ke liye famous the."
+      }
+    },
+    {
+      "groupId": "cr_023",
+      "difficulty": "medium",
+      "subcategory": "stadiums",
+      "correctIndex": 2,
+      "tags": [
+        "stadiums",
+        "india"
+      ],
+      "en": {
+        "question": "The cricket ground popularly called \"Chepauk\" is in which city?",
+        "options": [
+          "Hyderabad",
+          "Bengaluru",
+          "Chennai",
+          "Kochi"
+        ],
+        "explanation": "Chepauk is the common name for the M. A. Chidambaram Stadium, one of India's oldest Test venues."
+      },
+      "hi": {
+        "question": "लोकप्रिय रूप से \"चेपॉक\" कहलाने वाला क्रिकेट मैदान किस शहर में है?",
+        "options": [
+          "हैदराबाद",
+          "बेंगलुरु",
+          "चेन्नई",
+          "कोच्चि"
+        ],
+        "explanation": "चेपॉक एम. ए. चिदंबरम स्टेडियम का आम नाम है, जो भारत के सबसे पुराने टेस्ट मैदानों में से एक है।"
+      },
+      "hi-Latn": {
+        "question": "\"Chepauk\" naam se famous cricket ground kis city mein hai?",
+        "options": [
+          "Hyderabad",
+          "Bengaluru",
+          "Chennai",
+          "Kochi"
+        ],
+        "explanation": "Chepauk M. A. Chidambaram Stadium ka common naam hai, jo India ke sabse purane Test venues mein se ek hai."
+      }
+    },
+    {
+      "groupId": "cr_024",
+      "difficulty": "medium",
+      "subcategory": "fielding",
+      "correctIndex": 0,
+      "tags": [
+        "fielding",
+        "terminology"
+      ],
+      "en": {
+        "question": "Which fielding position is very close to the batter on the off side, almost square of the wicket?",
+        "options": [
+          "Silly point",
+          "Fine leg",
+          "Long on",
+          "Third man"
+        ],
+        "explanation": "It is called \"silly\" because standing so close to the bat is risky, so fielders there usually wear helmets."
+      },
+      "hi": {
+        "question": "कौन-सी फील्डिंग पोज़िशन ऑफ साइड पर बल्लेबाज़ के बिल्कुल पास, लगभग विकेट की सीध में होती है?",
+        "options": [
+          "सिली पॉइंट",
+          "फाइन लेग",
+          "लॉन्ग ऑन",
+          "थर्ड मैन"
+        ],
+        "explanation": "इसे \"सिली\" इसलिए कहते हैं क्योंकि बल्ले के इतने पास खड़ा होना जोखिम भरा है, इसलिए वहाँ फील्डर अक्सर हेलमेट पहनते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Kaunsi fielding position off side par batsman ke bilkul paas, lagbhag square of the wicket hoti hai?",
+        "options": [
+          "Silly point",
+          "Fine leg",
+          "Long on",
+          "Third man"
+        ],
+        "explanation": "Ise \"silly\" isliye kehte hain kyunki bat ke itne paas khada hona risky hai, isliye wahan fielders aksar helmet pehente hain."
+      }
+    },
+    {
+      "groupId": "cr_025",
+      "difficulty": "medium",
+      "subcategory": "terminology",
+      "correctIndex": 1,
+      "tags": [
+        "terminology",
+        "bowling",
+        "spin"
+      ],
+      "en": {
+        "question": "What is a leg-spinner's delivery that turns the opposite way to a normal leg-break called?",
+        "options": [
+          "Doosra",
+          "Googly",
+          "Yorker",
+          "Bouncer"
+        ],
+        "explanation": "It is credited to England's Bernard Bosanquet around 1900, which is why it was once nicknamed the \"Bosie\"."
+      },
+      "hi": {
+        "question": "लेग-स्पिनर की वह गेंद जो सामान्य लेग-ब्रेक से उल्टी दिशा में घूमती है, क्या कहलाती है?",
+        "options": [
+          "दूसरा",
+          "गुगली",
+          "यॉर्कर",
+          "बाउंसर"
+        ],
+        "explanation": "इसका श्रेय इंग्लैंड के बर्नार्ड बोसांके को दिया जाता है, जिन्होंने करीब 1900 में इसे ईजाद किया; इसलिए इसे कभी \"बोसी\" भी कहा जाता था।"
+      },
+      "hi-Latn": {
+        "question": "Leg-spinner ki wo ball jo normal leg-break se ulti direction mein ghoomti hai, use kya kehte hain?",
+        "options": [
+          "Doosra",
+          "Googly",
+          "Yorker",
+          "Bouncer"
+        ],
+        "explanation": "Iska credit England ke Bernard Bosanquet ko jata hai, jinhone around 1900 ise invent kiya; isliye ise kabhi \"Bosie\" bhi kehte the."
+      }
+    },
+    {
+      "groupId": "cr_026",
+      "difficulty": "medium",
+      "subcategory": "world_cup",
+      "correctIndex": 3,
+      "tags": [
+        "world_cup",
+        "india",
+        "2011",
+        "dhoni"
+      ],
+      "en": {
+        "question": "Who was Player of the Match in the 2011 World Cup final?",
+        "options": [
+          "Zaheer Khan",
+          "Gautam Gambhir",
+          "Mahela Jayawardene",
+          "MS Dhoni"
+        ],
+        "explanation": "Dhoni promoted himself above Yuvraj and made an unbeaten 91, outshining Mahela Jayawardene's century."
+      },
+      "hi": {
+        "question": "2011 वर्ल्ड कप फाइनल में \"प्लेयर ऑफ द मैच\" कौन थे?",
+        "options": [
+          "ज़हीर खान",
+          "गौतम गंभीर",
+          "महेला जयवर्धने",
+          "एमएस धोनी"
+        ],
+        "explanation": "धोनी ने खुद को युवराज से ऊपर बल्लेबाज़ी के लिए भेजा और नाबाद 91 रन बनाए, जो महेला जयवर्धने के शतक पर भारी पड़े।"
+      },
+      "hi-Latn": {
+        "question": "2011 World Cup final mein \"Player of the Match\" kaun the?",
+        "options": [
+          "Zaheer Khan",
+          "Gautam Gambhir",
+          "Mahela Jayawardene",
+          "MS Dhoni"
+        ],
+        "explanation": "Dhoni ne khud ko Yuvraj se upar promote kiya aur unbeaten 91 banaye, jo Mahela Jayawardene ki century par bhaari pade."
+      }
+    },
+    {
+      "groupId": "cr_027",
+      "difficulty": "medium",
+      "subcategory": "world_cup",
+      "correctIndex": 1,
+      "tags": [
+        "world_cup",
+        "india",
+        "1983"
+      ],
+      "en": {
+        "question": "Who was Player of the Match in the 1983 World Cup final?",
+        "options": [
+          "Kapil Dev",
+          "Mohinder Amarnath",
+          "Kris Srikkanth",
+          "Madan Lal"
+        ],
+        "explanation": "Amarnath scored 26 and took 3 wickets for 12 runs, having also been Player of the Match in the semi-final."
+      },
+      "hi": {
+        "question": "1983 वर्ल्ड कप फाइनल में \"प्लेयर ऑफ द मैच\" कौन थे?",
+        "options": [
+          "कपिल देव",
+          "मोहिंदर अमरनाथ",
+          "कृष्णामाचारी श्रीकांत",
+          "मदन लाल"
+        ],
+        "explanation": "अमरनाथ ने 26 रन बनाए और 12 रन देकर 3 विकेट लिए; सेमीफाइनल में भी वही प्लेयर ऑफ द मैच थे।"
+      },
+      "hi-Latn": {
+        "question": "1983 World Cup final mein \"Player of the Match\" kaun the?",
+        "options": [
+          "Kapil Dev",
+          "Mohinder Amarnath",
+          "Kris Srikkanth",
+          "Madan Lal"
+        ],
+        "explanation": "Amarnath ne 26 runs banaye aur 12 runs dekar 3 wickets liye; semi-final mein bhi wahi Player of the Match the."
+      }
+    },
+    {
+      "groupId": "cr_028",
+      "difficulty": "medium",
+      "subcategory": "test_history",
+      "correctIndex": 2,
+      "tags": [
+        "test_cricket",
+        "history",
+        "firsts"
+      ],
+      "en": {
+        "question": "The first-ever Test match, in 1877, was played between which two teams?",
+        "options": [
+          "England and India",
+          "England and South Africa",
+          "Australia and England",
+          "Australia and New Zealand"
+        ],
+        "explanation": "It was played at the Melbourne Cricket Ground in March 1877, and Australia won by 45 runs."
+      },
+      "hi": {
+        "question": "1877 में खेला गया इतिहास का पहला टेस्ट मैच किन दो टीमों के बीच था?",
+        "options": [
+          "इंग्लैंड और भारत",
+          "इंग्लैंड और दक्षिण अफ्रीका",
+          "ऑस्ट्रेलिया और इंग्लैंड",
+          "ऑस्ट्रेलिया और न्यूज़ीलैंड"
+        ],
+        "explanation": "यह मार्च 1877 में मेलबर्न क्रिकेट ग्राउंड पर खेला गया था और ऑस्ट्रेलिया ने 45 रन से जीत दर्ज की थी।"
+      },
+      "hi-Latn": {
+        "question": "1877 mein khela gaya history ka pehla Test match kin do teams ke beech tha?",
+        "options": [
+          "England aur India",
+          "England aur South Africa",
+          "Australia aur England",
+          "Australia aur New Zealand"
+        ],
+        "explanation": "Ye March 1877 mein Melbourne Cricket Ground par khela gaya tha aur Australia ne 45 runs se jeeta tha."
+      }
+    },
+    {
+      "groupId": "cr_029",
+      "difficulty": "medium",
+      "subcategory": "nicknames",
+      "correctIndex": 3,
+      "tags": [
+        "nicknames",
+        "pakistan",
+        "fast_bowling"
+      ],
+      "en": {
+        "question": "Which fast bowler is known as the \"Rawalpindi Express\"?",
+        "options": [
+          "Shahid Afridi",
+          "Wasim Akram",
+          "Waqar Younis",
+          "Shoaib Akhtar"
+        ],
+        "explanation": "Named after his hometown, Shoaib is credited with the first officially recorded 100 mph delivery, at the 2003 World Cup."
+      },
+      "hi": {
+        "question": "किस तेज़ गेंदबाज़ को \"रावलपिंडी एक्सप्रेस\" कहा जाता है?",
+        "options": [
+          "शाहिद अफरीदी",
+          "वसीम अकरम",
+          "वकार यूनुस",
+          "शोएब अख्तर"
+        ],
+        "explanation": "अपने गृहनगर के नाम पर यह उपनाम पाने वाले शोएब को 2003 वर्ल्ड कप में पहली आधिकारिक 100 मील प्रति घंटा की गेंद डालने का श्रेय जाता है।"
+      },
+      "hi-Latn": {
+        "question": "Kis fast bowler ko \"Rawalpindi Express\" kaha jata hai?",
+        "options": [
+          "Shahid Afridi",
+          "Wasim Akram",
+          "Waqar Younis",
+          "Shoaib Akhtar"
+        ],
+        "explanation": "Apne hometown ke naam par ye nickname paane wale Shoaib ko 2003 World Cup mein pehli official 100 mph ball dalne ka credit jata hai."
+      }
+    },
+    {
+      "groupId": "cr_030",
+      "difficulty": "medium",
+      "subcategory": "firsts",
+      "correctIndex": 0,
+      "tags": [
+        "firsts",
+        "test_cricket",
+        "india",
+        "records"
+      ],
+      "en": {
+        "question": "Who was the first Indian to score a triple century in Test cricket?",
+        "options": [
+          "Virender Sehwag",
+          "Rahul Dravid",
+          "Sunil Gavaskar",
+          "VVS Laxman"
+        ],
+        "explanation": "Sehwag smashed 309 against Pakistan at Multan in 2004, earning the nickname \"Sultan of Multan\"."
+      },
+      "hi": {
+        "question": "टेस्ट क्रिकेट में तिहरा शतक लगाने वाले पहले भारतीय कौन थे?",
+        "options": [
+          "वीरेंद्र सहवाग",
+          "राहुल द्रविड़",
+          "सुनील गावस्कर",
+          "वीवीएस लक्ष्मण"
+        ],
+        "explanation": "सहवाग ने 2004 में मुल्तान में पाकिस्तान के खिलाफ 309 रन ठोके और उन्हें \"मुल्तान का सुल्तान\" कहा जाने लगा।"
+      },
+      "hi-Latn": {
+        "question": "Test cricket mein triple century banane wale pehle Indian kaun the?",
+        "options": [
+          "Virender Sehwag",
+          "Rahul Dravid",
+          "Sunil Gavaskar",
+          "VVS Laxman"
+        ],
+        "explanation": "Sehwag ne 2004 mein Multan mein Pakistan ke against 309 runs thoke aur unhe \"Multan ka Sultan\" kaha jaane laga."
+      }
+    },
+    {
+      "groupId": "cr_031",
+      "difficulty": "hard",
+      "subcategory": "test_history",
+      "correctIndex": 0,
+      "tags": [
+        "test_cricket",
+        "india",
+        "history"
+      ],
+      "en": {
+        "question": "In which year did India play its first Test match?",
+        "options": [
+          "1932",
+          "1928",
+          "1936",
+          "1947"
+        ],
+        "explanation": "India faced England at Lord's in June 1932, becoming the sixth Test-playing nation."
+      },
+      "hi": {
+        "question": "भारत ने अपना पहला टेस्ट मैच किस साल खेला था?",
+        "options": [
+          "1932",
+          "1928",
+          "1936",
+          "1947"
+        ],
+        "explanation": "भारत ने जून 1932 में लॉर्ड्स में इंग्लैंड का सामना किया और टेस्ट खेलने वाला छठा देश बना।"
+      },
+      "hi-Latn": {
+        "question": "India ne apna pehla Test match kis saal khela tha?",
+        "options": [
+          "1932",
+          "1928",
+          "1936",
+          "1947"
+        ],
+        "explanation": "India ne June 1932 mein Lord's par England ka saamna kiya aur Test khelne wala chhatha desh bana."
+      }
+    },
+    {
+      "groupId": "cr_032",
+      "difficulty": "hard",
+      "subcategory": "test_history",
+      "correctIndex": 2,
+      "tags": [
+        "test_cricket",
+        "india",
+        "captains",
+        "firsts"
+      ],
+      "en": {
+        "question": "Who captained India in its first-ever Test match?",
+        "options": [
+          "Vijay Hazare",
+          "Lala Amarnath",
+          "C. K. Nayudu",
+          "Vijay Merchant"
+        ],
+        "explanation": "Nayudu led India at Lord's in 1932, and the BCCI's lifetime achievement award is named in his honour."
+      },
+      "hi": {
+        "question": "भारत के पहले टेस्ट मैच में कप्तान कौन थे?",
+        "options": [
+          "विजय हज़ारे",
+          "लाला अमरनाथ",
+          "सी. के. नायडू",
+          "विजय मर्चेंट"
+        ],
+        "explanation": "नायडू ने 1932 में लॉर्ड्स में भारत की कप्तानी की थी, और बीसीसीआई का लाइफटाइम अचीवमेंट अवॉर्ड उन्हीं के नाम पर है।"
+      },
+      "hi-Latn": {
+        "question": "India ke pehle Test match mein captain kaun the?",
+        "options": [
+          "Vijay Hazare",
+          "Lala Amarnath",
+          "C. K. Nayudu",
+          "Vijay Merchant"
+        ],
+        "explanation": "Nayudu ne 1932 mein Lord's par India ki captaincy ki thi, aur BCCI ka lifetime achievement award unhi ke naam par hai."
+      }
+    },
+    {
+      "groupId": "cr_033",
+      "difficulty": "hard",
+      "subcategory": "test_history",
+      "correctIndex": 1,
+      "tags": [
+        "test_cricket",
+        "india",
+        "firsts"
+      ],
+      "en": {
+        "question": "India's first-ever Test victory, in 1952, came against which team?",
+        "options": [
+          "Pakistan",
+          "England",
+          "New Zealand",
+          "West Indies"
+        ],
+        "explanation": "India beat England by an innings at Madras, nearly 20 years after making their Test debut."
+      },
+      "hi": {
+        "question": "1952 में भारत ने अपनी पहली टेस्ट जीत किस टीम के खिलाफ हासिल की थी?",
+        "options": [
+          "पाकिस्तान",
+          "इंग्लैंड",
+          "न्यूज़ीलैंड",
+          "वेस्टइंडीज"
+        ],
+        "explanation": "भारत ने मद्रास में इंग्लैंड को पारी से हराया, जो टेस्ट डेब्यू के लगभग 20 साल बाद आई जीत थी।"
+      },
+      "hi-Latn": {
+        "question": "1952 mein India ki pehli Test jeet kis team ke against aayi thi?",
+        "options": [
+          "Pakistan",
+          "England",
+          "New Zealand",
+          "West Indies"
+        ],
+        "explanation": "India ne Madras mein England ko innings se haraya, jo Test debut ke kareeb 20 saal baad pehli jeet thi."
+      }
+    },
+    {
+      "groupId": "cr_034",
+      "difficulty": "hard",
+      "subcategory": "stadiums",
+      "correctIndex": 3,
+      "tags": [
+        "world_cup",
+        "stadiums",
+        "1983"
+      ],
+      "en": {
+        "question": "At which ground was the 1983 World Cup final played?",
+        "options": [
+          "Edgbaston",
+          "The Oval",
+          "Old Trafford",
+          "Lord's"
+        ],
+        "explanation": "Lord's hosted each of the first three World Cup finals, in 1975, 1979 and 1983."
+      },
+      "hi": {
+        "question": "1983 वर्ल्ड कप फाइनल किस मैदान पर खेला गया था?",
+        "options": [
+          "एजबेस्टन",
+          "द ओवल",
+          "ओल्ड ट्रैफर्ड",
+          "लॉर्ड्स"
+        ],
+        "explanation": "पहले तीनों वर्ल्ड कप फाइनल, यानी 1975, 1979 और 1983, लॉर्ड्स में ही खेले गए थे।"
+      },
+      "hi-Latn": {
+        "question": "1983 World Cup final kis ground par khela gaya tha?",
+        "options": [
+          "Edgbaston",
+          "The Oval",
+          "Old Trafford",
+          "Lord's"
+        ],
+        "explanation": "Pehle teeno World Cup finals, yaani 1975, 1979 aur 1983, Lord's par hi khele gaye the."
+      }
+    },
+    {
+      "groupId": "cr_035",
+      "difficulty": "hard",
+      "subcategory": "historic_moments",
+      "correctIndex": 2,
+      "tags": [
+        "test_cricket",
+        "india",
+        "kumble",
+        "records"
+      ],
+      "en": {
+        "question": "In 1999, Anil Kumble took all 10 wickets in a Test innings against Pakistan in which city?",
+        "options": [
+          "Chennai",
+          "Kolkata",
+          "Delhi",
+          "Mumbai"
+        ],
+        "explanation": "At the Feroz Shah Kotla, Kumble became only the second bowler after Jim Laker to take all 10 in a Test innings."
+      },
+      "hi": {
+        "question": "1999 में अनिल कुंबले ने पाकिस्तान के खिलाफ एक टेस्ट पारी में सभी 10 विकेट किस शहर में लिए थे?",
+        "options": [
+          "चेन्नई",
+          "कोलकाता",
+          "दिल्ली",
+          "मुंबई"
+        ],
+        "explanation": "फ़िरोज़शाह कोटला में कुंबले जिम लेकर के बाद टेस्ट की एक पारी में सभी 10 विकेट लेने वाले सिर्फ दूसरे गेंदबाज़ बने।"
+      },
+      "hi-Latn": {
+        "question": "1999 mein Anil Kumble ne Pakistan ke against ek Test innings mein saare 10 wickets kis city mein liye the?",
+        "options": [
+          "Chennai",
+          "Kolkata",
+          "Delhi",
+          "Mumbai"
+        ],
+        "explanation": "Feroz Shah Kotla mein Kumble, Jim Laker ke baad Test innings mein saare 10 wickets lene wale sirf doosre bowler bane."
+      }
+    },
+    {
+      "groupId": "cr_036",
+      "difficulty": "hard",
+      "subcategory": "firsts",
+      "correctIndex": 0,
+      "tags": [
+        "firsts",
+        "test_cricket",
+        "bowling",
+        "records"
+      ],
+      "en": {
+        "question": "Who was the first bowler to take all 10 wickets in a Test innings?",
+        "options": [
+          "Jim Laker",
+          "Anil Kumble",
+          "Richard Hadlee",
+          "Muttiah Muralitharan"
+        ],
+        "explanation": "England's off-spinner took 10 for 53 against Australia at Old Trafford in 1956, finishing with 19 wickets in the match."
+      },
+      "hi": {
+        "question": "टेस्ट की एक पारी में सभी 10 विकेट लेने वाले पहले गेंदबाज़ कौन थे?",
+        "options": [
+          "जिम लेकर",
+          "अनिल कुंबले",
+          "रिचर्ड हैडली",
+          "मुथैया मुरलीधरन"
+        ],
+        "explanation": "इंग्लैंड के इस ऑफ-स्पिनर ने 1956 में ओल्ड ट्रैफर्ड पर ऑस्ट्रेलिया के खिलाफ 53 रन देकर 10 विकेट लिए और मैच में कुल 19 विकेट झटके।"
+      },
+      "hi-Latn": {
+        "question": "Test innings mein saare 10 wickets lene wale pehle bowler kaun the?",
+        "options": [
+          "Jim Laker",
+          "Anil Kumble",
+          "Richard Hadlee",
+          "Muttiah Muralitharan"
+        ],
+        "explanation": "England ke is off-spinner ne 1956 mein Old Trafford par Australia ke against 10/53 liye aur match mein total 19 wickets jhatke."
+      }
+    },
+    {
+      "groupId": "cr_037",
+      "difficulty": "hard",
+      "subcategory": "firsts",
+      "correctIndex": 1,
+      "tags": [
+        "firsts",
+        "odi",
+        "history"
+      ],
+      "en": {
+        "question": "In which year was the first-ever One Day International played?",
+        "options": [
+          "1975",
+          "1971",
+          "1968",
+          "1977"
+        ],
+        "explanation": "Australia and England played it at the MCG after the first three days of a Test there were washed out by rain."
+      },
+      "hi": {
+        "question": "इतिहास का पहला वनडे इंटरनेशनल मैच किस साल खेला गया था?",
+        "options": [
+          "1975",
+          "1971",
+          "1968",
+          "1977"
+        ],
+        "explanation": "मेलबर्न में एक टेस्ट के पहले तीन दिन बारिश से धुल जाने के बाद ऑस्ट्रेलिया और इंग्लैंड ने यह मैच खेला था।"
+      },
+      "hi-Latn": {
+        "question": "History ka pehla One Day International match kis saal khela gaya tha?",
+        "options": [
+          "1975",
+          "1971",
+          "1968",
+          "1977"
+        ],
+        "explanation": "Melbourne mein ek Test ke pehle teen din baarish mein dhul gaye, tab Australia aur England ne ye match khela tha."
+      }
+    },
+    {
+      "groupId": "cr_038",
+      "difficulty": "hard",
+      "subcategory": "firsts",
+      "correctIndex": 3,
+      "tags": [
+        "firsts",
+        "t20i",
+        "history"
+      ],
+      "en": {
+        "question": "The first-ever men's T20 International, in 2005, was played between New Zealand and which team?",
+        "options": [
+          "Pakistan",
+          "England",
+          "South Africa",
+          "Australia"
+        ],
+        "explanation": "Played in Auckland in a light-hearted spirit, with New Zealand in retro kits, the match was won comfortably by Australia."
+      },
+      "hi": {
+        "question": "2005 में खेला गया पहला पुरुष T20 इंटरनेशनल मैच न्यूज़ीलैंड और किस टीम के बीच था?",
+        "options": [
+          "पाकिस्तान",
+          "इंग्लैंड",
+          "दक्षिण अफ्रीका",
+          "ऑस्ट्रेलिया"
+        ],
+        "explanation": "ऑकलैंड में हल्के-फुल्के माहौल में खेले गए इस मैच में न्यूज़ीलैंड ने पुरानी रेट्रो जर्सी पहनी थी, और ऑस्ट्रेलिया आसानी से जीता।"
+      },
+      "hi-Latn": {
+        "question": "2005 mein khela gaya pehla men's T20 International New Zealand aur kis team ke beech tha?",
+        "options": [
+          "Pakistan",
+          "England",
+          "South Africa",
+          "Australia"
+        ],
+        "explanation": "Auckland mein fun mood mein khele gaye is match mein New Zealand ne retro kits pehni thi, aur Australia aaram se jeeta."
+      }
+    },
+    {
+      "groupId": "cr_039",
+      "difficulty": "hard",
+      "subcategory": "firsts",
+      "correctIndex": 0,
+      "tags": [
+        "firsts",
+        "test_cricket",
+        "india",
+        "bowling"
+      ],
+      "en": {
+        "question": "Who was the first Indian bowler to take a hat-trick in Test cricket?",
+        "options": [
+          "Harbhajan Singh",
+          "Kapil Dev",
+          "Irfan Pathan",
+          "Anil Kumble"
+        ],
+        "explanation": "Harbhajan removed Ricky Ponting, Adam Gilchrist and Shane Warne at Eden Gardens in 2001."
+      },
+      "hi": {
+        "question": "टेस्ट क्रिकेट में हैट्रिक लेने वाले पहले भारतीय गेंदबाज़ कौन थे?",
+        "options": [
+          "हरभजन सिंह",
+          "कपिल देव",
+          "इरफ़ान पठान",
+          "अनिल कुंबले"
+        ],
+        "explanation": "हरभजन ने 2001 में ईडन गार्डन्स पर रिकी पोंटिंग, एडम गिलक्रिस्ट और शेन वॉर्न को लगातार गेंदों पर आउट किया था।"
+      },
+      "hi-Latn": {
+        "question": "Test cricket mein hat-trick lene wale pehle Indian bowler kaun the?",
+        "options": [
+          "Harbhajan Singh",
+          "Kapil Dev",
+          "Irfan Pathan",
+          "Anil Kumble"
+        ],
+        "explanation": "Harbhajan ne 2001 mein Eden Gardens par Ricky Ponting, Adam Gilchrist aur Shane Warne ko lagatar balls par out kiya tha."
+      }
+    },
+    {
+      "groupId": "cr_040",
+      "difficulty": "hard",
+      "subcategory": "test_history",
+      "correctIndex": 2,
+      "tags": [
+        "test_cricket",
+        "legends",
+        "records"
+      ],
+      "en": {
+        "question": "What was Sir Don Bradman's career Test batting average?",
+        "options": [
+          "98.96",
+          "100.00",
+          "99.94",
+          "101.24"
+        ],
+        "explanation": "Bradman needed just 4 runs in his final innings in 1948 to average 100, but was bowled for a duck by Eric Hollies."
+      },
+      "hi": {
+        "question": "सर डॉन ब्रैडमैन का टेस्ट करियर बल्लेबाज़ी औसत कितना था?",
+        "options": [
+          "98.96",
+          "100.00",
+          "99.94",
+          "101.24"
+        ],
+        "explanation": "1948 में अपनी आखिरी पारी में ब्रैडमैन को 100 का औसत पाने के लिए सिर्फ 4 रन चाहिए थे, लेकिन एरिक हॉलीज़ ने उन्हें शून्य पर बोल्ड कर दिया।"
+      },
+      "hi-Latn": {
+        "question": "Sir Don Bradman ka Test career batting average kitna tha?",
+        "options": [
+          "98.96",
+          "100.00",
+          "99.94",
+          "101.24"
+        ],
+        "explanation": "1948 mein apni last innings mein Bradman ko 100 average ke liye sirf 4 runs chahiye the, lekin Eric Hollies ne unhe zero par bowled kar diya."
+      }
+    },
+    {
+      "groupId": "cr_041",
+      "difficulty": "hard",
+      "subcategory": "ipl",
+      "correctIndex": 1,
+      "tags": [
+        "ipl",
+        "history",
+        "firsts"
+      ],
+      "en": {
+        "question": "Who scored an unbeaten 158 in the very first IPL match in 2008?",
+        "options": [
+          "Chris Gayle",
+          "Brendon McCullum",
+          "Adam Gilchrist",
+          "Sourav Ganguly"
+        ],
+        "explanation": "McCullum's blitz for Kolkata Knight Riders against RCB in Bengaluru set the tone for the league on opening night."
+      },
+      "hi": {
+        "question": "2008 में IPL के सबसे पहले मैच में नाबाद 158 रन किसने बनाए थे?",
+        "options": [
+          "क्रिस गेल",
+          "ब्रेंडन मैकलम",
+          "एडम गिलक्रिस्ट",
+          "सौरव गांगुली"
+        ],
+        "explanation": "बेंगलुरु में आरसीबी के खिलाफ कोलकाता नाइट राइडर्स के लिए मैकलम की तूफ़ानी पारी ने पहली ही रात लीग का माहौल बना दिया।"
+      },
+      "hi-Latn": {
+        "question": "2008 mein IPL ke sabse pehle match mein unbeaten 158 kisne banaye the?",
+        "options": [
+          "Chris Gayle",
+          "Brendon McCullum",
+          "Adam Gilchrist",
+          "Sourav Ganguly"
+        ],
+        "explanation": "Bengaluru mein RCB ke against KKR ke liye McCullum ki toofani innings ne opening night par hi league ka mood set kar diya."
+      }
+    },
+    {
+      "groupId": "cr_042",
+      "difficulty": "hard",
+      "subcategory": "world_cup",
+      "correctIndex": 3,
+      "tags": [
+        "world_cup",
+        "history",
+        "sri_lanka"
+      ],
+      "en": {
+        "question": "In which city was the 1996 World Cup final played?",
+        "options": [
+          "Colombo",
+          "Kolkata",
+          "Karachi",
+          "Lahore"
+        ],
+        "explanation": "Sri Lanka beat Australia at the Gaddafi Stadium, with Aravinda de Silva scoring an unbeaten century."
+      },
+      "hi": {
+        "question": "1996 वर्ल्ड कप फाइनल किस शहर में खेला गया था?",
+        "options": [
+          "कोलंबो",
+          "कोलकाता",
+          "कराची",
+          "लाहौर"
+        ],
+        "explanation": "गद्दाफ़ी स्टेडियम में श्रीलंका ने ऑस्ट्रेलिया को हराया, जिसमें अरविंद डी सिल्वा ने नाबाद शतक लगाया।"
+      },
+      "hi-Latn": {
+        "question": "1996 World Cup final kis city mein khela gaya tha?",
+        "options": [
+          "Colombo",
+          "Kolkata",
+          "Karachi",
+          "Lahore"
+        ],
+        "explanation": "Gaddafi Stadium mein Sri Lanka ne Australia ko haraya, jisme Aravinda de Silva ne unbeaten century maari."
+      }
+    },
+    {
+      "groupId": "cr_043",
+      "difficulty": "hard",
+      "subcategory": "firsts",
+      "correctIndex": 0,
+      "tags": [
+        "firsts",
+        "test_cricket",
+        "india"
+      ],
+      "en": {
+        "question": "Who was the first Indian to score a century in Test cricket?",
+        "options": [
+          "Lala Amarnath",
+          "C. K. Nayudu",
+          "Vijay Merchant",
+          "Mushtaq Ali"
+        ],
+        "explanation": "Amarnath hit 118 on his Test debut against England in Bombay in 1933."
+      },
+      "hi": {
+        "question": "टेस्ट क्रिकेट में शतक लगाने वाले पहले भारतीय कौन थे?",
+        "options": [
+          "लाला अमरनाथ",
+          "सी. के. नायडू",
+          "विजय मर्चेंट",
+          "मुश्ताक अली"
+        ],
+        "explanation": "अमरनाथ ने 1933 में बॉम्बे में इंग्लैंड के खिलाफ अपने टेस्ट डेब्यू पर 118 रन बनाए थे।"
+      },
+      "hi-Latn": {
+        "question": "Test cricket mein century banane wale pehle Indian kaun the?",
+        "options": [
+          "Lala Amarnath",
+          "C. K. Nayudu",
+          "Vijay Merchant",
+          "Mushtaq Ali"
+        ],
+        "explanation": "Amarnath ne 1933 mein Bombay mein England ke against apne Test debut par 118 runs banaye the."
+      }
+    },
+    {
+      "groupId": "cr_044",
+      "difficulty": "hard",
+      "subcategory": "world_cup",
+      "correctIndex": 2,
+      "tags": [
+        "world_cup",
+        "history",
+        "australia"
+      ],
+      "en": {
+        "question": "Which team won the 1987 World Cup, the first one held outside England?",
+        "options": [
+          "India",
+          "England",
+          "Australia",
+          "Pakistan"
+        ],
+        "explanation": "Co-hosted by India and Pakistan, the tournament ended with Australia beating England in the final at Eden Gardens."
+      },
+      "hi": {
+        "question": "1987 का वर्ल्ड कप, जो इंग्लैंड के बाहर होने वाला पहला वर्ल्ड कप था, किस टीम ने जीता?",
+        "options": [
+          "भारत",
+          "इंग्लैंड",
+          "ऑस्ट्रेलिया",
+          "पाकिस्तान"
+        ],
+        "explanation": "भारत और पाकिस्तान की संयुक्त मेज़बानी वाले इस टूर्नामेंट के फाइनल में ईडन गार्डन्स पर ऑस्ट्रेलिया ने इंग्लैंड को हराया।"
+      },
+      "hi-Latn": {
+        "question": "1987 World Cup, jo England ke bahar hone wala pehla World Cup tha, kis team ne jeeta?",
+        "options": [
+          "India",
+          "England",
+          "Australia",
+          "Pakistan"
+        ],
+        "explanation": "India aur Pakistan ki joint hosting wale is tournament ke final mein Eden Gardens par Australia ne England ko haraya."
+      }
+    },
+    {
+      "groupId": "cr_045",
+      "difficulty": "hard",
+      "subcategory": "firsts",
+      "correctIndex": 1,
+      "tags": [
+        "firsts",
+        "first_class",
+        "records"
+      ],
+      "en": {
+        "question": "Who was the first batter to hit six sixes in an over in first-class cricket?",
+        "options": [
+          "Ravi Shastri",
+          "Garfield Sobers",
+          "Herschelle Gibbs",
+          "Viv Richards"
+        ],
+        "explanation": "Sobers hit Malcolm Nash for six sixes for Nottinghamshire against Glamorgan in 1968; Ravi Shastri matched it in 1985."
+      },
+      "hi": {
+        "question": "फर्स्ट-क्लास क्रिकेट में एक ओवर में छह छक्के लगाने वाले पहले बल्लेबाज़ कौन थे?",
+        "options": [
+          "रवि शास्त्री",
+          "गारफ़ील्ड सोबर्स",
+          "हर्शल गिब्स",
+          "विव रिचर्ड्स"
+        ],
+        "explanation": "सोबर्स ने 1968 में नॉटिंघमशायर की ओर से ग्लैमोर्गन के मैल्कम नैश के ओवर में छह छक्के लगाए; रवि शास्त्री ने 1985 में यह कारनामा दोहराया।"
+      },
+      "hi-Latn": {
+        "question": "First-class cricket mein ek over mein 6 sixes maarne wale pehle batsman kaun the?",
+        "options": [
+          "Ravi Shastri",
+          "Garfield Sobers",
+          "Herschelle Gibbs",
+          "Viv Richards"
+        ],
+        "explanation": "Sobers ne 1968 mein Nottinghamshire ki taraf se Glamorgan ke Malcolm Nash ke over mein 6 sixes maare; Ravi Shastri ne 1985 mein ye repeat kiya."
+      }
+    }
+  ]
+}
