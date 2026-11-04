@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "files": [
+    "general_knowledge.json",
+    "bollywood.json",
+    "cricket.json",
+    "science.json",
+    "history.json",
+    "geography.json",
+    "technology.json",
+    "indian_culture.json",
+    "space.json"
+  ]
+}

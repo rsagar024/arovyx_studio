@@ -1,0 +1,995 @@
+{
+  "category": "bollywood",
+  "questions": [
+    {
+      "groupId": "bw_001",
+      "difficulty": "easy",
+      "subcategory": "dialogues",
+      "correctIndex": 1,
+      "tags": ["sholay", "dialogues", "gabbar_singh"],
+      "en": {
+        "question": "The iconic dialogue 'Kitne aadmi the?' is from which film?",
+        "options": ["Deewaar", "Sholay", "Zanjeer", "Trishul"],
+        "explanation": "Gabbar Singh asks this of his henchmen after they return from Ramgarh in Sholay (1975), and it became one of Hindi cinema's most quoted lines."
+      },
+      "hi": {
+        "question": "मशहूर डायलॉग 'कितने आदमी थे?' किस फ़िल्म का है?",
+        "options": ["दीवार", "शोले", "ज़ंजीर", "त्रिशूल"],
+        "explanation": "शोले (1975) में गब्बर सिंह रामगढ़ से लौटे अपने साथियों से यह सवाल पूछता है, और यह हिंदी सिनेमा के सबसे ज़्यादा दोहराए जाने वाले संवादों में से एक बन गया।"
+      },
+      "hi-Latn": {
+        "question": "Famous dialogue 'Kitne aadmi the?' kis film ka hai?",
+        "options": ["Deewaar", "Sholay", "Zanjeer", "Trishul"],
+        "explanation": "Sholay (1975) mein Gabbar Singh Ramgarh se laute apne saathiyon se yeh sawaal poochta hai, aur yeh Bollywood ke sabse zyada quote kiye jaane wale dialogues mein se ek ban gaya."
+      }
+    },
+    {
+      "groupId": "bw_002",
+      "difficulty": "easy",
+      "subcategory": "directors",
+      "correctIndex": 2,
+      "tags": ["ddlj", "directors"],
+      "en": {
+        "question": "Who directed Dilwale Dulhania Le Jayenge (1995)?",
+        "options": ["Yash Chopra", "Karan Johar", "Aditya Chopra", "Sooraj Barjatya"],
+        "explanation": "DDLJ was Aditya Chopra's directorial debut, made for Yash Raj Films, the banner founded by his father Yash Chopra."
+      },
+      "hi": {
+        "question": "'दिलवाले दुल्हनिया ले जाएंगे' (1995) का निर्देशन किसने किया था?",
+        "options": ["यश चोपड़ा", "करण जौहर", "आदित्य चोपड़ा", "सूरज बड़जात्या"],
+        "explanation": "यह आदित्य चोपड़ा की पहली निर्देशित फ़िल्म थी, जो उनके पिता यश चोपड़ा द्वारा स्थापित यश राज फ़िल्म्स के बैनर तले बनी।"
+      },
+      "hi-Latn": {
+        "question": "Dilwale Dulhania Le Jayenge (1995) ko kisne direct kiya tha?",
+        "options": ["Yash Chopra", "Karan Johar", "Aditya Chopra", "Sooraj Barjatya"],
+        "explanation": "DDLJ Aditya Chopra ki directorial debut thi, jo unke papa Yash Chopra ke banaye Yash Raj Films banner ke under bani."
+      }
+    },
+    {
+      "groupId": "bw_003",
+      "difficulty": "easy",
+      "subcategory": "actors",
+      "correctIndex": 0,
+      "tags": ["ddlj", "kajol", "shah_rukh_khan"],
+      "en": {
+        "question": "Which actress played Simran opposite Shah Rukh Khan in DDLJ?",
+        "options": ["Kajol", "Madhuri Dixit", "Juhi Chawla", "Rani Mukerji"],
+        "explanation": "Kajol's Simran and SRK's Raj became one of Bollywood's most loved pairs; the famous train scene ends with 'Ja Simran ja, jee le apni zindagi'."
+      },
+      "hi": {
+        "question": "'डीडीएलजे' में शाहरुख़ ख़ान के साथ सिमरन का किरदार किस अभिनेत्री ने निभाया?",
+        "options": ["काजोल", "माधुरी दीक्षित", "जूही चावला", "रानी मुखर्जी"],
+        "explanation": "काजोल की सिमरन और शाहरुख़ का राज बॉलीवुड की सबसे प्यारी जोड़ियों में गिने जाते हैं; मशहूर ट्रेन वाला सीन 'जा सिमरन जा, जी ले अपनी ज़िंदगी' पर ख़त्म होता है।"
+      },
+      "hi-Latn": {
+        "question": "DDLJ mein Shah Rukh Khan ke opposite Simran ka role kis actress ne kiya?",
+        "options": ["Kajol", "Madhuri Dixit", "Juhi Chawla", "Rani Mukerji"],
+        "explanation": "Kajol ki Simran aur SRK ka Raj Bollywood ki sabse pyaari jodiyon mein se hain; famous train scene 'Ja Simran ja, jee le apni zindagi' pe khatam hota hai."
+      }
+    },
+    {
+      "groupId": "bw_004",
+      "difficulty": "easy",
+      "subcategory": "dialogues",
+      "correctIndex": 3,
+      "tags": ["mr_india", "dialogues", "villains"],
+      "en": {
+        "question": "'Mogambo khush hua!' is a famous line from which film?",
+        "options": ["Tezaab", "Ram Lakhan", "Karma", "Mr. India"],
+        "explanation": "Amrish Puri's flamboyant villain Mogambo says it in Mr. India (1987), directed by Shekhar Kapur."
+      },
+      "hi": {
+        "question": "'मोगैम्बो ख़ुश हुआ!' किस फ़िल्म का मशहूर डायलॉग है?",
+        "options": ["तेज़ाब", "राम लखन", "कर्मा", "मिस्टर इंडिया"],
+        "explanation": "शेखर कपूर की फ़िल्म मिस्टर इंडिया (1987) में अमरीश पुरी का शानदार खलनायक मोगैम्बो यह संवाद बोलता है।"
+      },
+      "hi-Latn": {
+        "question": "'Mogambo khush hua!' kis film ka famous dialogue hai?",
+        "options": ["Tezaab", "Ram Lakhan", "Karma", "Mr. India"],
+        "explanation": "Shekhar Kapur ki Mr. India (1987) mein Amrish Puri ka dhamakedaar villain Mogambo yeh line bolta hai."
+      }
+    },
+    {
+      "groupId": "bw_005",
+      "difficulty": "easy",
+      "subcategory": "actors",
+      "correctIndex": 1,
+      "tags": ["lagaan", "aamir_khan"],
+      "en": {
+        "question": "Who played Bhuvan, the village cricketer, in Lagaan (2001)?",
+        "options": ["Shah Rukh Khan", "Aamir Khan", "Salman Khan", "Hrithik Roshan"],
+        "explanation": "Aamir Khan also produced Lagaan, which was directed by Ashutosh Gowariker and went on to earn an Oscar nomination."
+      },
+      "hi": {
+        "question": "'लगान' (2001) में गाँव के क्रिकेटर भुवन का किरदार किसने निभाया?",
+        "options": ["शाहरुख़ ख़ान", "आमिर ख़ान", "सलमान ख़ान", "ऋतिक रोशन"],
+        "explanation": "आमिर ख़ान ने लगान का निर्माण भी किया था; इसे आशुतोष गोवारिकर ने निर्देशित किया और इसे ऑस्कर नामांकन भी मिला।"
+      },
+      "hi-Latn": {
+        "question": "Lagaan (2001) mein village cricketer Bhuvan ka role kisne kiya?",
+        "options": ["Shah Rukh Khan", "Aamir Khan", "Salman Khan", "Hrithik Roshan"],
+        "explanation": "Aamir Khan ne Lagaan produce bhi ki thi; isse Ashutosh Gowariker ne direct kiya aur isko Oscar nomination bhi mila."
+      }
+    },
+    {
+      "groupId": "bw_006",
+      "difficulty": "easy",
+      "subcategory": "actors",
+      "correctIndex": 3,
+      "tags": ["sholay", "villains", "amjad_khan"],
+      "en": {
+        "question": "Which actor played the dacoit Gabbar Singh in Sholay?",
+        "options": ["Amrish Puri", "Pran", "Prem Chopra", "Amjad Khan"],
+        "explanation": "Amjad Khan was a relatively new face when cast as Gabbar, and the role made him one of the most famous villains in Indian cinema."
+      },
+      "hi": {
+        "question": "शोले में डाकू गब्बर सिंह का किरदार किस अभिनेता ने निभाया था?",
+        "options": ["अमरीश पुरी", "प्राण", "प्रेम चोपड़ा", "अमजद ख़ान"],
+        "explanation": "गब्बर के रोल के समय अमजद ख़ान लगभग नए चेहरे थे, और इसी किरदार ने उन्हें भारतीय सिनेमा के सबसे मशहूर खलनायकों में शामिल कर दिया।"
+      },
+      "hi-Latn": {
+        "question": "Sholay mein daaku Gabbar Singh ka role kis actor ne kiya tha?",
+        "options": ["Amrish Puri", "Pran", "Prem Chopra", "Amjad Khan"],
+        "explanation": "Gabbar ke role ke time Amjad Khan kaafi naya chehra the, aur isi role ne unhe Indian cinema ke sabse famous villains mein shaamil kar diya."
+      }
+    },
+    {
+      "groupId": "bw_007",
+      "difficulty": "easy",
+      "subcategory": "dialogues",
+      "correctIndex": 0,
+      "tags": ["deewaar", "dialogues", "amitabh_bachchan"],
+      "en": {
+        "question": "'Mere paas maa hai' is a legendary line from which film?",
+        "options": ["Deewaar", "Trishul", "Kaala Patthar", "Shakti"],
+        "explanation": "In Deewaar (1975), Shashi Kapoor's honest cop Ravi says it to his brother Vijay (Amitabh Bachchan), who boasts of his wealth."
+      },
+      "hi": {
+        "question": "'मेरे पास माँ है' किस फ़िल्म का यादगार डायलॉग है?",
+        "options": ["दीवार", "त्रिशूल", "काला पत्थर", "शक्ति"],
+        "explanation": "दीवार (1975) में ईमानदार पुलिसवाला रवि (शशि कपूर) यह बात अपने भाई विजय (अमिताभ बच्चन) से कहता है, जो अपनी दौलत का बखान कर रहा होता है।"
+      },
+      "hi-Latn": {
+        "question": "'Mere paas maa hai' kis film ka legendary dialogue hai?",
+        "options": ["Deewaar", "Trishul", "Kaala Patthar", "Shakti"],
+        "explanation": "Deewaar (1975) mein imaandaar police wala Ravi (Shashi Kapoor) yeh apne bhai Vijay (Amitabh Bachchan) se kehta hai, jo apni daulat ka show off kar raha hota hai."
+      }
+    },
+    {
+      "groupId": "bw_008",
+      "difficulty": "easy",
+      "subcategory": "directors",
+      "correctIndex": 2,
+      "tags": ["3_idiots", "rajkumar_hirani"],
+      "en": {
+        "question": "Who directed the film 3 Idiots (2009)?",
+        "options": ["Farhan Akhtar", "Ashutosh Gowariker", "Rajkumar Hirani", "Zoya Akhtar"],
+        "explanation": "Rajkumar Hirani, who earlier made the Munna Bhai films, loosely based 3 Idiots on Chetan Bhagat's novel Five Point Someone."
+      },
+      "hi": {
+        "question": "फ़िल्म '3 इडियट्स' (2009) का निर्देशन किसने किया था?",
+        "options": ["फ़रहान अख़्तर", "आशुतोष गोवारिकर", "राजकुमार हिरानी", "ज़ोया अख़्तर"],
+        "explanation": "मुन्ना भाई फ़िल्मों के निर्देशक राजकुमार हिरानी ने यह फ़िल्म चेतन भगत के उपन्यास 'फ़ाइव पॉइंट समवन' से प्रेरित होकर बनाई थी।"
+      },
+      "hi-Latn": {
+        "question": "3 Idiots (2009) film ko kisne direct kiya tha?",
+        "options": ["Farhan Akhtar", "Ashutosh Gowariker", "Rajkumar Hirani", "Zoya Akhtar"],
+        "explanation": "Munna Bhai films wale Rajkumar Hirani ne 3 Idiots ko Chetan Bhagat ki novel Five Point Someone se loosely inspired hokar banaya tha."
+      }
+    },
+    {
+      "groupId": "bw_009",
+      "difficulty": "easy",
+      "subcategory": "playback_singers",
+      "correctIndex": 1,
+      "tags": ["playback_singers", "lata_mangeshkar"],
+      "en": {
+        "question": "Which playback singer is popularly called the 'Nightingale of India'?",
+        "options": ["Asha Bhosle", "Lata Mangeshkar", "Shreya Ghoshal", "Alka Yagnik"],
+        "explanation": "Lata Mangeshkar sang for Hindi films for more than six decades and was awarded the Bharat Ratna in 2001."
+      },
+      "hi": {
+        "question": "किस पार्श्व गायिका को 'भारत की स्वर कोकिला' कहा जाता है?",
+        "options": ["आशा भोसले", "लता मंगेशकर", "श्रेया घोषाल", "अलका याज्ञिक"],
+        "explanation": "लता मंगेशकर ने छह दशकों से ज़्यादा समय तक हिंदी फ़िल्मों के लिए गाया और उन्हें 2001 में भारत रत्न से सम्मानित किया गया।"
+      },
+      "hi-Latn": {
+        "question": "Kis playback singer ko 'Nightingale of India' kaha jaata hai?",
+        "options": ["Asha Bhosle", "Lata Mangeshkar", "Shreya Ghoshal", "Alka Yagnik"],
+        "explanation": "Lata Mangeshkar ne chhe decades se zyada Hindi films ke liye gaaya aur unhe 2001 mein Bharat Ratna mila."
+      }
+    },
+    {
+      "groupId": "bw_010",
+      "difficulty": "easy",
+      "subcategory": "classic_films",
+      "correctIndex": 3,
+      "tags": ["mughal_e_azam", "madhubala"],
+      "en": {
+        "question": "Who played Anarkali in Mughal-e-Azam (1960)?",
+        "options": ["Meena Kumari", "Nargis", "Waheeda Rehman", "Madhubala"],
+        "explanation": "Madhubala's Anarkali, opposite Dilip Kumar's Prince Salim, is immortalised in the song 'Pyar Kiya To Darna Kya'."
+      },
+      "hi": {
+        "question": "'मुग़ल-ए-आज़म' (1960) में अनारकली का किरदार किसने निभाया?",
+        "options": ["मीना कुमारी", "नरगिस", "वहीदा रहमान", "मधुबाला"],
+        "explanation": "दिलीप कुमार के शहज़ादे सलीम के साथ मधुबाला की अनारकली गीत 'प्यार किया तो डरना क्या' के ज़रिए अमर हो गई।"
+      },
+      "hi-Latn": {
+        "question": "Mughal-e-Azam (1960) mein Anarkali ka role kisne kiya tha?",
+        "options": ["Meena Kumari", "Nargis", "Waheeda Rehman", "Madhubala"],
+        "explanation": "Dilip Kumar ke Prince Salim ke saath Madhubala ki Anarkali 'Pyar Kiya To Darna Kya' gaane ki wajah se amar ho gayi."
+      }
+    },
+    {
+      "groupId": "bw_011",
+      "difficulty": "easy",
+      "subcategory": "directors",
+      "correctIndex": 0,
+      "tags": ["kuch_kuch_hota_hai", "debuts", "directors"],
+      "en": {
+        "question": "Kuch Kuch Hota Hai (1998) was the directorial debut of whom?",
+        "options": ["Karan Johar", "Aditya Chopra", "Farah Khan", "Yash Johar"],
+        "explanation": "Karan Johar had assisted on DDLJ before directing KKHH, which starred Shah Rukh Khan, Kajol and Rani Mukerji."
+      },
+      "hi": {
+        "question": "'कुछ कुछ होता है' (1998) किस निर्देशक की पहली फ़िल्म थी?",
+        "options": ["करण जौहर", "आदित्य चोपड़ा", "फ़राह ख़ान", "यश जौहर"],
+        "explanation": "करण जौहर ने इससे पहले डीडीएलजे में सहायक के रूप में काम किया था; इस फ़िल्म में शाहरुख़, काजोल और रानी मुखर्जी थे।"
+      },
+      "hi-Latn": {
+        "question": "Kuch Kuch Hota Hai (1998) kis director ki pehli film thi?",
+        "options": ["Karan Johar", "Aditya Chopra", "Farah Khan", "Yash Johar"],
+        "explanation": "Karan Johar ne isse pehle DDLJ mein assist kiya tha; KKHH mein Shah Rukh, Kajol aur Rani Mukerji the."
+      }
+    },
+    {
+      "groupId": "bw_012",
+      "difficulty": "easy",
+      "subcategory": "songs",
+      "correctIndex": 0,
+      "tags": ["songs", "dil_se", "ar_rahman"],
+      "en": {
+        "question": "The song 'Chaiyya Chaiyya', shot atop a moving train, is from which film?",
+        "options": ["Dil Se..", "Dil To Pagal Hai", "Kuch Kuch Hota Hai", "Pardes"],
+        "explanation": "Composed by A.R. Rahman for Mani Ratnam's Dil Se.. (1998), the song features Shah Rukh Khan and Malaika Arora dancing on a train roof."
+      },
+      "hi": {
+        "question": "चलती ट्रेन की छत पर फ़िल्माया गया गाना 'छैयां छैयां' किस फ़िल्म का है?",
+        "options": ["दिल से..", "दिल तो पागल है", "कुछ कुछ होता है", "परदेस"],
+        "explanation": "मणि रत्नम की फ़िल्म दिल से.. (1998) के लिए ए.आर. रहमान ने यह गीत बनाया था, जिसमें शाहरुख़ ख़ान और मलाइका अरोड़ा ट्रेन की छत पर नाचते हैं।"
+      },
+      "hi-Latn": {
+        "question": "Chalti train ki chhat pe shoot hua gaana 'Chaiyya Chaiyya' kis film ka hai?",
+        "options": ["Dil Se..", "Dil To Pagal Hai", "Kuch Kuch Hota Hai", "Pardes"],
+        "explanation": "Mani Ratnam ki Dil Se.. (1998) ke liye A.R. Rahman ne yeh song banaya tha, jismein Shah Rukh Khan aur Malaika Arora train ki roof pe dance karte hain."
+      }
+    },
+    {
+      "groupId": "bw_013",
+      "difficulty": "easy",
+      "subcategory": "actors",
+      "correctIndex": 2,
+      "tags": ["munna_bhai", "sanjay_dutt"],
+      "en": {
+        "question": "Who played the title role in Munna Bhai M.B.B.S. (2003)?",
+        "options": ["Arshad Warsi", "Suniel Shetty", "Sanjay Dutt", "Ajay Devgn"],
+        "explanation": "Sanjay Dutt played the lovable goon Munna, while Arshad Warsi played his loyal sidekick Circuit."
+      },
+      "hi": {
+        "question": "'मुन्ना भाई एम.बी.बी.एस.' (2003) में मुन्ना भाई का किरदार किसने निभाया?",
+        "options": ["अरशद वारसी", "सुनील शेट्टी", "संजय दत्त", "अजय देवगन"],
+        "explanation": "संजय दत्त ने प्यारे से गुंडे मुन्ना का रोल किया था, जबकि अरशद वारसी उसके वफ़ादार साथी सर्किट बने थे।"
+      },
+      "hi-Latn": {
+        "question": "Munna Bhai M.B.B.S. (2003) mein Munna Bhai ka role kisne kiya?",
+        "options": ["Arshad Warsi", "Suniel Shetty", "Sanjay Dutt", "Ajay Devgn"],
+        "explanation": "Sanjay Dutt ne pyaare se goon Munna ka role kiya tha, aur Arshad Warsi uske loyal dost Circuit bane the."
+      }
+    },
+    {
+      "groupId": "bw_014",
+      "difficulty": "easy",
+      "subcategory": "dialogues",
+      "correctIndex": 1,
+      "tags": ["don", "dialogues", "amitabh_bachchan"],
+      "en": {
+        "question": "'Don ko pakadna mushkil hi nahin, naamumkin hai' is from which film?",
+        "options": ["Zanjeer", "Don", "Agneepath", "Shahenshah"],
+        "explanation": "Amitabh Bachchan delivered it in Don (1978), and Shah Rukh Khan repeated it in Farhan Akhtar's 2006 remake."
+      },
+      "hi": {
+        "question": "'डॉन को पकड़ना मुश्किल ही नहीं, नामुमकिन है' किस फ़िल्म का डायलॉग है?",
+        "options": ["ज़ंजीर", "डॉन", "अग्निपथ", "शहंशाह"],
+        "explanation": "अमिताभ बच्चन ने यह संवाद डॉन (1978) में बोला था, और फ़रहान अख़्तर के 2006 के रीमेक में शाहरुख़ ख़ान ने इसे दोहराया।"
+      },
+      "hi-Latn": {
+        "question": "'Don ko pakadna mushkil hi nahin, naamumkin hai' kis film ka dialogue hai?",
+        "options": ["Zanjeer", "Don", "Agneepath", "Shahenshah"],
+        "explanation": "Amitabh Bachchan ne yeh line Don (1978) mein boli thi, aur Farhan Akhtar ke 2006 remake mein Shah Rukh Khan ne ise repeat kiya."
+      }
+    },
+    {
+      "groupId": "bw_015",
+      "difficulty": "easy",
+      "subcategory": "biopics",
+      "correctIndex": 2,
+      "tags": ["dangal", "biopics", "wrestling"],
+      "en": {
+        "question": "Dangal (2016) is based on the life of which wrestler and coach?",
+        "options": ["Sushil Kumar", "Yogeshwar Dutt", "Mahavir Singh Phogat", "Dara Singh"],
+        "explanation": "Aamir Khan played Mahavir Singh Phogat, who trained his daughters Geeta and Babita to become champion wrestlers."
+      },
+      "hi": {
+        "question": "'दंगल' (2016) किस पहलवान और कोच के जीवन पर आधारित है?",
+        "options": ["सुशील कुमार", "योगेश्वर दत्त", "महावीर सिंह फोगाट", "दारा सिंह"],
+        "explanation": "आमिर ख़ान ने महावीर सिंह फोगाट का किरदार निभाया, जिन्होंने अपनी बेटियों गीता और बबीता को चैंपियन पहलवान बनाया।"
+      },
+      "hi-Latn": {
+        "question": "Dangal (2016) kis wrestler aur coach ki life pe based hai?",
+        "options": ["Sushil Kumar", "Yogeshwar Dutt", "Mahavir Singh Phogat", "Dara Singh"],
+        "explanation": "Aamir Khan ne Mahavir Singh Phogat ka role kiya, jinhone apni betiyon Geeta aur Babita ko champion wrestlers banaya."
+      }
+    },
+    {
+      "groupId": "bw_016",
+      "difficulty": "medium",
+      "subcategory": "film_history",
+      "correctIndex": 3,
+      "tags": ["film_history", "dadasaheb_phalke", "firsts"],
+      "en": {
+        "question": "Which is considered India's first full-length feature film?",
+        "options": ["Alam Ara", "Kisan Kanya", "Achhut Kanya", "Raja Harishchandra"],
+        "explanation": "Dadasaheb Phalke's silent film Raja Harishchandra (1913) launched Indian cinema; even the queen's role was played by a man, Anna Salunke."
+      },
+      "hi": {
+        "question": "भारत की पहली पूर्ण लंबाई वाली फ़ीचर फ़िल्म किसे माना जाता है?",
+        "options": ["आलम आरा", "किसान कन्या", "अछूत कन्या", "राजा हरिश्चंद्र"],
+        "explanation": "दादासाहेब फाल्के की मूक फ़िल्म राजा हरिश्चंद्र (1913) से भारतीय सिनेमा की शुरुआत हुई; इसमें रानी का किरदार भी एक पुरुष, अन्ना सालुंके ने निभाया था।"
+      },
+      "hi-Latn": {
+        "question": "India ki pehli full-length feature film kise maana jaata hai?",
+        "options": ["Alam Ara", "Kisan Kanya", "Achhut Kanya", "Raja Harishchandra"],
+        "explanation": "Dadasaheb Phalke ki silent film Raja Harishchandra (1913) se Indian cinema shuru hua; isme rani ka role bhi ek aadmi, Anna Salunke ne kiya tha."
+      }
+    },
+    {
+      "groupId": "bw_017",
+      "difficulty": "medium",
+      "subcategory": "film_history",
+      "correctIndex": 2,
+      "tags": ["film_history", "alam_ara", "firsts"],
+      "en": {
+        "question": "Who directed Alam Ara (1931), India's first sound film?",
+        "options": ["Dadasaheb Phalke", "V. Shantaram", "Ardeshir Irani", "Himanshu Rai"],
+        "explanation": "Ardeshir Irani's Alam Ara brought dialogue and songs to Indian screens, ending the silent era."
+      },
+      "hi": {
+        "question": "भारत की पहली सवाक (बोलती) फ़िल्म 'आलम आरा' (1931) का निर्देशन किसने किया?",
+        "options": ["दादासाहेब फाल्के", "वी. शांताराम", "आर्देशिर ईरानी", "हिमांशु राय"],
+        "explanation": "आर्देशिर ईरानी की आलम आरा ने भारतीय पर्दे पर संवाद और गीत पहुँचाए और मूक फ़िल्मों का दौर ख़त्म किया।"
+      },
+      "hi-Latn": {
+        "question": "India ki pehli sound film Alam Ara (1931) ko kisne direct kiya?",
+        "options": ["Dadasaheb Phalke", "V. Shantaram", "Ardeshir Irani", "Himanshu Rai"],
+        "explanation": "Ardeshir Irani ki Alam Ara ne Indian screen pe dialogues aur gaane laaye aur silent films ka daur khatam kiya."
+      }
+    },
+    {
+      "groupId": "bw_018",
+      "difficulty": "medium",
+      "subcategory": "awards",
+      "correctIndex": 1,
+      "tags": ["lagaan", "oscars", "awards"],
+      "en": {
+        "question": "Lagaan received an Oscar nomination in which category?",
+        "options": ["Best Picture", "Best Foreign Language Film", "Best Original Song", "Best Cinematography"],
+        "explanation": "Lagaan was nominated at the 74th Academy Awards in 2002; the award went to the Bosnian film No Man's Land."
+      },
+      "hi": {
+        "question": "'लगान' को किस श्रेणी में ऑस्कर नामांकन मिला था?",
+        "options": ["सर्वश्रेष्ठ फ़िल्म", "सर्वश्रेष्ठ विदेशी भाषा फ़िल्म", "सर्वश्रेष्ठ मौलिक गीत", "सर्वश्रेष्ठ छायांकन"],
+        "explanation": "लगान को 2002 में 74वें अकादमी पुरस्कारों में नामांकन मिला था; यह पुरस्कार बोस्निया की फ़िल्म 'नो मैन्स लैंड' ने जीता।"
+      },
+      "hi-Latn": {
+        "question": "Lagaan ko kis category mein Oscar nomination mila tha?",
+        "options": ["Best Picture", "Best Foreign Language Film", "Best Original Song", "Best Cinematography"],
+        "explanation": "Lagaan ko 2002 mein 74th Academy Awards mein nomination mila tha; award Bosnia ki film No Man's Land le gayi."
+      }
+    },
+    {
+      "groupId": "bw_019",
+      "difficulty": "medium",
+      "subcategory": "directors",
+      "correctIndex": 0,
+      "tags": ["mother_india", "directors", "oscars"],
+      "en": {
+        "question": "Who directed Mother India (1957)?",
+        "options": ["Mehboob Khan", "Raj Kapoor", "Bimal Roy", "Guru Dutt"],
+        "explanation": "Mehboob Khan's epic starring Nargis became India's first film to be nominated for the Best Foreign Language Film Oscar."
+      },
+      "hi": {
+        "question": "'मदर इंडिया' (1957) का निर्देशन किसने किया था?",
+        "options": ["महबूब ख़ान", "राज कपूर", "बिमल रॉय", "गुरु दत्त"],
+        "explanation": "नरगिस अभिनीत महबूब ख़ान की यह महागाथा सर्वश्रेष्ठ विदेशी भाषा फ़िल्म के ऑस्कर के लिए नामांकित होने वाली पहली भारतीय फ़िल्म बनी।"
+      },
+      "hi-Latn": {
+        "question": "Mother India (1957) ko kisne direct kiya tha?",
+        "options": ["Mehboob Khan", "Raj Kapoor", "Bimal Roy", "Guru Dutt"],
+        "explanation": "Nargis wali Mehboob Khan ki yeh epic film Best Foreign Language Film Oscar ke liye nominate hone wali pehli Indian film bani."
+      }
+    },
+    {
+      "groupId": "bw_020",
+      "difficulty": "medium",
+      "subcategory": "awards",
+      "correctIndex": 2,
+      "tags": ["ar_rahman", "oscars", "slumdog_millionaire"],
+      "en": {
+        "question": "How many Oscars did A.R. Rahman win for Slumdog Millionaire?",
+        "options": ["One", "Three", "Two", "Four"],
+        "explanation": "At the 2009 Academy Awards he won Best Original Score and Best Original Song for 'Jai Ho', the latter shared with lyricist Gulzar."
+      },
+      "hi": {
+        "question": "ए.आर. रहमान ने 'स्लमडॉग मिलियनेयर' के लिए कितने ऑस्कर जीते?",
+        "options": ["एक", "तीन", "दो", "चार"],
+        "explanation": "2009 के अकादमी पुरस्कारों में उन्होंने सर्वश्रेष्ठ मौलिक संगीत और 'जय हो' के लिए सर्वश्रेष्ठ मौलिक गीत का पुरस्कार जीता; गीत वाला पुरस्कार गीतकार गुलज़ार के साथ साझा था।"
+      },
+      "hi-Latn": {
+        "question": "A.R. Rahman ne Slumdog Millionaire ke liye kitne Oscars jeete?",
+        "options": ["Ek", "Teen", "Do", "Chaar"],
+        "explanation": "2009 ke Academy Awards mein unhone Best Original Score aur 'Jai Ho' ke liye Best Original Song jeeta; song wala award lyricist Gulzar ke saath share hua."
+      }
+    },
+    {
+      "groupId": "bw_021",
+      "difficulty": "medium",
+      "subcategory": "awards",
+      "correctIndex": 3,
+      "tags": ["dadasaheb_phalke_award", "awards", "devika_rani"],
+      "en": {
+        "question": "Who was the first recipient of the Dadasaheb Phalke Award (1969)?",
+        "options": ["Prithviraj Kapoor", "Raj Kapoor", "Satyajit Ray", "Devika Rani"],
+        "explanation": "Devika Rani, often called the 'First Lady of Indian Cinema', co-founded Bombay Talkies and received the first Phalke Award."
+      },
+      "hi": {
+        "question": "दादासाहेब फाल्के पुरस्कार (1969) पाने वाली पहली हस्ती कौन थीं?",
+        "options": ["पृथ्वीराज कपूर", "राज कपूर", "सत्यजीत रे", "देविका रानी"],
+        "explanation": "'भारतीय सिनेमा की प्रथम महिला' कहलाने वाली देविका रानी ने बॉम्बे टॉकीज़ की सह-स्थापना की थी और पहला फाल्के पुरस्कार उन्हें ही मिला।"
+      },
+      "hi-Latn": {
+        "question": "Dadasaheb Phalke Award (1969) paane wali pehli personality kaun thi?",
+        "options": ["Prithviraj Kapoor", "Raj Kapoor", "Satyajit Ray", "Devika Rani"],
+        "explanation": "'First Lady of Indian Cinema' kehlaane wali Devika Rani ne Bombay Talkies co-found kiya tha aur pehla Phalke Award unhe hi mila."
+      }
+    },
+    {
+      "groupId": "bw_022",
+      "difficulty": "medium",
+      "subcategory": "debuts",
+      "correctIndex": 2,
+      "tags": ["debuts", "amitabh_bachchan"],
+      "en": {
+        "question": "Amitabh Bachchan made his acting debut in which film?",
+        "options": ["Zanjeer", "Anand", "Saat Hindustani", "Bombay to Goa"],
+        "explanation": "Saat Hindustani (1969), directed by K.A. Abbas, was about seven Indians joining the Goa liberation movement."
+      },
+      "hi": {
+        "question": "अमिताभ बच्चन ने किस फ़िल्म से अभिनय की शुरुआत की थी?",
+        "options": ["ज़ंजीर", "आनंद", "सात हिंदुस्तानी", "बॉम्बे टू गोवा"],
+        "explanation": "के.ए. अब्बास के निर्देशन में बनी सात हिंदुस्तानी (1969) गोवा मुक्ति आंदोलन से जुड़ने वाले सात भारतीयों की कहानी थी।"
+      },
+      "hi-Latn": {
+        "question": "Amitabh Bachchan ne kis film se acting debut kiya tha?",
+        "options": ["Zanjeer", "Anand", "Saat Hindustani", "Bombay to Goa"],
+        "explanation": "K.A. Abbas ki Saat Hindustani (1969) Goa liberation movement mein judne wale saat Indians ki kahani thi."
+      }
+    },
+    {
+      "groupId": "bw_023",
+      "difficulty": "medium",
+      "subcategory": "debuts",
+      "correctIndex": 0,
+      "tags": ["debuts", "shah_rukh_khan"],
+      "en": {
+        "question": "Which was Shah Rukh Khan's first released Hindi film?",
+        "options": ["Deewana", "Baazigar", "Darr", "Raju Ban Gaya Gentleman"],
+        "explanation": "Deewana (1992), co-starring Rishi Kapoor and Divya Bharti, won SRK the Filmfare Award for Best Male Debut."
+      },
+      "hi": {
+        "question": "शाहरुख़ ख़ान की पहली रिलीज़ हुई हिंदी फ़िल्म कौन-सी थी?",
+        "options": ["दीवाना", "बाज़ीगर", "डर", "राजू बन गया जेंटलमैन"],
+        "explanation": "ऋषि कपूर और दिव्या भारती के साथ आई दीवाना (1992) के लिए शाहरुख़ को सर्वश्रेष्ठ पुरुष डेब्यू का फ़िल्मफ़ेयर पुरस्कार मिला।"
+      },
+      "hi-Latn": {
+        "question": "Shah Rukh Khan ki pehli release hui Hindi film kaunsi thi?",
+        "options": ["Deewana", "Baazigar", "Darr", "Raju Ban Gaya Gentleman"],
+        "explanation": "Rishi Kapoor aur Divya Bharti ke saath aayi Deewana (1992) ke liye SRK ko Filmfare Best Male Debut award mila."
+      }
+    },
+    {
+      "groupId": "bw_024",
+      "difficulty": "medium",
+      "subcategory": "music_directors",
+      "correctIndex": 2,
+      "tags": ["sholay", "music_directors", "rd_burman"],
+      "en": {
+        "question": "Who composed the music for Sholay (1975)?",
+        "options": ["Laxmikant-Pyarelal", "Kalyanji-Anandji", "R.D. Burman", "S.D. Burman"],
+        "explanation": "R.D. Burman not only composed the score but also sang 'Mehbooba Mehbooba' himself."
+      },
+      "hi": {
+        "question": "शोले (1975) का संगीत किसने दिया था?",
+        "options": ["लक्ष्मीकांत-प्यारेलाल", "कल्याणजी-आनंदजी", "आर.डी. बर्मन", "एस.डी. बर्मन"],
+        "explanation": "आर.डी. बर्मन ने न केवल संगीत दिया, बल्कि 'महबूबा महबूबा' गीत ख़ुद भी गाया था।"
+      },
+      "hi-Latn": {
+        "question": "Sholay (1975) ka music kisne diya tha?",
+        "options": ["Laxmikant-Pyarelal", "Kalyanji-Anandji", "R.D. Burman", "S.D. Burman"],
+        "explanation": "R.D. Burman ne sirf music hi nahi diya, balki 'Mehbooba Mehbooba' gaana khud bhi gaaya tha."
+      }
+    },
+    {
+      "groupId": "bw_025",
+      "difficulty": "medium",
+      "subcategory": "songs",
+      "correctIndex": 0,
+      "tags": ["songs", "lata_mangeshkar", "madan_mohan"],
+      "en": {
+        "question": "The evergreen song 'Lag Jaa Gale' is from which film?",
+        "options": ["Woh Kaun Thi?", "Mera Saaya", "Anupama", "Gumnaam"],
+        "explanation": "Sung by Lata Mangeshkar and composed by Madan Mohan, it features Sadhana in the 1964 mystery Woh Kaun Thi?."
+      },
+      "hi": {
+        "question": "सदाबहार गीत 'लग जा गले' किस फ़िल्म का है?",
+        "options": ["वो कौन थी?", "मेरा साया", "अनुपमा", "गुमनाम"],
+        "explanation": "लता मंगेशकर की आवाज़ और मदन मोहन के संगीत वाला यह गीत 1964 की रहस्य फ़िल्म वो कौन थी? में साधना पर फ़िल्माया गया था।"
+      },
+      "hi-Latn": {
+        "question": "Evergreen song 'Lag Jaa Gale' kis film ka hai?",
+        "options": ["Woh Kaun Thi?", "Mera Saaya", "Anupama", "Gumnaam"],
+        "explanation": "Lata Mangeshkar ki awaaz aur Madan Mohan ke music wala yeh gaana 1964 ki mystery film Woh Kaun Thi? mein Sadhana pe filmaya gaya tha."
+      }
+    },
+    {
+      "groupId": "bw_026",
+      "difficulty": "medium",
+      "subcategory": "classic_films",
+      "correctIndex": 1,
+      "tags": ["guide", "dev_anand", "adaptations"],
+      "en": {
+        "question": "Dev Anand's Guide (1965) is based on a novel by which author?",
+        "options": ["Premchand", "R.K. Narayan", "Ruskin Bond", "Khushwant Singh"],
+        "explanation": "Directed by Vijay Anand, the film adapted R.K. Narayan's novel The Guide, with Waheeda Rehman as Rosie."
+      },
+      "hi": {
+        "question": "देव आनंद की फ़िल्म 'गाइड' (1965) किस लेखक के उपन्यास पर आधारित है?",
+        "options": ["प्रेमचंद", "आर.के. नारायण", "रस्किन बॉन्ड", "ख़ुशवंत सिंह"],
+        "explanation": "विजय आनंद के निर्देशन में बनी यह फ़िल्म आर.के. नारायण के उपन्यास 'द गाइड' पर आधारित थी, जिसमें वहीदा रहमान ने रोज़ी का किरदार निभाया।"
+      },
+      "hi-Latn": {
+        "question": "Dev Anand ki Guide (1965) kis writer ki novel pe based hai?",
+        "options": ["Premchand", "R.K. Narayan", "Ruskin Bond", "Khushwant Singh"],
+        "explanation": "Vijay Anand ki direct ki hui yeh film R.K. Narayan ki novel The Guide pe based thi, aur Waheeda Rehman ne Rosie ka role kiya tha."
+      }
+    },
+    {
+      "groupId": "bw_027",
+      "difficulty": "medium",
+      "subcategory": "directors",
+      "correctIndex": 3,
+      "tags": ["pyaasa", "guru_dutt", "classic_films"],
+      "en": {
+        "question": "Who directed and starred in the classic Pyaasa (1957)?",
+        "options": ["Bimal Roy", "Raj Kapoor", "Mehboob Khan", "Guru Dutt"],
+        "explanation": "Guru Dutt played the struggling poet Vijay; Pyaasa later featured in TIME magazine's list of the 100 greatest films."
+      },
+      "hi": {
+        "question": "क्लासिक फ़िल्म 'प्यासा' (1957) के निर्देशक और नायक कौन थे?",
+        "options": ["बिमल रॉय", "राज कपूर", "महबूब ख़ान", "गुरु दत्त"],
+        "explanation": "गुरु दत्त ने संघर्षरत कवि विजय का किरदार निभाया था; बाद में प्यासा को टाइम पत्रिका की 100 महानतम फ़िल्मों की सूची में जगह मिली।"
+      },
+      "hi-Latn": {
+        "question": "Classic film Pyaasa (1957) ko kisne direct kiya aur lead role bhi kiya?",
+        "options": ["Bimal Roy", "Raj Kapoor", "Mehboob Khan", "Guru Dutt"],
+        "explanation": "Guru Dutt ne struggling poet Vijay ka role kiya tha; baad mein Pyaasa ko TIME magazine ki 100 greatest films ki list mein jagah mili."
+      }
+    },
+    {
+      "groupId": "bw_028",
+      "difficulty": "medium",
+      "subcategory": "songs",
+      "correctIndex": 1,
+      "tags": ["songs", "raj_kapoor", "mukesh"],
+      "en": {
+        "question": "'Mera Joota Hai Japani' is a song from which Raj Kapoor film?",
+        "options": ["Awaara", "Shree 420", "Anari", "Jis Desh Mein Ganga Behti Hai"],
+        "explanation": "Sung by Mukesh and written by Shailendra, the song from Shree 420 (1955) celebrates an Indian heart beneath foreign clothes."
+      },
+      "hi": {
+        "question": "'मेरा जूता है जापानी' राज कपूर की किस फ़िल्म का गीत है?",
+        "options": ["आवारा", "श्री 420", "अनाड़ी", "जिस देश में गंगा बहती है"],
+        "explanation": "मुकेश की आवाज़ और शैलेंद्र के बोलों वाला श्री 420 (1955) का यह गीत विदेशी कपड़ों के नीचे धड़कते हिंदुस्तानी दिल की बात करता है।"
+      },
+      "hi-Latn": {
+        "question": "'Mera Joota Hai Japani' Raj Kapoor ki kis film ka gaana hai?",
+        "options": ["Awaara", "Shree 420", "Anari", "Jis Desh Mein Ganga Behti Hai"],
+        "explanation": "Mukesh ki awaaz aur Shailendra ke lyrics wala Shree 420 (1955) ka yeh gaana videshi kapdon ke andar Hindustani dil ki baat karta hai."
+      }
+    },
+    {
+      "groupId": "bw_029",
+      "difficulty": "medium",
+      "subcategory": "famous_roles",
+      "correctIndex": 3,
+      "tags": ["agneepath", "amitabh_bachchan", "famous_roles"],
+      "en": {
+        "question": "In which film did Amitabh Bachchan play 'Vijay Deenanath Chauhan'?",
+        "options": ["Deewaar", "Trishul", "Shahenshah", "Agneepath"],
+        "explanation": "His role in Agneepath (1990) won him the National Film Award for Best Actor; Hrithik Roshan played the same character in the 2012 remake."
+      },
+      "hi": {
+        "question": "अमिताभ बच्चन ने 'विजय दीनानाथ चौहान' का किरदार किस फ़िल्म में निभाया?",
+        "options": ["दीवार", "त्रिशूल", "शहंशाह", "अग्निपथ"],
+        "explanation": "अग्निपथ (1990) के इस रोल के लिए उन्हें सर्वश्रेष्ठ अभिनेता का राष्ट्रीय पुरस्कार मिला; 2012 के रीमेक में यही किरदार ऋतिक रोशन ने निभाया।"
+      },
+      "hi-Latn": {
+        "question": "Amitabh Bachchan ne 'Vijay Deenanath Chauhan' ka role kis film mein kiya tha?",
+        "options": ["Deewaar", "Trishul", "Shahenshah", "Agneepath"],
+        "explanation": "Agneepath (1990) ke is role ke liye unhe Best Actor ka National Award mila; 2012 ke remake mein yahi role Hrithik Roshan ne kiya."
+      }
+    },
+    {
+      "groupId": "bw_030",
+      "difficulty": "medium",
+      "subcategory": "songs",
+      "correctIndex": 0,
+      "tags": ["songs", "madhuri_dixit", "tezaab"],
+      "en": {
+        "question": "Madhuri Dixit's hit dance number 'Ek Do Teen' is from which film?",
+        "options": ["Tezaab", "Beta", "Dil", "Ram Lakhan"],
+        "explanation": "Tezaab (1988) made Madhuri a star; the song was sung by Alka Yagnik and composed by Laxmikant-Pyarelal."
+      },
+      "hi": {
+        "question": "माधुरी दीक्षित का हिट डांस नंबर 'एक दो तीन' किस फ़िल्म का है?",
+        "options": ["तेज़ाब", "बेटा", "दिल", "राम लखन"],
+        "explanation": "तेज़ाब (1988) ने माधुरी को स्टार बना दिया; यह गीत अलका याज्ञिक ने गाया और लक्ष्मीकांत-प्यारेलाल ने संगीतबद्ध किया था।"
+      },
+      "hi-Latn": {
+        "question": "Madhuri Dixit ka hit dance number 'Ek Do Teen' kis film ka hai?",
+        "options": ["Tezaab", "Beta", "Dil", "Ram Lakhan"],
+        "explanation": "Tezaab (1988) ne Madhuri ko star bana diya; yeh gaana Alka Yagnik ne gaaya aur Laxmikant-Pyarelal ne compose kiya tha."
+      }
+    },
+    {
+      "groupId": "bw_031",
+      "difficulty": "hard",
+      "subcategory": "film_history",
+      "correctIndex": 1,
+      "tags": ["alam_ara", "film_history", "firsts"],
+      "en": {
+        "question": "In which year was Alam Ara, India's first talkie, released?",
+        "options": ["1913", "1931", "1936", "1927"],
+        "explanation": "Alam Ara premiered at Bombay's Majestic Cinema in March 1931, and crowds turned up to hear characters speak on screen."
+      },
+      "hi": {
+        "question": "भारत की पहली बोलती फ़िल्म 'आलम आरा' किस वर्ष रिलीज़ हुई?",
+        "options": ["1913", "1931", "1936", "1927"],
+        "explanation": "आलम आरा मार्च 1931 में बंबई के मैजेस्टिक सिनेमा में प्रदर्शित हुई, और पर्दे पर किरदारों को बोलते सुनने के लिए भारी भीड़ उमड़ी।"
+      },
+      "hi-Latn": {
+        "question": "India ki pehli talkie film Alam Ara kis saal release hui?",
+        "options": ["1913", "1931", "1936", "1927"],
+        "explanation": "Alam Ara March 1931 mein Bombay ke Majestic Cinema mein release hui, aur screen pe characters ko bolte sunne ke liye bheed umad padi."
+      }
+    },
+    {
+      "groupId": "bw_032",
+      "difficulty": "hard",
+      "subcategory": "playback_singers",
+      "correctIndex": 1,
+      "tags": ["alam_ara", "songs", "firsts"],
+      "en": {
+        "question": "Who sang 'De De Khuda Ke Naam Par', the first song of Indian talkies, in Alam Ara?",
+        "options": ["K.L. Saigal", "Wazir Mohammed Khan", "Pankaj Mullick", "Master Madan"],
+        "explanation": "Actor Wazir Mohammed Khan (W.M. Khan), playing a fakir, sang it on screen; songs were recorded live during shooting back then."
+      },
+      "hi": {
+        "question": "आलम आरा में भारतीय बोलती फ़िल्मों का पहला गीत 'दे दे ख़ुदा के नाम पर' किसने गाया था?",
+        "options": ["के.एल. सहगल", "वज़ीर मोहम्मद ख़ान", "पंकज मलिक", "मास्टर मदन"],
+        "explanation": "फ़क़ीर का किरदार निभा रहे अभिनेता वज़ीर मोहम्मद ख़ान (डब्ल्यू.एम. ख़ान) ने इसे पर्दे पर गाया था; उस दौर में गाने शूटिंग के समय ही लाइव रिकॉर्ड होते थे।"
+      },
+      "hi-Latn": {
+        "question": "Alam Ara mein Indian talkies ka pehla gaana 'De De Khuda Ke Naam Par' kisne gaaya tha?",
+        "options": ["K.L. Saigal", "Wazir Mohammed Khan", "Pankaj Mullick", "Master Madan"],
+        "explanation": "Fakir ka role kar rahe actor Wazir Mohammed Khan (W.M. Khan) ne ise screen pe gaaya tha; us time gaane shooting ke dauraan hi live record hote the."
+      }
+    },
+    {
+      "groupId": "bw_033",
+      "difficulty": "hard",
+      "subcategory": "awards",
+      "correctIndex": 2,
+      "tags": ["dadasaheb_phalke_award", "raj_kapoor"],
+      "en": {
+        "question": "Which legend collapsed at the ceremony while receiving his Dadasaheb Phalke Award in 1988?",
+        "options": ["Prithviraj Kapoor", "Ashok Kumar", "Raj Kapoor", "Dilip Kumar"],
+        "explanation": "Raj Kapoor suffered a severe asthma attack at the ceremony in Delhi and died about a month later, in June 1988."
+      },
+      "hi": {
+        "question": "1988 में दादासाहेब फाल्के पुरस्कार लेते समय समारोह में कौन-से दिग्गज गिर पड़े थे?",
+        "options": ["पृथ्वीराज कपूर", "अशोक कुमार", "राज कपूर", "दिलीप कुमार"],
+        "explanation": "दिल्ली के समारोह में राज कपूर को दमे का गंभीर दौरा पड़ा और लगभग एक महीने बाद, जून 1988 में उनका निधन हो गया।"
+      },
+      "hi-Latn": {
+        "question": "1988 mein Dadasaheb Phalke Award lete waqt ceremony mein kaun legend gir pade the?",
+        "options": ["Prithviraj Kapoor", "Ashok Kumar", "Raj Kapoor", "Dilip Kumar"],
+        "explanation": "Delhi ki ceremony mein Raj Kapoor ko asthma ka serious attack aaya aur lagbhag ek mahine baad, June 1988 mein unka nidhan ho gaya."
+      }
+    },
+    {
+      "groupId": "bw_034",
+      "difficulty": "hard",
+      "subcategory": "directors",
+      "correctIndex": 3,
+      "tags": ["satyajit_ray", "directors", "adaptations"],
+      "en": {
+        "question": "Which was Satyajit Ray's only full-length Hindi feature film?",
+        "options": ["Ankur", "Manthan", "Bhumika", "Shatranj Ke Khilari"],
+        "explanation": "Based on a Premchand story, Shatranj Ke Khilari (1977) starred Sanjeev Kumar and Saeed Jaffrey as chess-obsessed nobles of Lucknow."
+      },
+      "hi": {
+        "question": "सत्यजीत रे की एकमात्र पूर्ण लंबाई वाली हिंदी फ़ीचर फ़िल्म कौन-सी थी?",
+        "options": ["अंकुर", "मंथन", "भूमिका", "शतरंज के खिलाड़ी"],
+        "explanation": "प्रेमचंद की कहानी पर आधारित शतरंज के खिलाड़ी (1977) में संजीव कुमार और सईद जाफ़री ने शतरंज के दीवाने लखनऊ के नवाबों का किरदार निभाया।"
+      },
+      "hi-Latn": {
+        "question": "Satyajit Ray ki ekmatra full-length Hindi feature film kaunsi thi?",
+        "options": ["Ankur", "Manthan", "Bhumika", "Shatranj Ke Khilari"],
+        "explanation": "Premchand ki kahani pe based Shatranj Ke Khilari (1977) mein Sanjeev Kumar aur Saeed Jaffrey ne chess ke deewane Lucknow ke nawabon ka role kiya."
+      }
+    },
+    {
+      "groupId": "bw_035",
+      "difficulty": "hard",
+      "subcategory": "awards",
+      "correctIndex": 1,
+      "tags": ["oscars", "mira_nair", "awards"],
+      "en": {
+        "question": "Which Mira Nair film earned an Oscar nomination for Best Foreign Language Film?",
+        "options": ["Monsoon Wedding", "Salaam Bombay!", "The Namesake", "Mississippi Masala"],
+        "explanation": "Salaam Bombay! (1988), about street children in Mumbai, was nominated at the 61st Academy Awards, following Mother India."
+      },
+      "hi": {
+        "question": "मीरा नायर की किस फ़िल्म को सर्वश्रेष्ठ विदेशी भाषा फ़िल्म का ऑस्कर नामांकन मिला था?",
+        "options": ["मॉनसून वेडिंग", "सलाम बॉम्बे!", "द नेमसेक", "मिसिसिपी मसाला"],
+        "explanation": "मुंबई के सड़क पर रहने वाले बच्चों की कहानी सलाम बॉम्बे! (1988) को मदर इंडिया के बाद 61वें अकादमी पुरस्कारों में नामांकन मिला।"
+      },
+      "hi-Latn": {
+        "question": "Mira Nair ki kis film ko Best Foreign Language Film ka Oscar nomination mila tha?",
+        "options": ["Monsoon Wedding", "Salaam Bombay!", "The Namesake", "Mississippi Masala"],
+        "explanation": "Mumbai ke street children ki kahani Salaam Bombay! (1988) ko Mother India ke baad 61st Academy Awards mein nomination mila."
+      }
+    },
+    {
+      "groupId": "bw_036",
+      "difficulty": "hard",
+      "subcategory": "awards",
+      "correctIndex": 0,
+      "tags": ["oscars", "bhanu_athaiya", "firsts"],
+      "en": {
+        "question": "Bhanu Athaiya, India's first Oscar winner, won for costume design of which film?",
+        "options": ["Gandhi", "A Passage to India", "Heat and Dust", "The Jungle Book"],
+        "explanation": "She shared the 1983 Oscar with John Mollo for Richard Attenborough's Gandhi, after years of designing costumes for Hindi films."
+      },
+      "hi": {
+        "question": "भारत की पहली ऑस्कर विजेता भानु अथैया ने किस फ़िल्म की वेशभूषा के लिए पुरस्कार जीता?",
+        "options": ["गांधी", "अ पैसेज टू इंडिया", "हीट एंड डस्ट", "द जंगल बुक"],
+        "explanation": "उन्होंने रिचर्ड एटनबरो की फ़िल्म गांधी के लिए 1983 का ऑस्कर जॉन मोलो के साथ साझा किया; इससे पहले वे बरसों तक हिंदी फ़िल्मों की वेशभूषा बना चुकी थीं।"
+      },
+      "hi-Latn": {
+        "question": "India ki pehli Oscar winner Bhanu Athaiya ne kis film ke costume design ke liye award jeeta?",
+        "options": ["Gandhi", "A Passage to India", "Heat and Dust", "The Jungle Book"],
+        "explanation": "Unhone Richard Attenborough ki Gandhi ke liye 1983 ka Oscar John Mollo ke saath share kiya; isse pehle woh saalon tak Hindi films ke costumes bana chuki thi."
+      }
+    },
+    {
+      "groupId": "bw_037",
+      "difficulty": "hard",
+      "subcategory": "playback_singers",
+      "correctIndex": 3,
+      "tags": ["kishore_kumar", "real_names"],
+      "en": {
+        "question": "What was the real name of singer-actor Kishore Kumar?",
+        "options": ["Kumudlal Ganguly", "Anoop Ganguly", "Sudhir Ganguly", "Abhas Kumar Ganguly"],
+        "explanation": "Born Abhas Kumar Ganguly in Khandwa, he was the younger brother of actor Ashok Kumar, whose real name was Kumudlal Ganguly."
+      },
+      "hi": {
+        "question": "गायक-अभिनेता किशोर कुमार का असली नाम क्या था?",
+        "options": ["कुमुदलाल गांगुली", "अनूप गांगुली", "सुधीर गांगुली", "आभास कुमार गांगुली"],
+        "explanation": "खंडवा में आभास कुमार गांगुली के नाम से जन्मे किशोर, अभिनेता अशोक कुमार के छोटे भाई थे, जिनका असली नाम कुमुदलाल गांगुली था।"
+      },
+      "hi-Latn": {
+        "question": "Singer-actor Kishore Kumar ka asli naam kya tha?",
+        "options": ["Kumudlal Ganguly", "Anoop Ganguly", "Sudhir Ganguly", "Abhas Kumar Ganguly"],
+        "explanation": "Khandwa mein Abhas Kumar Ganguly naam se paida hue Kishore, actor Ashok Kumar ke chhote bhai the, jinka asli naam Kumudlal Ganguly tha."
+      }
+    },
+    {
+      "groupId": "bw_038",
+      "difficulty": "hard",
+      "subcategory": "actors",
+      "correctIndex": 2,
+      "tags": ["dilip_kumar", "real_names"],
+      "en": {
+        "question": "What was thespian Dilip Kumar's real name?",
+        "options": ["Jatin Khanna", "Harihar Jariwala", "Muhammad Yusuf Khan", "Dharam Dev Anand"],
+        "explanation": "The screen name 'Dilip Kumar' was suggested at Bombay Talkies, where he debuted in Jwar Bhata (1944); the other options are the real names of Rajesh Khanna, Sanjeev Kumar and Dev Anand."
+      },
+      "hi": {
+        "question": "अभिनय सम्राट दिलीप कुमार का असली नाम क्या था?",
+        "options": ["जतिन खन्ना", "हरिहर जरीवाला", "मोहम्मद यूसुफ़ ख़ान", "धरम देव आनंद"],
+        "explanation": "'दिलीप कुमार' नाम उन्हें बॉम्बे टॉकीज़ में मिला, जहाँ उन्होंने ज्वार भाटा (1944) से शुरुआत की; बाक़ी विकल्प राजेश खन्ना, संजीव कुमार और देव आनंद के असली नाम हैं।"
+      },
+      "hi-Latn": {
+        "question": "Thespian Dilip Kumar ka asli naam kya tha?",
+        "options": ["Jatin Khanna", "Harihar Jariwala", "Muhammad Yusuf Khan", "Dharam Dev Anand"],
+        "explanation": "'Dilip Kumar' naam unhe Bombay Talkies mein mila, jahan unhone Jwar Bhata (1944) se debut kiya; baaki options Rajesh Khanna, Sanjeev Kumar aur Dev Anand ke asli naam hain."
+      }
+    },
+    {
+      "groupId": "bw_039",
+      "difficulty": "hard",
+      "subcategory": "film_history",
+      "correctIndex": 1,
+      "tags": ["guru_dutt", "firsts", "film_history"],
+      "en": {
+        "question": "Which Guru Dutt film is regarded as India's first film shot in CinemaScope?",
+        "options": ["Pyaasa", "Kaagaz Ke Phool", "Sahib Bibi Aur Ghulam", "Chaudhvin Ka Chand"],
+        "explanation": "Kaagaz Ke Phool (1959) flopped on release, but its widescreen visuals by V.K. Murthy later earned it cult-classic status."
+      },
+      "hi": {
+        "question": "गुरु दत्त की किस फ़िल्म को सिनेमास्कोप में बनी भारत की पहली फ़िल्म माना जाता है?",
+        "options": ["प्यासा", "काग़ज़ के फूल", "साहिब बीबी और ग़ुलाम", "चौदहवीं का चाँद"],
+        "explanation": "काग़ज़ के फूल (1959) रिलीज़ के समय नाकाम रही, लेकिन वी.के. मूर्ति के शानदार वाइडस्क्रीन छायांकन ने बाद में इसे कल्ट क्लासिक बना दिया।"
+      },
+      "hi-Latn": {
+        "question": "Guru Dutt ki kis film ko CinemaScope mein shoot hui India ki pehli film maana jaata hai?",
+        "options": ["Pyaasa", "Kaagaz Ke Phool", "Sahib Bibi Aur Ghulam", "Chaudhvin Ka Chand"],
+        "explanation": "Kaagaz Ke Phool (1959) release ke time flop rahi, lekin V.K. Murthy ki widescreen cinematography ne baad mein ise cult classic bana diya."
+      }
+    },
+    {
+      "groupId": "bw_040",
+      "difficulty": "hard",
+      "subcategory": "directors",
+      "correctIndex": 0,
+      "tags": ["do_bigha_zamin", "bimal_roy", "classic_films"],
+      "en": {
+        "question": "Who directed Do Bigha Zamin (1953), starring Balraj Sahni?",
+        "options": ["Bimal Roy", "Hrishikesh Mukherjee", "Satyajit Ray", "Ritwik Ghatak"],
+        "explanation": "Inspired by Italian neorealism, Bimal Roy's film about a farmer pulling a rickshaw in Calcutta won an international prize at Cannes."
+      },
+      "hi": {
+        "question": "बलराज साहनी अभिनीत 'दो बीघा ज़मीन' (1953) का निर्देशन किसने किया?",
+        "options": ["बिमल रॉय", "हृषिकेश मुखर्जी", "सत्यजीत रे", "ऋत्विक घटक"],
+        "explanation": "इतालवी नवयथार्थवाद से प्रेरित, कलकत्ता में रिक्शा खींचने वाले किसान पर बनी बिमल रॉय की इस फ़िल्म ने कान फ़िल्म समारोह में अंतरराष्ट्रीय पुरस्कार जीता।"
+      },
+      "hi-Latn": {
+        "question": "Balraj Sahni wali Do Bigha Zamin (1953) ko kisne direct kiya?",
+        "options": ["Bimal Roy", "Hrishikesh Mukherjee", "Satyajit Ray", "Ritwik Ghatak"],
+        "explanation": "Italian neorealism se inspired, Calcutta mein rickshaw kheenchne wale kisaan pe bani Bimal Roy ki is film ne Cannes mein international prize jeeta."
+      }
+    },
+    {
+      "groupId": "bw_041",
+      "difficulty": "hard",
+      "subcategory": "directors",
+      "correctIndex": 3,
+      "tags": ["mughal_e_azam", "directors"],
+      "en": {
+        "question": "Who directed the epic Mughal-e-Azam (1960)?",
+        "options": ["Kamal Amrohi", "Mehboob Khan", "Sohrab Modi", "K. Asif"],
+        "explanation": "K. Asif spent many years making the film; its famous Sheesh Mahal set hosts the song 'Pyar Kiya To Darna Kya'."
+      },
+      "hi": {
+        "question": "भव्य फ़िल्म 'मुग़ल-ए-आज़म' (1960) का निर्देशन किसने किया था?",
+        "options": ["कमाल अमरोही", "महबूब ख़ान", "सोहराब मोदी", "के. आसिफ़"],
+        "explanation": "के. आसिफ़ ने इस फ़िल्म को बनाने में कई साल लगाए; इसके मशहूर शीश महल सेट पर 'प्यार किया तो डरना क्या' फ़िल्माया गया।"
+      },
+      "hi-Latn": {
+        "question": "Epic film Mughal-e-Azam (1960) ko kisne direct kiya tha?",
+        "options": ["Kamal Amrohi", "Mehboob Khan", "Sohrab Modi", "K. Asif"],
+        "explanation": "K. Asif ne is film ko banane mein kai saal lagaye; iske famous Sheesh Mahal set pe 'Pyar Kiya To Darna Kya' shoot hua."
+      }
+    },
+    {
+      "groupId": "bw_042",
+      "difficulty": "hard",
+      "subcategory": "lyricists",
+      "correctIndex": 2,
+      "tags": ["gulzar", "oscars", "lyricists"],
+      "en": {
+        "question": "Which lyricist shared the Oscar with A.R. Rahman for the song 'Jai Ho'?",
+        "options": ["Javed Akhtar", "Sameer", "Gulzar", "Prasoon Joshi"],
+        "explanation": "Gulzar, also a celebrated poet and director of films like Ijaazat, wrote 'Jai Ho' for Slumdog Millionaire."
+      },
+      "hi": {
+        "question": "'जय हो' गीत के लिए ए.आर. रहमान के साथ किस गीतकार ने ऑस्कर साझा किया?",
+        "options": ["जावेद अख़्तर", "समीर", "गुलज़ार", "प्रसून जोशी"],
+        "explanation": "मशहूर शायर और इजाज़त जैसी फ़िल्मों के निर्देशक गुलज़ार ने स्लमडॉग मिलियनेयर के लिए 'जय हो' लिखा था।"
+      },
+      "hi-Latn": {
+        "question": "'Jai Ho' song ke liye A.R. Rahman ke saath kis lyricist ne Oscar share kiya?",
+        "options": ["Javed Akhtar", "Sameer", "Gulzar", "Prasoon Joshi"],
+        "explanation": "Famous shayar aur Ijaazat jaisi films ke director Gulzar ne Slumdog Millionaire ke liye 'Jai Ho' likha tha."
+      }
+    },
+    {
+      "groupId": "bw_043",
+      "difficulty": "hard",
+      "subcategory": "film_trivia",
+      "correctIndex": 3,
+      "tags": ["sholay", "shooting_locations"],
+      "en": {
+        "question": "The rocky village of Ramgarh in Sholay was mainly filmed near which place?",
+        "options": ["Jaisalmer, Rajasthan", "Chambal, Madhya Pradesh", "Kutch, Gujarat", "Ramanagara, Karnataka"],
+        "explanation": "The rugged hills of Ramanagara near Bengaluru stood in for Ramgarh, and the area still draws fans of the film."
+      },
+      "hi": {
+        "question": "शोले का पथरीला गाँव रामगढ़ मुख्य रूप से किस जगह के पास फ़िल्माया गया था?",
+        "options": ["जैसलमेर, राजस्थान", "चंबल, मध्य प्रदेश", "कच्छ, गुजरात", "रामनगर, कर्नाटक"],
+        "explanation": "बेंगलुरु के पास रामनगर की ऊबड़-खाबड़ पहाड़ियों को रामगढ़ बनाया गया था, और यह इलाक़ा आज भी फ़िल्म के प्रशंसकों को खींचता है।"
+      },
+      "hi-Latn": {
+        "question": "Sholay ka pathreela gaon Ramgarh mainly kis jagah ke paas shoot hua tha?",
+        "options": ["Jaisalmer, Rajasthan", "Chambal, Madhya Pradesh", "Kutch, Gujarat", "Ramanagara, Karnataka"],
+        "explanation": "Bengaluru ke paas Ramanagara ki pathreeli pahadiyon ko Ramgarh banaya gaya tha, aur yeh area aaj bhi film ke fans ko attract karta hai."
+      }
+    },
+    {
+      "groupId": "bw_044",
+      "difficulty": "hard",
+      "subcategory": "film_history",
+      "correctIndex": 0,
+      "tags": ["neecha_nagar", "cannes", "film_history"],
+      "en": {
+        "question": "Who directed Neecha Nagar (1946), which won the top prize at the first Cannes Film Festival?",
+        "options": ["Chetan Anand", "Dev Anand", "Vijay Anand", "K.A. Abbas"],
+        "explanation": "Chetan Anand's debut shared the Grand Prix at Cannes in 1946; it also marked the screen debut of actress Kamini Kaushal."
+      },
+      "hi": {
+        "question": "पहले कान फ़िल्म समारोह में शीर्ष पुरस्कार जीतने वाली 'नीचा नगर' (1946) का निर्देशन किसने किया?",
+        "options": ["चेतन आनंद", "देव आनंद", "विजय आनंद", "के.ए. अब्बास"],
+        "explanation": "चेतन आनंद की इस पहली फ़िल्म ने 1946 में कान का ग्रां प्री साझा रूप से जीता; इसी फ़िल्म से अभिनेत्री कामिनी कौशल ने पर्दे पर शुरुआत की।"
+      },
+      "hi-Latn": {
+        "question": "Pehle Cannes Film Festival mein top prize jeetne wali Neecha Nagar (1946) ko kisne direct kiya?",
+        "options": ["Chetan Anand", "Dev Anand", "Vijay Anand", "K.A. Abbas"],
+        "explanation": "Chetan Anand ki is debut film ne 1946 mein Cannes ka Grand Prix share kiya; isi film se actress Kamini Kaushal ne debut kiya."
+      }
+    },
+    {
+      "groupId": "bw_045",
+      "difficulty": "hard",
+      "subcategory": "music_directors",
+      "correctIndex": 1,
+      "tags": ["rd_burman", "music_directors"],
+      "en": {
+        "question": "Which film's soundtrack was R.D. Burman's last, released after his death?",
+        "options": ["Saagar", "1942: A Love Story", "Ijaazat", "Parinda"],
+        "explanation": "Songs like 'Ek Ladki Ko Dekha' became huge hits, and Pancham won a posthumous Filmfare Award for Best Music Director for the film."
+      },
+      "hi": {
+        "question": "आर.डी. बर्मन का आख़िरी संगीत किस फ़िल्म का था, जो उनके निधन के बाद रिलीज़ हुई?",
+        "options": ["सागर", "1942: अ लव स्टोरी", "इजाज़त", "परिंदा"],
+        "explanation": "'एक लड़की को देखा' जैसे गीत ज़बरदस्त हिट हुए, और इस फ़िल्म के लिए पंचम दा को मरणोपरांत सर्वश्रेष्ठ संगीतकार का फ़िल्मफ़ेयर पुरस्कार मिला।"
+      },
+      "hi-Latn": {
+        "question": "R.D. Burman ka last music kis film ka tha, jo unke nidhan ke baad release hui?",
+        "options": ["Saagar", "1942: A Love Story", "Ijaazat", "Parinda"],
+        "explanation": "'Ek Ladki Ko Dekha' jaise gaane superhit hue, aur is film ke liye Pancham da ko posthumous Filmfare Best Music Director award mila."
+      }
+    }
+  ]
+}

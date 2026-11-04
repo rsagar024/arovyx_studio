@@ -1,0 +1,72 @@
+{
+  "description": "`templates`: fallback 'new quiz' notifications (part 7.c), used when the AI text for a language fails its checks. Rotate by IST day number. {category} is filled from `categories` in the same language. Limits after filling: title <= 40 characters, body <= 120; hi must be Devanagari, hi-Latn must have none; no URLs and no answers. `new_questions`: the evening \"new questions added\" push, rotated by IST day number, same limits.",
+  "categories": {
+    "general_knowledge": { "en": "General Knowledge", "hi": "सामान्य ज्ञान", "hi-Latn": "General Knowledge" },
+    "bollywood": { "en": "Bollywood", "hi": "बॉलीवुड", "hi-Latn": "Bollywood" },
+    "cricket": { "en": "Cricket", "hi": "क्रिकेट", "hi-Latn": "Cricket" },
+    "science": { "en": "Science", "hi": "विज्ञान", "hi-Latn": "Science" },
+    "history": { "en": "History", "hi": "इतिहास", "hi-Latn": "History" },
+    "geography": { "en": "Geography", "hi": "भूगोल", "hi-Latn": "Geography" },
+    "technology": { "en": "Technology", "hi": "टेक्नोलॉजी", "hi-Latn": "Technology" },
+    "indian_culture": { "en": "Indian Culture", "hi": "भारतीय संस्कृति", "hi-Latn": "Indian Culture" },
+    "space": { "en": "Space", "hi": "अंतरिक्ष", "hi-Latn": "Space" }
+  },
+  "templates": {
+    "en": [
+      { "title": "🧠 {category} Quiz is LIVE!", "body": "Today's 10 questions are ready. Play now and win 100 coins 🪙" },
+      { "title": "☀️ Your {category} Quiz awaits", "body": "Fresh questions, one attempt, 100 coins up for grabs. Ready? 🎯" },
+      { "title": "🔥 New {category} challenge!", "body": "Keep your streak alive: 10 brand-new questions are waiting for you." },
+      { "title": "🎯 {category} time!", "body": "Think you know {category}? Prove it in today's quiz and grab 100 coins 🪙" },
+      { "title": "🏆 Daily {category} Quiz", "body": "Today's quiz just dropped. Beat your friends and climb the leaderboard!" },
+      { "title": "⚡ Quick! {category} Quiz", "body": "10 questions, 15 seconds each. How many can you get right today? 🤔" },
+      { "title": "🌟 Today: {category}", "body": "A new Daily Challenge is here. Play before midnight to keep your streak 🔥" },
+      { "title": "📚 {category} Quiz unlocked", "body": "Learn something new in 2 minutes and earn 100 coins on the way 🪙" },
+      { "title": "🎉 Fresh {category} Quiz!", "body": "Your brain's morning workout is ready. Tap to play today's 10 questions 💪" },
+      { "title": "👀 {category} Quiz is here", "body": "One attempt, ten questions, 100 coins. Make every answer count! 🎯" }
+    ],
+    "hi": [
+      { "title": "🧠 {category} क्विज़ आ गया!", "body": "आज के 10 सवाल तैयार हैं। अभी खेलें और 100 सिक्के जीतें 🪙" },
+      { "title": "☀️ आज का {category} क्विज़", "body": "नए सवाल, एक मौका, 100 सिक्के। क्या आप तैयार हैं? 🎯" },
+      { "title": "🔥 नया {category} चैलेंज!", "body": "अपनी स्ट्रीक बनाए रखें: 10 नए सवाल आपका इंतज़ार कर रहे हैं।" },
+      { "title": "🎯 {category} का समय!", "body": "क्या आप {category} जानते हैं? आज के क्विज़ में साबित करें और 100 सिक्के जीतें 🪙" },
+      { "title": "🏆 डेली {category} क्विज़", "body": "आज का क्विज़ आ गया है। दोस्तों को हराएँ और लीडरबोर्ड पर चढ़ें!" },
+      { "title": "⚡ जल्दी! {category} क्विज़", "body": "10 सवाल, हर सवाल के लिए 15 सेकंड। आज कितने सही होंगे? 🤔" },
+      { "title": "🌟 आज: {category}", "body": "नया डेली चैलेंज आ गया है। स्ट्रीक बचाने के लिए आधी रात से पहले खेलें 🔥" },
+      { "title": "📚 {category} क्विज़ खुल गया", "body": "दो मिनट में कुछ नया सीखें और साथ में 100 सिक्के कमाएँ 🪙" },
+      { "title": "🎉 नया {category} क्विज़!", "body": "दिमाग की सुबह की कसरत तैयार है। आज के 10 सवाल खेलने के लिए टैप करें 💪" },
+      { "title": "👀 {category} क्विज़ हाज़िर है", "body": "एक मौका, दस सवाल, 100 सिक्के। हर जवाब सोच-समझकर दें! 🎯" }
+    ],
+    "hi-Latn": [
+      { "title": "🧠 {category} Quiz aa gaya!", "body": "Aaj ke 10 sawaal ready hain. Abhi khelo aur 100 coins jeeto 🪙" },
+      { "title": "☀️ Aaj ka {category} Quiz", "body": "Naye sawaal, ek chance, 100 coins. Kya aap ready ho? 🎯" },
+      { "title": "🔥 Naya {category} challenge!", "body": "Apni streak bachao: 10 bilkul naye sawaal aapka wait kar rahe hain." },
+      { "title": "🎯 {category} ka time!", "body": "{category} mein dum hai? Aaj ke quiz mein dikhao aur 100 coins jeeto 🪙" },
+      { "title": "🏆 Daily {category} Quiz", "body": "Aaj ka quiz aa gaya hai. Doston ko haraao aur leaderboard pe chadho!" },
+      { "title": "⚡ Jaldi! {category} Quiz", "body": "10 sawaal, har sawaal ke liye 15 second. Aaj kitne sahi honge? 🤔" },
+      { "title": "🌟 Aaj: {category}", "body": "Naya Daily Challenge aa gaya. Streak bachane ke liye midnight se pehle khelo 🔥" },
+      { "title": "📚 {category} Quiz unlock", "body": "Do minute mein kuch naya seekho aur saath mein 100 coins kamao 🪙" },
+      { "title": "🎉 Fresh {category} Quiz!", "body": "Dimaag ki morning workout ready hai. Aaj ke 10 sawaal khelne ke liye tap karo 💪" },
+      { "title": "👀 {category} Quiz haazir hai", "body": "Ek chance, das sawaal, 100 coins. Har jawaab soch-samajh ke do! 🎯" }
+    ]
+  },
+  "new_questions": {
+    "en": [
+      { "title": "🧠 New questions are here!", "body": "45 fresh questions just landed in every category. Can you ace them all?" },
+      { "title": "✨ Fresh quizzes available", "body": "New easy, medium and hard questions in every category. Tap to play!" },
+      { "title": "🔥 Your quiz just got bigger", "body": "We added new questions in every category this evening. Jump in!" },
+      { "title": "🎯 New questions to crack", "body": "Every category has 45 new questions. Test yourself before bedtime!" }
+    ],
+    "hi": [
+      { "title": "🧠 नए सवाल आ गए!", "body": "हर कैटेगरी में 45 नए सवाल जुड़ गए हैं। क्या आप सब सही कर पाएँगे?" },
+      { "title": "✨ नए क्विज़ तैयार हैं", "body": "हर कैटेगरी में आसान, मध्यम और कठिन नए सवाल। खेलने के लिए टैप करें!" },
+      { "title": "🔥 आपका क्विज़ और बड़ा हुआ", "body": "आज शाम हर कैटेगरी में नए सवाल जोड़े गए हैं। अभी खेलें!" },
+      { "title": "🎯 हल करने को नए सवाल", "body": "हर कैटेगरी में 45 नए सवाल हैं। सोने से पहले खुद को परखें!" }
+    ],
+    "hi-Latn": [
+      { "title": "🧠 Naye sawaal aa gaye!", "body": "Har category mein 45 naye sawaal aa gaye hain. Kya aap sab sahi kar paoge?" },
+      { "title": "✨ Naye quiz ready hain", "body": "Har category mein easy, medium aur hard naye sawaal. Khelne ke liye tap karo!" },
+      { "title": "🔥 Aapka quiz aur bada hua", "body": "Aaj shaam har category mein naye sawaal jode gaye hain. Abhi khelo!" },
+      { "title": "🎯 Solve karne ko naye sawaal", "body": "Har category mein 45 naye sawaal hain. Sone se pehle khud ko test karo!" }
+    ]
+  }
+}

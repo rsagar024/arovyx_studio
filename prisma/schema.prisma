@@ -90,3 +90,65 @@ model AiLog {
 
   @@index([createdAt])
 }
+
+// --- Quiz Master automation (Studio → Quiz Master) ---------------------------
+// The jobs that used to run on GitHub Actions in the quizmaster repo, run from
+// the Studio tab in short resumable ticks. See src/lib/quizmaster/engine.ts.
+
+// Single-row schedule: the countdown every tab and device shows.
+model QuizSchedule {
+  id            Int       @id @default(1)
+  intervalHours Float     @default(12) // 11-12, clamped by the API
+  nextRunAt     DateTime?
+  paused        Boolean   @default(false)
+  lastCleanupAt DateTime? // last successful (non-dry-run) guest cleanup
+  updatedAt     DateTime  @updatedAt
+}
+
+model QuizRun {
+  id          String    @id @default(cuid())
+  kind        String // question_bank | guest_cleanup | seed
+  trigger     String    @default("manual") // timer | manual
+  slot        String    @default("") // am | pm | x{n}; "" for guest_cleanup
+  options     String    @default("{}") // JSON: date, force, dryRun, categories, days, ...
+  status      String    @default("running") // queued | running | succeeded | partial | failed | cancelled
+  lockedUntil DateTime? // run lease: renewed on every tick, expires 10 min after the last one
+  tickUntil   DateTime? // per-tick lease: one tick in flight per run
+  tickToken   String?
+  startedAt   DateTime  @default(now())
+  finishedAt  DateTime?
+  summary     String    @default("{}") // JSON: per-category / per-step results
+  createdAt   DateTime  @default(now())
+  steps       QuizRunStep[]
+  logs        QuizLog[]
+
+  @@index([kind, status])
+  @@index([createdAt])
+}
+
+model QuizRunStep {
+  id        String   @id @default(cuid())
+  runId     String
+  run       QuizRun  @relation(fields: [runId], references: [id], onDelete: Cascade)
+  key       String // e.g. science:verify:0:2, publish, daily_quiz
+  order     Int
+  status    String   @default("pending") // pending | done | failed | skipped
+  attempts  Int      @default(0)
+  state     String   @default("{}") // JSON: the unit's carried state (intermediate questions)
+  error     String?
+  updatedAt DateTime @updatedAt
+
+  @@unique([runId, key])
+  @@index([runId, order])
+}
+
+model QuizLog {
+  id      String   @id @default(cuid())
+  runId   String
+  run     QuizRun  @relation(fields: [runId], references: [id], onDelete: Cascade)
+  at      DateTime @default(now())
+  level   String   @default("info") // info | warn | error
+  message String
+
+  @@index([runId, at])
+}

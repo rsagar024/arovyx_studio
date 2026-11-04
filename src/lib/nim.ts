@@ -75,6 +75,14 @@ export interface NimOptions {
   /** Automatic retries on 429/5xx/network errors. Default 2. */
   retries?: number;
   backoffMs?: number;
+  /** Per-call model id. Default: NVIDIA_NIM_MODEL, else DEFAULT_MODEL. */
+  model?: string;
+  /** Retry after a timeout too, or throw at once. Default true. */
+  retryOnTimeout?: boolean;
+  /** Abort the call from outside (reported like a timeout). */
+  signal?: AbortSignal;
+  /** Output token cap. Default 8192. */
+  maxTokens?: number;
 }
 
 export async function nimChat(
@@ -96,7 +104,7 @@ export async function nimChat(
   const backoffMs = opts.backoffMs ?? 1_000;
 
   const body: Record<string, unknown> = {
-    model: model(),
+    model: opts.model || model(),
     messages: [
       { role: "system", content: system },
       { role: "user", content: user },
@@ -104,7 +112,7 @@ export async function nimChat(
     temperature,
     // Explicit cap — hosted endpoints otherwise apply a small default that
     // truncates mid-JSON.
-    max_tokens: 8192,
+    max_tokens: opts.maxTokens ?? 8192,
     // Turn off hidden reasoning on thinking models (Nemotron 3.x etc.) so the
     // token budget goes to the answer. Ignored by models without it.
     chat_template_kwargs: { enable_thinking: false },
@@ -118,6 +126,9 @@ export async function nimChat(
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const onOutsideAbort = () => controller.abort();
+    if (opts.signal?.aborted) controller.abort();
+    opts.signal?.addEventListener("abort", onOutsideAbort);
 
     try {
       const res = await fetch(`${baseUrl()}/chat/completions`, {
@@ -185,6 +196,7 @@ export async function nimChat(
           `NIM request timed out after ${Math.round(timeoutMs / 1000)}s.`,
           "timeout"
         );
+        if (opts.retryOnTimeout === false) throw lastError;
       } else if (err instanceof NIMError) {
         lastError = err;
       } else {
@@ -195,6 +207,7 @@ export async function nimChat(
       }
     } finally {
       clearTimeout(timer);
+      opts.signal?.removeEventListener("abort", onOutsideAbort);
     }
 
     if (attempt < maxRetries) {

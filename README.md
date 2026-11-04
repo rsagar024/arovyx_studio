@@ -64,6 +64,11 @@ npm start
 | `NEXT_PUBLIC_SITE_URL` | yes | Public base URL, used for canonical/Open Graph URLs, the sitemap and robots. |
 | `DATABASE_URL` | yes | PostgreSQL **pooled** connection string (Neon host contains `-pooler`). Used by the app at runtime. |
 | `DIRECT_URL` | yes | PostgreSQL **direct** (non-pooled) connection string. Used by `prisma db push`. |
+| `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT` | for Quiz Master | Firebase Admin SDK key JSON of the Quiz Master project, **on one line** (Firestore, FCM, Auth and Remote Config). Server-only. Without it, Studio → Quiz Master only does dry runs. |
+| `QUIZMASTER_FIREBASE_PROJECT_ID` | no | Default: the key's `project_id` (`quizmaster-3be48`). |
+| `QUIZMASTER_GEN_MODEL` | no | First-choice NIM model that writes questions and push texts. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. |
+| `QUIZMASTER_VERIFY_MODEL` | no | First-choice NIM model that cross-checks answers. **Must be a different model family** from the generator. Default `mistralai/mistral-large-4-1t-a52b`, asked together with `minimaxai/minimax-m3.1-flash`; the first answer wins. |
+| `QUIZMASTER_TRANSLATE_MODEL` | no | First-choice NIM model for the Hindi and Hinglish versions. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. If a model errors or hasn't answered after 45 s, a call also asks the next in `MODEL_POOL` (`src/lib/quizmaster/nimClient.ts`) and takes the first answer; the verifier never uses a family that wrote the questions. |
 
 Generate a strong JWT secret with:
 
@@ -121,6 +126,7 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
   - **Manual add** without AI
 - **Projects:** search, publish/unpublish, edit (same form, with the **AI Description Improver**), delete
 - **Messages:** inbox with read/unread, detail view, reply by email, delete
+- **Quiz Master:** runs the Quiz Master Android app's server jobs (question bank, daily quiz, pushes, weekly summary, guest cleanup) from a countdown in the tab. See [Quiz Master automation](#quiz-master-automation).
 - **Settings:** site name, owner name, tagline, bio, email, socials, avatar and résumé, live on the public site as soon as you save. **Hero showcase:** pick up to 3 projects (and their order) for the floating cards beside the home page title; with none picked, the latest 3 published are shown. **Featured projects:** pick up to 6 projects (and their order) for the home page grid; with none picked, the 6 newest published are shown.
 
 Every AI call (generate or improve, success or failure) is logged to the `AiLog` table and shown on Overview.
@@ -142,6 +148,11 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 | `GET` / `PATCH` | `/api/admin/settings` | Site settings |
 | `GET` / `DELETE` | `/api/admin/messages` | Inbox (+ unread count) / bulk delete `{ ids: [...] }` |
 | `PATCH` / `DELETE` | `/api/admin/messages/[id]` | Mark read/unread / delete one |
+| `GET` / `PATCH` | `/api/admin/quizmaster/schedule` | Countdown, env check, active and recent runs / pause, resume, reset, interval (11–12 h), next run time |
+| `GET` / `POST` | `/api/admin/quizmaster/runs` | Run history / start a run (scheduled, manual question bank or seed, guest cleanup); 409 while another run holds the lock |
+| `GET` | `/api/admin/quizmaster/runs/[id]` | Run, steps and log lines (`?after=` for new ones) |
+| `POST` | `/api/admin/quizmaster/runs/[id]/tick` | One bounded slice of work (≤ 240 s); returns `{ status, progress, done }` |
+| `POST` | `/api/admin/quizmaster/runs/[id]/cancel` | Cancel a running run |
 | `POST` | `/api/contact` | Public contact form |
 | `GET` | `/api/projects` | Public list, `?category=&q=` (drafts only for admins) |
 
@@ -155,6 +166,7 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 | `npm run build` | Production build |
 | `npm start` | Serve the build |
 | `npm run typecheck` | `tsc --noEmit` (strict) |
+| `npm test` | Vitest: the Quiz Master ports and engine tests |
 | `npm run db:push` | Apply the Prisma schema to the database |
 | `npm run db:generate` | Regenerate the Prisma client |
 | `npm run db:seed` | Seed / re-seed the example data |
@@ -165,19 +177,20 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 
 ```
 prisma/
-  schema.prisma        Project, ContactMessage, SiteConfig, AiLog
+  schema.prisma        Project, ContactMessage, SiteConfig, AiLog, QuizSchedule, QuizRun, QuizRunStep, QuizLog
   seed.ts              example data (--if-empty used by predev and the deploy workflow)
 .github/workflows/
   deploy.yml           merge to master → typecheck → sync secrets → Neon schema/seed → Vercel deploy
 src/
   app/
     (public)/          home, projects, projects/[slug], about, contact
-    studio/            login page + (panel)/ overview, projects, add, messages, settings
+    studio/            login page + (panel)/ overview, projects, add, messages, quizmaster, settings
     api/               routes listed above
     og/route.tsx       default social card
     layout.tsx, not-found.tsx, sitemap.ts, robots.ts, globals.css
   components/          Navbar, Footer, Hero, ProjectCard, badges, ThemeToggle, …
     studio/            StudioShell, AiGeneratePanel, ProjectForm, MessagesInbox, SettingsForm, …
+      quizmaster/      the Quiz Master tab: stopwatch, run driver, forms, run history
   lib/
     fetchers.ts        GitHub/GitLab/npm/PyPI APIs + generic HTML extraction
     nim.ts             nimChat (timeout + retries), generateProjectDetails, improveDescription, AiLog
@@ -185,8 +198,29 @@ src/
     session.ts         cookie helpers for server code
     validators.ts      Zod schemas + DB ↔ DTO mappers
     db.ts, projects.ts, dashboard.ts, seo.ts, slug.ts, api.ts, utils.ts, markdown.ts
+    quizmaster/        server-only port of the Quiz Master jobs + the step engine (tests in __tests__/)
+      assets/          prompts, push templates and the 405-group seed bank, copied verbatim
   middleware.ts        protects /studio/* and /api/admin/*
 ```
+
+---
+
+## Quiz Master automation
+
+Studio → **Quiz Master** runs the server jobs of the Quiz Master Android app (Firebase project `quizmaster-3be48`). They used to run as Python on GitHub Actions in the quizmaster repo (`automation/`, `tool/cleanup_guests.py`). The TypeScript port in `src/lib/quizmaster/` writes byte-for-byte the same Firestore docs (packed `question_files/base_*`, `meta/questions`, `daily_challenges/{date}`, `question_pushes/*`) and FCM pushes, so the shipped app needs no update.
+
+**How it runs.** Nothing external starts it: no GitHub Actions job, no Vercel Cron. The tab shows a countdown to `nextRunAt` (stored in `QuizSchedule`, so every tab and device shows the same one). The interval is 11–12 h, 12 h by default. When it reaches zero **while the tab is open**, or is already past when you open it (shown as *Overdue*), the page starts the run and drives it to the end; then the countdown restarts from the interval. Keep the tab open on a spare device, or press **Run now**. Line the timer up with about **07:00 IST**: the daily quiz is only published by a run that reaches its daily-quiz step before 12:00 IST, and a run from 15:00 IST on is the `pm` slot.
+
+**Resumable steps.** A full run took up to ~40 minutes, but a Vercel function stops after ~5. So a run is a list of steps in Postgres (`QuizRun`, `QuizRunStep`, `QuizLog`), and `POST …/runs/{id}/tick` does as much as fits in **240 s**, saving after every unit:
+
+- per category, up to 3 at once: prepare, generate (per difficulty), verify (12 questions per unit), up to 2 refill rounds, translate `hi` then `hi-Latn` (6 per unit, one retry), write
+- then publish, the daily quiz (not on the `pm` slot), notify (and the weekly summary on Mondays), and guest cleanup (an automatic run, at most once every 24 h, one page of 1,000 users per unit)
+
+A category that fails is recorded and doesn't stop the others. Publish always runs after the categories. If the tab closes mid-run, the run waits and the next tick, from any tab, carries on from the saved step.
+
+**Locks.** There is one active run per kind, held by a lease (`lockedUntil`, renewed every tick, expires 10 minutes after the last one). A per-run tick lease (`tickUntil`) means two tabs never run the same step. The Firestore-side checks from the Python code are still there as a safety net: a slot already done is skipped, `daily_challenges/{date}` is only ever created, and pushes already recorded are never resent.
+
+**Manual runs** use the old workflow inputs: slot (`extra` adds its own 45 per category), date, force, dry run, mode (`seed` needs typing SEED), and a category filter. A **dry run** reads the real data and logs every write and push instead of making them (FCM still validates the pushes). Guest cleanup has its own form; it is a dry run by default and never takes fewer than 30 days.
 
 ---
 
@@ -242,6 +276,9 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
 | `NEXT_PUBLIC_SITE_URL` | variable | Public URL for canonical/OG/sitemap | `gh variable set NEXT_PUBLIC_SITE_URL --body https://your-domain`, then redeploy |
 | `NVIDIA_NIM_MODEL` | variable | NIM model id | `gh variable set NVIDIA_NIM_MODEL --body <model>` |
 | `NVIDIA_NIM_BASE_URL` | variable | NIM endpoint | rarely changes |
+| `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT` | secret | Quiz Master Firebase Admin SDK key JSON, one line (optional) | `jq -c . key.json | gh secret set QUIZMASTER_FIREBASE_SERVICE_ACCOUNT`, then redeploy |
+| `QUIZMASTER_FIREBASE_PROJECT_ID` | variable | Quiz Master Firebase project | `gh variable set QUIZMASTER_FIREBASE_PROJECT_ID --body quizmaster-3be48` |
+| `QUIZMASTER_GEN_MODEL`, `QUIZMASTER_VERIFY_MODEL`, `QUIZMASTER_TRANSLATE_MODEL` | variable | Quiz Master NIM models (optional) | `gh variable set QUIZMASTER_GEN_MODEL --body <model>`; the verifier must be another model family |
 
 `gh secret set NAME` with no `--body` prompts for the value, so it never lands in your shell history. Secret values can't be read back from GitHub, so keep your admin password in a password manager.
 

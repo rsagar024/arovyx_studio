@@ -1,0 +1,455 @@
+{
+  "category": "science",
+  "questions": [
+    {
+      "groupId": "sc_001",
+      "difficulty": "easy",
+      "subcategory": "physics",
+      "correctIndex": 2,
+      "tags": ["units", "force"],
+      "en": { "question": "What is the SI unit of force?", "options": ["Joule", "Watt", "Newton", "Pascal"], "explanation": "One newton is the force needed to accelerate a 1 kg mass by 1 m/s², and the unit honours Sir Isaac Newton." },
+      "hi": { "question": "बल का SI मात्रक क्या है?", "options": ["जूल", "वाट", "न्यूटन", "पास्कल"], "explanation": "1 न्यूटन वह बल है जो 1 किलोग्राम द्रव्यमान में 1 मीटर/सेकंड² का त्वरण उत्पन्न करता है। यह मात्रक आइज़क न्यूटन के सम्मान में रखा गया है।" },
+      "hi-Latn": { "question": "Force ki SI unit kya hai?", "options": ["Joule", "Watt", "Newton", "Pascal"], "explanation": "1 newton wo force hai jo 1 kg mass ko 1 m/s² ka acceleration deta hai. Ye unit Isaac Newton ke naam par hai." }
+    },
+    {
+      "groupId": "sc_002",
+      "difficulty": "easy",
+      "subcategory": "chemistry",
+      "correctIndex": 0,
+      "tags": ["elements", "chemical_symbols"],
+      "en": { "question": "What is the chemical symbol for gold?", "options": ["Au", "Ag", "Gd", "Go"], "explanation": "The symbol Au comes from 'aurum', the Latin word for gold. Ag is silver, from the Latin 'argentum'." },
+      "hi": { "question": "सोने का रासायनिक प्रतीक क्या है?", "options": ["Au", "Ag", "Gd", "Go"], "explanation": "Au प्रतीक सोने के लैटिन नाम 'ऑरम' से आया है। Ag चाँदी का प्रतीक है, जो लैटिन 'अर्जेंटम' से बना है।" },
+      "hi-Latn": { "question": "Gold ka chemical symbol kya hai?", "options": ["Au", "Ag", "Gd", "Go"], "explanation": "Au symbol gold ke Latin naam 'aurum' se aaya hai. Ag silver ka symbol hai, jo Latin 'argentum' se bana hai." }
+    },
+    {
+      "groupId": "sc_003",
+      "difficulty": "easy",
+      "subcategory": "biology",
+      "correctIndex": 1,
+      "tags": ["photosynthesis", "plants"],
+      "en": { "question": "Which gas do plants absorb from the air for photosynthesis?", "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], "explanation": "Plants combine carbon dioxide and water using sunlight to make glucose, releasing oxygen as a by-product." },
+      "hi": { "question": "प्रकाश संश्लेषण के लिए पौधे हवा से कौन सी गैस ग्रहण करते हैं?", "options": ["ऑक्सीजन", "कार्बन डाइऑक्साइड", "नाइट्रोजन", "हाइड्रोजन"], "explanation": "पौधे सूर्य के प्रकाश की सहायता से कार्बन डाइऑक्साइड और जल से ग्लूकोज़ बनाते हैं और ऑक्सीजन बाहर छोड़ते हैं।" },
+      "hi-Latn": { "question": "Photosynthesis ke liye plants hawa se kaun si gas absorb karte hain?", "options": ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"], "explanation": "Plants sunlight ki madad se carbon dioxide aur paani se glucose banate hain, aur by-product ke roop mein oxygen release karte hain." }
+    },
+    {
+      "groupId": "sc_004",
+      "difficulty": "easy",
+      "subcategory": "astronomy",
+      "correctIndex": 3,
+      "tags": ["planets", "solar_system"],
+      "en": { "question": "Which is the largest planet in our solar system?", "options": ["Saturn", "Neptune", "Earth", "Jupiter"], "explanation": "Jupiter is so big that more than 1,300 Earths could fit inside it, and its mass is over twice that of all other planets combined." },
+      "hi": { "question": "हमारे सौरमंडल का सबसे बड़ा ग्रह कौन सा है?", "options": ["शनि", "वरुण", "पृथ्वी", "बृहस्पति"], "explanation": "बृहस्पति इतना विशाल है कि इसमें 1,300 से अधिक पृथ्वियाँ समा सकती हैं, और इसका द्रव्यमान बाकी सभी ग्रहों के कुल द्रव्यमान के दोगुने से भी ज़्यादा है।" },
+      "hi-Latn": { "question": "Hamare solar system ka sabse bada planet kaun sa hai?", "options": ["Saturn (Shani)", "Neptune (Varun)", "Earth (Prithvi)", "Jupiter (Brihaspati)"], "explanation": "Jupiter itna bada hai ki usme 1,300 se zyada Earth fit ho sakti hain, aur uska mass baaki sab planets ke total mass ka double se bhi zyada hai." }
+    },
+    {
+      "groupId": "sc_005",
+      "difficulty": "easy",
+      "subcategory": "human_body",
+      "correctIndex": 0,
+      "tags": ["bones", "skeleton"],
+      "en": { "question": "How many bones are there in an adult human body?", "options": ["206", "212", "198", "230"], "explanation": "Babies are born with around 300 bones, but many fuse together as they grow, leaving 206 in adults." },
+      "hi": { "question": "एक वयस्क मनुष्य के शरीर में कितनी हड्डियाँ होती हैं?", "options": ["206", "212", "198", "230"], "explanation": "नवजात शिशु में लगभग 300 हड्डियाँ होती हैं, लेकिन बढ़ने के साथ कई हड्डियाँ आपस में जुड़ जाती हैं और वयस्क में 206 रह जाती हैं।" },
+      "hi-Latn": { "question": "Ek adult insaan ke body mein kitni bones hoti hain?", "options": ["206", "212", "198", "230"], "explanation": "Newborn baby mein lagbhag 300 bones hoti hain, par growth ke saath kai bones fuse ho jaati hain aur adult mein 206 bachti hain." }
+    },
+    {
+      "groupId": "sc_006",
+      "difficulty": "easy",
+      "subcategory": "biology",
+      "correctIndex": 2,
+      "tags": ["cell", "organelles"],
+      "en": { "question": "Which cell organelle is called the 'powerhouse of the cell'?", "options": ["Nucleus", "Ribosome", "Mitochondria", "Golgi apparatus"], "explanation": "Mitochondria carry out cellular respiration and produce ATP, the energy currency the cell uses to do work." },
+      "hi": { "question": "किस कोशिकांग को 'कोशिका का बिजलीघर' कहा जाता है?", "options": ["केंद्रक", "राइबोसोम", "माइटोकॉन्ड्रिया", "गॉल्जी काय"], "explanation": "माइटोकॉन्ड्रिया कोशिकीय श्वसन द्वारा ATP बनाते हैं, जो कोशिका के लिए ऊर्जा की मुद्रा का काम करता है।" },
+      "hi-Latn": { "question": "Kaun sa cell organelle 'powerhouse of the cell' kehlata hai?", "options": ["Nucleus", "Ribosome", "Mitochondria", "Golgi apparatus"], "explanation": "Mitochondria cellular respiration karke ATP banate hain, jo cell ke liye energy currency ka kaam karta hai." }
+    },
+    {
+      "groupId": "sc_007",
+      "difficulty": "easy",
+      "subcategory": "astronomy",
+      "correctIndex": 1,
+      "tags": ["planets", "mars"],
+      "en": { "question": "Which planet is known as the 'Red Planet'?", "options": ["Venus", "Mars", "Mercury", "Jupiter"], "explanation": "Mars looks reddish because its surface dust is rich in iron oxide, which is basically rust." },
+      "hi": { "question": "किस ग्रह को 'लाल ग्रह' कहा जाता है?", "options": ["शुक्र", "मंगल", "बुध", "बृहस्पति"], "explanation": "मंगल की सतह की धूल में आयरन ऑक्साइड यानी जंग भरपूर मात्रा में है, इसलिए यह लाल दिखाई देता है।" },
+      "hi-Latn": { "question": "Kis planet ko 'Red Planet' kaha jaata hai?", "options": ["Venus (Shukra)", "Mars (Mangal)", "Mercury (Budh)", "Jupiter (Brihaspati)"], "explanation": "Mars ki surface ki dust mein iron oxide yaani rust bahut hai, isliye ye laal dikhta hai." }
+    },
+    {
+      "groupId": "sc_008",
+      "difficulty": "easy",
+      "subcategory": "physics",
+      "correctIndex": 3,
+      "tags": ["temperature", "water"],
+      "en": { "question": "At sea level, water boils at what temperature in degrees Celsius?", "options": ["90", "0", "212", "100"], "explanation": "Pure water boils at 100 °C at normal atmospheric pressure; 212 is the same point on the Fahrenheit scale." },
+      "hi": { "question": "समुद्र तल पर जल किस तापमान (डिग्री सेल्सियस) पर उबलता है?", "options": ["90", "0", "212", "100"], "explanation": "सामान्य वायुमंडलीय दाब पर शुद्ध जल 100 डिग्री सेल्सियस पर उबलता है; फ़ारेनहाइट पैमाने पर यही बिंदु 212 है।" },
+      "hi-Latn": { "question": "Sea level par paani kitne degree Celsius par boil hota hai?", "options": ["90", "0", "212", "100"], "explanation": "Normal atmospheric pressure par pure water 100 °C par boil hota hai; Fahrenheit scale par yahi point 212 hai." }
+    },
+    {
+      "groupId": "sc_009",
+      "difficulty": "easy",
+      "subcategory": "human_body",
+      "correctIndex": 2,
+      "tags": ["vitamins", "nutrition"],
+      "en": { "question": "Which vitamin does our skin make when exposed to sunlight?", "options": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"], "explanation": "UV-B rays in sunlight help the skin produce vitamin D, which the body needs to absorb calcium for strong bones." },
+      "hi": { "question": "धूप के संपर्क में आने पर हमारी त्वचा कौन सा विटामिन बनाती है?", "options": ["विटामिन A", "विटामिन C", "विटामिन D", "विटामिन K"], "explanation": "सूर्य की पराबैंगनी किरणों की मदद से त्वचा विटामिन D बनाती है, जो हड्डियों के लिए कैल्शियम के अवशोषण में सहायक है।" },
+      "hi-Latn": { "question": "Dhoop lagne par hamari skin kaun sa vitamin banati hai?", "options": ["Vitamin A", "Vitamin C", "Vitamin D", "Vitamin K"], "explanation": "Sunlight ki UV-B rays se skin vitamin D banati hai, jo strong bones ke liye calcium absorb karne mein help karta hai." }
+    },
+    {
+      "groupId": "sc_010",
+      "difficulty": "easy",
+      "subcategory": "chemistry",
+      "correctIndex": 0,
+      "tags": ["compounds", "chemical_formula"],
+      "en": { "question": "What is the chemical formula of common salt?", "options": ["NaCl", "KCl", "NaOH", "CaCO3"], "explanation": "Common salt is sodium chloride, made of sodium and chlorine ions held together by ionic bonds." },
+      "hi": { "question": "साधारण नमक का रासायनिक सूत्र क्या है?", "options": ["NaCl", "KCl", "NaOH", "CaCO3"], "explanation": "साधारण नमक सोडियम क्लोराइड है, जिसमें सोडियम और क्लोरीन के आयन आयनिक बंध से जुड़े होते हैं।" },
+      "hi-Latn": { "question": "Common salt (namak) ka chemical formula kya hai?", "options": ["NaCl", "KCl", "NaOH", "CaCO3"], "explanation": "Namak sodium chloride hai, jisme sodium aur chlorine ke ions ionic bond se jude hote hain." }
+    },
+    {
+      "groupId": "sc_011",
+      "difficulty": "easy",
+      "subcategory": "human_body",
+      "correctIndex": 3,
+      "tags": ["blood", "immunity"],
+      "en": { "question": "Which blood cells mainly help the body fight infections?", "options": ["Red blood cells", "Platelets", "Plasma", "White blood cells"], "explanation": "White blood cells (leucocytes) attack germs and make antibodies, acting as the body's defence army." },
+      "hi": { "question": "शरीर को संक्रमण से लड़ने में मुख्य रूप से कौन सी रक्त कोशिकाएँ मदद करती हैं?", "options": ["लाल रक्त कणिकाएँ", "बिंबाणु (प्लेटलेट्स)", "प्लाज़्मा", "श्वेत रक्त कणिकाएँ"], "explanation": "श्वेत रक्त कणिकाएँ कीटाणुओं पर हमला करती हैं और प्रतिरक्षी बनाती हैं, यानी ये शरीर की रक्षा सेना हैं।" },
+      "hi-Latn": { "question": "Body ko infection se ladne mein mainly kaun si blood cells help karti hain?", "options": ["Red blood cells", "Platelets", "Plasma", "White blood cells"], "explanation": "White blood cells germs par attack karti hain aur antibodies banati hain, yaani ye body ki defence army hain." }
+    },
+    {
+      "groupId": "sc_012",
+      "difficulty": "easy",
+      "subcategory": "physics",
+      "correctIndex": 1,
+      "tags": ["light", "speed"],
+      "en": { "question": "What is the approximate speed of light in vacuum?", "options": ["3 × 10^5 m/s", "3 × 10^8 m/s", "3 × 10^6 m/s", "340 m/s"], "explanation": "Light travels about 3 lakh km every second, so sunlight takes roughly 8 minutes to reach Earth. 340 m/s is the speed of sound in air." },
+      "hi": { "question": "निर्वात में प्रकाश की लगभग चाल कितनी है?", "options": ["3 × 10^5 m/s", "3 × 10^8 m/s", "3 × 10^6 m/s", "340 m/s"], "explanation": "प्रकाश हर सेकंड लगभग 3 लाख किलोमीटर चलता है, इसलिए सूर्य का प्रकाश पृथ्वी तक लगभग 8 मिनट में पहुँचता है। 340 मीटर/सेकंड हवा में ध्वनि की चाल है।" },
+      "hi-Latn": { "question": "Vacuum mein light ki approx speed kitni hai?", "options": ["3 × 10^5 m/s", "3 × 10^8 m/s", "3 × 10^6 m/s", "340 m/s"], "explanation": "Light har second lagbhag 3 lakh km travel karti hai, isliye sunlight ko Earth tak aane mein kareeb 8 minute lagte hain. 340 m/s hawa mein sound ki speed hai." }
+    },
+    {
+      "groupId": "sc_013",
+      "difficulty": "easy",
+      "subcategory": "astronomy",
+      "correctIndex": 2,
+      "tags": ["planets", "solar_system"],
+      "en": { "question": "Which planet is closest to the Sun?", "options": ["Venus", "Earth", "Mercury", "Mars"], "explanation": "Mercury orbits the Sun in just 88 Earth days, the shortest year of any planet." },
+      "hi": { "question": "सूर्य के सबसे निकट कौन सा ग्रह है?", "options": ["शुक्र", "पृथ्वी", "बुध", "मंगल"], "explanation": "बुध केवल 88 दिनों में सूर्य की परिक्रमा पूरी कर लेता है, यानी इसका वर्ष सभी ग्रहों में सबसे छोटा है।" },
+      "hi-Latn": { "question": "Sun ke sabse paas kaun sa planet hai?", "options": ["Venus (Shukra)", "Earth (Prithvi)", "Mercury (Budh)", "Mars (Mangal)"], "explanation": "Mercury sirf 88 din mein Sun ka ek chakkar poora kar leta hai, yaani iska saal sab planets mein sabse chhota hai." }
+    },
+    {
+      "groupId": "sc_014",
+      "difficulty": "easy",
+      "subcategory": "scientists",
+      "correctIndex": 1,
+      "tags": ["laws_of_motion", "scientists"],
+      "en": { "question": "Who formulated the three laws of motion?", "options": ["Galileo Galilei", "Isaac Newton", "Albert Einstein", "Johannes Kepler"], "explanation": "Newton published the three laws of motion in his book 'Principia' in 1687, laying the foundation of classical mechanics." },
+      "hi": { "question": "गति के तीन नियम किसने दिए?", "options": ["गैलीलियो गैलिली", "आइज़क न्यूटन", "अल्बर्ट आइंस्टीन", "योहानेस केप्लर"], "explanation": "न्यूटन ने 1687 में अपनी पुस्तक 'प्रिंसिपिया' में गति के तीन नियम प्रकाशित किए, जो चिरसम्मत यांत्रिकी की नींव बने।" },
+      "hi-Latn": { "question": "Motion ke teen laws kisne diye?", "options": ["Galileo Galilei", "Isaac Newton", "Albert Einstein", "Johannes Kepler"], "explanation": "Newton ne 1687 mein apni book 'Principia' mein motion ke teen laws publish kiye, jo classical mechanics ki foundation bane." }
+    },
+    {
+      "groupId": "sc_015",
+      "difficulty": "easy",
+      "subcategory": "chemistry",
+      "correctIndex": 3,
+      "tags": ["atmosphere", "gases"],
+      "en": { "question": "Which gas makes up the largest part of Earth's atmosphere?", "options": ["Oxygen", "Carbon dioxide", "Argon", "Nitrogen"], "explanation": "Nitrogen forms about 78% of the air we breathe, while oxygen is only about 21%." },
+      "hi": { "question": "पृथ्वी के वायुमंडल में सबसे अधिक मात्रा में कौन सी गैस है?", "options": ["ऑक्सीजन", "कार्बन डाइऑक्साइड", "आर्गन", "नाइट्रोजन"], "explanation": "हवा में लगभग 78% नाइट्रोजन होती है, जबकि ऑक्सीजन केवल लगभग 21% होती है।" },
+      "hi-Latn": { "question": "Earth ke atmosphere mein sabse zyada kaun si gas hai?", "options": ["Oxygen", "Carbon dioxide", "Argon", "Nitrogen"], "explanation": "Hawa mein lagbhag 78% nitrogen hoti hai, jabki oxygen sirf kareeb 21% hoti hai." }
+    },
+    {
+      "groupId": "sc_016",
+      "difficulty": "medium",
+      "subcategory": "scientists",
+      "correctIndex": 1,
+      "tags": ["indian_scientists", "nobel_prize"],
+      "en": { "question": "In which year did C.V. Raman win the Nobel Prize in Physics?", "options": ["1913", "1930", "1928", "1947"], "explanation": "Raman discovered the Raman effect on 28 February 1928 and won the Nobel two years later; India celebrates 28 February as National Science Day." },
+      "hi": { "question": "सी.वी. रमन को भौतिकी का नोबेल पुरस्कार किस वर्ष मिला?", "options": ["1913", "1930", "1928", "1947"], "explanation": "रमन ने 28 फ़रवरी 1928 को रमन प्रभाव की खोज की और दो साल बाद नोबेल जीता; भारत 28 फ़रवरी को राष्ट्रीय विज्ञान दिवस के रूप में मनाता है।" },
+      "hi-Latn": { "question": "C.V. Raman ko Physics ka Nobel Prize kis saal mila?", "options": ["1913", "1930", "1928", "1947"], "explanation": "Raman ne 28 February 1928 ko Raman effect discover kiya aur do saal baad Nobel jeeta; India 28 February ko National Science Day manata hai." }
+    },
+    {
+      "groupId": "sc_017",
+      "difficulty": "medium",
+      "subcategory": "space_science",
+      "correctIndex": 2,
+      "tags": ["isro", "mangalyaan"],
+      "en": { "question": "In which year did ISRO launch the Mars Orbiter Mission (Mangalyaan)?", "options": ["2008", "2011", "2013", "2016"], "explanation": "Mangalyaan launched in November 2013 and entered Mars orbit in September 2014, making India the first nation to succeed on its first Mars attempt." },
+      "hi": { "question": "इसरो ने मंगलयान (मार्स ऑर्बिटर मिशन) किस वर्ष प्रक्षेपित किया?", "options": ["2008", "2011", "2013", "2016"], "explanation": "मंगलयान नवंबर 2013 में प्रक्षेपित हुआ और सितंबर 2014 में मंगल की कक्षा में पहुँचा; भारत पहले ही प्रयास में सफल होने वाला पहला देश बना।" },
+      "hi-Latn": { "question": "ISRO ne Mangalyaan (Mars Orbiter Mission) kis saal launch kiya?", "options": ["2008", "2011", "2013", "2016"], "explanation": "Mangalyaan November 2013 mein launch hua aur September 2014 mein Mars orbit mein pahuncha; India pehli hi koshish mein successful hone wala pehla desh bana." }
+    },
+    {
+      "groupId": "sc_018",
+      "difficulty": "medium",
+      "subcategory": "chemistry",
+      "correctIndex": 0,
+      "tags": ["ph", "acids_bases"],
+      "en": { "question": "What is the pH of pure water at 25 °C?", "options": ["7", "0", "14", "5"], "explanation": "Pure water has equal amounts of H+ and OH- ions, so it is neutral at pH 7; below 7 is acidic and above 7 is basic." },
+      "hi": { "question": "25 डिग्री सेल्सियस पर शुद्ध जल का pH मान कितना होता है?", "options": ["7", "0", "14", "5"], "explanation": "शुद्ध जल में H+ और OH- आयन बराबर होते हैं, इसलिए यह pH 7 पर उदासीन है; 7 से कम अम्लीय और 7 से अधिक क्षारीय होता है।" },
+      "hi-Latn": { "question": "25 °C par pure water ka pH kitna hota hai?", "options": ["7", "0", "14", "5"], "explanation": "Pure water mein H+ aur OH- ions barabar hote hain, isliye ye pH 7 par neutral hai; 7 se kam acidic aur 7 se zyada basic hota hai." }
+    },
+    {
+      "groupId": "sc_019",
+      "difficulty": "medium",
+      "subcategory": "chemistry",
+      "correctIndex": 3,
+      "tags": ["elements", "atomic_number"],
+      "en": { "question": "Which element has atomic number 6?", "options": ["Nitrogen", "Oxygen", "Boron", "Carbon"], "explanation": "Carbon has 6 protons in its nucleus; its ability to form four bonds makes it the backbone of all known life." },
+      "hi": { "question": "किस तत्व का परमाणु क्रमांक 6 है?", "options": ["नाइट्रोजन", "ऑक्सीजन", "बोरॉन", "कार्बन"], "explanation": "कार्बन के नाभिक में 6 प्रोटॉन होते हैं; चार बंध बनाने की क्षमता के कारण यह सभी ज्ञात जीवन का आधार है।" },
+      "hi-Latn": { "question": "Kis element ka atomic number 6 hai?", "options": ["Nitrogen", "Oxygen", "Boron", "Carbon"], "explanation": "Carbon ke nucleus mein 6 protons hote hain; chaar bonds banane ki capacity ki wajah se ye saari known life ka base hai." }
+    },
+    {
+      "groupId": "sc_020",
+      "difficulty": "medium",
+      "subcategory": "human_body",
+      "correctIndex": 1,
+      "tags": ["brain", "nervous_system"],
+      "en": { "question": "Which part of the human brain mainly controls balance and posture?", "options": ["Cerebrum", "Cerebellum", "Medulla oblongata", "Hypothalamus"], "explanation": "The cerebellum, at the back of the brain, coordinates muscle movements so we can walk, ride a cycle and stay balanced." },
+      "hi": { "question": "मानव मस्तिष्क का कौन सा भाग मुख्य रूप से शरीर का संतुलन बनाए रखता है?", "options": ["प्रमस्तिष्क", "अनुमस्तिष्क", "मेडुला ऑब्लांगेटा", "हाइपोथैलेमस"], "explanation": "मस्तिष्क के पिछले भाग में स्थित अनुमस्तिष्क पेशियों की गतियों में तालमेल बिठाता है, जिससे हम चल पाते हैं, साइकिल चला पाते हैं और संतुलित रहते हैं।" },
+      "hi-Latn": { "question": "Human brain ka kaun sa part mainly body ka balance control karta hai?", "options": ["Cerebrum", "Cerebellum", "Medulla oblongata", "Hypothalamus"], "explanation": "Brain ke peeche wala cerebellum muscles ki movements ko coordinate karta hai, jisse hum chal paate hain, cycle chala paate hain aur balance mein rehte hain." }
+    },
+    {
+      "groupId": "sc_021",
+      "difficulty": "medium",
+      "subcategory": "physics",
+      "correctIndex": 0,
+      "tags": ["units", "electricity"],
+      "en": { "question": "What is the SI unit of electrical resistance?", "options": ["Ohm", "Volt", "Ampere", "Coulomb"], "explanation": "Named after Georg Ohm, one ohm is the resistance that allows 1 ampere of current to flow under 1 volt." },
+      "hi": { "question": "विद्युत प्रतिरोध का SI मात्रक क्या है?", "options": ["ओम", "वोल्ट", "ऐम्पियर", "कूलॉम"], "explanation": "जॉर्ज ओम के नाम पर रखा गया 1 ओम वह प्रतिरोध है जिसमें 1 वोल्ट विभवांतर पर 1 ऐम्पियर धारा बहती है।" },
+      "hi-Latn": { "question": "Electrical resistance ki SI unit kya hai?", "options": ["Ohm", "Volt", "Ampere", "Coulomb"], "explanation": "Georg Ohm ke naam par bani 1 ohm wo resistance hai jisme 1 volt par 1 ampere current flow hota hai." }
+    },
+    {
+      "groupId": "sc_022",
+      "difficulty": "medium",
+      "subcategory": "scientists",
+      "correctIndex": 2,
+      "tags": ["discoveries", "medicine"],
+      "en": { "question": "Who discovered penicillin, the first widely used antibiotic?", "options": ["Louis Pasteur", "Edward Jenner", "Alexander Fleming", "Robert Koch"], "explanation": "In 1928 Fleming noticed that a Penicillium mould had killed bacteria on a culture plate he had left out by chance." },
+      "hi": { "question": "पहली व्यापक रूप से प्रयुक्त प्रतिजैविक पेनिसिलिन की खोज किसने की?", "options": ["लुई पाश्चर", "एडवर्ड जेनर", "अलेक्ज़ेंडर फ्लेमिंग", "रॉबर्ट कॉख"], "explanation": "1928 में फ्लेमिंग ने देखा कि संयोग से खुली छूटी एक प्लेट पर पेनिसिलियम फफूँद ने जीवाणुओं को नष्ट कर दिया था।" },
+      "hi-Latn": { "question": "Pehli widely used antibiotic penicillin ki khoj kisne ki?", "options": ["Louis Pasteur", "Edward Jenner", "Alexander Fleming", "Robert Koch"], "explanation": "1928 mein Fleming ne dekha ki galti se khuli chhooti ek plate par Penicillium mould ne bacteria ko khatam kar diya tha." }
+    },
+    {
+      "groupId": "sc_023",
+      "difficulty": "medium",
+      "subcategory": "space_science",
+      "correctIndex": 1,
+      "tags": ["isro", "chandrayaan", "moon"],
+      "en": { "question": "India's Chandrayaan-1 (2008) helped confirm the presence of what on the Moon?", "options": ["Helium gas", "Water molecules", "Iron ore deposits", "Methane"], "explanation": "Instruments aboard Chandrayaan-1, including NASA's Moon Mineralogy Mapper, detected signs of water and hydroxyl on the lunar surface." },
+      "hi": { "question": "भारत के चंद्रयान-1 (2008) ने चंद्रमा पर किसकी उपस्थिति की पुष्टि करने में मदद की?", "options": ["हीलियम गैस", "जल के अणु", "लौह अयस्क के भंडार", "मीथेन"], "explanation": "चंद्रयान-1 पर लगे उपकरणों, जिनमें नासा का मून मिनरलॉजी मैपर भी था, ने चंद्रमा की सतह पर जल और हाइड्रॉक्सिल के संकेत पाए।" },
+      "hi-Latn": { "question": "India ke Chandrayaan-1 (2008) ne Moon par kis cheez ki presence confirm karne mein help ki?", "options": ["Helium gas", "Water molecules", "Iron ore deposits", "Methane"], "explanation": "Chandrayaan-1 ke instruments, jisme NASA ka Moon Mineralogy Mapper bhi tha, ne Moon ki surface par water aur hydroxyl ke signs detect kiye." }
+    },
+    {
+      "groupId": "sc_024",
+      "difficulty": "medium",
+      "subcategory": "human_body",
+      "correctIndex": 2,
+      "tags": ["blood", "blood_groups"],
+      "en": { "question": "Which blood group is known as the universal donor?", "options": ["AB positive", "A negative", "O negative", "B positive"], "explanation": "O negative red cells carry no A, B or Rh antigens, so they can be given to patients of any blood group in emergencies." },
+      "hi": { "question": "किस रक्त समूह को सर्वदाता कहा जाता है?", "options": ["AB पॉज़िटिव", "A नेगेटिव", "O नेगेटिव", "B पॉज़िटिव"], "explanation": "O नेगेटिव लाल रक्त कणिकाओं पर A, B या Rh प्रतिजन नहीं होते, इसलिए आपात स्थिति में इसे किसी भी रक्त समूह के रोगी को दिया जा सकता है।" },
+      "hi-Latn": { "question": "Kaun sa blood group universal donor kehlata hai?", "options": ["AB positive", "A negative", "O negative", "B positive"], "explanation": "O negative red cells par A, B ya Rh antigens nahi hote, isliye emergency mein ise kisi bhi blood group ke patient ko diya ja sakta hai." }
+    },
+    {
+      "groupId": "sc_025",
+      "difficulty": "medium",
+      "subcategory": "chemistry",
+      "correctIndex": 3,
+      "tags": ["minerals", "carbon"],
+      "en": { "question": "Which is the hardest naturally occurring substance?", "options": ["Quartz", "Topaz", "Graphite", "Diamond"], "explanation": "Diamond tops the Mohs hardness scale at 10; interestingly, soft graphite is made of the same element, carbon." },
+      "hi": { "question": "प्रकृति में पाया जाने वाला सबसे कठोर पदार्थ कौन सा है?", "options": ["क्वार्ट्ज़", "पुखराज", "ग्रेफ़ाइट", "हीरा"], "explanation": "मोह्स कठोरता पैमाने पर हीरा 10 अंक के साथ सबसे ऊपर है; रोचक बात यह है कि नरम ग्रेफ़ाइट भी उसी तत्व, कार्बन, से बना है।" },
+      "hi-Latn": { "question": "Nature mein milne wala sabse hard substance kaun sa hai?", "options": ["Quartz", "Topaz", "Graphite", "Diamond"], "explanation": "Mohs hardness scale par diamond 10 ke saath top par hai; interesting baat ye hai ki soft graphite bhi usi element, carbon, se bana hai." }
+    },
+    {
+      "groupId": "sc_026",
+      "difficulty": "medium",
+      "subcategory": "ecology",
+      "correctIndex": 1,
+      "tags": ["atmosphere", "ozone"],
+      "en": { "question": "In which layer of the atmosphere is the ozone layer mainly found?", "options": ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], "explanation": "The ozone layer sits in the stratosphere, roughly 15–35 km up, and absorbs most of the Sun's harmful ultraviolet rays." },
+      "hi": { "question": "ओज़ोन परत मुख्य रूप से वायुमंडल की किस परत में पाई जाती है?", "options": ["क्षोभमंडल", "समतापमंडल", "मध्यमंडल", "तापमंडल"], "explanation": "ओज़ोन परत समतापमंडल में लगभग 15–35 किलोमीटर की ऊँचाई पर है और सूर्य की हानिकारक पराबैंगनी किरणों का अधिकांश भाग सोख लेती है।" },
+      "hi-Latn": { "question": "Ozone layer mainly atmosphere ki kis layer mein paayi jaati hai?", "options": ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], "explanation": "Ozone layer stratosphere mein lagbhag 15–35 km ki height par hai aur Sun ki harmful UV rays ka zyada hissa absorb kar leti hai." }
+    },
+    {
+      "groupId": "sc_027",
+      "difficulty": "medium",
+      "subcategory": "physics",
+      "correctIndex": 0,
+      "tags": ["gravity", "acceleration"],
+      "en": { "question": "What is the approximate acceleration due to gravity on Earth's surface?", "options": ["9.8 m/s²", "6.67 m/s²", "1.6 m/s²", "3.0 m/s²"], "explanation": "A freely falling object near Earth speeds up by about 9.8 m/s every second; on the Moon this value is only about 1.6 m/s²." },
+      "hi": { "question": "पृथ्वी की सतह पर गुरुत्वीय त्वरण का लगभग मान कितना है?", "options": ["9.8 m/s²", "6.67 m/s²", "1.6 m/s²", "3.0 m/s²"], "explanation": "पृथ्वी के पास मुक्त रूप से गिरती वस्तु का वेग हर सेकंड लगभग 9.8 मीटर/सेकंड बढ़ता है; चंद्रमा पर यह मान केवल लगभग 1.6 है।" },
+      "hi-Latn": { "question": "Earth ki surface par acceleration due to gravity (g) approx kitna hai?", "options": ["9.8 m/s²", "6.67 m/s²", "1.6 m/s²", "3.0 m/s²"], "explanation": "Earth ke paas free fall karti cheez ki speed har second lagbhag 9.8 m/s badhti hai; Moon par ye value sirf kareeb 1.6 m/s² hai." }
+    },
+    {
+      "groupId": "sc_028",
+      "difficulty": "medium",
+      "subcategory": "human_body",
+      "correctIndex": 2,
+      "tags": ["hormones", "glands"],
+      "en": { "question": "Which organ produces the hormone insulin?", "options": ["Liver", "Kidney", "Pancreas", "Thyroid"], "explanation": "Beta cells in the islets of Langerhans of the pancreas release insulin, which lowers blood sugar; its deficiency causes diabetes." },
+      "hi": { "question": "इंसुलिन हॉर्मोन किस अंग द्वारा बनाया जाता है?", "options": ["यकृत", "वृक्क", "अग्न्याशय", "थायरॉइड"], "explanation": "अग्न्याशय की लैंगरहैंस द्वीपिकाओं की बीटा कोशिकाएँ इंसुलिन बनाती हैं, जो रक्त शर्करा घटाता है; इसकी कमी से मधुमेह होता है।" },
+      "hi-Latn": { "question": "Insulin hormone kaun sa organ banata hai?", "options": ["Liver", "Kidney", "Pancreas", "Thyroid"], "explanation": "Pancreas ke islets of Langerhans ki beta cells insulin banati hain, jo blood sugar kam karta hai; iski kami se diabetes hota hai." }
+    },
+    {
+      "groupId": "sc_029",
+      "difficulty": "medium",
+      "subcategory": "scientists",
+      "correctIndex": 3,
+      "tags": ["indian_scientists", "inventions", "plants"],
+      "en": { "question": "Which Indian scientist invented the crescograph to measure plant growth?", "options": ["C.V. Raman", "Homi J. Bhabha", "Meghnad Saha", "Jagadish Chandra Bose"], "explanation": "J.C. Bose's crescograph could magnify tiny plant movements thousands of times, helping show that plants respond to stimuli." },
+      "hi": { "question": "पौधों की वृद्धि मापने वाले क्रेस्कोग्राफ़ का आविष्कार किस भारतीय वैज्ञानिक ने किया?", "options": ["सी.वी. रमन", "होमी जे. भाभा", "मेघनाद साहा", "जगदीश चंद्र बसु"], "explanation": "जगदीश चंद्र बसु का क्रेस्कोग्राफ़ पौधों की सूक्ष्म गतियों को हज़ारों गुना बड़ा करके दिखाता था, जिससे पता चला कि पौधे उद्दीपनों पर प्रतिक्रिया करते हैं।" },
+      "hi-Latn": { "question": "Plants ki growth naapne wala crescograph kis Indian scientist ne invent kiya?", "options": ["C.V. Raman", "Homi J. Bhabha", "Meghnad Saha", "Jagadish Chandra Bose"], "explanation": "J.C. Bose ka crescograph plants ki chhoti-chhoti movements ko hazaron guna bada karke dikhata tha, jisse pata chala ki plants stimuli par react karte hain." }
+    },
+    {
+      "groupId": "sc_030",
+      "difficulty": "medium",
+      "subcategory": "chemistry",
+      "correctIndex": 0,
+      "tags": ["noble_gases", "elements"],
+      "en": { "question": "Which noble gas gives the classic red-orange glow in advertising signs?", "options": ["Neon", "Argon", "Xenon", "Krypton"], "explanation": "When electricity passes through neon gas it glows reddish-orange; signs of other colours use different gases or coated tubes." },
+      "hi": { "question": "विज्ञापन बोर्डों में लाल-नारंगी चमक कौन सी उत्कृष्ट गैस देती है?", "options": ["निऑन", "आर्गन", "ज़ेनॉन", "क्रिप्टॉन"], "explanation": "निऑन गैस में विद्युत धारा प्रवाहित करने पर यह लाल-नारंगी रंग में चमकती है; अन्य रंगों के लिए दूसरी गैसें या लेपित नलिकाएँ प्रयोग होती हैं।" },
+      "hi-Latn": { "question": "Advertising signs mein red-orange glow kaun si noble gas deti hai?", "options": ["Neon", "Argon", "Xenon", "Krypton"], "explanation": "Neon gas se current guzarne par ye reddish-orange glow karti hai; doosre colours ke liye alag gases ya coated tubes use hoti hain." }
+    },
+    {
+      "groupId": "sc_031",
+      "difficulty": "hard",
+      "subcategory": "mathematics",
+      "correctIndex": 0,
+      "tags": ["ramanujan", "numbers"],
+      "en": { "question": "Which number is famous as the 'Hardy–Ramanujan number'?", "options": ["1729", "1089", "2187", "1331"], "explanation": "1729 is the smallest number expressible as the sum of two cubes in two ways: 1³ + 12³ and 9³ + 10³." },
+      "hi": { "question": "कौन सी संख्या 'हार्डी–रामानुजन संख्या' के नाम से प्रसिद्ध है?", "options": ["1729", "1089", "2187", "1331"], "explanation": "1729 वह सबसे छोटी संख्या है जिसे दो घनों के योग के रूप में दो तरीकों से लिखा जा सकता है: 1³ + 12³ और 9³ + 10³।" },
+      "hi-Latn": { "question": "Kaun sa number 'Hardy–Ramanujan number' ke naam se famous hai?", "options": ["1729", "1089", "2187", "1331"], "explanation": "1729 sabse chhota number hai jise do cubes ke sum ke roop mein do tareekon se likha ja sakta hai: 1³ + 12³ aur 9³ + 10³." }
+    },
+    {
+      "groupId": "sc_032",
+      "difficulty": "hard",
+      "subcategory": "chemistry",
+      "correctIndex": 0,
+      "tags": ["constants", "mole"],
+      "en": { "question": "What is the approximate value of the Avogadro constant (per mole)?", "options": ["6.022 × 10^23", "3.011 × 10^23", "1.602 × 10^-19", "6.626 × 10^-34"], "explanation": "One mole of any substance contains about 6.022 × 10^23 particles; the other options resemble the electron charge and Planck's constant." },
+      "hi": { "question": "आवोगाद्रो स्थिरांक (प्रति मोल) का लगभग मान क्या है?", "options": ["6.022 × 10^23", "3.011 × 10^23", "1.602 × 10^-19", "6.626 × 10^-34"], "explanation": "किसी भी पदार्थ के एक मोल में लगभग 6.022 × 10^23 कण होते हैं; अन्य विकल्प इलेक्ट्रॉन के आवेश और प्लांक स्थिरांक से मिलते-जुलते हैं।" },
+      "hi-Latn": { "question": "Avogadro constant (per mole) ki approx value kya hai?", "options": ["6.022 × 10^23", "3.011 × 10^23", "1.602 × 10^-19", "6.626 × 10^-34"], "explanation": "Kisi bhi substance ke ek mole mein lagbhag 6.022 × 10^23 particles hote hain; baaki options electron charge aur Planck's constant jaise hain." }
+    },
+    {
+      "groupId": "sc_033",
+      "difficulty": "hard",
+      "subcategory": "chemistry",
+      "correctIndex": 2,
+      "tags": ["periodic_table", "electronegativity"],
+      "en": { "question": "Which is the most electronegative element?", "options": ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"], "explanation": "Fluorine has the highest value (about 4.0) on the Pauling scale, pulling shared electrons towards itself more strongly than any other atom." },
+      "hi": { "question": "सबसे अधिक विद्युतऋणात्मक तत्व कौन सा है?", "options": ["ऑक्सीजन", "क्लोरीन", "फ़्लोरीन", "नाइट्रोजन"], "explanation": "पॉलिंग पैमाने पर फ़्लोरीन का मान सबसे अधिक (लगभग 4.0) है, यानी यह साझा इलेक्ट्रॉनों को किसी भी अन्य परमाणु से अधिक ज़ोर से खींचता है।" },
+      "hi-Latn": { "question": "Sabse zyada electronegative element kaun sa hai?", "options": ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"], "explanation": "Pauling scale par fluorine ki value sabse zyada (lagbhag 4.0) hai, yaani ye shared electrons ko kisi bhi aur atom se zyada zor se kheenchta hai." }
+    },
+    {
+      "groupId": "sc_034",
+      "difficulty": "hard",
+      "subcategory": "astronomy",
+      "correctIndex": 1,
+      "tags": ["planets", "rotation"],
+      "en": { "question": "On which planet is a day (one rotation) longer than its year?", "options": ["Mercury", "Venus", "Mars", "Neptune"], "explanation": "Venus takes about 243 Earth days to spin once but only about 225 days to orbit the Sun, and it also rotates backwards." },
+      "hi": { "question": "किस ग्रह पर एक दिन (एक घूर्णन) उसके एक वर्ष से भी लंबा होता है?", "options": ["बुध", "शुक्र", "मंगल", "वरुण"], "explanation": "शुक्र को अपनी धुरी पर एक बार घूमने में लगभग 243 दिन लगते हैं, जबकि सूर्य की परिक्रमा में केवल लगभग 225 दिन; यह उल्टी दिशा में भी घूमता है।" },
+      "hi-Latn": { "question": "Kis planet par ek din (ek rotation) uske ek saal se bhi lamba hota hai?", "options": ["Mercury (Budh)", "Venus (Shukra)", "Mars (Mangal)", "Neptune (Varun)"], "explanation": "Venus ko apni axis par ek baar ghoomne mein lagbhag 243 Earth days lagte hain, jabki Sun ka chakkar sirf kareeb 225 din mein; ye ulti direction mein bhi ghoomta hai." }
+    },
+    {
+      "groupId": "sc_035",
+      "difficulty": "hard",
+      "subcategory": "scientists",
+      "correctIndex": 0,
+      "tags": ["indian_scientists", "astrophysics"],
+      "en": { "question": "Indian physicist Meghnad Saha is best known for which contribution?", "options": ["Thermal ionisation equation", "Discovery of the neutron", "Statistics of photons", "Expanding universe theory"], "explanation": "The Saha ionisation equation explains how ionisation in stars depends on temperature, helping astronomers decode stellar spectra." },
+      "hi": { "question": "भारतीय भौतिकविद् मेघनाद साहा मुख्य रूप से किस योगदान के लिए जाने जाते हैं?", "options": ["तापीय आयनन समीकरण", "न्यूट्रॉन की खोज", "फ़ोटॉनों की सांख्यिकी", "प्रसारी ब्रह्मांड सिद्धांत"], "explanation": "साहा आयनन समीकरण बताता है कि तारों में आयनन तापमान पर कैसे निर्भर करता है, जिससे खगोलविदों को तारों के स्पेक्ट्रम समझने में मदद मिली।" },
+      "hi-Latn": { "question": "Indian physicist Meghnad Saha mainly kis contribution ke liye jaane jaate hain?", "options": ["Thermal ionisation equation", "Discovery of the neutron", "Statistics of photons", "Expanding universe theory"], "explanation": "Saha ionisation equation batata hai ki stars mein ionisation temperature par kaise depend karta hai, jisse astronomers ko stellar spectra samajhne mein help mili." }
+    },
+    {
+      "groupId": "sc_036",
+      "difficulty": "hard",
+      "subcategory": "physics",
+      "correctIndex": 3,
+      "tags": ["units", "si_base_units"],
+      "en": { "question": "Which of these is NOT one of the seven SI base units?", "options": ["Kelvin", "Candela", "Mole", "Newton"], "explanation": "The newton is a derived unit (kg·m/s²); the seven base units are metre, kilogram, second, ampere, kelvin, mole and candela." },
+      "hi": { "question": "इनमें से कौन सा सात मूल SI मात्रकों में शामिल नहीं है?", "options": ["केल्विन", "कैंडेला", "मोल", "न्यूटन"], "explanation": "न्यूटन एक व्युत्पन्न मात्रक (kg·m/s²) है; सात मूल मात्रक हैं मीटर, किलोग्राम, सेकंड, ऐम्पियर, केल्विन, मोल और कैंडेला।" },
+      "hi-Latn": { "question": "Inme se kaun sa seven SI base units mein shaamil NAHI hai?", "options": ["Kelvin", "Candela", "Mole", "Newton"], "explanation": "Newton ek derived unit (kg·m/s²) hai; seven base units hain metre, kilogram, second, ampere, kelvin, mole aur candela." }
+    },
+    {
+      "groupId": "sc_037",
+      "difficulty": "hard",
+      "subcategory": "scientists",
+      "correctIndex": 2,
+      "tags": ["atomic_structure", "discoveries"],
+      "en": { "question": "Who discovered the electron in 1897 using cathode ray experiments?", "options": ["Ernest Rutherford", "James Chadwick", "J.J. Thomson", "Niels Bohr"], "explanation": "Thomson showed cathode rays were made of tiny negatively charged particles, leading to his 'plum pudding' model of the atom." },
+      "hi": { "question": "1897 में कैथोड किरण प्रयोगों द्वारा इलेक्ट्रॉन की खोज किसने की?", "options": ["अर्नेस्ट रदरफ़ोर्ड", "जेम्स चैडविक", "जे.जे. थॉमसन", "नील्स बोर"], "explanation": "थॉमसन ने दिखाया कि कैथोड किरणें सूक्ष्म ऋणावेशित कणों से बनी हैं, जिससे परमाणु का 'प्लम पुडिंग' मॉडल सामने आया।" },
+      "hi-Latn": { "question": "1897 mein cathode ray experiments se electron ki khoj kisne ki?", "options": ["Ernest Rutherford", "James Chadwick", "J.J. Thomson", "Niels Bohr"], "explanation": "Thomson ne dikhaya ki cathode rays chhote negatively charged particles se bani hain, jisse atom ka 'plum pudding' model aaya." }
+    },
+    {
+      "groupId": "sc_038",
+      "difficulty": "hard",
+      "subcategory": "chemistry",
+      "correctIndex": 0,
+      "tags": ["metals", "elements"],
+      "en": { "question": "Which metal has the highest melting point?", "options": ["Tungsten", "Titanium", "Platinum", "Osmium"], "explanation": "Tungsten melts at about 3,422 °C, which is why it was used for filaments in old incandescent bulbs." },
+      "hi": { "question": "किस धातु का गलनांक सबसे अधिक है?", "options": ["टंगस्टन", "टाइटेनियम", "प्लैटिनम", "ऑस्मियम"], "explanation": "टंगस्टन लगभग 3,422 डिग्री सेल्सियस पर पिघलता है, इसी कारण पुराने तापदीप्त बल्बों के तंतु इससे बनाए जाते थे।" },
+      "hi-Latn": { "question": "Kis metal ka melting point sabse zyada hai?", "options": ["Tungsten", "Titanium", "Platinum", "Osmium"], "explanation": "Tungsten lagbhag 3,422 °C par pighalta hai, isiliye purane incandescent bulbs ke filament isi se bante the." }
+    },
+    {
+      "groupId": "sc_039",
+      "difficulty": "hard",
+      "subcategory": "human_body",
+      "correctIndex": 3,
+      "tags": ["digestion", "enzymes"],
+      "en": { "question": "Which enzyme in saliva begins the digestion of starch?", "options": ["Pepsin", "Trypsin", "Lipase", "Salivary amylase"], "explanation": "Salivary amylase, also called ptyalin, breaks starch into maltose, which is why chewing a roti for long makes it taste slightly sweet." },
+      "hi": { "question": "लार में मौजूद कौन सा एंज़ाइम मंड (स्टार्च) का पाचन शुरू करता है?", "options": ["पेप्सिन", "ट्रिप्सिन", "लाइपेज़", "लार एमाइलेज़"], "explanation": "लार एमाइलेज़, जिसे टायलिन भी कहते हैं, मंड को माल्टोज़ में तोड़ता है; इसीलिए रोटी देर तक चबाने पर हल्की मीठी लगती है।" },
+      "hi-Latn": { "question": "Saliva (laar) mein kaun sa enzyme starch ka digestion shuru karta hai?", "options": ["Pepsin", "Trypsin", "Lipase", "Salivary amylase"], "explanation": "Salivary amylase, jise ptyalin bhi kehte hain, starch ko maltose mein todta hai; isiliye roti der tak chabane par thodi meethi lagti hai." }
+    },
+    {
+      "groupId": "sc_040",
+      "difficulty": "hard",
+      "subcategory": "astronomy",
+      "correctIndex": 1,
+      "tags": ["stars", "indian_scientists"],
+      "en": { "question": "The Chandrasekhar limit, the maximum mass of a stable white dwarf, is about how many solar masses?", "options": ["0.5", "1.4", "3.0", "10"], "explanation": "Subrahmanyan Chandrasekhar showed white dwarfs above about 1.4 solar masses collapse further, work that earned him the 1983 Nobel Prize." },
+      "hi": { "question": "स्थिर श्वेत वामन तारे का अधिकतम द्रव्यमान, यानी चंद्रशेखर सीमा, लगभग कितने सौर द्रव्यमान है?", "options": ["0.5", "1.4", "3.0", "10"], "explanation": "सुब्रह्मण्यन चंद्रशेखर ने दिखाया कि लगभग 1.4 सौर द्रव्यमान से भारी श्वेत वामन और सिकुड़ जाते हैं; इस कार्य के लिए उन्हें 1983 में नोबेल पुरस्कार मिला।" },
+      "hi-Latn": { "question": "Stable white dwarf ka maximum mass, yaani Chandrasekhar limit, lagbhag kitne solar masses hai?", "options": ["0.5", "1.4", "3.0", "10"], "explanation": "Subrahmanyan Chandrasekhar ne dikhaya ki lagbhag 1.4 solar masses se bhaari white dwarfs aur collapse ho jaate hain; is kaam ke liye unhe 1983 mein Nobel Prize mila." }
+    },
+    {
+      "groupId": "sc_041",
+      "difficulty": "hard",
+      "subcategory": "scientists",
+      "correctIndex": 2,
+      "tags": ["indian_scientists", "nuclear_physics"],
+      "en": { "question": "Who is regarded as the father of India's nuclear programme?", "options": ["Vikram Sarabhai", "A.P.J. Abdul Kalam", "Homi J. Bhabha", "Satish Dhawan"], "explanation": "Homi Bhabha founded TIFR and the Atomic Energy Establishment at Trombay, which was renamed BARC in his honour." },
+      "hi": { "question": "भारत के परमाणु कार्यक्रम का जनक किसे माना जाता है?", "options": ["विक्रम साराभाई", "ए.पी.जे. अब्दुल कलाम", "होमी जे. भाभा", "सतीश धवन"], "explanation": "होमी भाभा ने TIFR और ट्रॉम्बे में परमाणु ऊर्जा प्रतिष्ठान की स्थापना की, जिसका नाम बाद में उनके सम्मान में भाभा परमाणु अनुसंधान केंद्र रखा गया।" },
+      "hi-Latn": { "question": "India ke nuclear programme ka father kise maana jaata hai?", "options": ["Vikram Sarabhai", "A.P.J. Abdul Kalam", "Homi J. Bhabha", "Satish Dhawan"], "explanation": "Homi Bhabha ne TIFR aur Trombay mein Atomic Energy Establishment banaya, jiska naam baad mein unke honour mein BARC rakha gaya." }
+    },
+    {
+      "groupId": "sc_042",
+      "difficulty": "hard",
+      "subcategory": "human_body",
+      "correctIndex": 0,
+      "tags": ["vitamins", "nutrition"],
+      "en": { "question": "Which vitamin contains the metal cobalt in its structure?", "options": ["Vitamin B12", "Vitamin K", "Vitamin B6", "Vitamin E"], "explanation": "Vitamin B12 is also called cobalamin because of its central cobalt atom; its deficiency can cause pernicious anaemia." },
+      "hi": { "question": "किस विटामिन की संरचना में कोबाल्ट धातु होती है?", "options": ["विटामिन B12", "विटामिन K", "विटामिन B6", "विटामिन E"], "explanation": "केंद्र में कोबाल्ट परमाणु होने के कारण विटामिन B12 को कोबालामिन भी कहते हैं; इसकी कमी से प्रणाशी रक्ताल्पता हो सकती है।" },
+      "hi-Latn": { "question": "Kis vitamin ke structure mein cobalt metal hota hai?", "options": ["Vitamin B12", "Vitamin K", "Vitamin B6", "Vitamin E"], "explanation": "Beech mein cobalt atom hone ki wajah se vitamin B12 ko cobalamin bhi kehte hain; iski kami se pernicious anaemia ho sakta hai." }
+    },
+    {
+      "groupId": "sc_043",
+      "difficulty": "hard",
+      "subcategory": "astronomy",
+      "correctIndex": 3,
+      "tags": ["moons", "jupiter"],
+      "en": { "question": "Which is the largest moon in our solar system?", "options": ["Titan", "Callisto", "Io", "Ganymede"], "explanation": "Jupiter's moon Ganymede is even bigger than the planet Mercury and is the only moon known to have its own magnetic field." },
+      "hi": { "question": "हमारे सौरमंडल का सबसे बड़ा उपग्रह (चंद्रमा) कौन सा है?", "options": ["टाइटन", "कैलिस्टो", "आयो", "गैनिमीड"], "explanation": "बृहस्पति का उपग्रह गैनिमीड बुध ग्रह से भी बड़ा है और यह एकमात्र ज्ञात उपग्रह है जिसका अपना चुंबकीय क्षेत्र है।" },
+      "hi-Latn": { "question": "Hamare solar system ka sabse bada moon kaun sa hai?", "options": ["Titan", "Callisto", "Io", "Ganymede"], "explanation": "Jupiter ka moon Ganymede planet Mercury se bhi bada hai aur ye akela known moon hai jiska apna magnetic field hai." }
+    },
+    {
+      "groupId": "sc_044",
+      "difficulty": "hard",
+      "subcategory": "physics",
+      "correctIndex": 1,
+      "tags": ["quantum_mechanics", "scientists"],
+      "en": { "question": "Who formulated the uncertainty principle in quantum mechanics?", "options": ["Erwin Schrödinger", "Werner Heisenberg", "Wolfgang Pauli", "Paul Dirac"], "explanation": "Heisenberg showed in 1927 that a particle's position and momentum cannot both be known exactly at the same time." },
+      "hi": { "question": "क्वांटम यांत्रिकी में अनिश्चितता का सिद्धांत किसने दिया?", "options": ["एर्विन श्रोडिंगर", "वर्नर हाइज़ेनबर्ग", "वोल्फ़गांग पाउली", "पॉल डिरैक"], "explanation": "हाइज़ेनबर्ग ने 1927 में बताया कि किसी कण की स्थिति और संवेग दोनों को एक साथ पूरी सटीकता से नहीं जाना जा सकता।" },
+      "hi-Latn": { "question": "Quantum mechanics mein uncertainty principle kisne diya?", "options": ["Erwin Schrödinger", "Werner Heisenberg", "Wolfgang Pauli", "Paul Dirac"], "explanation": "Heisenberg ne 1927 mein bataya ki kisi particle ki position aur momentum dono ko ek saath bilkul exact nahi jaana ja sakta." }
+    },
+    {
+      "groupId": "sc_045",
+      "difficulty": "hard",
+      "subcategory": "ecology",
+      "correctIndex": 3,
+      "tags": ["ecosystem", "scientists"],
+      "en": { "question": "Who coined the term 'ecosystem' in 1935?", "options": ["Ernst Haeckel", "Charles Elton", "Eugene Odum", "Arthur Tansley"], "explanation": "British ecologist Arthur Tansley introduced 'ecosystem' to describe living organisms and their physical environment as one unit; Haeckel had earlier coined 'ecology'." },
+      "hi": { "question": "1935 में 'पारिस्थितिकी तंत्र' (इकोसिस्टम) शब्द किसने गढ़ा?", "options": ["अर्न्स्ट हेकेल", "चार्ल्स एल्टन", "यूजीन ओडम", "आर्थर टैन्सले"], "explanation": "ब्रिटिश पारिस्थितिकीविद् आर्थर टैन्सले ने जीवों और उनके भौतिक पर्यावरण को एक इकाई मानकर यह शब्द दिया; 'पारिस्थितिकी' शब्द इससे पहले हेकेल ने गढ़ा था।" },
+      "hi-Latn": { "question": "1935 mein 'ecosystem' shabd kisne banaya?", "options": ["Ernst Haeckel", "Charles Elton", "Eugene Odum", "Arthur Tansley"], "explanation": "British ecologist Arthur Tansley ne living organisms aur unke physical environment ko ek unit maankar ye term diya; 'ecology' shabd isse pehle Haeckel ne banaya tha." }
+    }
+  ]
+}
