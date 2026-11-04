@@ -116,6 +116,58 @@ describe("planning", () => {
   });
 });
 
+describe("Run now, many times a day", () => {
+  it("every run generates new questions and pushes; only a run's own daily quiz push replaces its push", async () => {
+    const { deps, bank, messenger, repo, clock } = setup();
+    const runNow = async (slot: string) => {
+      const { run } = await createRun(deps, {
+        kind: "question_bank",
+        trigger: "manual",
+        slot,
+        options: options({ runNow: true, categories: [DAILY] }),
+      });
+      await runToEnd(deps, run.id);
+      clock.t += 5 * 60_000; // the next click comes minutes later, inside the daily quiz push's hour
+      return JSON.parse((await repo.getRun(run.id))!.summary);
+    };
+    const pushes = () => messenger.sent.filter((m) => m.data.type === "new_questions").length;
+
+    // The first run of the morning publishes the daily quiz: one notification, not two.
+    const first = await runNow("x1001");
+    expect(first.categories[DAILY].status).toBe("published");
+    expect(first.steps.notify.newQuestions).toBe("covered_by_daily_quiz");
+    expect(pushes()).toBe(0);
+
+    const second = await runNow("x1002");
+    expect(second.categories[DAILY].status).toBe("published");
+    expect(second.steps.notify.newQuestions).toBe("sent");
+    expect(pushes()).toBe(3); // one per language
+
+    const third = await runNow("x1003");
+    expect(third.categories[DAILY].status).toBe("published");
+    expect(third.steps.notify.newQuestions).toBe("sent");
+    expect(pushes()).toBe(6);
+
+    const groups = await qb.loadCategory(bank, DAILY);
+    for (const slot of ["x1001", "x1002", "x1003"]) {
+      expect(groups.filter((g) => g.batch === slot).length).toBeGreaterThan(0);
+    }
+    expect(new Set(groups.map((g) => g.en.question)).size).toBe(groups.length); // nothing repeated
+  });
+
+  it("other runs still count any recent daily quiz push", async () => {
+    const { deps, repo, clock } = setup();
+    const run = async (slot: string) => {
+      const { run: r } = await createRun(deps, { kind: "question_bank", trigger: "manual", slot, options: options({ categories: [DAILY] }) });
+      await runToEnd(deps, r.id);
+      clock.t += 5 * 60_000;
+      return JSON.parse((await repo.getRun(r.id))!.summary);
+    };
+    await run("x2001");
+    expect((await run("x2002")).steps.notify.newQuestions).toBe("covered_by_daily_quiz");
+  });
+});
+
 describe("three tasks at the same time", () => {
   it("up to 3 categories run at once, and never more", async () => {
     const { deps, fake } = setup();

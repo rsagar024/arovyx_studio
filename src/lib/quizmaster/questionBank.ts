@@ -81,6 +81,12 @@ export function isSlot(value: string): boolean {
 }
 
 /** `am` for the morning run, `pm` from 15:00 IST. */
+/** A slot of its own, so the run always generates and pushes, however many
+ * ran today. */
+export function extraSlot(now: Date): string {
+  return `x${Math.floor(now.getTime() / 1000)}`;
+}
+
 export function slotFor(now: Date): "am" | "pm" {
   return ist.wallClock(now).hour >= EVENING_FROM ? "pm" : "am";
 }
