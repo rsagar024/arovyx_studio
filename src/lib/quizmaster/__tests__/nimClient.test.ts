@@ -202,33 +202,90 @@ describe("failover", () => {
   const POOL = ["a/1", "b/1", "c/1"];
   const fast = (log?: (l: string) => void) => new NimClient({ backoffMs: 0, retryDelayMs: 0, log });
 
-  it("a timeout moves to the next model, and says so", async () => {
+  it("a slow model gets company after 45 s, and the first answer wins", async () => {
     vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
     const called = byModel({ "a/1": "hang" });
     const logs: string[] = [];
     let answered = "";
-    const reply = await settle(() =>
-      fast((l) => logs.push(l)).chat(MESSAGES, { model: "a/1", fallbacks: POOL, onAnswer: (m) => (answered = m) })
-    );
-    expect(reply).toBe("from b/1");
-    expect(called).toEqual(["a/1", "b/1"]); // one request per model on a timeout
-    expect(answered).toBe("b/1");
-    expect(logs.join("\n")).toContain("timeout, switching to 1");
-  });
-
-  it("a timeout waits 90 s at most per model", async () => {
-    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
-    byModel({ "a/1": "hang" });
     vi.useFakeTimers();
     try {
       const start = Date.now();
       let at = 0;
-      const done = fast()
+      const done = fast((l) => logs.push(l))
+        .chat(MESSAGES, { model: "a/1", fallbacks: POOL, onAnswer: (m) => (answered = m) })
+        .then((r) => {
+          at = Date.now();
+          return r;
+        });
+      await vi.advanceTimersByTimeAsync(60_000);
+      expect(await done).toBe("from b/1");
+      expect(at - start).toBe(45_000);
+    } finally {
+      vi.useRealTimers();
+    }
+    expect(called).toEqual(["a/1", "b/1"]);
+    expect(answered).toBe("b/1");
+    expect(logs.join("\n")).toContain("no answer after 45s, also asking 1");
+  });
+
+  it("a slow model isn't abandoned: it can still win after the next one is asked", async () => {
+    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
+    const answerAt: Record<string, number> = { "a/1": 60_000, "b/1": 170_000, "c/1": 170_000 };
+    const signals: Record<string, AbortSignal> = {};
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((_url: string, init: { body: string; signal: AbortSignal }) => {
+        const model = JSON.parse(init.body).model as string;
+        signals[model] = init.signal;
+        return new Promise<Response>((resolve, reject) => {
+          init.signal.addEventListener("abort", () => reject(Object.assign(new Error("aborted"), { name: "AbortError" })));
+          setTimeout(
+            () => resolve(new Response(JSON.stringify({ choices: [{ message: { content: `from ${model}` }, finish_reason: "stop" }] }))),
+            answerAt[model]
+          );
+        });
+      })
+    );
+    const reply = await settle(() => fast().chat(MESSAGES, { model: "a/1", fallbacks: POOL }));
+    expect(reply).toBe("from a/1");
+    expect(signals["b/1"]!.aborted).toBe(true); // the loser's request is cancelled
+  });
+
+  it("hedge asks several models from the start", async () => {
+    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
+    const called = byModel({ "a/1": "hang", "b/1": "hang", "c/1": "hang" });
+    vi.useFakeTimers();
+    try {
+      const out = fast()
+        .chat(MESSAGES, { model: "a/1", fallbacks: POOL, hedge: 2 })
+        .catch((e: unknown) => e);
+      await vi.advanceTimersByTimeAsync(1_000);
+      expect(called).toEqual(["a/1", "b/1"]);
+      await vi.advanceTimersByTimeAsync(600_000);
+      await out;
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
+  it("no request outlives the tick, however many models are asked", async () => {
+    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
+    byModel({ "a/1": "hang", "b/1": "hang", "c/1": "hang" });
+    vi.useFakeTimers();
+    try {
+      const start = Date.now();
+      let at = 0;
+      const c = new NimClient({ deadline: start + 240_000, backoffMs: 0, retryDelayMs: 0 });
+      const out = c
         .chat(MESSAGES, { model: "a/1", fallbacks: POOL })
-        .then(() => (at = Date.now()));
-      await vi.advanceTimersByTimeAsync(120_000);
-      await done;
-      expect(at - start).toBe(90_000);
+        .catch((e: unknown) => e)
+        .then((e) => {
+          at = Date.now();
+          return e;
+        });
+      await vi.advanceTimersByTimeAsync(300_000);
+      expect(await out).toBeInstanceOf(DeadlineError);
+      expect(at - start).toBeLessThanOrEqual(240_000);
     } finally {
       vi.useRealTimers();
     }
@@ -271,17 +328,27 @@ describe("failover", () => {
     expect(called).not.toContain("b/1");
   });
 
-  it("a model that timed out is skipped by later calls in the tick", async () => {
+  it("models that timed out are skipped by later calls in the tick", async () => {
     vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
-    const called = byModel({ "a/1": "hang" });
+    const called = byModel({ "a/1": "hang", "b/1": "hang", "c/1": "hang" });
     const c = fast();
-    await settle(() => c.chat(MESSAGES, { model: "a/1", fallbacks: POOL }));
-    await c.chat(MESSAGES, { model: "a/1", fallbacks: POOL });
-    expect(called).toEqual(["a/1", "b/1", "b/1"]);
-    // A new client is a new tick: it gets another chance.
+    await expect(settle(() => c.chat(MESSAGES, { model: "a/1", fallbacks: POOL }))).rejects.toBeInstanceOf(DeadlineError);
     called.length = 0;
-    await settle(() => fast().chat(MESSAGES, { model: "a/1", fallbacks: POOL }));
-    expect(called[0]).toBe("a/1");
+    await expect(c.chat(MESSAGES, { model: "a/1", fallbacks: POOL })).rejects.toBeInstanceOf(DeadlineError);
+    expect(called).toEqual([]);
+    // A new client is a new tick: they get another chance.
+    byModel({});
+    expect(await fast().chat(MESSAGES, { model: "a/1", fallbacks: POOL })).toBe("from a/1");
+  });
+
+  it("a model that refused a request is skipped by later calls in the tick", async () => {
+    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
+    const called = byModel({ "a/1": 404 });
+    const c = fast();
+    await c.chat(MESSAGES, { model: "a/1", fallbacks: POOL });
+    called.length = 0;
+    expect(await c.chat(MESSAGES, { model: "a/1", fallbacks: POOL })).toBe("from b/1");
+    expect(called).toEqual(["b/1"]);
   });
 
   it("every model timing out ends the tick rather than failing the unit", async () => {
@@ -296,14 +363,6 @@ describe("failover", () => {
     const called = byModel({ "a/1": 503, "b/1": 503 });
     await expect(fast().chat(MESSAGES, { model: "a/1", fallbacks: ["b/1"] })).rejects.toMatchObject({ code: "server" });
     expect(called.length).toBe(8); // 2 requests per model, 2 passes
-  });
-
-  it("spread takes turns among the first models only", async () => {
-    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
-    const called = byModel({});
-    const c = fast();
-    for (let i = 0; i < 4; i++) await c.chat(MESSAGES, { model: "a/1", fallbacks: POOL, spread: 2 });
-    expect(called).toEqual(["a/1", "b/1", "a/1", "b/1"]);
   });
 
   it("a request cut short by the tick doesn't count against the model", async () => {

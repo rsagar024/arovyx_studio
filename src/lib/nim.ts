@@ -79,6 +79,8 @@ export interface NimOptions {
   model?: string;
   /** Retry after a timeout too, or throw at once. Default true. */
   retryOnTimeout?: boolean;
+  /** Abort the call from outside (reported like a timeout). */
+  signal?: AbortSignal;
   /** Output token cap. Default 8192. */
   maxTokens?: number;
 }
@@ -124,6 +126,9 @@ export async function nimChat(
   for (let attempt = 0; attempt <= maxRetries; attempt++) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeoutMs);
+    const onOutsideAbort = () => controller.abort();
+    if (opts.signal?.aborted) controller.abort();
+    opts.signal?.addEventListener("abort", onOutsideAbort);
 
     try {
       const res = await fetch(`${baseUrl()}/chat/completions`, {
@@ -202,6 +207,7 @@ export async function nimChat(
       }
     } finally {
       clearTimeout(timer);
+      opts.signal?.removeEventListener("abort", onOutsideAbort);
     }
 
     if (attempt < maxRetries) {

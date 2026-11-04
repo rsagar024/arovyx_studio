@@ -67,8 +67,8 @@ npm start
 | `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT` | for Quiz Master | Firebase Admin SDK key JSON of the Quiz Master project, **on one line** (Firestore, FCM, Auth and Remote Config). Server-only. Without it, Studio → Quiz Master only does dry runs. |
 | `QUIZMASTER_FIREBASE_PROJECT_ID` | no | Default: the key's `project_id` (`quizmaster-3be48`). |
 | `QUIZMASTER_GEN_MODEL` | no | First-choice NIM model that writes questions and push texts. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. |
-| `QUIZMASTER_VERIFY_MODEL` | no | First-choice NIM model that cross-checks answers. **Must be a different model family** from the generator. Default `mistralai/mistral-large-4-1t-a52b`, sharing the work with `minimaxai/minimax-m3.1-flash`. |
-| `QUIZMASTER_TRANSLATE_MODEL` | no | First-choice NIM model for the Hindi and Hinglish versions. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. If a model times out or errors, a call moves to the next in `MODEL_POOL` (`src/lib/quizmaster/nimClient.ts`); the verifier never uses a family that wrote the questions. |
+| `QUIZMASTER_VERIFY_MODEL` | no | First-choice NIM model that cross-checks answers. **Must be a different model family** from the generator. Default `mistralai/mistral-large-4-1t-a52b`, asked together with `minimaxai/minimax-m3.1-flash`; the first answer wins. |
+| `QUIZMASTER_TRANSLATE_MODEL` | no | First-choice NIM model for the Hindi and Hinglish versions. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. If a model errors or hasn't answered after 45 s, a call also asks the next in `MODEL_POOL` (`src/lib/quizmaster/nimClient.ts`) and takes the first answer; the verifier never uses a family that wrote the questions. |
 
 Generate a strong JWT secret with:
 
