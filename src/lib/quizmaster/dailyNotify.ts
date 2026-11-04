@@ -233,7 +233,7 @@ export class Notifier {
             { role: "system", content: prompt("notify.md") },
             { role: "user", content: pyDumps(payload) },
           ],
-          { model: this.o.models.generate, temperature: 0.9, maxTokens: 1024 }
+          { model: this.o.models.generate, fallbacks: this.o.models.pool, temperature: 0.9, maxTokens: 1024 }
         )
       );
     } catch (err) {

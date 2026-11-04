@@ -12,7 +12,7 @@
 import "server-only";
 import { prompt, type Group, type PromptName } from "./assets";
 import { extractJson, JsonExtractError } from "./jsonExtract";
-import { isDeadline, type Models, type Nim } from "./nimClient";
+import { isDeadline, modelFamily, type ChatOptions, type Models, type Nim } from "./nimClient";
 import { pyDumps } from "./pyJson";
 import type { PyRandom } from "./pyRandom";
 import { pyRepr } from "./pyText";
@@ -53,13 +53,25 @@ export class Pipeline {
     private log: (line: string) => void = () => {}
   ) {}
 
-  private async ask(name: PromptName, payload: unknown, model: string, temperature: number): Promise<unknown> {
+  /** The family of the model that answered the last `generate`. */
+  get generatedBy(): string {
+    return modelFamily(this.lastGenerator ?? this.models.generate);
+  }
+  private lastGenerator: string | null = null;
+
+  private async ask(
+    name: PromptName,
+    payload: unknown,
+    model: string,
+    temperature: number,
+    extra: Partial<ChatOptions> = {}
+  ): Promise<unknown> {
     const reply = await this.nim.chat(
       [
         { role: "system", content: prompt(name) },
         { role: "user", content: pyDumps(payload) },
       ],
-      { model, temperature }
+      { model, temperature, fallbacks: this.models.pool, ...extra }
     );
     return extractJson(reply);
   }
@@ -74,7 +86,8 @@ export class Pipeline {
         "generate.md",
         { category: categoryName, difficulty, count, avoid },
         this.models.generate,
-        0.8
+        0.8,
+        { onAnswer: (m) => (this.lastGenerator = m) }
       );
     } catch (err) {
       if (!(err instanceof JsonExtractError)) throw err;
@@ -133,8 +146,9 @@ export class Pipeline {
   }
 
   /** The groups the verifier answers correctly without seeing the answer,
-   * with the options shuffled. */
-  async verifyBatch(batch: Group[]): Promise<Group[]> {
+   * with the options shuffled. `writers` are the families that wrote them,
+   * which may not check them. */
+  async verifyBatch(batch: Group[], writers: string[] = [modelFamily(this.models.generate)]): Promise<Group[]> {
     const payload: Array<{ id: string; question: string; options: Record<string, string> }> = [];
     const expected: Record<string, string> = {};
     batch.forEach((group, i) => {
@@ -149,13 +163,13 @@ export class Pipeline {
       });
       expected[qid] = LETTERS[order.indexOf(group.correctIndex)]!;
     });
-    const answers = await this.verifyAnswers(payload);
+    const answers = await this.verifyAnswers(payload, writers);
     if (answers === null) {
       // A long batch can run the verifier out of tokens: try halves.
       if (batch.length > 1) {
         const half = Math.floor(batch.length / 2);
         this.log(`verify: no answers for ${batch.length} questions; trying halves`);
-        return [...(await this.verifyBatch(batch.slice(0, half))), ...(await this.verifyBatch(batch.slice(half)))];
+        return [...(await this.verifyBatch(batch.slice(0, half), writers)), ...(await this.verifyBatch(batch.slice(half), writers))];
       }
       this.log(`dropped (verifier gave no answer): ${pyRepr(batch[0]!.en.question)}`);
       return [];
@@ -174,10 +188,13 @@ export class Pipeline {
   }
 
   /** The verifier's letters by id, or null if it gave no readable reply. */
-  private async verifyAnswers(payload: unknown[]): Promise<Record<string, string> | null> {
+  private async verifyAnswers(payload: unknown[], writers: string[]): Promise<Record<string, string> | null> {
     for (const attempt of [1, 2]) {
       try {
-        const reply = await this.ask("verify.md", { questions: payload }, this.models.verify, 0.0);
+        const reply = await this.ask("verify.md", { questions: payload }, this.models.verify, 0.0, {
+          excludeFamilies: writers,
+          spread: 2,
+        });
         if (!isObject(reply)) throw new TypeError("'list' object has no attribute 'get'");
         const list = Array.isArray(reply.answers) ? reply.answers : [];
         const out: Record<string, string> = {};

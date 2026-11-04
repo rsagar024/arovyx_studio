@@ -38,7 +38,10 @@ export interface Status {
     overdue: boolean;
     lastCleanupAt: string | null;
   };
-  env: Record<string, boolean> & { models: { generate: string; verify: string; translate: string }; modelsOk: boolean };
+  env: Record<string, boolean> & {
+    models: { generate: string; verify: string; translate: string; pool?: string[] };
+    modelsOk: boolean;
+  };
   active: (RunInfo & { progress: Progress }) | null;
   activeRuns: Array<RunInfo & { progress: Progress }>;
   lastRun: RunInfo | null;

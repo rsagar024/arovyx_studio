@@ -24,7 +24,7 @@
 import "server-only";
 import type { Group } from "./assets";
 import { categoryName } from "./categories";
-import type { Models, Nim } from "./nimClient";
+import { modelFamily, type Models, type Nim } from "./nimClient";
 import { groupHash, Pipeline, TRANSLATE_BATCH, TRANSLATIONS, VERIFY_BATCH } from "./pipeline";
 import { PyRandom, type PyRandomState } from "./pyRandom";
 import { pyRepr } from "./pyText";
@@ -50,6 +50,9 @@ export interface GenState {
   genQueue: Array<[Difficulty, number]>;
   /** This round's generated groups, before dedupe. */
   fresh: Group[];
+  /** The model families that wrote this round's groups, which may not verify
+   * them (failover can change the writer). Absent on runs saved before failover. */
+  genFamilies?: string[];
   /** This round's deduped groups, verified `verifyPos` at a time. */
   toVerify: Group[];
   verifyPos: number;
@@ -234,6 +237,7 @@ export class Generator {
       this.log(`retry ${round}: still need {${missing.map(([d, n]) => `'${d}': ${n}`).join(", ")}}`);
     }
     s.genQueue = missing;
+    s.genFamilies = [];
     s.fresh = [];
     s.toVerify = [];
     s.verifyPos = 0;
@@ -245,6 +249,7 @@ export class Generator {
     // Ask for extra: some fail the checks or the verifier.
     const count = s.round === 0 ? short + Math.max(2, Math.floor(short / 2)) : short * 2;
     s.fresh.push(...(await pipeline.generate(categoryName(s.category), difficulty, count, s.avoid.slice(0, RECENT_IN_PROMPT))));
+    s.genFamilies = [...new Set([...(s.genFamilies ?? []), pipeline.generatedBy])];
     s.genQueue.shift();
     if (s.genQueue.length) return;
     // Every difficulty is in: drop duplicates of the seed bank (all
@@ -263,7 +268,8 @@ export class Generator {
 
   private async verify(s: GenState, pipeline: Pipeline) {
     const batch = s.toVerify.slice(s.verifyPos, s.verifyPos + VERIFY_BATCH);
-    for (const group of await pipeline.verifyBatch(batch)) {
+    const writers = s.genFamilies?.length ? s.genFamilies : [modelFamily(this.deps.models.generate)];
+    for (const group of await pipeline.verifyBatch(batch, writers)) {
       const bucket = s.chosen[group.difficulty as Difficulty];
       if (bucket && bucket.length < PER_DIFFICULTY) {
         bucket.push(group);

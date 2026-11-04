@@ -142,7 +142,7 @@ function RunDrawer({ id, onClose, onChanged }: { id: string; onClose: () => void
   return (
     <div className="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" aria-labelledby="qm-drawer-title">
       <button type="button" aria-label="Close" className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative flex h-full w-full max-w-2xl flex-col border-l border-[var(--border)] bg-[var(--bg)] shadow-2xl">
+      <div className="relative flex h-full w-full max-w-5xl flex-col border-l border-[var(--border)] bg-[var(--bg)] shadow-2xl">
         <div className="flex items-center justify-between gap-3 border-b border-[var(--border)] px-4 py-3 sm:px-6">
           <div className="min-w-0">
             <h2 id="qm-drawer-title" className="truncate font-semibold">
@@ -227,7 +227,7 @@ function RunDrawer({ id, onClose, onChanged }: { id: string; onClose: () => void
           )}
           <div>
             <h3 className="micro-label">Log</h3>
-            <div ref={logBox} className="mt-2 max-h-[50vh] overflow-y-auto rounded-xl border border-[var(--border)] bg-[var(--panel)] p-3 font-mono text-[11px] leading-relaxed">
+            <div ref={logBox} className="mt-2 h-[75vh] overflow-y-auto rounded-xl border border-[var(--border)] bg-[var(--panel)] p-3 font-mono text-[13px] leading-relaxed">
               {logs.length === 0 ? (
                 <p className="text-[var(--muted)]">No log lines yet.</p>
               ) : (

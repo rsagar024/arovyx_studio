@@ -4,7 +4,8 @@ import { afterEach, describe, expect, it } from "vitest";
 import { seedBank, type Group } from "../assets";
 import { ALL_CATEGORIES } from "../categories";
 import { SendFailed, TOPICS } from "../dailyNotify";
-import { Generator, PER_DIFFICULTY } from "../generator";
+import { Generator, PER_DIFFICULTY, startState, type GenState } from "../generator";
+import type { ChatMessage, ChatOptions } from "../nimClient";
 import { notifyNewQuestions, recordPath } from "../notifyQuestions";
 import { publish, seed } from "../publish";
 import * as qb from "../questionBank";
@@ -50,6 +51,66 @@ const add = (store: qb.BankStore, date: string, groups: Group[], slot = "am", ca
 
 afterEach(() => {
   qb.limits.MAX_BYTES = 900_000;
+});
+
+/* --- failover ------------------------------------------------------------ */
+
+describe("failover and the verifier's family rule", () => {
+  const MODELS_WITH_POOL = { generate: "gen/a", verify: "ver/a", translate: "tr/a", pool: ["gen/a", "ver/a", "other/a"] };
+
+  /** Reports `writer` as the model that answered generate calls, like NimClient. */
+  class Recording extends FakeNim {
+    excluded: string[][] = [];
+    constructor(private writer?: string) {
+      super();
+    }
+    override async chat(messages: ChatMessage[], opts: ChatOptions) {
+      if (opts.model === MODELS_WITH_POOL.generate && this.writer) opts.onAnswer?.(this.writer);
+      if (opts.model === MODELS_WITH_POOL.verify) this.excluded.push(opts.excludeFamilies ?? []);
+      return super.chat(messages, { ...opts, model: opts.model.split("/")[0]! }); // FakeNim's "gen", "ver", "tr"
+    }
+  }
+  const stepsThroughVerify = async (nim: FakeNim, patch?: (s: GenState) => void) => {
+    const gen = new Generator({ store: new qb.MemoryBankStore(), nim, models: MODELS_WITH_POOL, seed: {} });
+    let s = startState(CATEGORY, DATE, "am", false, DATE);
+    while (s.phase !== "verify") s = await gen.step(s);
+    patch?.(s);
+    const writers = s.genFamilies;
+    s = await gen.step(s);
+    return { writers, after: s };
+  };
+
+  it("the generator's own family is excluded from verifying", async () => {
+    const nim = new Recording();
+    const { writers } = await stepsThroughVerify(nim);
+    expect(writers).toEqual(["gen"]);
+    expect(nim.excluded[0]).toEqual(["gen"]);
+  });
+
+  it("after generation fails over, the model that really wrote them is the one excluded", async () => {
+    const nim = new Recording("other/a");
+    const { writers } = await stepsThroughVerify(nim);
+    expect(writers).toEqual(["other"]);
+    expect(nim.excluded[0]).toEqual(["other"]);
+  });
+
+  it("a run saved before failover (no genFamilies) excludes the configured generator", async () => {
+    const nim = new Recording();
+    await stepsThroughVerify(nim, (s) => delete s.genFamilies);
+    expect(nim.excluded[0]).toEqual(["gen"]);
+  });
+
+  it("a new round starts its list of writers again", async () => {
+    const nim = new Recording();
+    const gen = new Generator({ store: new qb.MemoryBankStore(), nim, models: MODELS_WITH_POOL, seed: {} });
+    nim.verifierWrong = () => true; // nothing survives, so another round is needed
+    let s = startState(CATEGORY, DATE, "am", false, DATE);
+    while (s.phase !== "verify") s = await gen.step(s);
+    s.genFamilies = ["stale"];
+    while (s.phase === "verify") s = await gen.step(s);
+    expect(s.phase).toBe("generate");
+    expect(s.genFamilies).toEqual([]);
+  });
 });
 
 /* --- generate ------------------------------------------------------------ */
