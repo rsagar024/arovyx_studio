@@ -77,6 +77,8 @@ export interface NimOptions {
   backoffMs?: number;
   /** Per-call model id. Default: NVIDIA_NIM_MODEL, else DEFAULT_MODEL. */
   model?: string;
+  /** Retry after a timeout too, or throw at once. Default true. */
+  retryOnTimeout?: boolean;
   /** Output token cap. Default 8192. */
   maxTokens?: number;
 }
@@ -189,6 +191,7 @@ export async function nimChat(
           `NIM request timed out after ${Math.round(timeoutMs / 1000)}s.`,
           "timeout"
         );
+        if (opts.retryOnTimeout === false) throw lastError;
       } else if (err instanceof NIMError) {
         lastError = err;
       } else {

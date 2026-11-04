@@ -45,6 +45,11 @@ export default function StatusCard({ status }: { status: Status }) {
           <p className="mt-3 break-words text-xs text-[var(--muted)]">
             Models: generate <code>{env.models.generate}</code>, verify <code>{env.models.verify}</code>, translate{" "}
             <code>{env.models.translate}</code>
+            {env.models.pool?.length ? (
+              <span className="mt-1 block">
+                If a model times out, the next is tried: <code>{env.models.pool.join(" → ")}</code>
+              </span>
+            ) : null}
             {!env.modelsOk && (
               <span className="mt-1 block text-rose-500">The verifier must be a different model family from the generator.</span>
             )}

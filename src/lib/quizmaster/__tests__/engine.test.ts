@@ -116,6 +116,32 @@ describe("planning", () => {
   });
 });
 
+describe("three tasks at the same time", () => {
+  it("up to 3 categories run at once, and never more", async () => {
+    const { deps, fake } = setup();
+    let inFlight = 0;
+    let peak = 0;
+    const jobs = deps.makeJobs({ dryRun: false, deadline: Number.POSITIVE_INFINITY, log: () => {} });
+    jobs.nim = {
+      async chat(messages: ChatMessage[], opts: ChatOptions) {
+        peak = Math.max(peak, ++inFlight);
+        await new Promise((r) => setTimeout(r, 1)); // a real wait, so the lanes overlap
+        inFlight--;
+        return fake.chat(messages, opts);
+      },
+    };
+    deps.makeJobs = () => jobs;
+    const { run } = await createRun(deps, {
+      kind: "question_bank",
+      trigger: "manual",
+      slot: "pm",
+      options: options({ categories: ["science", "cricket", "history", "space", "geography"], scheduled: false }),
+    });
+    await runToEnd(deps, run.id);
+    expect(peak).toBe(3);
+  });
+});
+
 describe("lease lock", () => {
   it("two concurrent run creations: one wins, the other gets the live run", async () => {
     const { deps } = setup();
