@@ -47,7 +47,7 @@ export default function StatusCard({ status }: { status: Status }) {
             <code>{env.models.translate}</code>
             {env.models.pool?.length ? (
               <span className="mt-1 block">
-                If a model times out, the next is tried: <code>{env.models.pool.join(" → ")}</code>
+                If a model is slow or fails, the next is asked too: <code>{env.models.pool.join(" → ")}</code>
               </span>
             ) : null}
             {!env.modelsOk && (

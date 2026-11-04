@@ -193,7 +193,7 @@ export class Pipeline {
       try {
         const reply = await this.ask("verify.md", { questions: payload }, this.models.verify, 0.0, {
           excludeFamilies: writers,
-          spread: 2,
+          hedge: 2,
         });
         if (!isObject(reply)) throw new TypeError("'list' object has no attribute 'get'");
         const list = Array.isArray(reply.answers) ? reply.answers : [];
