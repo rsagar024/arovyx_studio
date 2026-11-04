@@ -250,6 +250,10 @@ export default function Stopwatch({
           Automatic runs only happen while this tab is open. Keep it open (e.g. on a spare device), or press Run now.
         </p>
         <p>
+          Run now can be pressed as often as you like, one run at a time: each run writes new questions to Firebase and
+          sends a push to players.
+        </p>
+        <p>
           The daily quiz is only published by a run that reaches its daily-quiz step before 12:00 IST, the same as
           before; after that the app plays its local quiz. Line the timer up with about 07:00 IST: the morning run
           then publishes the quiz and the evening run (from 15:00 IST) adds the <code>pm</code> questions.

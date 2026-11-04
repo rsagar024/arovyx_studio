@@ -60,6 +60,8 @@ export interface RunOptions {
   mode: "daily" | "seed";
   /** A scheduled run (timer or Run now): finishing restarts the countdown. */
   scheduled: boolean;
+  /** Pressed Run now: always push, unless this run's own daily quiz push just went out. */
+  runNow?: boolean;
   /** Guest cleanup as the last step (automatic runs, once a day). */
   cleanup?: { days: number; dryRun: boolean } | null;
   /** guest_cleanup runs. */
@@ -523,7 +525,16 @@ async function runPostUnit(
       const commit = (w: Parameters<typeof jobs.docs.commit>[0]) => jobs.docs.commit(w);
       try {
         newQuestions = await notifyNewQuestions(
-          { bank: jobs.bank, messenger: jobs.messenger, read, commit, now, dryRun: options.dryRun, log },
+          {
+            bank: jobs.bank,
+            messenger: jobs.messenger,
+            read,
+            commit,
+            now,
+            dryRun: options.dryRun,
+            log,
+            dailyQuizCoversFrom: options.runNow ? run.startedAt : undefined,
+          },
           options.date,
           run.slot
         );

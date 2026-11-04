@@ -38,6 +38,9 @@ export interface NewQuestionsOptions {
   dryRun?: boolean;
   log?: (line: string) => void;
   templates?: Record<Lang, PushText[]>;
+  /** Only a daily quiz push sent since this time counts as telling the players
+   * (Run now: this run's own). Default: any recent one. */
+  dailyQuizCoversFrom?: Date;
 }
 
 /** Throws `SendFailed` if a topic fails (the others are still sent and recorded). */
@@ -50,7 +53,12 @@ export async function notifyNewQuestions(o: NewQuestionsOptions, date: string, s
     return "already_sent";
   }
   const quizSent = ((await o.read(`daily_challenges/${date}`)) ?? {}).notifiedAt;
-  if (slot !== "pm" && quizSent instanceof Date && o.now.getTime() - quizSent.getTime() < DAILY_QUIZ_COVERS_MS) {
+  if (
+    slot !== "pm" &&
+    quizSent instanceof Date &&
+    o.now.getTime() - quizSent.getTime() < DAILY_QUIZ_COVERS_MS &&
+    (!o.dailyQuizCoversFrom || quizSent >= o.dailyQuizCoversFrom)
+  ) {
     log(`the daily quiz push for ${date} just went out; no second push`);
     return "covered_by_daily_quiz";
   }

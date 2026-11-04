@@ -9,7 +9,7 @@ import { createRun, snapshot, tick, type EngineDeps, type RunKind, type RunOptio
 import { firebaseConfigured } from "./firebase";
 import * as ist from "./ist";
 import { modelFamily, models } from "./nimClient";
-import { isSlot, slotFor } from "./questionBank";
+import { extraSlot, isSlot, slotFor } from "./questionBank";
 import { PrismaRunRepo, type RunRow } from "./repo";
 import { makeJobDeps } from "./runtime";
 import {
@@ -174,8 +174,10 @@ export interface ManualQuestionBank {
   categories?: string[];
 }
 
-/** The scheduled run (the timer, or Run now): `auto` slot, every category,
- * guest cleanup when the last real one is over 24 h old. */
+/** The scheduled run: every category, guest cleanup when the last real one is
+ * over 24 h old. The timer uses the `auto` slot, so at most one run per slot.
+ * Run now gets a new slot each time, so every click generates new questions
+ * and pushes, as many times a day as it is pressed. */
 export async function startScheduled(trigger: "timer" | "now") {
   const now = new Date();
   const s = await getSchedule(scheduleDb, now);
@@ -189,9 +191,12 @@ export async function startScheduled(trigger: "timer" | "now") {
     categories: [...ALL_CATEGORIES],
     mode: "daily",
     scheduled: true,
+    runNow: trigger === "now",
     cleanup: cleanupDue(s.lastCleanupAt, now) ? { days: 30, dryRun: false } : null,
   };
-  return start("question_bank", trigger === "timer" ? "timer" : "manual", slotFor(now), options);
+  return trigger === "timer"
+    ? start("question_bank", "timer", slotFor(now), options)
+    : start("question_bank", "manual", extraSlot(now), options);
 }
 
 export async function startManual(body: ManualQuestionBank) {
@@ -202,7 +207,7 @@ export async function startManual(body: ManualQuestionBank) {
     throw new BadRequest('Seeding rewrites every base_* doc: type SEED to confirm.');
   }
   const slot =
-    body.slot === "auto" ? slotFor(now) : body.slot === "extra" ? `x${Math.floor(now.getTime() / 1000)}` : body.slot;
+    body.slot === "auto" ? slotFor(now) : body.slot === "extra" ? extraSlot(now) : body.slot;
   if (!isSlot(slot)) throw new BadRequest("Bad slot.");
   const categories = (body.categories?.length ? body.categories : [...ALL_CATEGORIES]).filter(isCategory);
   if (!categories.length) throw new BadRequest("Pick at least one category.");
