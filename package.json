@@ -18,6 +18,11 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   },
+  "overrides": {
+    "jwks-rsa": {
+      "jose": "5.10.0"
+    }
+  },
   "dependencies": {
     "@prisma/client": "^5.22.0",
     "firebase-admin": "14.5.0",
