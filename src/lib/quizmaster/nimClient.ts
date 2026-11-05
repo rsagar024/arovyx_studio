@@ -11,14 +11,19 @@
  * share the generator's mistakes: `excludeFamilies` holds that line through
  * every failover.
  *
- * The pool is the owner's chosen list, as far as this key can reach it (checked
- * 2026-11-05; the rest of that list answers HTTP 404 or 410):
+ * The pool, measured on this key on 2026-11-05 against the real question bank:
+ * - `nvidia/nemotron-3.5-super-vl-120b-a12b`: generates and translates. It won a
+ *   head-to-head (45/45 on geography and science, 11 duplicates across three
+ *   categories, against 176 for lightning), so the owner's "use the best" put
+ *   it first though it isn't on their list.
  * - `nvidia/nemotron-3.5-lightning-30b-a3b` and `nvidia/nemotron-3.5-bolt-e4b`:
- *   under a second on a short request. They generate and translate, but can't
- *   verify their own family's questions.
+ *   the owner's choices, kept as fallbacks. Lightning overruns the token limit
+ *   and both repeat questions. None of the three may verify another's work, as
+ *   they're one family.
  * - `mistralai/mistral-large-4-1t-a52b` and `google/gemma-4-31b-it`: the only
- *   other families, 9 s and 39 s on a short request, so verify asks both at
- *   once (`hedge`).
+ *   other families, and slow, so verify asks both at once (`hedge`).
+ *
+ * The rest of the owner's list answers HTTP 404 or 410.
  *
  * Every call is bounded by the tick's deadline: a call that can't finish in
  * the time left throws `DeadlineError`, which ends the tick without counting
@@ -28,12 +33,13 @@
 import "server-only";
 import { NIMError, nimChat } from "@/lib/nim";
 
-export const DEFAULT_GEN_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
+export const DEFAULT_GEN_MODEL = "nvidia/nemotron-3.5-super-vl-120b-a12b";
 export const DEFAULT_VERIFY_MODEL = "mistralai/mistral-large-4-1t-a52b";
-export const DEFAULT_TRANSLATE_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
+export const DEFAULT_TRANSLATE_MODEL = "nvidia/nemotron-3.5-super-vl-120b-a12b";
 
-/** Failover order, fastest first. A job's first choice is tried before these. */
+/** Failover order. A job's first choice is tried before these. */
 export const MODEL_POOL = [
+  "nvidia/nemotron-3.5-super-vl-120b-a12b",
   "nvidia/nemotron-3.5-lightning-30b-a3b",
   "nvidia/nemotron-3.5-bolt-e4b",
   "mistralai/mistral-large-4-1t-a52b",

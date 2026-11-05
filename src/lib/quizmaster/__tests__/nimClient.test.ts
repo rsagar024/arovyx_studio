@@ -113,9 +113,9 @@ describe("NIM client", () => {
 
   it("model ids come from variables, with defaults", () => {
     const defaults = models({});
-    expect(defaults.generate).toBe("nvidia/nemotron-3.5-lightning-30b-a3b");
+    expect(defaults.generate).toBe("nvidia/nemotron-3.5-super-vl-120b-a12b");
     expect(defaults.verify).toBe("mistralai/mistral-large-4-1t-a52b");
-    expect(defaults.translate).toBe("nvidia/nemotron-3.5-lightning-30b-a3b");
+    expect(defaults.translate).toBe("nvidia/nemotron-3.5-super-vl-120b-a12b");
     expect(defaults.pool).toEqual(MODEL_POOL);
     expect(MODEL_POOL).toContain(defaults.generate);
     expect(MODEL_POOL).toContain(defaults.verify);
