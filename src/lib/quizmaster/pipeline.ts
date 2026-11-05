@@ -17,6 +17,7 @@ import { pyDumps } from "./pyJson";
 import type { PyRandom } from "./pyRandom";
 import { pyRepr } from "./pyText";
 import { dedupHash, validateEn, validateVariant, type Language, type Variant } from "./questionChecks";
+import type { FactIndex } from "./questionMemory";
 import { errMessage, errName } from "./dailyNotify";
 
 export const LETTERS = "ABCD";
@@ -59,6 +60,12 @@ export class Pipeline {
   }
   private lastGenerator: string | null = null;
 
+  /** Every model that has answered through this pipeline. */
+  get answeredBy(): string[] {
+    return [...this.answered];
+  }
+  private answered = new Set<string>();
+
   private async ask(
     name: PromptName,
     payload: unknown,
@@ -71,7 +78,16 @@ export class Pipeline {
         { role: "system", content: prompt(name) },
         { role: "user", content: pyDumps(payload) },
       ],
-      { model, temperature, fallbacks: this.models.pool, ...extra }
+      {
+        model,
+        temperature,
+        fallbacks: this.models.pool,
+        ...extra,
+        onAnswer: (answered) => {
+          this.answered.add(answered);
+          extra.onAnswer?.(answered);
+        },
+      }
     );
     return extractJson(reply);
   }
@@ -79,12 +95,18 @@ export class Pipeline {
   /* --- Steps 2 and 3: generate and validate --- */
 
   /** Up to `count` new English groups that pass `validateEn`. */
-  async generate(categoryName: string, difficulty: string, count: number, avoid: string[]): Promise<Group[]> {
+  async generate(
+    categoryName: string,
+    difficulty: string,
+    count: number,
+    avoid: string[],
+    hints: Record<string, unknown> = {}
+  ): Promise<Group[]> {
     let reply: unknown;
     try {
       reply = await this.ask(
         "generate.md",
-        { category: categoryName, difficulty, count, avoid },
+        { category: categoryName, difficulty, count, avoid, ...hints },
         this.models.generate,
         0.8,
         { onAnswer: (m) => (this.lastGenerator = m) }
@@ -119,8 +141,9 @@ export class Pipeline {
 
   /* --- Step 4: remove duplicates --- */
 
-  /** Groups whose question and answer aren't in `seen`; adds the kept ones. */
-  dedupe(groups: Group[], seen: Set<string>): Group[] {
+  /** Groups whose question and answer aren't in `seen`, or reworded in `facts`;
+   * adds the kept ones to both. */
+  dedupe(groups: Group[], seen: Set<string>, facts?: FactIndex): Group[] {
     const kept: Group[] = [];
     for (const group of groups) {
       const h = groupHash(group);
@@ -128,7 +151,13 @@ export class Pipeline {
         this.log(`dropped (duplicate): ${pyRepr(group.en.question)}`);
         continue;
       }
+      const answer = group.en.options[group.correctIndex]!;
+      if (facts?.matches(group.en.question, answer)) {
+        this.log(`dropped (reworded duplicate): ${pyRepr(group.en.question)}`);
+        continue;
+      }
       seen.add(h);
+      facts?.add(group.en.question, answer);
       kept.push(group);
     }
     return kept;
@@ -149,6 +178,13 @@ export class Pipeline {
    * with the options shuffled. `writers` are the families that wrote them,
    * which may not check them. */
   async verifyBatch(batch: Group[], writers: string[] = [modelFamily(this.models.generate)]): Promise<Group[]> {
+    // Failover can leave every family among the writers. Nobody may check these,
+    // and waiting won't change that, so they go and the next round writes more.
+    const checkers = [this.models.verify, ...(this.models.pool ?? [])];
+    if (checkers.every((m) => writers.includes(modelFamily(m)))) {
+      this.log(`verify: no model left that didn't write these; dropped ${batch.length} question(s)`);
+      return [];
+    }
     const payload: Array<{ id: string; question: string; options: Record<string, string> }> = [];
     const expected: Record<string, string> = {};
     batch.forEach((group, i) => {

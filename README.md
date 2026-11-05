@@ -57,6 +57,7 @@ npm start
 | Variable | Required | Description |
 | --- | --- | --- |
 | `NVIDIA_NIM_API_KEY` | for AI features | Your NIM key. Read **only on the server**, never sent to the browser. Without it, AI requests return a clear "missing key" error, and manual add/edit still works. |
+| `NVIDIA_NIM_API_KEY_2` | no | Backup NIM key. A request switches to it at once when the first key answers 429, 401 or 403, and the refused key is passed over for 60 s. |
 | `NVIDIA_NIM_MODEL` | no | Chat model id. Default `meta/llama-3.2-11b-vision-instruct` (see the model note below). |
 | `NVIDIA_NIM_BASE_URL` | no | Default `https://integrate.api.nvidia.com/v1`. |
 | `ADMIN_SECRET_KEY` | **yes** | The password for the hidden admin panel. |
@@ -66,9 +67,9 @@ npm start
 | `DIRECT_URL` | yes | PostgreSQL **direct** (non-pooled) connection string. Used by `prisma db push`. |
 | `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT` | for Quiz Master | Firebase Admin SDK key JSON of the Quiz Master project, **on one line** (Firestore, FCM, Auth and Remote Config). Server-only. Without it, Studio → Quiz Master only does dry runs. |
 | `QUIZMASTER_FIREBASE_PROJECT_ID` | no | Default: the key's `project_id` (`quizmaster-3be48`). |
-| `QUIZMASTER_GEN_MODEL` | no | First-choice NIM model that writes questions and push texts. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. |
-| `QUIZMASTER_VERIFY_MODEL` | no | First-choice NIM model that cross-checks answers. **Must be a different model family** from the generator. Default `mistralai/mistral-large-4-1t-a52b`, asked together with `minimaxai/minimax-m3.1-flash`; the first answer wins. |
-| `QUIZMASTER_TRANSLATE_MODEL` | no | First-choice NIM model for the Hindi and Hinglish versions. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. If a model errors or hasn't answered after 45 s, a call also asks the next in `MODEL_POOL` (`src/lib/quizmaster/nimClient.ts`) and takes the first answer; the verifier never uses a family that wrote the questions. |
+| `QUIZMASTER_GEN_MODEL` | no | First-choice NIM model that writes questions and push texts. Default `nvidia/nemotron-3.5-lightning-30b-a3b`. |
+| `QUIZMASTER_VERIFY_MODEL` | no | First-choice NIM model that cross-checks answers. **Must be a different model family** from the generator. Default `mistralai/mistral-large-4-1t-a52b`, asked together with `google/gemma-4-31b-it`; the first answer wins. |
+| `QUIZMASTER_TRANSLATE_MODEL` | no | First-choice NIM model for the Hindi and Hinglish versions. Default `nvidia/nemotron-3.5-lightning-30b-a3b`. If a model errors or hasn't answered after 45 s, a call also asks the next in `MODEL_POOL` (`src/lib/quizmaster/nimClient.ts`) and takes the first answer; the verifier never uses a family that wrote the questions. |
 | `COLORTAP_FIREBASE_SERVICE_ACCOUNT` | for Color Tap | Firebase Admin SDK key JSON of the Color Tap project (`color-tap-c06bf`), **on one line**, with the Firebase Authentication Admin role. Server-only. A key for any other project is refused. Without it, Studio → Color Tap can't run. |
 
 Generate a strong JWT secret with:
@@ -290,6 +291,7 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
 | `ADMIN_SECRET_KEY` | secret | **Your admin password** for `/studio` | `gh secret set ADMIN_SECRET_KEY`, then redeploy |
 | `ADMIN_JWT_SECRET` | secret | Signs admin session cookies (random 64-hex) | `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` → `gh secret set ADMIN_JWT_SECRET`, then redeploy. **Logs out every session.** |
 | `NVIDIA_NIM_API_KEY` | secret | NVIDIA NIM key (server-only) | `gh secret set NVIDIA_NIM_API_KEY`, then redeploy |
+| `NVIDIA_NIM_API_KEY_2` | secret | Backup NIM key, used when the first hits its limit (optional) | `gh secret set NVIDIA_NIM_API_KEY_2`, then redeploy |
 | `DATABASE_URL` | secret | Neon **pooled** URL, used by CI for schema push/seed. At runtime Vercel gets the same value from the Neon integration. | Rotate the password in Neon, then update both |
 | `DIRECT_URL` | secret | Neon **direct** URL (schema push) | as above |
 | `VERCEL_TOKEN` | secret | Lets Actions deploy to your Vercel account | Create at vercel.com/account/settings/tokens → `gh secret set VERCEL_TOKEN` |

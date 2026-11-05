@@ -63,6 +63,21 @@ function model(): string {
   return process.env.NVIDIA_NIM_MODEL || DEFAULT_MODEL;
 }
 
+/** How long a key that hit its limit is passed over, so calls don't waste a request on it. */
+const KEY_REST_MS = 60_000;
+const keyRestingUntil = new Map<string, number>();
+
+/** The main key, then the optional backup. */
+function apiKeys(): string[] {
+  return [process.env.NVIDIA_NIM_API_KEY, process.env.NVIDIA_NIM_API_KEY_2].filter((k): k is string => Boolean(k));
+}
+
+/** The first key not in `tried`, preferring one that isn't resting. */
+function pickKey(tried: Set<string>): string | undefined {
+  const untried = apiKeys().filter((k) => !tried.has(k));
+  return untried.find((k) => (keyRestingUntil.get(k) ?? 0) <= Date.now()) ?? untried[0];
+}
+
 /* ------------------------------------------------------------------ */
 /* Low-level chat                                                      */
 /* ------------------------------------------------------------------ */
@@ -90,7 +105,8 @@ export async function nimChat(
   user: string,
   opts: NimOptions = {}
 ): Promise<string> {
-  const apiKey = process.env.NVIDIA_NIM_API_KEY;
+  let triedKeys = new Set<string>();
+  let apiKey = pickKey(triedKeys);
   if (!apiKey) {
     throw new NIMError(
       "NVIDIA_NIM_API_KEY is not set on the server. Add it to .env and restart the dev server.",
@@ -178,6 +194,19 @@ export async function nimChat(
         continue;
       }
 
+      // This key is out of quota or refused: go straight to the other one. Each
+      // key is tried once per attempt, so this can't loop.
+      if (res.status === 429 || res.status === 401 || res.status === 403) {
+        keyRestingUntil.set(apiKey, Date.now() + KEY_REST_MS);
+        triedKeys.add(apiKey);
+        const otherKey = pickKey(triedKeys);
+        if (otherKey) {
+          apiKey = otherKey;
+          attempt--;
+          continue;
+        }
+      }
+
       if (res.status === 401 || res.status === 403) {
         throw new NIMError(
           "NIM rejected the API key (401). Check NVIDIA_NIM_API_KEY.",
@@ -211,6 +240,7 @@ export async function nimChat(
     }
 
     if (attempt < maxRetries) {
+      triedKeys = new Set();
       const wait = backoffMs * 2 ** attempt;
       await new Promise((r) => setTimeout(r, wait));
     }

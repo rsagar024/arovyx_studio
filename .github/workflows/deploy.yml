@@ -127,6 +127,8 @@ jobs:
       - name: Sync GitHub Secrets → Vercel runtime environment
         env:
           NVIDIA_NIM_API_KEY: ${{ secrets.NVIDIA_NIM_API_KEY }}
+          # Optional backup, used when the first key hits its limit
+          NVIDIA_NIM_API_KEY_2: ${{ secrets.NVIDIA_NIM_API_KEY_2 }}
           NVIDIA_NIM_MODEL: ${{ vars.NVIDIA_NIM_MODEL }}
           NVIDIA_NIM_BASE_URL: ${{ vars.NVIDIA_NIM_BASE_URL }}
           ADMIN_SECRET_KEY: ${{ secrets.ADMIN_SECRET_KEY }}
@@ -143,7 +145,7 @@ jobs:
         run: |
           api="https://api.vercel.com/v10/projects/$VERCEL_PROJECT_ID/env?upsert=true&teamId=$VERCEL_ORG_ID"
           failed=0
-          for name in DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
+          for name in DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_API_KEY_2 NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
                       ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL \
                       QUIZMASTER_FIREBASE_SERVICE_ACCOUNT QUIZMASTER_FIREBASE_PROJECT_ID \
                       QUIZMASTER_GEN_MODEL QUIZMASTER_VERIFY_MODEL QUIZMASTER_TRANSLATE_MODEL \
