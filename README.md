@@ -192,12 +192,13 @@ prisma/
 src/
   app/
     (public)/          home, projects, projects/[slug], about, contact
-    studio/            login page + (panel)/ overview, projects, add, messages, quizmaster, settings
+    studio/            login page + (panel)/ overview, projects, add, messages, apps, quizmaster, colortap, settings
     api/               routes listed above
     og/route.tsx       default social card
     layout.tsx, not-found.tsx, sitemap.ts, robots.ts, globals.css
   components/          Navbar, Footer, Hero, ProjectCard, badges, ThemeToggle, …
     studio/            StudioShell, AiGeneratePanel, ProjectForm, MessagesInbox, SettingsForm, …
+      apps/            the Apps page: card grid and registry.ts, the list of apps
       quizmaster/      the Quiz Master tab: stopwatch, run driver, forms, run history
   lib/
     fetchers.ts        GitHub/GitLab/npm/PyPI APIs + generic HTML extraction
@@ -210,6 +211,12 @@ src/
       assets/          prompts, push templates and the 405-group seed bank, copied verbatim
   middleware.ts        protects /studio/* and /api/admin/*
 ```
+
+---
+
+## Studio apps
+
+Studio → **Apps** has one card per app, with its current status. To add an app, give it a page under `src/app/studio/(panel)/` with `<BackToApps />` above its heading, then add an entry to `src/components/studio/apps/registry.ts`. That entry creates the card and keeps the **Apps** sidebar link highlighted on the app's page. Its optional `loadStatus` must only read: jobs start from an app's own page, never from the Apps page.
 
 ---
 
