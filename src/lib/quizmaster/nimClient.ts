@@ -11,16 +11,14 @@
  * share the generator's mistakes: `excludeFamilies` holds that line through
  * every failover.
  *
- * Defaults, measured on this key on 2026-11-04 with the real prompts:
- * - `nvidia/nemotron-3.5-super-vl-120b-a12b`: seconds for every job, 12/12 on
- *   verify. First choice for generate and translate, but it can't verify its
- *   own questions.
- * - `mistralai/mistral-large-4-1t-a52b` and `minimaxai/minimax-m3.1-flash`:
- *   12/12 on verify, usually about a minute, sometimes much longer, so verify
- *   asks both at once (`hedge`).
- * - `google/gemma-4-31b-it` and `z-ai/glm-5.3-flash`: slower, last resorts.
- * - `deepseek-ai/deepseek-v4.1-flash`, the previous verifier, timed out on
- *   every verify call of a real run.
+ * The pool is the owner's chosen list, as far as this key can reach it (checked
+ * 2026-11-05; the rest of that list answers HTTP 404 or 410):
+ * - `nvidia/nemotron-3.5-lightning-30b-a3b` and `nvidia/nemotron-3.5-bolt-e4b`:
+ *   under a second on a short request. They generate and translate, but can't
+ *   verify their own family's questions.
+ * - `mistralai/mistral-large-4-1t-a52b` and `google/gemma-4-31b-it`: the only
+ *   other families, 9 s and 39 s on a short request, so verify asks both at
+ *   once (`hedge`).
  *
  * Every call is bounded by the tick's deadline: a call that can't finish in
  * the time left throws `DeadlineError`, which ends the tick without counting
@@ -30,17 +28,16 @@
 import "server-only";
 import { NIMError, nimChat } from "@/lib/nim";
 
-export const DEFAULT_GEN_MODEL = "nvidia/nemotron-3.5-super-vl-120b-a12b";
+export const DEFAULT_GEN_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
 export const DEFAULT_VERIFY_MODEL = "mistralai/mistral-large-4-1t-a52b";
-export const DEFAULT_TRANSLATE_MODEL = "nvidia/nemotron-3.5-super-vl-120b-a12b";
+export const DEFAULT_TRANSLATE_MODEL = "nvidia/nemotron-3.5-lightning-30b-a3b";
 
 /** Failover order, fastest first. A job's first choice is tried before these. */
 export const MODEL_POOL = [
-  "nvidia/nemotron-3.5-super-vl-120b-a12b",
+  "nvidia/nemotron-3.5-lightning-30b-a3b",
+  "nvidia/nemotron-3.5-bolt-e4b",
   "mistralai/mistral-large-4-1t-a52b",
-  "minimaxai/minimax-m3.1-flash",
   "google/gemma-4-31b-it",
-  "z-ai/glm-5.3-flash",
 ];
 
 export interface Models {

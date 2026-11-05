@@ -30,6 +30,7 @@ import { PyRandom, type PyRandomState } from "./pyRandom";
 import { pyRepr } from "./pyText";
 import * as qb from "./questionBank";
 import { DIFFICULTIES, type Difficulty } from "./questionChecks";
+import { avoidFor, buildMemory, FactIndex, type KnownFact, type QuestionMemory } from "./questionMemory";
 
 export const PER_DIFFICULTY = 15;
 export const GENERATION_ROUNDS = 3; // the first try plus up to 2 retries
@@ -57,7 +58,14 @@ export interface GenState {
   toVerify: Group[];
   verifyPos: number;
   chosen: Record<Difficulty, Group[]>;
-  /** The newest questions, first 100 only (all the prompt ever uses). */
+  /** What the writer is told about the bank. Absent on runs saved before it
+   * existed, which keep using `avoid`; gone once generating is over. */
+  memory?: QuestionMemory;
+  /** Everything this run has generated so far, so retries don't repeat it. */
+  runKnown?: KnownFact[];
+  /** The models that answered the last unit, for its step row. */
+  unitModels?: string[];
+  /** Runs saved before `memory`: the newest questions, first 100 only. */
   avoid: string[];
   /** Hashes this run added to `seen` (the rest is re-read from the bank). */
   runSeen: string[];
@@ -201,6 +209,7 @@ export class Generator {
         break;
     }
     s.rng = rng.getState();
+    s.unitModels = pipeline.answeredBy;
     return s;
   }
 
@@ -218,11 +227,12 @@ export class Generator {
       return;
     }
     const existing = await this.existing(s);
-    // Newest first, so the prompt's window holds the latest questions.
-    const avoid = existing.map((g) => g.en.question).reverse();
-    avoid.push(...(this.deps.seed[category] ?? []).map((g) => g.en.question));
-    s.avoid = avoid.slice(0, RECENT_IN_PROMPT);
+    s.memory = buildMemory([...existing, ...(this.deps.seed[category] ?? [])], `${date}/${slot}`);
+    s.runKnown = [];
     this.log(`${date} ${slot} ${category}: aiming for ${3 * PER_DIFFICULTY} {'easy': 15, 'medium': 15, 'hard': 15}`);
+    this.log(
+      `memory: ${s.memory.known} known questions; sent ${DIFFICULTIES.map((d) => `${d} ${s.memory!.avoid[d].length}`).join(", ")}`
+    );
     this.startRound(s, 0);
   }
 
@@ -248,18 +258,34 @@ export class Generator {
     const [difficulty, short] = s.genQueue[0]!;
     // Ask for extra: some fail the checks or the verifier.
     const count = s.round === 0 ? short + Math.max(2, Math.floor(short / 2)) : short * 2;
-    s.fresh.push(...(await pipeline.generate(categoryName(s.category), difficulty, count, s.avoid.slice(0, RECENT_IN_PROMPT))));
+    const runQuestions = [...(s.runKnown ?? []).map((k) => k.question), ...s.fresh.map((g) => g.en.question)];
+    const avoid = s.memory ? avoidFor(s.memory, difficulty, runQuestions) : s.avoid.slice(0, RECENT_IN_PROMPT);
+    const hints = s.memory
+      ? { overused_topics: s.memory.overusedTopics, overused_patterns: s.memory.overusedPatterns }
+      : {};
+    s.fresh.push(...(await pipeline.generate(categoryName(s.category), difficulty, count, avoid, hints)));
     s.genFamilies = [...new Set([...(s.genFamilies ?? []), pipeline.generatedBy])];
     s.genQueue.shift();
     if (s.genQueue.length) return;
     // Every difficulty is in: drop duplicates of the seed bank (all
     // categories), the category's other questions and this run's.
+    const existing = await this.existing(s);
     const seen = new Set<string>(s.runSeen);
     for (const groups of Object.values(this.deps.seed)) for (const g of groups) seen.add(groupHash(g));
-    for (const g of await this.existing(s)) seen.add(groupHash(g));
+    for (const g of existing) seen.add(groupHash(g));
+    const facts = new FactIndex();
+    for (const g of [...existing, ...(this.deps.seed[s.category] ?? [])]) {
+      facts.add(g.en.question, g.en.options[g.correctIndex]!);
+    }
+    for (const k of s.runKnown ?? []) facts.add(k.question, k.answer);
     const before = new Set(seen);
-    s.toVerify = pipeline.dedupe(s.fresh, seen);
+    s.toVerify = pipeline.dedupe(s.fresh, seen, facts);
     for (const h of seen) if (!before.has(h)) s.runSeen.push(h);
+    // Kept or not, the writer shouldn't offer these again.
+    s.runKnown = [
+      ...(s.runKnown ?? []),
+      ...s.fresh.map((g) => ({ question: g.en.question, answer: g.en.options[g.correctIndex]! })),
+    ];
     s.fresh = [];
     s.verifyPos = 0;
     s.phase = "verify";
@@ -289,6 +315,9 @@ export class Generator {
     const groups = DIFFICULTIES.flatMap((d) => s.chosen[d]);
     s.chosen = { easy: [], medium: [], hard: [] };
     s.genQueue = [];
+    // Generating is over: keep the state row small.
+    delete s.memory;
+    delete s.runKnown;
     if (!groups.length) {
       this.log(`${s.category}: no questions survived; nothing written`);
       s.status = "empty";

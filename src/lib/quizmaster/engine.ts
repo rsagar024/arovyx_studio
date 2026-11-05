@@ -323,7 +323,11 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
             result.doc = next.doc.id;
           }
           summary.categories![cat] = result;
-          await repo.updateStep(row.id, { status: "done", state: JSON.stringify(result), error: null });
+          await repo.updateStep(row.id, {
+            status: "done",
+            state: JSON.stringify({ ...result, models: next.unitModels ?? [] }),
+            error: null,
+          });
           await flush();
           await saveSummary();
           return true;
@@ -331,7 +335,7 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
         // Add the next unit first, then close this one: a crash in between
         // leaves two pending rows, and the newer one wins (above).
         const added = await repo.addStep(runId, { key: unitKey(next), order: row.order + 1, state: JSON.stringify(next) });
-        await repo.updateStep(row.id, { status: "done", state: "{}", error: null });
+        await repo.updateStep(row.id, { status: "done", state: JSON.stringify({ models: next.unitModels ?? [] }), error: null });
         row = added;
         await flush();
         await saveSummary();
@@ -486,8 +490,18 @@ async function runPostUnit(
       return {};
     }
     case "daily_quiz": {
+      const answeredBy = new Set<string>();
       const notifier = new Notifier({
-        nim: jobs.nim,
+        nim: {
+          chat: (messages, opts) =>
+            jobs.nim.chat(messages, {
+              ...opts,
+              onAnswer: (model) => {
+                answeredBy.add(model);
+                opts.onAnswer?.(model);
+              },
+            }),
+        },
         models: jobs.models,
         messenger: jobs.messenger,
         commit: (w) => jobs.docs.commit(w),
@@ -515,7 +529,7 @@ async function runPostUnit(
         }
         throw err;
       }
-      return {};
+      return { state: JSON.stringify({ models: [...answeredBy] }) };
     }
     case "notify": {
       const problems: string[] = [];

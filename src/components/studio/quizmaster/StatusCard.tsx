@@ -7,6 +7,7 @@ import { KIND_LABEL, STATUS_STYLE, cardClass, fmtIst, type Status } from "./api"
 const ENV_KEYS: Array<[string, string]> = [
   ["QUIZMASTER_FIREBASE_SERVICE_ACCOUNT", "required"],
   ["NVIDIA_NIM_API_KEY", "required"],
+  ["NVIDIA_NIM_API_KEY_2", "optional"],
   ["QUIZMASTER_FIREBASE_PROJECT_ID", "optional"],
   ["QUIZMASTER_GEN_MODEL", "optional"],
   ["QUIZMASTER_VERIFY_MODEL", "optional"],
