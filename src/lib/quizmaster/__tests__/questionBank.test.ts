@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it } from "vitest";
 import { seedBank, type Group } from "../assets";
 import { ALL_CATEGORIES } from "../categories";
 import { SendFailed, TOPICS } from "../dailyNotify";
-import { Generator, PER_DIFFICULTY, startState, type GenState } from "../generator";
+import { GENERATION_ROUNDS, Generator, PER_DIFFICULTY, startState, type GenState } from "../generator";
 import type { ChatMessage, ChatOptions } from "../nimClient";
 import { notifyNewQuestions, recordPath } from "../notifyQuestions";
 import { publish, seed } from "../publish";
@@ -310,7 +310,7 @@ describe("generate", () => {
     const g = makeGenerator(nim);
     expect(await g.run(CATEGORY, DATE, "am")).toBe("empty");
     expect(await g.store.get(BASE)).toBeNull();
-    expect(nim.calls.filter((c) => c === "gen").length).toBe(9); // the first try and 2 retries, per difficulty
+    expect(nim.calls.filter((c) => c === "gen").length).toBe(3 * GENERATION_ROUNDS); // every round, per difficulty
   });
 
   it("a batch the verifier leaves empty is verified in halves", async () => {

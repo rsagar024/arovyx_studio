@@ -16,8 +16,12 @@ import type { Group } from "./assets";
 import { casefold } from "./pyText";
 import { DIFFICULTIES, normalize, type Difficulty } from "./questionChecks";
 
-/** About 6k tokens, which every model in the pool takes with room to reply. */
-export const MAX_AVOID_CHARS = 24_000;
+/** What one call gets. Longer lists stopped the small writer models working
+ * (measured 2026-11-05: at 370 questions one ran on past 12,000 tokens). */
+export const MAX_AVOID_CHARS = 9_000;
+/** What a run keeps to choose from, per difficulty. */
+export const MEMORY_POOL_CHARS = 24_000;
+export const TOPICS_PER_CALL = 3;
 /** Share of content words two questions need in common to be the same fact. */
 export const REWORD_SIMILARITY = 0.7;
 /** A question this short says too little to count as contained in another. */
@@ -90,7 +94,7 @@ function fit(questions: string[], budget: number): string[] {
 }
 
 /** `rotation` (date and slot) reorders the questions, so each run's pick differs. */
-export function buildMemory(groups: Group[], rotation: string, budget = MAX_AVOID_CHARS): QuestionMemory {
+export function buildMemory(groups: Group[], rotation: string, budget = MEMORY_POOL_CHARS): QuestionMemory {
   const unique = new Map<string, Group>();
   for (const g of groups) {
     const key = normalize(g.en.question);
@@ -126,16 +130,58 @@ export function buildMemory(groups: Group[], rotation: string, budget = MAX_AVOI
   };
 }
 
-/** This run's questions, newest first, then the bank's, within the budget. */
+/** A topic's or question's words that say what it's about: "rivers of Africa" → river, africa. */
+function keywords(text: string): string[] {
+  return words(text)
+    .filter((w) => w.length >= 4 && !STOPWORDS.has(w))
+    .map((w) => w.replace(/ies$/, "y").replace(/(o|sh|ch|x)es$/, "$1").replace(/s$/, ""));
+}
+
+const mentions = (questionWords: Set<string>, topic: string) => keywords(topic).some((w) => questionWords.has(w));
+
+/** How many known questions mention each of the category's topics. */
+export function topicCoverage(topics: string[], groups: Group[]): Record<string, number> {
+  const asked = groups.map((g) => new Set(keywords(g.en.question)));
+  return Object.fromEntries(topics.map((t) => [t, asked.filter((q) => mentions(q, t)).length]));
+}
+
+/**
+ * The next topics for a call: the least-covered not yet `used` this run, with
+ * `rotation` settling ties so runs differ. Starts over when all have been used.
+ */
+export function pickTopics(
+  coverage: Record<string, number>,
+  used: string[],
+  rotation: string,
+  count = TOPICS_PER_CALL
+): string[] {
+  const all = Object.keys(coverage);
+  const unused = all.filter((t) => !used.includes(t));
+  const hash = (t: string) => createHash("sha1").update(`${rotation}|${t}`, "utf8").digest("hex");
+  const order = (list: string[]) =>
+    [...list].sort((a, b) => coverage[a]! - coverage[b]! || (hash(a) < hash(b) ? -1 : 1));
+  const first = order(unused).slice(0, count);
+  if (first.length === count || unused.length === all.length) return first;
+  return [...first, ...order(all.filter((t) => !first.includes(t))).slice(0, count - first.length)];
+}
+
+/** This run's questions, newest first, then known questions on `topics`, then
+ * the rest (same difficulty first), within the budget. */
 export function avoidFor(
   memory: QuestionMemory,
   difficulty: Difficulty,
   runQuestions: string[],
+  topics: string[] = [],
   budget = MAX_AVOID_CHARS
 ): string[] {
+  const onTopic = (q: string) => {
+    const asked = new Set(keywords(q));
+    return topics.some((t) => mentions(asked, t));
+  };
+  const known = memory.avoid[difficulty];
   const seen = new Set<string>();
   const merged: string[] = [];
-  for (const q of [...[...runQuestions].reverse(), ...memory.avoid[difficulty]]) {
+  for (const q of [...[...runQuestions].reverse(), ...known.filter(onTopic), ...known.filter((k) => !onTopic(k))]) {
     const key = normalize(q);
     if (seen.has(key)) continue;
     seen.add(key);

@@ -54,3 +54,44 @@ export function extractJson(input: string): unknown {
   }
   throw new JsonExtractError(`no JSON in model reply: ${pyRepr(text.slice(0, 200))}`);
 }
+
+/**
+ * The list under `key` in a reply like `{"questions": [{...}, {...}]}`.
+ *
+ * A reply cut off by the token limit, or with one malformed item, doesn't parse
+ * as a whole, and `extractJson` would then return its first item alone. Here
+ * every complete item is kept instead (`salvaged`). Throws `JsonExtractError`
+ * if the reply has no such list.
+ */
+export function extractList(input: string, key: string): { items: unknown[]; salvaged: boolean } {
+  const text = input.replace(THINK, "");
+  const opening = new RegExp(`"${key}"\\s*:\\s*\\[`).exec(text);
+  if (!opening) {
+    const whole = extractJson(text);
+    if (Array.isArray(whole)) return { items: whole, salvaged: false };
+    throw new JsonExtractError(`no "${key}" list in model reply: ${pyRepr(text.slice(0, 200))}`);
+  }
+  const listStart = opening.index + opening[0].length - 1;
+  const listEnd = balancedEnd(text, listStart);
+  if (listEnd >= 0) {
+    try {
+      const items: unknown = JSON.parse(text.slice(listStart, listEnd));
+      if (Array.isArray(items)) return { items, salvaged: false };
+    } catch {
+      // A malformed item: keep the others, below.
+    }
+  }
+  const items: unknown[] = [];
+  let at = text.indexOf("{", listStart);
+  while (at >= 0) {
+    const end = balancedEnd(text, at);
+    if (end < 0) break; // the item the reply was cut off in
+    try {
+      items.push(JSON.parse(text.slice(at, end)));
+    } catch {
+      // This item is malformed; the next may not be.
+    }
+    at = text.indexOf("{", end);
+  }
+  return { items, salvaged: true };
+}
