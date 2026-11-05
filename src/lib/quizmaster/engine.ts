@@ -22,7 +22,7 @@ import type { Group } from "./assets";
 import { ALL_CATEGORIES } from "./categories";
 import { Notifier, SendFailed, errMessage, errName } from "./dailyNotify";
 import { DailyJob, NotEnoughQuestions } from "./dailyQuiz";
-import { FirebaseNotConfigured } from "./firebase";
+import { FirebaseNoPermission, FirebaseNotConfigured } from "./firebase";
 import { describeUnit, estimateRemaining, Generator, startState, unitKey, type GenState } from "./generator";
 import { cleanupPage, startCleanup, type CleanupState } from "./guestCleanup";
 import { cleanLine, levelOf } from "./log";
@@ -212,7 +212,8 @@ export class RunNotFound extends Error {
 }
 
 /** Errors that will fail the same way however often they're retried. */
-const isFatal = (err: unknown) => err instanceof NotEnoughQuestions || err instanceof FirebaseNotConfigured;
+const isFatal = (err: unknown) =>
+  err instanceof NotEnoughQuestions || err instanceof FirebaseNotConfigured || err instanceof FirebaseNoPermission;
 
 export async function tick(deps: EngineDeps, runId: string): Promise<TickResult> {
   const clock = deps.clock ?? Date.now;
