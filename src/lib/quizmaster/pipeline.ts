@@ -11,7 +11,7 @@
  */
 import "server-only";
 import { prompt, type Group, type PromptName } from "./assets";
-import { extractJson, JsonExtractError } from "./jsonExtract";
+import { extractJson, extractList, JsonExtractError } from "./jsonExtract";
 import { isDeadline, modelFamily, type ChatOptions, type Models, type Nim } from "./nimClient";
 import { pyDumps } from "./pyJson";
 import type { PyRandom } from "./pyRandom";
@@ -73,7 +73,17 @@ export class Pipeline {
     temperature: number,
     extra: Partial<ChatOptions> = {}
   ): Promise<unknown> {
-    const reply = await this.nim.chat(
+    return extractJson(await this.askText(name, payload, model, temperature, extra));
+  }
+
+  private askText(
+    name: PromptName,
+    payload: unknown,
+    model: string,
+    temperature: number,
+    extra: Partial<ChatOptions> = {}
+  ): Promise<string> {
+    return this.nim.chat(
       [
         { role: "system", content: prompt(name) },
         { role: "user", content: pyDumps(payload) },
@@ -89,7 +99,6 @@ export class Pipeline {
         },
       }
     );
-    return extractJson(reply);
   }
 
   /* --- Steps 2 and 3: generate and validate --- */
@@ -102,23 +111,28 @@ export class Pipeline {
     avoid: string[],
     hints: Record<string, unknown> = {}
   ): Promise<Group[]> {
-    let reply: unknown;
+    let items: unknown[];
     try {
-      reply = await this.ask(
-        "generate.md",
-        { category: categoryName, difficulty, count, avoid, ...hints },
-        this.models.generate,
-        0.8,
-        { onAnswer: (m) => (this.lastGenerator = m) }
+      const reply = extractList(
+        await this.askText(
+          "generate.md",
+          { category: categoryName, difficulty, count, avoid, ...hints },
+          this.models.generate,
+          0.8,
+          { onAnswer: (m) => (this.lastGenerator = m) }
+        ),
+        "questions"
       );
+      items = reply.items;
+      if (reply.salvaged) this.log(`generate ${difficulty}: reply was incomplete; kept its ${items.length} complete questions`);
     } catch (err) {
       if (!(err instanceof JsonExtractError)) throw err;
       this.log(`generate ${difficulty}: ${err.message}`);
       return [];
     }
-    const items = isObject(reply) && Array.isArray(reply.questions) ? reply.questions : [];
     const groups: Group[] = [];
-    for (const item of items.slice(0, count)) {
+    // Extras are worth keeping: many won't survive the duplicate check.
+    for (const item of items.slice(0, count * 2)) {
       if (!isObject(item)) continue;
       const tags = item.tags;
       const group = {
