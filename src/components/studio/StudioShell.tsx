@@ -8,34 +8,33 @@ import {
   FolderKanban,
   Inbox,
   LayoutDashboard,
+  LayoutGrid,
   LogOut,
   Menu,
-  Palette,
   Settings,
   Sparkles,
-  Timer,
   X,
 } from "lucide-react";
 import SkipLink from "@/components/SkipLink";
 import ThemeToggle from "@/components/ThemeToggle";
 import BrandMark from "@/components/BrandMark";
+import { APPS } from "@/components/studio/apps/registry";
 import { cn } from "@/lib/utils";
 
-const NAV_ITEMS = [
+const NAV_ITEMS: Array<{ href: string; label: string; icon: typeof Inbox; alsoActiveOn?: string[] }> = [
   { href: "/studio/overview", label: "Overview", icon: LayoutDashboard },
   { href: "/studio/projects", label: "Projects", icon: FolderKanban },
   { href: "/studio/add", label: "Add Project", icon: Sparkles },
   { href: "/studio/messages", label: "Messages", icon: Inbox },
-  { href: "/studio/quizmaster", label: "Quiz Master", icon: Timer },
-  { href: "/studio/colortap", label: "Color Tap", icon: Palette },
+  { href: "/studio/apps", label: "Apps", icon: LayoutGrid, alsoActiveOn: APPS.map((app) => app.href) },
   { href: "/studio/settings", label: "Settings", icon: Settings },
 ];
 
 function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
   return (
     <nav aria-label="Studio" className="flex flex-col gap-1">
-      {NAV_ITEMS.map(({ href, label, icon: Icon }) => {
-        const active = pathname === href || pathname.startsWith(`${href}/`);
+      {NAV_ITEMS.map(({ href, label, icon: Icon, alsoActiveOn = [] }) => {
+        const active = [href, ...alsoActiveOn].some((path) => pathname === path || pathname.startsWith(`${path}/`));
         return (
           <Link
             key={href}
