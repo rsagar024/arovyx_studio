@@ -60,6 +60,7 @@ export function envCheck() {
     QUIZMASTER_VERIFY_MODEL: Boolean(process.env.QUIZMASTER_VERIFY_MODEL),
     QUIZMASTER_TRANSLATE_MODEL: Boolean(process.env.QUIZMASTER_TRANSLATE_MODEL),
     NVIDIA_NIM_API_KEY: Boolean(process.env.NVIDIA_NIM_API_KEY),
+    NVIDIA_NIM_API_KEY_2: Boolean(process.env.NVIDIA_NIM_API_KEY_2),
     NVIDIA_NIM_BASE_URL: Boolean(process.env.NVIDIA_NIM_BASE_URL),
     models: m,
     modelsOk: modelFamily(m.generate) !== modelFamily(m.verify),
@@ -251,6 +252,16 @@ async function start(kind: RunKind, trigger: "timer" | "manual", slot: string, o
   return { runId: result.run.id, created: result.created, resumed: !result.created };
 }
 
+/** The models that answered a finished step; none for older runs or model-free steps. */
+export function stepModels(state: string): string[] {
+  try {
+    const models = (JSON.parse(state) as { models?: unknown } | null)?.models;
+    return Array.isArray(models) ? models.filter((m): m is string => typeof m === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 export async function runDetail(id: string, after?: Date) {
   const run = await repo.getRun(id);
   if (!run) return null;
@@ -259,7 +270,14 @@ export async function runDetail(id: string, after?: Date) {
   return {
     run: runDto(run),
     progress: (await snapshot(repo, id)).progress,
-    steps: steps.map((s) => ({ key: s.key, order: s.order, status: s.status, attempts: s.attempts, error: s.error })),
+    steps: steps.map((s) => ({
+      key: s.key,
+      order: s.order,
+      status: s.status,
+      attempts: s.attempts,
+      error: s.error,
+      models: stepModels(s.state),
+    })),
     logs: logs.map((l) => ({ at: l.at.toISOString(), level: l.level, message: l.message })),
   };
 }

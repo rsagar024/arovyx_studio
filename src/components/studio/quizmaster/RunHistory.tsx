@@ -78,7 +78,7 @@ export default function RunHistory({ runs, onChanged }: { runs: RunInfo[]; onCha
 function RunDrawer({ id, onClose, onChanged }: { id: string; onClose: () => void; onChanged: () => void }) {
   const [detail, setDetail] = useState<RunDetail | null>(null);
   const [logs, setLogs] = useState<RunDetail["logs"]>([]);
-  const [showSteps, setShowSteps] = useState(false);
+  const [showSteps, setShowSteps] = useState(true);
   const cursor = useRef<string | null>(null);
   const logBox = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -216,6 +216,7 @@ function RunDrawer({ id, onClose, onChanged }: { id: string; onClose: () => void
                     {detail.steps.map((s) => (
                       <li key={s.key} className={cn(s.status === "failed" && "text-rose-500", s.status === "pending" && "text-[var(--muted)]")}>
                         {s.status.padEnd(7)} {s.key}
+                        {s.models?.length ? ` · ${s.models.map((m) => m.split("/").pop()).join(", ")}` : ""}
                         {s.attempts ? ` (attempts ${s.attempts})` : ""}
                         {s.error ? ` — ${s.error}` : ""}
                       </li>

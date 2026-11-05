@@ -59,7 +59,7 @@ export interface TickResponse {
 export interface RunDetail {
   run: RunInfo;
   progress: Progress;
-  steps: Array<{ key: string; order: number; status: string; attempts: number; error: string | null }>;
+  steps: Array<{ key: string; order: number; status: string; attempts: number; error: string | null; models: string[] }>;
   logs: Array<{ at: string; level: string; message: string }>;
 }
 
