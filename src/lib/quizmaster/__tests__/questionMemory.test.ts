@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import type { Group } from "../assets";
 import { Generator, startState, type GenState } from "../generator";
+import { extractList, JsonExtractError } from "../jsonExtract";
 import type { ChatMessage, ChatOptions, Models } from "../nimClient";
 import { Pipeline } from "../pipeline";
 import { PyRandom } from "../pyRandom";
 import * as qb from "../questionBank";
-import { avoidFor, buildMemory, FactIndex } from "../questionMemory";
+import { avoidFor, buildMemory, FactIndex, MAX_AVOID_CHARS, pickTopics, topicCoverage } from "../questionMemory";
+import { TOPICS } from "../topics";
+import { ALL_CATEGORIES } from "../categories";
 import { stepModels } from "../service";
 import { FakeNim, MODELS } from "./fakeNim";
 
@@ -87,9 +90,66 @@ describe("avoidFor", () => {
 
   it("keeps this run's questions when the budget is tight", () => {
     const m = buildMemory(many(50, "easy", "bank"), "r");
-    const out = avoidFor(m, "easy", ["from this run?"], 40);
+    const out = avoidFor(m, "easy", ["from this run?"], [], 40);
     expect(out[0]).toBe("from this run?");
     expect(out.join("").length).toBeLessThanOrEqual(40);
+  });
+
+  it("puts known questions on the call's topics ahead of the rest", () => {
+    const m = buildMemory(
+      [...many(20, "easy", "Unrelated planet"), group("Which river flows through Cairo in Africa?"), group("Which river is longest?")],
+      "r"
+    );
+    const out = avoidFor(m, "easy", ["from this run?"], ["rivers of Africa"]);
+    expect(out[0]).toBe("from this run?");
+    expect(out.slice(1, 3).sort()).toEqual(["Which river flows through Cairo in Africa?", "Which river is longest?"]);
+  });
+
+  it("stays within what one call may send by default", () => {
+    const m = buildMemory(many(600, "easy", "A rather long question about something"), "r");
+    expect(avoidFor(m, "easy", []).join("").length).toBeLessThanOrEqual(MAX_AVOID_CHARS);
+  });
+});
+
+describe("focus topics", () => {
+  it("every category has plenty of different topics", () => {
+    for (const c of ALL_CATEGORIES) {
+      expect(new Set(TOPICS[c]).size, c).toBeGreaterThanOrEqual(25);
+    }
+  });
+
+  it("counts the questions that mention a topic", () => {
+    const coverage = topicCoverage(
+      ["rivers of Africa", "volcanoes"],
+      [group("Which river is longest?"), group("Which African river is it?"), group("Which volcano erupted?"), group("What is gold?")]
+    );
+    expect(coverage).toEqual({ "rivers of Africa": 2, volcanoes: 1 });
+  });
+
+  it("picks the least covered first and doesn't reuse a topic until all are used", () => {
+    const coverage = { a: 9, b: 1, c: 5, d: 0 };
+    expect(pickTopics(coverage, [], "r", 2)).toEqual(["d", "b"]);
+    expect(pickTopics(coverage, ["d", "b"], "r", 2)).toEqual(["c", "a"]);
+    expect(pickTopics(coverage, ["d", "b", "c"], "r", 2)).toEqual(["a", "d"]);
+    expect(pickTopics({}, [], "r")).toEqual([]);
+  });
+
+  it("settles ties differently from run to run", () => {
+    const coverage = Object.fromEntries(Array.from({ length: 30 }, (_, i) => [`topic ${i}`, 0]));
+    const picks = new Set(Array.from({ length: 10 }, (_, i) => pickTopics(coverage, [], `run ${i}`).join()));
+    expect(picks.size).toBeGreaterThan(1);
+  });
+
+  it("each call asks about different topics, and the state stays clean afterwards", async () => {
+    const nim = new RecordingNim();
+    const gen = new Generator({ store: new qb.MemoryBankStore(), nim, models: MODELS, seed: {} });
+    let s = startState(CATEGORY, DATE, "am", false, DATE);
+    while (s.phase !== "translate" && s.phase !== "done") s = await gen.step(s);
+    const asked = nim.requests.map((r) => (r as unknown as { focus_topics: string[] }).focus_topics);
+    expect(asked[0]).toHaveLength(3);
+    expect(new Set(asked.flat()).size).toBe(asked.flat().length);
+    expect(s.topicCounts).toBeUndefined();
+    expect(s.usedTopics).toBeUndefined();
   });
 });
 
@@ -135,18 +195,19 @@ describe("what the writer is told", () => {
     return s;
   };
 
-  it("sends the whole bank, not the newest 100", async () => {
+  it("draws on the whole bank and the seed, not just the newest 100", async () => {
     const store = new qb.MemoryBankStore();
-    const bank = many(300, "easy", "bank easy");
+    const bank = many(200, "easy", "bank easy");
     await qb.appendBatch(store, CATEGORY, "2026-10-01", "am", bank);
     const nim = new RecordingNim();
     const gen = new Generator({ store, nim, models: MODELS, seed: { [CATEGORY]: [group("A seed question here?")] } });
     await gen.run(CATEGORY, DATE, "am");
     const first = nim.requests[0]!;
     expect(first.difficulty).toBe("easy");
-    expect(first.avoid).toHaveLength(301);
+    expect(first.avoid).toHaveLength(201);
     expect(first.avoid).toContain(bank[0]!.en.question);
     expect(first.avoid).toContain("A seed question here?");
+    expect(first).toHaveProperty("focus_topics");
     expect(first).toHaveProperty("overused_topics");
     expect(first).toHaveProperty("overused_patterns");
   });
@@ -223,6 +284,56 @@ describe("which model answered", () => {
     expect(stepModels("{}")).toEqual([]);
     expect(stepModels("null")).toEqual([]);
     expect(stepModels("not json")).toEqual([]);
+  });
+});
+
+describe("replies that don't parse as a whole", () => {
+  const item = (n: number) => ({
+    question: `Which thing is number ${n}?`,
+    options: ["A", "B", "C", "D"],
+    correctIndex: n % 4,
+    explanation: "Because.",
+    subcategory: "misc",
+    tags: ["x"],
+  });
+  const list = (n: number) => Array.from({ length: n }, (_, i) => item(i + 1));
+
+  it("reads a whole reply, fenced or not", () => {
+    expect(extractList(`Here:\n\`\`\`json\n${JSON.stringify({ questions: list(3) })}\n\`\`\``, "questions")).toEqual({
+      items: list(3),
+      salvaged: false,
+    });
+  });
+
+  it("keeps every complete question from a reply cut off mid-question", () => {
+    const whole = JSON.stringify({ questions: list(5) });
+    const cut = whole.slice(0, whole.lastIndexOf("explanation"));
+    const out = extractList(cut, "questions");
+    expect(out.salvaged).toBe(true);
+    expect(out.items).toEqual(list(4));
+  });
+
+  it("skips a malformed question and keeps the rest", () => {
+    const broken = `{"questions": [${JSON.stringify(item(1))}, {"question": oops}, ${JSON.stringify(item(3))}]}`;
+    const out = extractList(broken, "questions");
+    expect(out.salvaged).toBe(true);
+    expect(out.items).toEqual([item(1), item(3)]);
+  });
+
+  it("accepts a bare list, and refuses a reply with no list", () => {
+    expect(extractList(JSON.stringify(list(2)), "questions").items).toEqual(list(2));
+    expect(() => extractList('{"answer": 1}', "questions")).toThrow(JsonExtractError);
+    expect(() => extractList("sorry, no", "questions")).toThrow(JsonExtractError);
+  });
+
+  it("generate keeps a cut-off reply's questions, spares included, up to twice the count", async () => {
+    const whole = JSON.stringify({ questions: list(30) });
+    const nim = { chat: async () => whole.slice(0, whole.lastIndexOf("explanation")) };
+    const logs: string[] = [];
+    const pipeline = new Pipeline(nim, MODELS, new PyRandom("x"), (l) => logs.push(l));
+    expect(await pipeline.generate("Science", "easy", 22, [])).toHaveLength(29);
+    expect(await pipeline.generate("Science", "easy", 10, [])).toHaveLength(20);
+    expect(logs).toContain("generate easy: reply was incomplete; kept its 29 complete questions");
   });
 });
 

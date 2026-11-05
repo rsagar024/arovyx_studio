@@ -30,10 +30,11 @@ import { PyRandom, type PyRandomState } from "./pyRandom";
 import { pyRepr } from "./pyText";
 import * as qb from "./questionBank";
 import { DIFFICULTIES, type Difficulty } from "./questionChecks";
-import { avoidFor, buildMemory, FactIndex, type KnownFact, type QuestionMemory } from "./questionMemory";
+import { avoidFor, buildMemory, FactIndex, pickTopics, topicCoverage, type KnownFact, type QuestionMemory } from "./questionMemory";
+import { TOPICS } from "./topics";
 
 export const PER_DIFFICULTY = 15;
-export const GENERATION_ROUNDS = 3; // the first try plus up to 2 retries
+export const GENERATION_ROUNDS = 6; // the first try plus up to 5 retries
 export const RECENT_IN_PROMPT = 100;
 
 export type GenStatus = "exists" | "published" | "empty";
@@ -63,6 +64,9 @@ export interface GenState {
   memory?: QuestionMemory;
   /** Everything this run has generated so far, so retries don't repeat it. */
   runKnown?: KnownFact[];
+  /** Known questions per topic, and the topics this run has asked about. */
+  topicCounts?: Record<string, number>;
+  usedTopics?: string[];
   /** The models that answered the last unit, for its step row. */
   unitModels?: string[];
   /** Runs saved before `memory`: the newest questions, first 100 only. */
@@ -171,6 +175,22 @@ function missingNow(s: GenState): Array<[Difficulty, number]> {
   );
 }
 
+/** What's worth a verifier call: per difficulty, what's still needed plus half
+ * again as spares for the verifier to reject. */
+function spareTrimmed(groups: Group[], s: GenState): Group[] {
+  const room = new Map<string, number>(
+    DIFFICULTIES.map((d) => {
+      const short = PER_DIFFICULTY - s.chosen[d].length;
+      return [d, short + Math.ceil(short / 2)] as [string, number];
+    })
+  );
+  return groups.filter((g) => {
+    const left = room.get(g.difficulty) ?? 0;
+    room.set(g.difficulty, left - 1);
+    return left > 0;
+  });
+}
+
 export class Generator {
   private log: (line: string) => void;
   constructor(private deps: GeneratorDeps) {
@@ -227,8 +247,11 @@ export class Generator {
       return;
     }
     const existing = await this.existing(s);
-    s.memory = buildMemory([...existing, ...(this.deps.seed[category] ?? [])], `${date}/${slot}`);
+    const known = [...existing, ...(this.deps.seed[category] ?? [])];
+    s.memory = buildMemory(known, `${date}/${slot}`);
     s.runKnown = [];
+    s.topicCounts = topicCoverage(TOPICS[category] ?? [], known);
+    s.usedTopics = [];
     this.log(`${date} ${slot} ${category}: aiming for ${3 * PER_DIFFICULTY} {'easy': 15, 'medium': 15, 'hard': 15}`);
     this.log(
       `memory: ${s.memory.known} known questions; sent ${DIFFICULTIES.map((d) => `${d} ${s.memory!.avoid[d].length}`).join(", ")}`
@@ -259,11 +282,19 @@ export class Generator {
     // Ask for extra: some fail the checks or the verifier.
     const count = s.round === 0 ? short + Math.max(2, Math.floor(short / 2)) : short * 2;
     const runQuestions = [...(s.runKnown ?? []).map((k) => k.question), ...s.fresh.map((g) => g.en.question)];
-    const avoid = s.memory ? avoidFor(s.memory, difficulty, runQuestions) : s.avoid.slice(0, RECENT_IN_PROMPT);
+    const topics = pickTopics(s.topicCounts ?? {}, s.usedTopics ?? [], `${s.date}/${s.slot}`);
+    const avoid = s.memory ? avoidFor(s.memory, difficulty, runQuestions, topics) : s.avoid.slice(0, RECENT_IN_PROMPT);
     const hints = s.memory
-      ? { overused_topics: s.memory.overusedTopics, overused_patterns: s.memory.overusedPatterns }
+      ? {
+          ...(topics.length ? { focus_topics: topics } : {}),
+          overused_topics: s.memory.overusedTopics,
+          overused_patterns: s.memory.overusedPatterns,
+        }
       : {};
     s.fresh.push(...(await pipeline.generate(categoryName(s.category), difficulty, count, avoid, hints)));
+    const all = Object.keys(s.topicCounts ?? {});
+    const used = [...new Set([...(s.usedTopics ?? []), ...topics])];
+    s.usedTopics = used.length >= all.length ? [] : used;
     s.genFamilies = [...new Set([...(s.genFamilies ?? []), pipeline.generatedBy])];
     s.genQueue.shift();
     if (s.genQueue.length) return;
@@ -279,7 +310,7 @@ export class Generator {
     }
     for (const k of s.runKnown ?? []) facts.add(k.question, k.answer);
     const before = new Set(seen);
-    s.toVerify = pipeline.dedupe(s.fresh, seen, facts);
+    s.toVerify = spareTrimmed(pipeline.dedupe(s.fresh, seen, facts), s);
     for (const h of seen) if (!before.has(h)) s.runSeen.push(h);
     // Kept or not, the writer shouldn't offer these again.
     s.runKnown = [
@@ -318,6 +349,8 @@ export class Generator {
     // Generating is over: keep the state row small.
     delete s.memory;
     delete s.runKnown;
+    delete s.topicCounts;
+    delete s.usedTopics;
     if (!groups.length) {
       this.log(`${s.category}: no questions survived; nothing written`);
       s.status = "empty";
