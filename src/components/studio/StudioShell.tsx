@@ -10,6 +10,7 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
+  Palette,
   Settings,
   Sparkles,
   Timer,
@@ -26,6 +27,7 @@ const NAV_ITEMS = [
   { href: "/studio/add", label: "Add Project", icon: Sparkles },
   { href: "/studio/messages", label: "Messages", icon: Inbox },
   { href: "/studio/quizmaster", label: "Quiz Master", icon: Timer },
+  { href: "/studio/colortap", label: "Color Tap", icon: Palette },
   { href: "/studio/settings", label: "Settings", icon: Settings },
 ];
 

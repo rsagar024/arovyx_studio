@@ -152,3 +152,49 @@ model QuizLog {
 
   @@index([runId, at])
 }
+
+// --- Color Tap guest cleanup (Studio → Color Tap) ----------------------------
+// The job that used to run on GitHub Actions in the color_tap repo, run from
+// the Studio tab in short resumable ticks. See src/lib/colortap/engine.ts.
+
+// Single-row settings.
+model ColorTapSchedule {
+  id            Int       @id @default(1)
+  autoEnabled   Boolean   @default(false) // off until a dry run has been checked
+  days          Int       @default(90) // inactivity window of automatic runs (at least 30)
+  lastCleanupAt DateTime? // last successful (non-dry-run) cleanup
+  lastAutoAt    DateTime? // last automatic start, so a failing run retries hourly, not per minute
+  updatedAt     DateTime  @updatedAt
+}
+
+model ColorTapRun {
+  id          String    @id @default(cuid())
+  trigger     String    @default("manual") // timer | manual
+  days        Int
+  dryRun      Boolean   @default(true)
+  status      String    @default("running") // running | succeeded | failed | cancelled
+  state       String    @default("{}") // JSON: page token, pages and counts so far
+  attempts    Int       @default(0) // failures of the current page
+  error       String?
+  lockedUntil DateTime? // run lease: renewed on every tick, expires 10 min after the last one
+  tickUntil   DateTime? // per-tick lease: one tick in flight per run
+  tickToken   String?
+  startedAt   DateTime  @default(now())
+  finishedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  logs        ColorTapLog[]
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+model ColorTapLog {
+  id      String      @id @default(cuid())
+  runId   String
+  run     ColorTapRun @relation(fields: [runId], references: [id], onDelete: Cascade)
+  at      DateTime    @default(now())
+  level   String      @default("info") // info | warn | error
+  message String
+
+  @@index([runId, at])
+}
