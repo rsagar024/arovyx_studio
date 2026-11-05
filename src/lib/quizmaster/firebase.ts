@@ -30,6 +30,22 @@ export class FirebaseNotConfigured extends Error {
   }
 }
 
+/** The key works but its service account can't use Firebase Auth. Retrying can't help. */
+export class FirebaseNoPermission extends Error {
+  constructor() {
+    super(
+      "The Firebase key's service account can't read or delete Auth users. In Google Cloud IAM, give that account the " +
+        "Firebase Authentication Admin role (roles/firebaseauth.admin). No new key or deploy is needed."
+    );
+    this.name = "FirebaseNoPermission";
+  }
+}
+
+/** The SDK's permission error as `FirebaseNoPermission`; anything else unchanged. */
+export function authError(err: unknown): unknown {
+  return (err as { code?: unknown } | null)?.code === "auth/insufficient-permission" ? new FirebaseNoPermission() : err;
+}
+
 export function firebaseConfigured(): boolean {
   return Boolean(process.env.QUIZMASTER_FIREBASE_SERVICE_ACCOUNT);
 }
@@ -174,7 +190,11 @@ export class FcmMessenger implements Messenger {
 
 export class FirebaseUserAdmin implements UserAdmin {
   async listUsers(maxResults: number, pageToken?: string) {
-    const result = await getAuth(quizApp()).listUsers(maxResults, pageToken);
+    const result = await getAuth(quizApp())
+      .listUsers(maxResults, pageToken)
+      .catch((err: unknown) => {
+        throw authError(err);
+      });
     const ms = (s?: string | null) => (s ? Date.parse(s) || null : null);
     const users: GuestUser[] = result.users.map((u) => ({
       uid: u.uid,
@@ -189,7 +209,11 @@ export class FirebaseUserAdmin implements UserAdmin {
   }
 
   async deleteUsers(uids: string[]) {
-    const result = await getAuth(quizApp()).deleteUsers(uids);
+    const result = await getAuth(quizApp())
+      .deleteUsers(uids)
+      .catch((err: unknown) => {
+        throw authError(err);
+      });
     return { successCount: result.successCount, failureCount: result.failureCount };
   }
 }
