@@ -69,6 +69,7 @@ npm start
 | `QUIZMASTER_GEN_MODEL` | no | First-choice NIM model that writes questions and push texts. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. |
 | `QUIZMASTER_VERIFY_MODEL` | no | First-choice NIM model that cross-checks answers. **Must be a different model family** from the generator. Default `mistralai/mistral-large-4-1t-a52b`, asked together with `minimaxai/minimax-m3.1-flash`; the first answer wins. |
 | `QUIZMASTER_TRANSLATE_MODEL` | no | First-choice NIM model for the Hindi and Hinglish versions. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. If a model errors or hasn't answered after 45 s, a call also asks the next in `MODEL_POOL` (`src/lib/quizmaster/nimClient.ts`) and takes the first answer; the verifier never uses a family that wrote the questions. |
+| `COLORTAP_FIREBASE_SERVICE_ACCOUNT` | for Color Tap | Firebase Admin SDK key JSON of the Color Tap project (`color-tap-c06bf`), **on one line**, with the Firebase Authentication Admin role. Server-only. A key for any other project is refused. Without it, Studio → Color Tap can't run. |
 
 Generate a strong JWT secret with:
 
@@ -127,6 +128,7 @@ Sign in with the value of `ADMIN_SECRET_KEY`. The session is an HTTP-only signed
 - **Projects:** search, publish/unpublish, edit (same form, with the **AI Description Improver**), delete
 - **Messages:** inbox with read/unread, detail view, reply by email, delete
 - **Quiz Master:** runs the Quiz Master Android app's server jobs (question bank, daily quiz, pushes, weekly summary, guest cleanup) from a countdown in the tab. See [Quiz Master automation](#quiz-master-automation).
+- **Color Tap:** deletes the Color Tap game's stale guest accounts from Firebase Auth. See [Color Tap guest cleanup](#color-tap-guest-cleanup).
 - **Settings:** site name, owner name, tagline, bio, email, socials, avatar and résumé, live on the public site as soon as you save. **Hero showcase:** pick up to 3 projects (and their order) for the floating cards beside the home page title; with none picked, the latest 3 published are shown. **Featured projects:** pick up to 6 projects (and their order) for the home page grid; with none picked, the 6 newest published are shown.
 
 Every AI call (generate or improve, success or failure) is logged to the `AiLog` table and shown on Overview.
@@ -153,6 +155,11 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 | `GET` | `/api/admin/quizmaster/runs/[id]` | Run, steps and log lines (`?after=` for new ones) |
 | `POST` | `/api/admin/quizmaster/runs/[id]/tick` | One bounded slice of work (≤ 240 s); returns `{ status, progress, done }` |
 | `POST` | `/api/admin/quizmaster/runs/[id]/cancel` | Cancel a running run |
+| `GET` / `PATCH` | `/api/admin/colortap/status` | Settings, key check, active and recent runs / automatic cleanup on or off, inactivity window (at least 30 days) |
+| `POST` | `/api/admin/colortap/runs` | Start a run (automatic when due, or a manual cleanup, dry run by default); 409 while another run holds the lock |
+| `GET` | `/api/admin/colortap/runs/[id]` | Run and log lines (`?after=` for new ones) |
+| `POST` | `/api/admin/colortap/runs/[id]/tick` | One bounded slice of work (≤ 240 s); returns `{ status, done, pages, counts }` |
+| `POST` | `/api/admin/colortap/runs/[id]/cancel` | Cancel a running run |
 | `POST` | `/api/contact` | Public contact form |
 | `GET` | `/api/projects` | Public list, `?category=&q=` (drafts only for admins) |
 
@@ -224,6 +231,20 @@ A category that fails is recorded and doesn't stop the others. Publish always ru
 
 ---
 
+## Color Tap guest cleanup
+
+Studio → **Color Tap** deletes stale guest accounts from the Firebase Auth of the Color Tap game (project `color-tap-c06bf`). It used to be a daily GitHub Actions job in the color_tap repo (`tool/cleanup_guests.py`). The code is self-contained: `src/lib/colortap/`, `src/components/studio/colortap/` and the `ColorTap*` tables share nothing with Quiz Master.
+
+**What it deletes.** A guest has no sign-in provider, email or phone. It is stale when its newest activity (creation, last sign-in or last token refresh, which the game updates on every launch) is older than the window: 90 days by default, never fewer than 30. Registered accounts are never touched. Guests own no Firestore data, so only the Auth record goes.
+
+**How it runs.** Nothing external starts it: no GitHub Actions job, no Vercel Cron. With **Automatic cleanup** on, opening the tab starts a run when the last real cleanup is over 24 hours old, and an open tab checks again every minute. If nobody opens the tab, nothing runs until the next visit. A failed or cancelled automatic run waits an hour before the next try. Automatic cleanup starts **off**, so check a dry run's counts before turning it on. The form runs a cleanup by hand; it is a dry run by default.
+
+**Resumable.** A run handles one page of 1,000 users at a time and saves after each, with `POST …/runs/{id}/tick` doing as much as fits in **240 s**. If the tab closes, the next visit carries on from the saved page. A page is tried up to 3 times. There is one active run at a time, held by a lease that expires 10 minutes after the last tick. Runs are kept for 60 days.
+
+**Setup.** In the `color-tap-c06bf` project, create a service account with the **Firebase Authentication Admin** role, then `jq -c . key.json | gh secret set COLORTAP_FIREBASE_SERVICE_ACCOUNT` and redeploy. The deploy fails if the key is for another project.
+
+---
+
 ## Live deployment
 
 The live site runs on **Vercel** (hosting + serverless functions) with a **Neon** PostgreSQL database (free tier), both linked to the Vercel account behind this repo. **Every merge (or push) to `master` deploys automatically** via GitHub Actions. You never deploy by hand.
@@ -279,6 +300,7 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
 | `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT` | secret | Quiz Master Firebase Admin SDK key JSON, one line (optional) | `jq -c . key.json | gh secret set QUIZMASTER_FIREBASE_SERVICE_ACCOUNT`, then redeploy |
 | `QUIZMASTER_FIREBASE_PROJECT_ID` | variable | Quiz Master Firebase project | `gh variable set QUIZMASTER_FIREBASE_PROJECT_ID --body quizmaster-3be48` |
 | `QUIZMASTER_GEN_MODEL`, `QUIZMASTER_VERIFY_MODEL`, `QUIZMASTER_TRANSLATE_MODEL` | variable | Quiz Master NIM models (optional) | `gh variable set QUIZMASTER_GEN_MODEL --body <model>`; the verifier must be another model family |
+| `COLORTAP_FIREBASE_SERVICE_ACCOUNT` | secret | Color Tap Firebase Admin SDK key JSON, one line (optional) | `jq -c . key.json | gh secret set COLORTAP_FIREBASE_SERVICE_ACCOUNT`, then redeploy |
 
 `gh secret set NAME` with no `--body` prompts for the value, so it never lands in your shell history. Secret values can't be read back from GitHub, so keep your admin password in a password manager.
 
