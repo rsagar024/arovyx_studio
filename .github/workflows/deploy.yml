@@ -121,9 +121,11 @@ jobs:
       # Uses the Vercel REST API (upsert) rather than `vercel env add`, whose
       # generic "Could not retrieve Project Settings" error hid the real cause
       # in CI. Any failure here prints the actual HTTP status + API message.
-      # DATABASE_URL is not synced: the Neon ↔ Vercel integration manages it
-      # at runtime (same database). The GitHub secret is used by the schema
-      # push and seed steps below.
+      # DATABASE_URL is synced too (since 2026-11-08 the database is a Neon
+      # project in our own org, not the Vercel Marketplace integration, whose
+      # free quota ran out). It goes up as "encrypted", not "sensitive",
+      # because `vercel pull` must read it back: the build prerenders pages
+      # that query the database.
       - name: Sync GitHub Secrets → Vercel runtime environment
         env:
           NVIDIA_NIM_API_KEY: ${{ secrets.NVIDIA_NIM_API_KEY }}
@@ -145,7 +147,7 @@ jobs:
         run: |
           api="https://api.vercel.com/v10/projects/$VERCEL_PROJECT_ID/env?upsert=true&teamId=$VERCEL_ORG_ID"
           failed=0
-          for name in DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_API_KEY_2 NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
+          for name in DATABASE_URL DIRECT_URL NVIDIA_NIM_API_KEY NVIDIA_NIM_API_KEY_2 NVIDIA_NIM_MODEL NVIDIA_NIM_BASE_URL \
                       ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL \
                       QUIZMASTER_FIREBASE_SERVICE_ACCOUNT QUIZMASTER_FIREBASE_PROJECT_ID \
                       QUIZMASTER_GEN_MODEL QUIZMASTER_VERIFY_MODEL QUIZMASTER_TRANSLATE_MODEL \
@@ -158,6 +160,7 @@ jobs:
             case "$name" in
               NEXT_PUBLIC_SITE_URL|NVIDIA_NIM_MODEL|NVIDIA_NIM_BASE_URL) type=plain ;;
               QUIZMASTER_FIREBASE_PROJECT_ID|QUIZMASTER_GEN_MODEL|QUIZMASTER_VERIFY_MODEL|QUIZMASTER_TRANSLATE_MODEL) type=plain ;;
+              DATABASE_URL) type=encrypted ;; # read by the build (prerendering)
               *) type=sensitive ;;
             esac
             body=$(jq -n --arg k "$name" --arg v "$value" --arg t "$type" \

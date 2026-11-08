@@ -145,9 +145,20 @@ export function pickHeroProjects(published: ProjectDTO[], heroProjectIds: string
   return pickChosenProjects(published, heroProjectIds, limit);
 }
 
-/** Single-row site settings (with defaults if the row is missing). */
+/**
+ * Single-row site settings (with defaults if the row is missing).
+ * A database outage also falls back to the defaults, because the root layout's
+ * metadata calls this on every page. Without the fallback, an outage crashes
+ * even pages that don't need the database (and the error boundaries never get
+ * a chance to render).
+ */
 export async function getSiteConfig() {
-  const config = await db.siteConfig.findFirst();
+  let config = null;
+  try {
+    config = await db.siteConfig.findFirst();
+  } catch (err) {
+    console.error("getSiteConfig: database unavailable, using defaults:", err);
+  }
   if (config) return config;
   return {
     id: 1,
