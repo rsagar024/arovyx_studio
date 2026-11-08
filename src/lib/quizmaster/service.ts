@@ -3,14 +3,13 @@
  * runs, and the status the Studio tab shows. Server-only.
  */
 import "server-only";
-import { db } from "@/lib/db";
 import { ALL_CATEGORIES, isCategory } from "./categories";
 import { createRun, snapshot, tick, type EngineDeps, type RunKind, type RunOptions, type RunSummary } from "./engine";
 import { firebaseConfigured } from "./firebase";
 import * as ist from "./ist";
 import { modelFamily, models } from "./nimClient";
 import { extraSlot, isSlot, slotFor } from "./questionBank";
-import { PrismaRunRepo, type RunRow } from "./repo";
+import type { RunRow } from "./repo";
 import { makeJobDeps } from "./runtime";
 import {
   cleanupDue,
@@ -19,12 +18,11 @@ import {
   getSchedule,
   isOverdue,
   updateSchedule,
-  type ScheduleDb,
   type ScheduleRow,
 } from "./schedule";
+import { repo, scheduleDb } from "./storage";
 
-const scheduleDb = db as unknown as ScheduleDb;
-export const repo = new PrismaRunRepo(db);
+export { repo };
 
 const parse = <T>(text: string, fallback: T): T => {
   try {

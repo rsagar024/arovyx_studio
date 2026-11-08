@@ -1,12 +1,11 @@
-/** The Color Tap service the API routes use, on Postgres and the real Firebase app. */
+/** The Color Tap service the API routes use, on Firestore and the real Color Tap Firebase app. */
 import "server-only";
-import { db } from "@/lib/db";
 import { createColorTapService } from "./cleanup";
 import { firebaseUsers, keyProblem } from "./firebase";
-import { PrismaRunRepo } from "./repo";
+import { FirestoreRunRepo } from "./repo";
 
 export const colorTap = createColorTapService({
-  repo: new PrismaRunRepo(db),
+  repo: new FirestoreRunRepo(),
   makeUsers: firebaseUsers,
   keyProblem: () => keyProblem(),
 });

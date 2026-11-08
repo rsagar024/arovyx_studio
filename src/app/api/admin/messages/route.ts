@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { countUnreadMessages, deleteMessages, listMessages } from "@/lib/store";
 import { messageBulkDeleteSchema } from "@/lib/validators";
 import { getSession } from "@/lib/session";
 import { jsonError, jsonOk, zodErrorDetails, zodErrorMessage } from "@/lib/api";
@@ -15,8 +15,8 @@ export async function GET() {
   if (!session) return jsonError(401, "Unauthorized");
 
   const [messages, unreadCount] = await Promise.all([
-    db.contactMessage.findMany({ orderBy: { createdAt: "desc" } }),
-    db.contactMessage.count({ where: { isRead: false } }),
+    listMessages(),
+    countUnreadMessages(),
   ]);
 
   return jsonOk({ count: messages.length, unreadCount, messages });
@@ -44,8 +44,6 @@ export async function DELETE(req: NextRequest) {
     return jsonError(400, zodErrorMessage(parsed.error), zodErrorDetails(parsed.error));
   }
 
-  const { count } = await db.contactMessage.deleteMany({
-    where: { id: { in: parsed.data.ids } },
-  });
+  const count = await deleteMessages(parsed.data.ids);
   return jsonOk({ deleted: count });
 }

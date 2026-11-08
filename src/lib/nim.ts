@@ -3,7 +3,7 @@
  * reaches the client. Uses plain `fetch`, no SDK.
  */
 import { z } from "zod";
-import { db } from "@/lib/db";
+import { createAiLog } from "@/lib/store";
 import type { FetchedData } from "@/lib/fetchers";
 import {
   projectDraftSchema,
@@ -447,14 +447,12 @@ export async function logAiUse(entry: {
   error?: string;
 }): Promise<void> {
   try {
-    await db.aiLog.create({
-      data: {
-        url: entry.url,
-        action: entry.action,
-        success: entry.success,
-        error: entry.error ?? null,
-        model: model(),
-      },
+    await createAiLog({
+      url: entry.url,
+      action: entry.action,
+      success: entry.success,
+      error: entry.error ?? null,
+      model: model(),
     });
   } catch (err) {
     // Logging must never break the feature.

@@ -1,17 +1,19 @@
 /**
- * Where runs, steps and logs live: Postgres through Prisma, behind a small
- * interface so the engine's tests can use an in-memory copy.
+ * Where runs, steps and logs live: Firestore (`quizRuns/{id}` with `steps`
+ * and `logs` subcollections), behind a small interface so the engine's tests
+ * can use an in-memory copy.
  *
  * Two leases keep runs safe when several tabs or devices drive them:
  * - the run lease, `lockedUntil`: one active run per kind. Renewed on every
  *   tick; a run whose lease ran out (no tick for 10 minutes, e.g. the tab
  *   closed) is resumed by the next tab rather than started again.
  * - the tick lease, `tickUntil` + `tickToken`: one tick in flight per run,
- *   taken with `updateMany ... where tickUntil is null or < now`, so two tabs
- *   can never run the same step twice.
+ *   taken in a transaction that checks `tickUntil is null or < now`, so two
+ *   tabs can never run the same step twice.
  */
 import "server-only";
-import type { PrismaClient } from "@prisma/client";
+import { COL } from "@/lib/firestore";
+import { FirestoreRuns } from "@/lib/firestoreRuns";
 
 export interface RunRow {
   id: string;
@@ -88,28 +90,60 @@ export interface RunRepo {
   pruneBefore(date: Date): Promise<number>;
 }
 
-/* ------------------------------ Prisma -------------------------------- */
+/* ----------------------------- Firestore ------------------------------ */
 
-export class PrismaRunRepo implements RunRepo {
-  constructor(private db: PrismaClient) {}
+/** A step's id is `{runId}|{key}`: steps live under their run, keyed by `key`. */
+const stepId = (runId: string, key: string) => `${runId}|${key}`;
+const stepDocId = (key: string) => encodeURIComponent(key);
+function splitStepId(id: string): { runId: string; key: string } {
+  const i = id.indexOf("|");
+  return { runId: id.slice(0, i), key: id.slice(i + 1) };
+}
+
+export class FirestoreRunRepo implements RunRepo {
+  private runs = new FirestoreRuns<RunRow>(COL.quizRuns);
+
+  private stepRef(runId: string, key: string) {
+    return this.runs.ref(runId).collection("steps").doc(stepDocId(key));
+  }
+
+  private stepRow(runId: string, data: FirebaseFirestore.DocumentData): StepRow {
+    const updatedAt = data.updatedAt?.toDate?.() ?? data.updatedAt;
+    return {
+      id: stepId(runId, data.key),
+      runId,
+      key: data.key,
+      order: data.order,
+      status: data.status,
+      attempts: data.attempts,
+      state: data.state,
+      error: data.error ?? null,
+      updatedAt,
+    };
+  }
 
   async createRunIfFree(data: NewRun, steps: NewStep[], now: Date, lockedUntil: Date): Promise<CreateResult> {
-    return this.db.$transaction(async (tx) => {
-      // Serialises run creation per kind across every connection.
-      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext(${"quizrun:" + data.kind}))`;
-      const active = await tx.quizRun.findFirst({
-        where: { kind: data.kind, status: "running" },
-        orderBy: { createdAt: "desc" },
-      });
-      if (active) {
-        return { run: active, created: false as const, live: Boolean(active.lockedUntil && active.lockedUntil > now) };
-      }
-      const run = await tx.quizRun.create({
-        data: { ...data, summary: data.summary ?? "{}", status: "running", lockedUntil, startedAt: now },
-      });
-      if (steps.length) {
-        await tx.quizRunStep.createMany({
-          data: steps.map((s) => ({ runId: run.id, key: s.key, order: s.order, state: s.state ?? "{}" })),
+    return this.runs.withCreateLock(`quizrun:${data.kind}`, now, async (tx) => {
+      const active = (await this.runs.running(tx)).find((r) => r.kind === data.kind);
+      if (active) return { run: active, created: false as const, live: Boolean(active.lockedUntil && active.lockedUntil > now) };
+      const ref = this.runs.newRef();
+      const run: RunRow = {
+        id: ref.id,
+        ...data,
+        summary: data.summary ?? "{}",
+        status: "running",
+        lockedUntil,
+        tickUntil: null,
+        tickToken: null,
+        startedAt: now,
+        finishedAt: null,
+        createdAt: now,
+      };
+      const { id: _id, ...doc } = run;
+      tx.create(ref, doc);
+      for (const st of steps) {
+        tx.create(this.stepRef(run.id, st.key), {
+          key: st.key, order: st.order, status: "pending", attempts: 0, state: st.state ?? "{}", error: null, updatedAt: now,
         });
       }
       return { run, created: true as const };
@@ -117,71 +151,66 @@ export class PrismaRunRepo implements RunRepo {
   }
 
   getRun(id: string) {
-    return this.db.quizRun.findUnique({ where: { id } });
+    return this.runs.getRun(id);
   }
 
-  activeRun(kind?: string) {
-    return this.db.quizRun.findFirst({
-      where: { status: "running", ...(kind ? { kind } : {}) },
-      orderBy: { createdAt: "desc" },
-    });
+  async activeRun(kind?: string) {
+    return (await this.runs.running()).find((r) => !kind || r.kind === kind) ?? null;
   }
 
   listRuns(limit: number) {
-    return this.db.quizRun.findMany({ orderBy: { createdAt: "desc" }, take: limit });
+    return this.runs.listRuns(limit);
   }
 
-  async updateRun(id: string, data: Partial<Omit<RunRow, "id">>) {
-    await this.db.quizRun.update({ where: { id }, data });
+  updateRun(id: string, data: Partial<Omit<RunRow, "id">>) {
+    return this.runs.updateRun(id, data);
   }
 
-  async acquireTick(id: string, token: string, now: Date, tickUntil: Date, lockedUntil: Date) {
-    const { count } = await this.db.quizRun.updateMany({
-      where: { id, status: "running", OR: [{ tickUntil: null }, { tickUntil: { lt: now } }] },
-      data: { tickUntil, tickToken: token, lockedUntil },
-    });
-    return count === 1;
+  acquireTick(id: string, token: string, now: Date, tickUntil: Date, lockedUntil: Date) {
+    return this.runs.acquireTick(id, token, now, tickUntil, lockedUntil);
   }
 
-  async renewLock(id: string, token: string, lockedUntil: Date) {
-    await this.db.quizRun.updateMany({ where: { id, tickToken: token }, data: { lockedUntil } });
+  renewLock(id: string, token: string, lockedUntil: Date) {
+    return this.runs.renewLock(id, token, lockedUntil);
   }
 
-  async releaseTick(id: string, token: string) {
-    await this.db.quizRun.updateMany({ where: { id, tickToken: token }, data: { tickUntil: null, tickToken: null } });
+  releaseTick(id: string, token: string) {
+    return this.runs.releaseTick(id, token);
   }
 
-  steps(runId: string) {
-    return this.db.quizRunStep.findMany({ where: { runId }, orderBy: { order: "asc" } });
+  async steps(runId: string) {
+    const snap = await this.runs.ref(runId).collection("steps").orderBy("order", "asc").get();
+    return snap.docs.map((d) => this.stepRow(runId, d.data()));
   }
 
   async addStep(runId: string, step: NewStep) {
-    return this.db.quizRunStep.upsert({
-      where: { runId_key: { runId, key: step.key } },
-      create: { runId, key: step.key, order: step.order, state: step.state ?? "{}" },
-      update: {},
+    const ref = this.stepRef(runId, step.key);
+    return this.runs.db.runTransaction(async (tx) => {
+      const snap = await tx.get(ref);
+      if (snap.exists) return this.stepRow(runId, snap.data()!);
+      const data = {
+        key: step.key, order: step.order, status: "pending", attempts: 0, state: step.state ?? "{}", error: null, updatedAt: new Date(),
+      };
+      tx.create(ref, data);
+      return this.stepRow(runId, data);
     });
   }
 
   async updateStep(id: string, data: Partial<Pick<StepRow, "status" | "attempts" | "state" | "error">>) {
-    await this.db.quizRunStep.update({ where: { id }, data });
+    const { runId, key } = splitStepId(id);
+    await this.stepRef(runId, key).update({ ...data, updatedAt: new Date() });
   }
 
-  async addLogs(runId: string, logs: Array<{ at: Date; level: string; message: string }>) {
-    if (logs.length) await this.db.quizLog.createMany({ data: logs.map((l) => ({ runId, ...l })) });
+  addLogs(runId: string, logs: Array<{ at: Date; level: string; message: string }>) {
+    return this.runs.addLogs(runId, logs);
   }
 
   logs(runId: string, opts: { after?: Date; limit?: number } = {}) {
-    return this.db.quizLog.findMany({
-      where: { runId, ...(opts.after ? { at: { gt: opts.after } } : {}) },
-      orderBy: [{ at: "asc" }, { id: "asc" }],
-      take: opts.limit ?? 500,
-    });
+    return this.runs.logs(runId, opts);
   }
 
-  async pruneBefore(date: Date) {
-    const { count } = await this.db.quizRun.deleteMany({ where: { createdAt: { lt: date }, status: { not: "running" } } });
-    return count;
+  pruneBefore(date: Date) {
+    return this.runs.pruneBefore(date);
   }
 }
 
