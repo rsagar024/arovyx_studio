@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { saveSiteConfig } from "@/lib/store";
 import { settingsInputSchema } from "@/lib/validators";
 import { getSession } from "@/lib/session";
 import { getSiteConfig } from "@/lib/projects";
@@ -51,11 +51,7 @@ export async function PATCH(req: NextRequest) {
     ...(heroProjectIds !== undefined ? { heroProjectIds: JSON.stringify(heroProjectIds) } : {}),
     ...(featuredProjectIds !== undefined ? { featuredProjectIds: JSON.stringify(featuredProjectIds) } : {}),
   };
-  const settings = await db.siteConfig.upsert({
-    where: { id: 1 },
-    update: data,
-    create: { id: 1, ...data },
-  });
+  const settings = await saveSiteConfig(data);
 
   revalidatePublicPages();
 

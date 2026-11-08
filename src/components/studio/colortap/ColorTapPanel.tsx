@@ -8,6 +8,9 @@ import RunHistory from "./RunHistory";
 import { ApiError, MIN_DAYS, api, buttonClass, cardClass, fmtIst, inputClass, labelClass, type StartResponse, type Status } from "./api";
 import { useRunDriver } from "./useRunDriver";
 
+/** Background status refresh. Must stay well above Neon's 5-minute scale-to-zero delay. */
+const STATUS_REFRESH_MS = 15 * 60_000;
+
 /**
  * Studio → Color Tap. Runs only from this open tab: an unfinished run resumes
  * on open, and a cleanup starts when automatic cleanup is on and the server
@@ -62,10 +65,12 @@ export default function ColorTapPanel() {
     [drive, refresh]
   );
 
-  // First load, then a light refresh every minute, and on returning to the tab.
+  // First load, then a light refresh every 15 minutes, and on returning to the tab.
+  // Keep this well above Neon's 5-minute scale-to-zero delay, so an open tab
+  // doesn't keep the database awake (cleanup is daily; 15 min late is fine).
   useEffect(() => {
     void refresh();
-    const id = setInterval(() => void refresh(), 60_000);
+    const id = setInterval(() => void refresh(), STATUS_REFRESH_MS);
     const onVisible = () => {
       if (document.visibilityState === "visible") void refresh();
     };

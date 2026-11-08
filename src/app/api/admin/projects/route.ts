@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { createProject, listProjects } from "@/lib/store";
 import {
   projectInputSchema,
   serializeProject,
@@ -23,7 +23,7 @@ export async function GET() {
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const rows = await db.project.findMany({ orderBy: { updatedAt: "desc" } });
+  const rows = await listProjects({ orderBy: "updatedAt" });
   const projects = rows.map(toProjectDTO);
   return jsonOk({ count: projects.length, projects });
 }
@@ -52,13 +52,11 @@ export async function POST(req: NextRequest) {
 
   const { screenshots, ...input } = parsed.data;
   const slug = await uniqueSlug(input.title);
-  const row = await db.project.create({
-    data: {
-      slug,
-      ...input,
-      ...serializeProject(input),
-      screenshots: JSON.stringify(screenshots),
-    },
+  const row = await createProject({
+    slug,
+    ...input,
+    ...serializeProject(input),
+    screenshots: JSON.stringify(screenshots),
   });
 
   // Refresh the cached home page (stats, featured, hero, about) and the new

@@ -3,33 +3,41 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const created: Array<{ slot: string; trigger: string; options: string }> = [];
 
-vi.mock("@/lib/db", () => {
-  const quizRun = {
-    deleteMany: async () => ({ count: 0 }),
-    findFirst: async () => null,
-    create: async ({ data }: { data: { slot: string; trigger: string; options: string } }) => {
+vi.mock("../storage", async () => {
+  const { MemoryRunRepo } = await import("../repo");
+  type Repo = import("../repo").RunRepo;
+  // Every start creates a run (as if none were active), and records its fields.
+  class RecordingRepo extends MemoryRunRepo {
+    override async listRuns() {
+      return [];
+    }
+    override async activeRun() {
+      return null;
+    }
+    override async createRunIfFree(...args: Parameters<Repo["createRunIfFree"]>) {
+      const [data, steps, now, lockedUntil] = args;
       created.push(data);
-      return { id: `run${created.length}`, ...data };
+      this.runs.clear();
+      return super.createRunIfFree(data, steps, now, lockedUntil);
+    }
+  }
+  const schedule = {
+    id: 1,
+    intervalHours: 12,
+    nextRunAt: new Date(0), // always due
+    paused: false,
+    lastCleanupAt: null,
+    updatedAt: new Date(0),
+  };
+  return {
+    repo: new RecordingRepo(),
+    scheduleDb: {
+      quizSchedule: {
+        upsert: async () => ({ ...schedule }),
+        update: async ({ data }: { data: object }) => ({ ...schedule, ...data }),
+      },
     },
   };
-  const db = {
-    quizSchedule: {
-      upsert: async () => ({
-        id: 1,
-        intervalHours: 12,
-        nextRunAt: new Date(0), // always due
-        paused: false,
-        lastCleanupAt: null,
-        updatedAt: new Date(0),
-      }),
-    },
-    quizRun,
-    quizRunStep: { createMany: async () => ({ count: 0 }) },
-    quizLog: { createMany: async () => ({ count: 0 }) },
-    $executeRaw: async () => 0,
-    $transaction: async (fn: (tx: unknown) => unknown) => fn(db),
-  };
-  return { db };
 });
 
 import { startScheduled } from "../service";

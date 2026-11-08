@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { NIMError, nimChat } from "../nim";
 
-vi.mock("@/lib/db", () => ({ db: {} }));
+vi.mock("@/lib/store", () => ({ createAiLog: async () => {} }));
 
 /** Replies in order, and records the key each request used. */
 function fakeFetch(replies: number[]) {
