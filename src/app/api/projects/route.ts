@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { listProjects } from "@/lib/store";
 import { toProjectDTO, categorySchema } from "@/lib/validators";
 import { isAdminRequest, jsonError, jsonOk } from "@/lib/api";
 
@@ -35,13 +35,9 @@ export async function GET(req: NextRequest) {
 
   const isAdmin = await isAdminRequest(req);
 
-  const rows = await db.project.findMany({
-    where: {
-      ...(isAdmin ? {} : { isPublished: true }),
-      ...(category ? { category } : {}),
-    },
-    orderBy: { createdAt: "desc" },
-  });
+  const rows = (await listProjects({ publishedOnly: !isAdmin })).filter(
+    (p) => !category || p.category === category
+  );
 
   let projects = rows.map(toProjectDTO);
 

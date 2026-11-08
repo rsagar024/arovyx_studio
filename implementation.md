@@ -439,3 +439,11 @@ The Quiz Master app's server jobs (question bank, daily quiz, pushes, weekly sum
 1. Prisma + SQLite is the primary plan; if `prisma db push` fails in this environment, I fall back to the JSON-file data layer in `lib/db.ts` with an identical interface (permitted by spec §2).
 2. A real `NVIDIA_NIM_API_KEY` IS present in `.env` (discovered during Phase 6C) — automated checks still use a mock NIM for deterministic error paths (429/401), and live calls are verified against the real API (model: `meta/llama-3.2-11b-vision-instruct`; the spec's `meta/llama-3.3-70b-instruct` is retired/410).
 3. Accent color committed to **electric cyan `#22d3ee`**; fonts **Clash Display + Space Grotesk**.
+
+## Phase 10 — Database on Firestore ✅ DONE (2026-11-08)
+
+- The Neon free database ran out of compute (an open Studio tab polled every minute, so it never scaled to zero) and took the site down.
+- The data moved to **Firestore** (Firebase project `arovyx-studio`, asia-south1, Spark plan): `src/lib/firestore.ts`, `src/lib/store/`, and `FirestoreRunRepo` for Quiz Master and Color Tap. Prisma and `prisma/` were removed; the seed moved to `scripts/seed.ts`.
+- `scripts/import-postgres.ts` copies the old Postgres data across with the same ids.
+- Error boundaries show a retryable message when the database is unreachable, and the Studio panels poll every 15 min.
+

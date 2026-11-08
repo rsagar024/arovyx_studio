@@ -1,17 +1,14 @@
-import { db } from "@/lib/db";
+import { SITE_CONFIG_DEFAULTS, getProjectBySlugRow, listProjects, readSiteConfig } from "@/lib/store";
 import { parseJsonStringArray, toProjectDTO, type ProjectDTO } from "@/lib/validators";
 
 /** All published projects, newest first, decoded to DTOs. */
 export async function getPublishedProjects(): Promise<ProjectDTO[]> {
-  const rows = await db.project.findMany({
-    where: { isPublished: true },
-    orderBy: { createdAt: "desc" },
-  });
+  const rows = await listProjects({ publishedOnly: true });
   return rows.map(toProjectDTO);
 }
 
 export async function getProjectBySlug(slug: string): Promise<ProjectDTO | null> {
-  const row = await db.project.findUnique({ where: { slug } });
+  const row = await getProjectBySlugRow(slug);
   if (!row || !row.isPublished) return null;
   return toProjectDTO(row);
 }
@@ -24,10 +21,7 @@ export async function getProjectStats(): Promise<{
   PACKAGE: number;
   PLUGIN: number;
 }> {
-  const rows = await db.project.findMany({
-    where: { isPublished: true },
-    select: { category: true },
-  });
+  const rows = await listProjects({ publishedOnly: true });
   const stats = { total: rows.length, APP: 0, GAME: 0, PACKAGE: 0, PLUGIN: 0 };
   for (const row of rows) {
     if (row.category === "APP" || row.category === "GAME" || row.category === "PACKAGE" || row.category === "PLUGIN") {
@@ -145,24 +139,20 @@ export function pickHeroProjects(published: ProjectDTO[], heroProjectIds: string
   return pickChosenProjects(published, heroProjectIds, limit);
 }
 
-/** Single-row site settings (with defaults if the row is missing). */
+/**
+ * Single-row site settings (with defaults if the row is missing).
+ * A database outage also falls back to the defaults, because the root layout's
+ * metadata calls this on every page. Without the fallback, an outage crashes
+ * even pages that don't need the database (and the error boundaries never get
+ * a chance to render).
+ */
 export async function getSiteConfig() {
-  const config = await db.siteConfig.findFirst();
+  let config = null;
+  try {
+    config = await readSiteConfig();
+  } catch (err) {
+    console.error("getSiteConfig: database unavailable, using defaults:", err);
+  }
   if (config) return config;
-  return {
-    id: 1,
-    siteName: "Arovyx Studio",
-    ownerName: "Arovyx Studio Owner",
-    tagline: "Building apps, games, packages & plugins.",
-    bio: "",
-    email: "",
-    githubUrl: "",
-    linkedinUrl: "",
-    instagramUrl: "",
-    avatarUrl: "",
-    resumeUrl: "",
-    heroProjectIds: "[]",
-    featuredProjectIds: "[]",
-    updatedAt: new Date(),
-  };
+  return { ...SITE_CONFIG_DEFAULTS, updatedAt: new Date() };
 }

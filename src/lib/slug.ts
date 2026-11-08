@@ -1,4 +1,4 @@
-import { db } from "@/lib/db";
+import { getProjectBySlugRow } from "@/lib/store";
 
 /** Convert any string to a URL-safe slug. */
 export function slugify(input: string): string {
@@ -26,7 +26,7 @@ export async function uniqueSlug(base: string, excludeId?: string): Promise<stri
 
   // Bounded loop — never hangs even with many collisions.
   for (let i = 0; i < 200; i++) {
-    const existing = await db.project.findUnique({ where: { slug: candidate } });
+    const existing = await getProjectBySlugRow(candidate);
     if (!existing || existing.id === excludeId) return candidate;
     candidate = `${root}-${counter++}`;
   }

@@ -1,6 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+/**
+ * Seeds the site's Firestore with three sample projects and the default
+ * settings. `--if-empty` (predev, deploy) seeds only a fresh database.
+ */
+import { scriptFirestore } from "./lib/firestore";
 
-const prisma = new PrismaClient();
+const db = scriptFirestore();
 
 const projects = [
   {
@@ -116,59 +120,50 @@ const siteConfig = {
 };
 
 async function main() {
-  // `--if-empty` (used by the predev/prestart hooks): seed only a fresh
+  const projectsCol = db.collection("projects");
+  const siteRef = db.collection("config").doc("site");
+
+  // `--if-empty` (used by the predev hook and the deploy): seed only a fresh
   // database, so normal runs never overwrite edits or resurrect deletions.
   if (process.argv.includes("--if-empty")) {
-    const [projectCount, configCount] = await Promise.all([
-      prisma.project.count(),
-      prisma.siteConfig.count(),
-    ]);
-    if (projectCount > 0 || configCount > 0) {
+    const [anyProject, site] = await Promise.all([projectsCol.limit(1).get(), siteRef.get()]);
+    if (!anyProject.empty || site.exists) {
       console.log("Arovyx Studio: database already seeded — skipping.");
       return;
     }
   }
 
   console.log("Seeding Arovyx Studio…");
-
-  await prisma.siteConfig.upsert({
-    where: { id: 1 },
-    update: {},
-    create: siteConfig,
-  });
+  const now = new Date();
+  const { id: _id, ...site } = siteConfig;
+  await siteRef.set({ heroProjectIds: "[]", featuredProjectIds: "[]", ...site, updatedAt: now }, { merge: true });
   console.log("  ✓ SiteConfig defaults");
 
   for (const project of projects) {
-    const { tags, techStack, features, category, status, ...rest } = project;
+    const { tags, techStack, features, ...rest } = project;
     const data = {
+      bannerUrl: null,
+      publisher: null,
+      privacyPolicyUrl: null,
+      termsAndConditionsUrl: null,
+      screenshots: "[]",
       ...rest,
-      category,
-      status,
       tags: JSON.stringify(tags),
       techStack: JSON.stringify(techStack),
       features: JSON.stringify(features),
+      updatedAt: now,
     };
-
-    await prisma.project.upsert({
-      where: { slug: project.slug },
-      update: data,
-      create: data,
-    });
+    const existing = await projectsCol.where("slug", "==", project.slug).limit(1).get();
+    if (existing.empty) await projectsCol.doc().create({ ...data, createdAt: now });
+    else await existing.docs[0]!.ref.update(data);
     console.log(`  ✓ Project: ${project.title}`);
   }
 
-  const [projectCount, configCount] = await Promise.all([
-    prisma.project.count(),
-    prisma.siteConfig.count(),
-  ]);
-  console.log(`Done. projects=${projectCount} siteConfig=${configCount}`);
+  const count = (await projectsCol.count().get()).data().count;
+  console.log(`Done. projects=${count}`);
 }
 
-main()
-  .catch((err) => {
-    console.error("Seed failed:", err);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+main().catch((err) => {
+  console.error("Seed failed:", err);
+  process.exit(1);
+});

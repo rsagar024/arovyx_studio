@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { deleteProject, getProject, updateProject } from "@/lib/store";
 import {
   parseJsonStringArray,
   projectUpdateSchema,
@@ -67,7 +67,7 @@ export async function GET(
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const row = await db.project.findUnique({ where: { id: params.id } });
+  const row = await getProject(params.id);
   if (!row) return jsonError(404, "Project not found.");
 
   return jsonOk({ project: toProjectDTO(row) });
@@ -84,7 +84,7 @@ export async function PATCH(
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const existing = await db.project.findUnique({ where: { id: params.id } });
+  const existing = await getProject(params.id);
   if (!existing) return jsonError(404, "Project not found.");
 
   let body: unknown;
@@ -107,10 +107,7 @@ export async function PATCH(
     slug = await uniqueSlug(requestedSlug, existing.id);
   }
 
-  const row = await db.project.update({
-    where: { id: existing.id },
-    data: { slug, ...applyUpdate(existing, fields) },
-  });
+  const row = await updateProject(existing.id, { slug, ...applyUpdate(existing, fields) });
 
   const project = toProjectDTO(row);
   revalidatePublicPages([`/projects/${project.slug}`, `/projects/${existing.slug}`]);
@@ -126,10 +123,10 @@ export async function DELETE(
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const existing = await db.project.findUnique({ where: { id: params.id } });
+  const existing = await getProject(params.id);
   if (!existing) return jsonError(404, "Project not found.");
 
-  await db.project.delete({ where: { id: existing.id } });
+  await deleteProject(existing.id);
   revalidatePublicPages([`/projects/${existing.slug}`]);
 
   return jsonOk({ message: `“${existing.title}” deleted.`, id: existing.id });

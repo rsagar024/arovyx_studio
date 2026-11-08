@@ -19,7 +19,7 @@ Visitors browse read-only; there are no public accounts.
 - **Next.js 14** (App Router) · **React 18** · **TypeScript** (strict)
 - **Tailwind CSS**: custom components only (no UI library)
 - **Motion** (`motion/react`) + **Lenis** smooth scrolling for the public site's animations. Shared pieces live in `src/components/motion/`: `Reveal` / `Stagger` scroll reveals, `SplitText` word-by-word headings, `Marquee`, `Parallax`, `TiltCard`, `Magnetic`, `AnimatedTabs` and `ScrollProgress`. Variants and easings are in `src/lib/motion.ts`. All of it respects `prefers-reduced-motion`, and `/studio` loads none of it.
-- **Prisma + PostgreSQL** (hosted on **Neon**, free tier)
+- **Firestore** (Firebase project `arovyx-studio`, free Spark plan) through the Firebase Admin SDK
 - Hosting on **Vercel**, deployed by **GitHub Actions** on every merge to `master`
 - **NVIDIA NIM** (OpenAI-compatible `chat/completions`, called with plain `fetch`)
 - **Zod** validation · **lucide-react** icons · **react-hot-toast**
@@ -28,18 +28,17 @@ Visitors browse read-only; there are no public accounts.
 
 ## Quick start
 
-Requires **Node.js 18.17+** and a **PostgreSQL** connection string. The easiest source is a free Neon database; see [Local development against Neon](#local-development-against-neon).
+Requires **Node.js 18.17+** and a Firebase service-account key for a Firestore database; see [Local development](#local-development).
 
 ```bash
-cp .env.example .env        # then fill in the values (see below)
+cp .env.example .env.local  # then fill in the values (see below)
 npm install
-npx prisma db push
 npm run dev
 ```
 
 Open <http://localhost:3000>.
 
-The first `npm run dev` seeds a fresh database automatically (production is seeded by the deploy workflow): 3 example projects (an app, a game and a package) plus default site settings. On later runs the seed sees existing data and skips, so your edits are never overwritten. Run `npm run db:seed` to force a re-seed (it upserts the example projects again).
+The first `npm run dev` seeds a fresh database automatically (production is seeded by the deploy workflow): 3 example projects (an app, a game and a package) plus default site settings. On later runs the seed sees existing data and skips, so your edits are never overwritten. Run `npm run db:seed` to force a re-seed (it updates the example projects again).
 
 ### Production
 
@@ -63,8 +62,7 @@ npm start
 | `ADMIN_SECRET_KEY` | **yes** | The password for the hidden admin panel. |
 | `ADMIN_JWT_SECRET` | **yes** | Random string used to sign the admin session cookie (HMAC-SHA256). |
 | `NEXT_PUBLIC_SITE_URL` | yes | Public base URL, used for canonical/Open Graph URLs, the sitemap and robots. |
-| `DATABASE_URL` | yes | PostgreSQL **pooled** connection string (Neon host contains `-pooler`). Used by the app at runtime. |
-| `DIRECT_URL` | yes | PostgreSQL **direct** (non-pooled) connection string. Used by `prisma db push`. |
+| `FIREBASE_SERVICE_ACCOUNT` | **yes** | Firebase Admin SDK key JSON of the **arovyx-studio** project, **on one line**. The site's database (Firestore). Server-only. |
 | `QUIZMASTER_FIREBASE_SERVICE_ACCOUNT` | for Quiz Master | Firebase Admin SDK key JSON of the Quiz Master project, **on one line** (Firestore, FCM, Auth and Remote Config). Server-only. Without it, Studio → Quiz Master only does dry runs. Guest cleanup also needs the **Firebase Authentication Admin** role on the key's service account. |
 | `QUIZMASTER_FIREBASE_PROJECT_ID` | no | Default: the key's `project_id` (`quizmaster-3be48`). |
 | `QUIZMASTER_GEN_MODEL` | no | First-choice NIM model that writes questions and push texts. Default `nvidia/nemotron-3.5-super-vl-120b-a12b`. |
@@ -175,20 +173,19 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 | `npm start` | Serve the build |
 | `npm run typecheck` | `tsc --noEmit` (strict) |
 | `npm test` | Vitest: the Quiz Master ports and engine tests |
-| `npm run db:push` | Apply the Prisma schema to the database |
-| `npm run db:generate` | Regenerate the Prisma client |
 | `npm run db:seed` | Seed / re-seed the example data |
+| `npm run db:import -- --from "<postgres url>"` | Copy everything from the old Postgres database into Firestore (see [Importing the old Postgres data](#importing-the-old-postgres-data)) |
 
 ---
 
 ## Project structure
 
 ```
-prisma/
-  schema.prisma        Project, ContactMessage, SiteConfig, AiLog, QuizSchedule, QuizRun, QuizRunStep, QuizLog
+scripts/
   seed.ts              example data (--if-empty used by predev and the deploy workflow)
+  import-postgres.ts   one-off copy of the old Postgres data into Firestore (same ids, re-runnable)
 .github/workflows/
-  deploy.yml           merge to master → typecheck → sync secrets → Neon schema/seed → Vercel deploy
+  deploy.yml           merge to master → typecheck → sync secrets → seed → Vercel deploy
 src/
   app/
     (public)/          home, projects, projects/[slug], about, contact
@@ -255,14 +252,14 @@ Studio → **Color Tap** deletes stale guest accounts from the Firebase Auth of 
 
 ## Live deployment
 
-The live site runs on **Vercel** (hosting + serverless functions) with a **Neon** PostgreSQL database (free tier), both linked to the Vercel account behind this repo. **Every merge (or push) to `master` deploys automatically** via GitHub Actions. You never deploy by hand.
+The live site runs on **Vercel** (hosting + serverless functions) with a **Firestore** database (Firebase project `arovyx-studio`, free Spark plan, region asia-south1). **Every merge (or push) to `master` deploys automatically** via GitHub Actions. You never deploy by hand.
 
 | | |
 | --- | --- |
 | Live site | <https://arovyx-studio.vercel.app> |
 | Admin panel | <https://arovyx-studio.vercel.app/studio> (or `Ctrl/Cmd + Shift + A` on any page) |
 | Deploy workflow | `.github/workflows/deploy.yml` → repo **Actions** tab → "Deploy to Vercel" |
-| Database | Neon project `arovyx-db`, managed from the Vercel dashboard → project **arovyx-studio** → **Storage** |
+| Database | Firestore in Firebase project **arovyx-studio**: <https://console.firebase.google.com/project/arovyx-studio/firestore> |
 
 > **Why not GitHub Pages?** Pages only serves static files. This app needs a server for the `/studio` login, the API routes, the NVIDIA NIM calls (the API key must stay server-side) and the database, so it's hosted on Vercel, which runs Next.js natively.
 
@@ -273,13 +270,12 @@ merge PR → master
    │
    ▼
 GitHub Actions: "Deploy to Vercel"
-   ├─ check   npm ci → typecheck → prisma validate
-   └─ deploy  1. verify every required secret exists
+   ├─ check   npm ci → typecheck → tests
+   └─ deploy  1. verify every required secret exists, and that the Firebase keys are for the right projects
               2. sync GitHub Secrets → Vercel runtime env
-              3. prisma db push   (apply schema to Neon; refuses destructive changes)
-              4. seed --if-empty  (only fills an empty database)
-              5. vercel pull → vercel build --prod → vercel deploy --prebuilt --prod
-              6. smoke test: /, /projects, /api/projects, /robots.txt, /sitemap.xml, /studio → 200;
+              3. seed --if-empty  (only fills an empty database; Firestore has no schema to apply)
+              4. vercel pull → vercel build --prod → vercel deploy --prebuilt --prod
+              5. smoke test: /, /projects, /api/projects, /robots.txt, /sitemap.xml, /studio → 200;
                  /studio/overview (logged out) → 307
 ```
 
@@ -299,8 +295,7 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
 | `ADMIN_JWT_SECRET` | secret | Signs admin session cookies (random 64-hex) | `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` → `gh secret set ADMIN_JWT_SECRET`, then redeploy. **Logs out every session.** |
 | `NVIDIA_NIM_API_KEY` | secret | NVIDIA NIM key (server-only) | `gh secret set NVIDIA_NIM_API_KEY`, then redeploy |
 | `NVIDIA_NIM_API_KEY_2` | secret | Backup NIM key, used when the first hits its limit (optional) | `gh secret set NVIDIA_NIM_API_KEY_2`, then redeploy |
-| `DATABASE_URL` | secret | Neon **pooled** URL, used by CI for schema push/seed. At runtime Vercel gets the same value from the Neon integration. | Rotate the password in Neon, then update both |
-| `DIRECT_URL` | secret | Neon **direct** URL (schema push) | as above |
+| `FIREBASE_SERVICE_ACCOUNT` | secret | Admin SDK key JSON of Firebase project **arovyx-studio**, one line: the site's database | `jq -c . key.json \| gh secret set FIREBASE_SERVICE_ACCOUNT`, then redeploy |
 | `VERCEL_TOKEN` | secret | Lets Actions deploy to your Vercel account | Create at vercel.com/account/settings/tokens → `gh secret set VERCEL_TOKEN` |
 | `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID` | secret | Which Vercel project to deploy | Only if the project is recreated (from `.vercel/project.json` after `vercel link`) |
 | `NEXT_PUBLIC_SITE_URL` | variable | Public URL for canonical/OG/sitemap | `gh variable set NEXT_PUBLIC_SITE_URL --body https://your-domain`, then redeploy |
@@ -327,7 +322,7 @@ Stored in GitHub → repo **Settings → Secrets and variables → Actions**.
 
 **Forgot or want to change the password:** `gh secret set ADMIN_SECRET_KEY --repo rsagar024/arovyx_studio`, then run the workflow. To also kick out every existing session, rotate `ADMIN_JWT_SECRET` at the same time.
 
-Content you add in `/studio` lives in the Neon database, not in Git, so deploys never overwrite it.
+Content you add in `/studio` lives in Firestore, not in Git, so deploys never overwrite it.
 
 ### One-time setup (already done for this repo)
 
@@ -335,30 +330,35 @@ For reference, or to recreate the setup on a new account:
 
 1. Sign up at **vercel.com** with **Continue with GitHub** (Hobby plan, free).
 2. `npx vercel login`, then in the repo: `npx vercel link --yes --project arovyx-studio` and `npx vercel git disconnect --yes` (Actions does the deploying).
-3. Neon (free): `npx vercel integration accept-terms neon`, then `npx vercel integration add neon --name arovyx-db --plan free_v3 --metadata region=iad1`.
+3. Firebase (free): create project `arovyx-studio`, then **Firestore Database → Create database** (production mode, `asia-south1`), and **Project settings → Service accounts → Generate new private key**. Set it with `jq -c . key.json | gh secret set FIREBASE_SERVICE_ACCOUNT` and delete the file.
 4. Create a Vercel token (Account Settings → Tokens), then `gh secret set VERCEL_TOKEN`.
-5. `gh secret set ADMIN_SECRET_KEY` (your password). Also set `ADMIN_JWT_SECRET`, `NVIDIA_NIM_API_KEY`, `DATABASE_URL` (Neon pooled), `DIRECT_URL` (Neon unpooled), `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`, plus the variables `NEXT_PUBLIC_SITE_URL`, `NVIDIA_NIM_MODEL` and `NVIDIA_NIM_BASE_URL`.
+5. `gh secret set ADMIN_SECRET_KEY` (your password). Also set `ADMIN_JWT_SECRET`, `NVIDIA_NIM_API_KEY`, `VERCEL_ORG_ID` and `VERCEL_PROJECT_ID`, plus the variables `NEXT_PUBLIC_SITE_URL`, `NVIDIA_NIM_MODEL` and `NVIDIA_NIM_BASE_URL`.
 6. Merge to `master` (or run the workflow).
 
-### Local development against Neon
+### Local development
 
-Local dev also uses PostgreSQL. With the Vercel CLI logged in and the repo linked:
+Put the Firebase key on one line in `.env.local` (gitignored) as `FIREBASE_SERVICE_ACCOUNT='…'`, next to the NIM and admin values, and run `npm run dev`.
+
+Note this points at the **live** database, so anything you add or delete locally is real. For a safe sandbox, use the Firestore emulator: `npx firebase-tools emulators:start --only firestore --project demo-arovyx`, then start the app with `FIRESTORE_EMULATOR_HOST=127.0.0.1:8080` and no key set. The repo tests that need Firestore run the same way: `npx firebase-tools emulators:exec --only firestore --project demo-arovyx "npx vitest run firestore.emulator"`.
+
+### Importing the old Postgres data
+
+The site ran on Neon Postgres until 2026-11-08. `scripts/import-postgres.ts` copies every table into Firestore with the **same ids**, so it can be run again safely:
 
 ```bash
-npx vercel env pull .env.local --environment=development   # gitignored
+npm run db:import -- --from "<postgres direct url>" --dry-run          # counts only
+npm run db:import -- --from "<postgres direct url>" --remove-samples   # the real import
 ```
 
-Then open `.env.local` and add `DIRECT_URL="…"` with the value of `DATABASE_URL_UNPOOLED` from the same file (Prisma needs both). Run `npm run dev`.
-
-Note this points at the **live** database, so anything you add or delete locally is real. For a safe sandbox, create a **branch** of the database in the Neon console (Branches → New branch) and put that branch's pooled/direct URLs in `.env.local` instead. Keep the NIM/admin values in `.env`.
+`--remove-samples` deletes the three seeded example projects first. `--skip-settings` keeps the settings and schedules already in Firestore. A project whose slug is already taken by a different project is skipped and listed, never duplicated.
 
 ### Troubleshooting
 
 | Symptom | Fix |
 | --- | --- |
 | Workflow fails at **Check required secrets** | The error names the missing secret or variable; add it and re-run |
-| `PrismaClientInitializationError … rhel-openssl-3.0.x` | `binaryTargets` in `prisma/schema.prisma` must include `rhel-openssl-3.0.x` (it does); re-run so the client regenerates |
-| **prisma db push** refuses with a data-loss warning | A schema change would drop data. Migrate it deliberately; the workflow never passes `--accept-data-loss` |
+| Workflow fails at **Check site Firebase key** | `FIREBASE_SERVICE_ACCOUNT` isn't a one-line key JSON, or it's for another project; re-set it from a key of **arovyx-studio** |
+| Pages show "Something went wrong on our side" | Firestore couldn't be reached or the key is wrong: check `vercel logs` and the Firebase console's usage page |
 | AI generate times out on the live site | The hosted NIM model is slow or down (it can take ~45 s); retry, or set `NVIDIA_NIM_MODEL` to another model your key can call |
 | Changed a secret but the site didn't change | Secrets apply on the next deploy: run the workflow |
 | Admin login always says invalid | Re-set `ADMIN_SECRET_KEY` (watch for trailing spaces), then redeploy |
@@ -368,8 +368,8 @@ Note this points at the **live** database, so anything you add or delete locally
 
 ## Notes
 
-- **Data model:** the schema is portable. `category` and `status` are strings validated by Zod, and `tags`, `techStack` and `features` are JSON-encoded strings exposed as `string[]` by the mappers in `src/lib/validators.ts`. That design dates from the original SQLite version and works unchanged on PostgreSQL.
+- **Data model:** each Firestore document has the fields of the old SQL tables (`src/lib/store/types.ts`). `category` and `status` are strings validated by Zod, and `tags`, `techStack` and `features` are JSON-encoded strings exposed as `string[]` by the mappers in `src/lib/validators.ts`. Collections are small, so the code filters and sorts in memory instead of needing composite indexes. Quiz Master and Color Tap runs keep their steps and logs in subcollections, and their leases are taken in Firestore transactions.
 - **Function duration:** the AI routes declare `maxDuration = 300` because NIM calls can take ~45 s and retry.
-- **Social card:** `/og` runs on the edge runtime. In the Node runtime, `@vercel/og` fails to build on Windows, and edge can't reach Prisma, so the card shows the brand text rather than the editable site name. Projects with an `imageUrl` use that image instead.
+- **Social card:** `/og` runs on the edge runtime. In the Node runtime, `@vercel/og` fails to build on Windows, and edge can't run the Firebase Admin SDK, so the card shows the brand text rather than the editable site name. Projects with an `imageUrl` use that image instead.
 - **Play Store images** are served through `/api/img`, a cached pass-through restricted to Google's image host. Hot-linking Google directly gets visitors rate-limited (HTTP 429, broken images); the proxy lets Vercel's CDN cache each image for a year. Images that still fail are hidden rather than shown broken.
 - **Rate limits** (contact form, login) are in memory per serverless instance, so on Vercel they're best-effort rather than global. Use a shared store (e.g. Upstash Redis) if that ever matters.

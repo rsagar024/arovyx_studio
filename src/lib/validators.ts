@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Project } from "@prisma/client";
+import type { Project } from "@/lib/store/types";
 
 /* ------------------------------------------------------------------ */
 /* Enums (Zod is the source of truth — SQLite has no native enums)    */

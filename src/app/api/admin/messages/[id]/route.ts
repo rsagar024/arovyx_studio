@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { deleteMessage, getMessage, updateMessage } from "@/lib/store";
 import { messageUpdateSchema } from "@/lib/validators";
 import { getSession } from "@/lib/session";
 import {
@@ -17,7 +17,7 @@ export async function PATCH(
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const existing = await db.contactMessage.findUnique({ where: { id: params.id } });
+  const existing = await getMessage(params.id);
   if (!existing) return jsonError(404, "Message not found.");
 
   let body: unknown;
@@ -32,10 +32,7 @@ export async function PATCH(
     return jsonError(400, zodErrorMessage(parsed.error), zodErrorDetails(parsed.error));
   }
 
-  const message = await db.contactMessage.update({
-    where: { id: existing.id },
-    data: { isRead: parsed.data.isRead },
-  });
+  const message = await updateMessage(existing.id, { isRead: parsed.data.isRead });
 
   return jsonOk({ message });
 }
@@ -48,9 +45,9 @@ export async function DELETE(
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const existing = await db.contactMessage.findUnique({ where: { id: params.id } });
+  const existing = await getMessage(params.id);
   if (!existing) return jsonError(404, "Message not found.");
 
-  await db.contactMessage.delete({ where: { id: existing.id } });
+  await deleteMessage(existing.id);
   return jsonOk({ message: "Message deleted.", id: existing.id });
 }

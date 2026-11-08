@@ -1,5 +1,6 @@
 /**
- * Where Color Tap's settings, runs and logs live: Postgres through Prisma,
+ * Where Color Tap's settings, runs and logs live: Firestore
+ * (`config/colorTapSchedule`, `colorTapRuns/{id}` with a `logs` subcollection),
  * behind a small interface so the tests can use an in-memory copy.
  *
  * Two leases keep runs safe when several tabs or devices drive them:
@@ -7,11 +8,12 @@
  *   tick; a run whose lease ran out (no tick for 10 minutes, e.g. the tab
  *   closed) is resumed by the next tab rather than started again.
  * - the tick lease, `tickUntil` + `tickToken`: one tick in flight per run,
- *   taken with `updateMany ... where tickUntil is null or < now`, so two tabs
- *   can never handle the same page twice.
+ *   taken in a transaction that checks `tickUntil is null or < now`, so two
+ *   tabs can never handle the same page twice.
  */
 import "server-only";
-import type { PrismaClient } from "@prisma/client";
+import { COL, firestore, toRow } from "@/lib/firestore";
+import { FirestoreRuns } from "@/lib/firestoreRuns";
 
 export interface ScheduleRow {
   id: number;
@@ -79,80 +81,91 @@ export interface RunRepo {
   pruneBefore(date: Date): Promise<number>;
 }
 
-/* ------------------------------ Prisma -------------------------------- */
+/* ----------------------------- Firestore ------------------------------ */
 
-export class PrismaRunRepo implements RunRepo {
-  constructor(private db: PrismaClient) {}
+const SCHEDULE_DEFAULTS = { autoEnabled: false, days: 90, lastCleanupAt: null, lastAutoAt: null };
 
-  getSchedule() {
-    return this.db.colorTapSchedule.upsert({ where: { id: 1 }, create: { id: 1 }, update: {} });
+export class FirestoreRunRepo implements RunRepo {
+  private runs = new FirestoreRuns<RunRow>(COL.colorTapRuns);
+  private scheduleRef = () => firestore().collection(COL.config).doc("colorTapSchedule");
+
+  async getSchedule(): Promise<ScheduleRow> {
+    const ref = this.scheduleRef();
+    const snap = await ref.get();
+    if (snap.exists) return { ...SCHEDULE_DEFAULTS, ...toRow<ScheduleRow>(snap), id: 1 };
+    const row = { ...SCHEDULE_DEFAULTS, updatedAt: new Date() };
+    await ref.set(row, { merge: true });
+    return { ...row, id: 1 };
   }
 
   async updateSchedule(data: Partial<Omit<ScheduleRow, "id">>) {
     await this.getSchedule();
-    return this.db.colorTapSchedule.update({ where: { id: 1 }, data });
+    await this.scheduleRef().set({ ...data, updatedAt: new Date() }, { merge: true });
+    return this.getSchedule();
   }
 
   async createRunIfFree(data: NewRun, now: Date, lockedUntil: Date): Promise<CreateResult> {
-    return this.db.$transaction(async (tx) => {
-      // Serialises run creation across every connection.
-      await tx.$executeRaw`SELECT pg_advisory_xact_lock(hashtext('colortap:run'))`;
-      const active = await tx.colorTapRun.findFirst({ where: { status: "running" }, orderBy: { createdAt: "desc" } });
-      if (active) {
-        return { run: active, created: false as const, live: Boolean(active.lockedUntil && active.lockedUntil > now) };
-      }
-      const run = await tx.colorTapRun.create({ data: { ...data, status: "running", lockedUntil, startedAt: now } });
+    return this.runs.withCreateLock("colortap:run", now, async (tx) => {
+      const [active] = await this.runs.running(tx);
+      if (active) return { run: active, created: false as const, live: Boolean(active.lockedUntil && active.lockedUntil > now) };
+      const ref = this.runs.newRef();
+      const run: RunRow = {
+        id: ref.id,
+        ...data,
+        status: "running",
+        attempts: 0,
+        error: null,
+        lockedUntil,
+        tickUntil: null,
+        tickToken: null,
+        startedAt: now,
+        finishedAt: null,
+        createdAt: now,
+      };
+      const { id: _id, ...doc } = run;
+      tx.create(ref, doc);
       return { run, created: true as const };
     });
   }
 
   getRun(id: string) {
-    return this.db.colorTapRun.findUnique({ where: { id } });
+    return this.runs.getRun(id);
   }
 
-  activeRun() {
-    return this.db.colorTapRun.findFirst({ where: { status: "running" }, orderBy: { createdAt: "desc" } });
+  async activeRun() {
+    return (await this.runs.running())[0] ?? null;
   }
 
   listRuns(limit: number) {
-    return this.db.colorTapRun.findMany({ orderBy: { createdAt: "desc" }, take: limit });
+    return this.runs.listRuns(limit);
   }
 
-  async updateRun(id: string, data: RunChange) {
-    await this.db.colorTapRun.update({ where: { id }, data });
+  updateRun(id: string, data: RunChange) {
+    return this.runs.updateRun(id, data);
   }
 
-  async acquireTick(id: string, token: string, now: Date, tickUntil: Date, lockedUntil: Date) {
-    const { count } = await this.db.colorTapRun.updateMany({
-      where: { id, status: "running", OR: [{ tickUntil: null }, { tickUntil: { lt: now } }] },
-      data: { tickUntil, tickToken: token, lockedUntil },
-    });
-    return count === 1;
+  acquireTick(id: string, token: string, now: Date, tickUntil: Date, lockedUntil: Date) {
+    return this.runs.acquireTick(id, token, now, tickUntil, lockedUntil);
   }
 
-  async renewLock(id: string, token: string, lockedUntil: Date) {
-    await this.db.colorTapRun.updateMany({ where: { id, tickToken: token }, data: { lockedUntil } });
+  renewLock(id: string, token: string, lockedUntil: Date) {
+    return this.runs.renewLock(id, token, lockedUntil);
   }
 
-  async releaseTick(id: string, token: string) {
-    await this.db.colorTapRun.updateMany({ where: { id, tickToken: token }, data: { tickUntil: null, tickToken: null } });
+  releaseTick(id: string, token: string) {
+    return this.runs.releaseTick(id, token);
   }
 
-  async addLogs(runId: string, logs: NewLog[]) {
-    if (logs.length) await this.db.colorTapLog.createMany({ data: logs.map((l) => ({ runId, ...l })) });
+  addLogs(runId: string, logs: NewLog[]) {
+    return this.runs.addLogs(runId, logs);
   }
 
   logs(runId: string, opts: { after?: Date; limit?: number } = {}) {
-    return this.db.colorTapLog.findMany({
-      where: { runId, ...(opts.after ? { at: { gt: opts.after } } : {}) },
-      orderBy: [{ at: "asc" }, { id: "asc" }],
-      take: opts.limit ?? 500,
-    });
+    return this.runs.logs(runId, opts);
   }
 
-  async pruneBefore(date: Date) {
-    const { count } = await this.db.colorTapRun.deleteMany({ where: { createdAt: { lt: date }, status: { not: "running" } } });
-    return count;
+  pruneBefore(date: Date) {
+    return this.runs.pruneBefore(date);
   }
 }
 

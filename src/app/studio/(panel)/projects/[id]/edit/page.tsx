@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
-import { db } from "@/lib/db";
+import { getProject } from "@/lib/store";
 import { toProjectDTO } from "@/lib/validators";
 import ProjectForm from "@/components/studio/ProjectForm";
 
@@ -14,7 +14,7 @@ export default async function StudioEditProjectPage({
 }: {
   params: { id: string };
 }) {
-  const row = await db.project.findUnique({ where: { id: params.id } });
+  const row = await getProject(params.id);
   if (!row) notFound();
   const project = toProjectDTO(row);
 

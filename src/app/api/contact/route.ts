@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { db } from "@/lib/db";
+import { createMessage } from "@/lib/store";
 import { contactInputSchema } from "@/lib/validators";
 import {
   clientIp,
@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
   }
 
   // 4. Persist + refresh any public page cache.
-  const created = await db.contactMessage.create({ data: parsed.data });
+  const created = await createMessage(parsed.data);
   revalidatePublicPages();
 
   return jsonOk(

@@ -4,17 +4,19 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 const touched: string[] = [];
 
 vi.mock("@/lib/session", () => ({ getSession: vi.fn(async () => null) }));
-// Nothing may reach the database (or Firebase) without a session.
-vi.mock("@/lib/db", () => ({
-  db: new Proxy(
-    {},
-    {
-      get(_t, prop) {
-        touched.push(String(prop));
-        throw new Error(`db.${String(prop)} used without a session`);
-      },
-    }
-  ),
+// Nothing may reach the database (Firestore) or Firebase without a session.
+vi.mock("@/lib/firestore", async (orig) => ({
+  ...(await orig<typeof import("@/lib/firestore")>()),
+  firestore: () =>
+    new Proxy(
+      {},
+      {
+        get(_t, prop) {
+          touched.push(String(prop));
+          throw new Error(`firestore().${String(prop)} used without a session`);
+        },
+      }
+    ),
 }));
 
 import * as status from "@/app/api/admin/colortap/status/route";
