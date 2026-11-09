@@ -57,6 +57,29 @@ d("Quiz Master FirestoreRunRepo", () => {
     expect(await repo.acquireTick(run.id, "t4", now(), later(240_000), later(600_000))).toBe(true);
   });
 
+  it("lets three lanes save to one run at once without a lock stall", async () => {
+    const { FirestoreRunRepo } = await import("../quizmaster/repo");
+    const repo = new FirestoreRunRepo();
+    const { run } = await repo.createRunIfFree(
+      { kind: "seed", trigger: "manual", slot: "", options: "{}" }, [], now(), later(600_000)
+    );
+    expect(await repo.acquireTick(run.id, "tok", now(), later(240_000), later(600_000))).toBe(true);
+    const started = Date.now();
+    await Promise.all(
+      [1, 2, 3].flatMap((n) =>
+        Array.from({ length: 4 }, (_, i) => [
+          repo.updateRun(run.id, { summary: JSON.stringify({ lane: n, i }) }),
+          repo.renewLock(run.id, "tok", later(600_000 + n * 1000 + i)),
+          repo.addLogs(run.id, [{ at: new Date(), level: "info", message: `lane ${n} unit ${i}` }]),
+        ]).flat()
+      )
+    );
+    expect(Date.now() - started).toBeLessThan(10_000);
+    expect((await repo.logs(run.id)).length).toBe(12);
+    await repo.releaseTick(run.id, "tok");
+    expect((await repo.getRun(run.id))!.tickToken).toBeNull();
+  });
+
   it("keeps steps idempotent, logs in order, and prunes finished runs with their children", async () => {
     const { FirestoreRunRepo } = await import("../quizmaster/repo");
     const repo = new FirestoreRunRepo();

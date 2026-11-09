@@ -67,9 +67,6 @@ export const COL = {
   messages: "contactMessages",
   aiLogs: "aiLogs",
   config: "config",
-  quizRuns: "quizRuns",
-  colorTapRuns: "colorTapRuns",
-  locks: "locks",
 } as const;
 
 /** Firestore values → plain JS: Timestamps become Dates (deeply). */
@@ -96,7 +93,7 @@ export function timeId(at: Date, n = 0): string {
 let counter = Math.floor(Math.random() * 1296);
 
 /**
- * A new document id in the cuid style the Postgres rows used ("c" + time +
+ * A new document id in the cuid style ("c" + time +
  * counter + random, lowercase base 36, 25 chars). Imported and new ids look
  * alike, and they pass the `z.string().cuid()` checks on project ids (e.g. the
  * home Hero and Featured pickers).

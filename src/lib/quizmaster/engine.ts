@@ -34,8 +34,14 @@ import type { JobContext, JobDeps } from "./runtime";
 import { weeklySummary } from "./weekly";
 
 export const TICK_BUDGET_MS = 240_000;
-/** The tick lease outlives the budget so a slow last unit can't overlap the next tick. */
-export const TICK_LEASE_MS = 290_000;
+/**
+ * The tick lease outlives the budget so a slow last unit can't overlap the
+ * next tick, but not by much: a tick that was killed (it never released the
+ * lease) blocks the run only this long.
+ */
+export const TICK_LEASE_MS = 270_000;
+/** How often a tick re-reads the run to see if it was cancelled. */
+const CANCEL_CHECK_MS = 15_000;
 export const RUN_LEASE_MS = 10 * 60_000;
 export const MAX_ATTEMPTS = 3;
 export const MAX_LANES = 3;
@@ -149,6 +155,7 @@ export async function createRun(
 ) {
   const now = new Date((deps.clock ?? Date.now)());
   await deps.repo.pruneBefore(new Date(now.getTime() - RETENTION_DAYS * 24 * 60 * 60 * 1000));
+  const planned = planSteps(input.kind, input.slot, input.options);
   const result = await deps.repo.createRunIfFree(
     {
       kind: input.kind,
@@ -156,8 +163,9 @@ export async function createRun(
       slot: input.slot,
       options: JSON.stringify(input.options),
       summary: "{}",
+      progress: JSON.stringify({ done: 0, total: planned.length, current: "" }),
     },
-    planSteps(input.kind, input.slot, input.options),
+    planned,
     now,
     new Date(now.getTime() + RUN_LEASE_MS)
   );
@@ -193,6 +201,15 @@ export function progressOf(steps: StepRow[], summary: RunSummary): Progress {
   return { done, total: done + remaining, current: summary.current ?? "" };
 }
 
+/** The progress the last tick saved on the run: no step reads (busy tabs, the status card). */
+export function cachedProgress(run: RunRow): Progress {
+  const saved = parse<Partial<Progress>>(run.progress ?? "", {});
+  const current = parse<RunSummary>(run.summary, {}).current ?? saved.current ?? "";
+  const done = saved.done ?? 0;
+  const total = Math.max(saved.total ?? 0, done);
+  return run.status === "running" ? { done, total, current } : { done: total, total, current: "" };
+}
+
 export async function snapshot(repo: RunRepo, runId: string): Promise<TickResult> {
   const run = await repo.getRun(runId);
   if (!run) throw new RunNotFound();
@@ -222,7 +239,7 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
   const deadline = t0 + (deps.budgetMs ?? TICK_BUDGET_MS);
   const run = await repo.getRun(runId);
   if (!run) throw new RunNotFound();
-  if (run.status !== "running") return snapshot(repo, runId);
+  if (run.status !== "running") return { status: run.status, done: true, progress: cachedProgress(run) };
 
   const token = randomUUID();
   const acquired = await repo.acquireTick(
@@ -232,7 +249,12 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
     new Date(t0 + TICK_LEASE_MS),
     new Date(t0 + RUN_LEASE_MS)
   );
-  if (!acquired) return { ...(await snapshot(repo, runId)), busy: true };
+  // Another tab's tick holds the run: answer from the run doc alone.
+  if (!acquired) {
+    const now = await repo.getRun(runId);
+    if (!now) throw new RunNotFound();
+    return { status: now.status, done: now.status !== "running", busy: now.status === "running", progress: cachedProgress(now) };
+  }
 
   const options = parse<RunOptions>(run.options, {} as RunOptions);
   const summary = parse<RunSummary>(run.summary, {});
@@ -255,7 +277,15 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
     await repo.renewLock(runId, token, new Date(clock() + RUN_LEASE_MS));
   };
   const timeLeft = () => deadline - clock();
-  const cancelled = async () => (await repo.getRun(runId))?.status !== "running";
+  let cancelCheckedAt = clock();
+  let wasCancelled = false;
+  const cancelled = async (fresh = false) => {
+    if (wasCancelled) return true;
+    if (!fresh && clock() - cancelCheckedAt < CANCEL_CHECK_MS) return false;
+    cancelCheckedAt = clock();
+    wasCancelled = (await repo.getRun(runId))?.status !== "running";
+    return wasCancelled;
+  };
 
   let jobs: JobDeps | null = null;
   const jobsFor = (): JobDeps => {
@@ -264,6 +294,8 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
   };
 
   let outOfTime = false;
+  let progress: Progress = cachedProgress(run);
+  let finalStatusValue: string | null = null;
   try {
     // --- Category chains, up to 3 at once ------------------------------
     let steps = await repo.steps(runId);
@@ -414,29 +446,35 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
 
     // --- Finished? -----------------------------------------------------
     steps = await repo.steps(runId);
-    if (!steps.some((s) => !finished(s)) && !(await cancelled())) {
+    progress = progressOf(steps, summary);
+    if (!steps.some((s) => !finished(s)) && !(await cancelled(true))) {
       const status = finalStatus(run.kind as RunKind, steps, summary);
       summary.current = "";
       const finishedAt = new Date(clock());
       logger("")(`run finished: ${status}`);
       await flush();
+      finalStatusValue = status;
       await repo.updateRun(runId, {
         status,
         finishedAt,
         lockedUntil: null,
         summary: JSON.stringify(summary),
+        progress: JSON.stringify({ done: progress.total, total: progress.total, current: "" }),
       });
       const final = await repo.getRun(runId);
       if (final && deps.onFinish) await deps.onFinish(final, summary);
     } else {
       await flush();
-      await saveSummary();
+      await repo.updateRun(runId, { summary: JSON.stringify(summary), progress: JSON.stringify(progress) });
+      await repo.renewLock(runId, token, new Date(clock() + RUN_LEASE_MS));
     }
   } finally {
     await flush().catch(() => {});
     await repo.releaseTick(runId, token);
   }
-  return snapshot(repo, runId);
+  if (finalStatusValue) return { status: finalStatusValue, done: true, progress: { ...progress, done: progress.total, current: "" } };
+  if (wasCancelled) return { status: "cancelled", done: true, progress };
+  return { status: "running", done: false, progress };
 }
 
 /** succeeded: everything worked; partial: something failed; failed: nothing useful happened. */

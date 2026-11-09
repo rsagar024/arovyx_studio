@@ -14,7 +14,7 @@ import type { NewLog, RunRepo, RunRow } from "./repo";
 
 export const TICK_BUDGET_MS = 240_000;
 /** The tick lease outlives the budget so a slow last page can't overlap the next tick. */
-export const TICK_LEASE_MS = 290_000;
+export const TICK_LEASE_MS = 270_000;
 export const RUN_LEASE_MS = 10 * 60_000;
 export const MAX_ATTEMPTS = 3;
 /** Don't start a page with less than this left. */

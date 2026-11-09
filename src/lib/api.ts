@@ -8,7 +8,7 @@
  */
 
 import { NextResponse, type NextRequest } from "next/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { ZodError } from "zod";
 import { SESSION_COOKIE, verifySession } from "@/lib/auth";
 
@@ -86,7 +86,7 @@ interface RateStore {
   hits: Map<string, number[]>;
 }
 
-// Survive dev hot-reload (same pattern as the Prisma singleton).
+// Survive dev hot-reload (a globalThis singleton).
 const globalStore = globalThis as unknown as { __arovyxRateLimit?: RateStore };
 const store: RateStore = globalStore.__arovyxRateLimit ?? { hits: new Map() };
 globalStore.__arovyxRateLimit = store;
@@ -149,7 +149,26 @@ export function clientIp(req: NextRequest): string {
  * Revalidate the public pages so DB mutations show up without a restart.
  * Pass extra paths (e.g. `/projects/my-slug`) when a single page changes.
  */
+/**
+ * Firestore's "RESOURCE_EXHAUSTED" (gRPC code 8): on the free Spark plan,
+ * the project's daily reads or writes are used up until the reset at
+ * midnight Pacific time (about 1:30 PM IST). A readable message, or null for
+ * any other error.
+ */
+export function quotaMessage(err: unknown): string | null {
+  const e = err as { code?: unknown; message?: unknown } | null;
+  const hit = e?.code === 8 || (typeof e?.message === "string" && e.message.includes("RESOURCE_EXHAUSTED"));
+  return hit
+    ? "The Firebase free daily quota for this database is used up. It resets at midnight Pacific time (about 1:30 PM IST)."
+    : null;
+}
+
+/** Cache tags of the public data (see src/lib/projects.ts). */
+export const CACHE_TAGS = { projects: "projects", site: "site-config", ai: "ai-logs" } as const;
+
 export function revalidatePublicPages(extraPaths: string[] = []) {
+  revalidateTag(CACHE_TAGS.projects);
+  revalidateTag(CACHE_TAGS.site);
   for (const path of ["/", "/projects", ...extraPaths]) {
     revalidatePath(path);
   }

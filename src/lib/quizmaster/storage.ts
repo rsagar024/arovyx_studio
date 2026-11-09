@@ -1,12 +1,13 @@
-/** Quiz Master's storage on Firestore: the runs repo and the schedule document. */
+/** Quiz Master's storage, in the Quiz Master project's Firestore: the runs repo and the schedule document. */
 import "server-only";
-import { COL, firestore, toRow } from "@/lib/firestore";
+import { toRow } from "@/lib/firestore";
+import { STUDIO_COL, firestore } from "./firebase";
 import { FirestoreRunRepo } from "./repo";
 import type { ScheduleDb, ScheduleRow } from "./schedule";
 
 export const repo = new FirestoreRunRepo();
 
-const scheduleRef = () => firestore().collection(COL.config).doc("quizSchedule");
+const scheduleRef = () => firestore().collection(STUDIO_COL.config).doc("quizSchedule");
 
 async function read(): Promise<ScheduleRow> {
   return { ...toRow<ScheduleRow>(await scheduleRef().get()), id: 1 };

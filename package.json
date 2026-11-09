@@ -10,7 +10,6 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "db:seed": "tsx scripts/seed.ts",
-    "db:import": "tsx scripts/import-postgres.ts",
     "test": "vitest run"
   },
   "overrides": {
@@ -34,11 +33,9 @@
   "devDependencies": {
     "@types/node": "^20.17.6",
     "@types/pako": "2.0.4",
-    "@types/pg": "^8.11.10",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "autoprefixer": "^10.4.20",
-    "pg": "^8.13.1",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
     "tsx": "^4.19.2",

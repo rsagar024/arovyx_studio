@@ -174,7 +174,6 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 | `npm run typecheck` | `tsc --noEmit` (strict) |
 | `npm test` | Vitest: the Quiz Master ports and engine tests |
 | `npm run db:seed` | Seed / re-seed the example data |
-| `npm run db:import -- --from "<postgres url>"` | Copy everything from the old Postgres database into Firestore (see [Importing the old Postgres data](#importing-the-old-postgres-data)) |
 
 ---
 
@@ -183,7 +182,6 @@ All `/api/admin/*` routes require the admin session cookie (checked by middlewar
 ```
 scripts/
   seed.ts              example data (--if-empty used by predev and the deploy workflow)
-  import-postgres.ts   one-off copy of the old Postgres data into Firestore (same ids, re-runnable)
 .github/workflows/
   deploy.yml           merge to master → typecheck → sync secrets → seed → Vercel deploy
 src/
@@ -221,9 +219,9 @@ Studio → **Apps** has one card per app, with its current status. To add an app
 
 Studio → **Quiz Master** runs the server jobs of the Quiz Master Android app (Firebase project `quizmaster-3be48`). They used to run as Python on GitHub Actions in the quizmaster repo (`automation/`, `tool/cleanup_guests.py`). The TypeScript port in `src/lib/quizmaster/` writes byte-for-byte the same Firestore docs (packed `question_files/base_*`, `meta/questions`, `daily_challenges/{date}`, `question_pushes/*`) and FCM pushes, so the shipped app needs no update.
 
-**How it runs.** Nothing external starts it: no GitHub Actions job, no Vercel Cron. The tab shows a countdown to `nextRunAt` (stored in `QuizSchedule`, so every tab and device shows the same one). The interval is 11–12 h, 12 h by default. When it reaches zero **while the tab is open**, or is already past when you open it (shown as *Overdue*), the page starts the run and drives it to the end; then the countdown restarts from the interval. Keep the tab open on a spare device, or press **Run now**, which can run any number of times a day: each click gets its own `x{time}` slot, so it writes new questions and sends the push (unless that run has just sent the daily quiz push). The timer keeps one run per `am` or `pm` slot. Line the timer up with about **07:00 IST**: the daily quiz is only published by a run that reaches its daily-quiz step before 12:00 IST, and a run from 15:00 IST on is the `pm` slot.
+**How it runs.** Nothing external starts it: no GitHub Actions job, no Vercel Cron. The tab shows a countdown to `nextRunAt` (stored in `studio_config/quizSchedule`, so every tab and device shows the same one). The interval is 11–12 h, 12 h by default. When it reaches zero **while the tab is open**, or is already past when you open it (shown as *Overdue*), the page starts the run and drives it to the end; then the countdown restarts from the interval. Keep the tab open on a spare device, or press **Run now**, which can run any number of times a day: each click gets its own `x{time}` slot, so it writes new questions and sends the push (unless that run has just sent the daily quiz push). The timer keeps one run per `am` or `pm` slot. Line the timer up with about **07:00 IST**: the daily quiz is only published by a run that reaches its daily-quiz step before 12:00 IST, and a run from 15:00 IST on is the `pm` slot.
 
-**Resumable steps.** A full run took up to ~40 minutes, but a Vercel function stops after ~5. So a run is a list of steps in Postgres (`QuizRun`, `QuizRunStep`, `QuizLog`), and `POST …/runs/{id}/tick` does as much as fits in **240 s**, saving after every unit:
+**Resumable steps.** A full run took up to ~40 minutes, but a Vercel function stops after ~5. So a run is a list of steps in the Quiz Master project's own Firestore (`studio_quizRuns/{id}` with `steps` and `logs` subcollections, never the site's database), and `POST …/runs/{id}/tick` does as much as fits in **240 s**, saving after every unit:
 
 - per category, up to 3 at once: prepare, generate (per difficulty), verify (12 questions per unit), up to 2 refill rounds, translate `hi` then `hi-Latn` (6 per unit, one retry), write
 - then publish, the daily quiz (not on the `pm` slot), notify (and the weekly summary on Mondays), and guest cleanup (an automatic run, at most once every 24 h, one page of 1,000 users per unit)
@@ -341,17 +339,6 @@ Put the Firebase key on one line in `.env.local` (gitignored) as `FIREBASE_SERVI
 
 Note this points at the **live** database, so anything you add or delete locally is real. For a safe sandbox, use the Firestore emulator: `npx firebase-tools emulators:start --only firestore --project demo-arovyx`, then start the app with `FIRESTORE_EMULATOR_HOST=127.0.0.1:8080` and no key set. The repo tests that need Firestore run the same way: `npx firebase-tools emulators:exec --only firestore --project demo-arovyx "npx vitest run firestore.emulator"`.
 
-### Importing the old Postgres data
-
-The site ran on Neon Postgres until 2026-11-08. `scripts/import-postgres.ts` copies every table into Firestore with the **same ids**, so it can be run again safely:
-
-```bash
-npm run db:import -- --from "<postgres direct url>" --dry-run          # counts only
-npm run db:import -- --from "<postgres direct url>" --remove-samples   # the real import
-```
-
-`--remove-samples` deletes the three seeded example projects first. `--skip-settings` keeps the settings and schedules already in Firestore. A project whose slug is already taken by a different project is skipped and listed, never duplicated.
-
 ### Troubleshooting
 
 | Symptom | Fix |
@@ -359,6 +346,7 @@ npm run db:import -- --from "<postgres direct url>" --remove-samples   # the rea
 | Workflow fails at **Check required secrets** | The error names the missing secret or variable; add it and re-run |
 | Workflow fails at **Check site Firebase key** | `FIREBASE_SERVICE_ACCOUNT` isn't a one-line key JSON, or it's for another project; re-set it from a key of **arovyx-studio** |
 | Pages show "Something went wrong on our side" | Firestore couldn't be reached or the key is wrong: check `vercel logs` and the Firebase console's usage page |
+| `8 RESOURCE_EXHAUSTED: Quota exceeded` | A Firebase project used up its free daily reads or writes (Spark: 50k reads, 20k writes). It resets at midnight Pacific (about 1:30 PM IST). Public pages keep serving the cached copy meanwhile. If it keeps happening, check **Firebase console → Firestore → Usage** for what reads, or move the project to the Blaze plan with a budget alert |
 | AI generate times out on the live site | The hosted NIM model is slow or down (it can take ~45 s); retry, or set `NVIDIA_NIM_MODEL` to another model your key can call |
 | Changed a secret but the site didn't change | Secrets apply on the next deploy: run the workflow |
 | Admin login always says invalid | Re-set `ADMIN_SECRET_KEY` (watch for trailing spaces), then redeploy |
@@ -368,7 +356,7 @@ npm run db:import -- --from "<postgres direct url>" --remove-samples   # the rea
 
 ## Notes
 
-- **Data model:** each Firestore document has the fields of the old SQL tables (`src/lib/store/types.ts`). `category` and `status` are strings validated by Zod, and `tags`, `techStack` and `features` are JSON-encoded strings exposed as `string[]` by the mappers in `src/lib/validators.ts`. Collections are small, so the code filters and sorts in memory instead of needing composite indexes. Quiz Master and Color Tap runs keep their steps and logs in subcollections, and their leases are taken in Firestore transactions.
+- **Data model:** each Firestore document has the fields of the old SQL tables (`src/lib/store/types.ts`). `category` and `status` are strings validated by Zod, and `tags`, `techStack` and `features` are JSON-encoded strings exposed as `string[]` by the mappers in `src/lib/validators.ts`. Collections are small, so the code filters and sorts in memory instead of needing composite indexes. Quiz Master and Color Tap runs live in **their own** Firebase projects (`studio_*` collections), not in the site's, so a long run can't use up the site's free quota. They keep steps and logs (one document per batch of lines) in subcollections, and their leases are taken in Firestore transactions. The public pages read projects and settings through Next's data cache (`unstable_cache`, tags `projects` / `site-config`, at most hourly, dropped at once by any Studio edit), so visitors cost no Firestore reads.
 - **Function duration:** the AI routes declare `maxDuration = 300` because NIM calls can take ~45 s and retry.
 - **Social card:** `/og` runs on the edge runtime. In the Node runtime, `@vercel/og` fails to build on Windows, and edge can't run the Firebase Admin SDK, so the card shows the brand text rather than the editable site name. Projects with an `imageUrl` use that image instead.
 - **Play Store images** are served through `/api/img`, a cached pass-through restricted to Google's image host. Hot-linking Google directly gets visitors rate-limited (HTTP 429, broken images); the proxy lets Vercel's CDN cache each image for a year. Images that still fail are hidden rather than shown broken.

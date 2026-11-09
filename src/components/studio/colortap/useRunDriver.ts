@@ -7,6 +7,17 @@ import { api, type TickResponse } from "./api";
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 /**
+ * The wait before the next tick. A tick that worked its full slice goes again
+ * at once. A quick one (nothing could start, every model was busy) waits a
+ * little, and a run another tab is driving is only checked on: each call
+ * costs database reads, and the free plan counts them.
+ */
+export function nextTickDelay(busy: boolean, tookMs: number): number {
+  if (busy) return 15_000;
+  return tookMs < 10_000 ? 3_000 : 300;
+}
+
+/**
  * Drives a run to the end: calls `tick` in a loop, one request in flight at a
  * time, until the server says it's done. If the tab closes, the run waits in
  * the database and the next open (or any other tab) resumes it.
@@ -34,7 +45,9 @@ export function useRunDriver(onFinished: (runId: string, status: string) => void
     try {
       while (mounted.current && driving.current.has(id)) {
         let res: TickResponse;
+        let started = Date.now();
         try {
+          started = Date.now();
           res = await api<TickResponse>(`/runs/${id}/tick`, { method: "POST" });
           failures = 0;
         } catch (err) {
@@ -51,7 +64,7 @@ export function useRunDriver(onFinished: (runId: string, status: string) => void
           finishedRef.current(id, res.status);
           break;
         }
-        await sleep(res.busy ? 5_000 : 300);
+        await sleep(nextTickDelay(Boolean(res.busy), Date.now() - started));
       }
     } finally {
       driving.current.delete(id);

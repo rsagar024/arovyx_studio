@@ -1,16 +1,44 @@
-import { SITE_CONFIG_DEFAULTS, getProjectBySlugRow, listProjects, readSiteConfig } from "@/lib/store";
+import { unstable_cache } from "next/cache";
+import { CACHE_TAGS } from "@/lib/api";
+import { SITE_CONFIG_DEFAULTS, listProjects, readSiteConfig, type Project, type SiteConfig } from "@/lib/store";
 import { parseJsonStringArray, toProjectDTO, type ProjectDTO } from "@/lib/validators";
+
+/*
+ * Every public page, the sitemap and the root layout's metadata read the
+ * projects and the site settings. Reading Firestore on each render cost
+ * thousands of reads a day on the free plan, so both are kept in Next's data
+ * cache: one read of the projects and one of the settings per hour at most,
+ * and at once after any edit in Studio (revalidatePublicPages drops the
+ * tags). The cache stores JSON, so dates are revived on the way out.
+ */
+const CACHE_SECONDS = 3600;
+
+const cachedPublishedRows = unstable_cache(
+  async () => listProjects({ publishedOnly: true }),
+  ["published-projects-v1"],
+  { tags: [CACHE_TAGS.projects], revalidate: CACHE_SECONDS }
+);
+
+const cachedSiteConfig = unstable_cache(async () => readSiteConfig(), ["site-config-v1"], {
+  tags: [CACHE_TAGS.site],
+  revalidate: CACHE_SECONDS,
+});
+
+const reviveProject = (p: Project): Project => ({
+  ...p,
+  createdAt: new Date(p.createdAt),
+  updatedAt: new Date(p.updatedAt),
+});
 
 /** All published projects, newest first, decoded to DTOs. */
 export async function getPublishedProjects(): Promise<ProjectDTO[]> {
-  const rows = await listProjects({ publishedOnly: true });
-  return rows.map(toProjectDTO);
+  const rows = await cachedPublishedRows();
+  return rows.map((r) => toProjectDTO(reviveProject(r)));
 }
 
+/** A published project by slug, from the cached list: an unknown slug costs no read. */
 export async function getProjectBySlug(slug: string): Promise<ProjectDTO | null> {
-  const row = await getProjectBySlugRow(slug);
-  if (!row || !row.isPublished) return null;
-  return toProjectDTO(row);
+  return (await getPublishedProjects()).find((p) => p.slug === slug) ?? null;
 }
 
 /** Counts for the home stats strip. */
@@ -21,7 +49,7 @@ export async function getProjectStats(): Promise<{
   PACKAGE: number;
   PLUGIN: number;
 }> {
-  const rows = await listProjects({ publishedOnly: true });
+  const rows = await getPublishedProjects();
   const stats = { total: rows.length, APP: 0, GAME: 0, PACKAGE: 0, PLUGIN: 0 };
   for (const row of rows) {
     if (row.category === "APP" || row.category === "GAME" || row.category === "PACKAGE" || row.category === "PLUGIN") {
@@ -146,10 +174,11 @@ export function pickHeroProjects(published: ProjectDTO[], heroProjectIds: string
  * even pages that don't need the database (and the error boundaries never get
  * a chance to render).
  */
-export async function getSiteConfig() {
-  let config = null;
+export async function getSiteConfig(): Promise<SiteConfig> {
+  let config: SiteConfig | null = null;
   try {
-    config = await readSiteConfig();
+    const cached = await cachedSiteConfig();
+    config = cached ? { ...cached, updatedAt: new Date(cached.updatedAt) } : null;
   } catch (err) {
     console.error("getSiteConfig: database unavailable, using defaults:", err);
   }
