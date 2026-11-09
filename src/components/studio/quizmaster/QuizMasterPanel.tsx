@@ -10,7 +10,7 @@ import StatusCard from "./StatusCard";
 import Stopwatch, { type StopwatchState } from "./Stopwatch";
 import { useRunDriver } from "./useRunDriver";
 
-/** Background status refresh. Must stay well above Neon's 5-minute scale-to-zero delay. */
+/** Background status refresh: rare, since each refresh costs database reads. */
 const STATUS_REFRESH_MS = 15 * 60_000;
 
 interface StartResponse {
@@ -88,8 +88,8 @@ export default function QuizMasterPanel() {
   );
 
   // First load, then a light refresh every 15 minutes (another device may change things).
-  // Keep this well above Neon's 5-minute scale-to-zero delay: a tab left open polling
-  // every minute kept the database awake around the clock and used up the free plan.
+  // Keep it rare: every refresh costs Firestore reads, and a tab left open polling
+  // every minute used up the free plan.
   // The countdown runs on the local clock, so due runs still start on time.
   useEffect(() => {
     void refresh();

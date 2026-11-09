@@ -61,6 +61,11 @@ export function quizApp(): App {
     // not initialised yet
   }
   const raw = process.env.QUIZMASTER_FIREBASE_SERVICE_ACCOUNT;
+  if (!raw && process.env.FIRESTORE_EMULATOR_HOST) {
+    // Tests against the local emulator: no credentials needed.
+    app = initializeApp({ projectId: process.env.GCLOUD_PROJECT || "demo-arovyx" }, APP_NAME);
+    return app;
+  }
   if (!raw) throw new FirebaseNotConfigured();
   let info: { project_id?: string; client_email?: string; private_key?: string };
   try {
@@ -83,7 +88,25 @@ export function quizApp(): App {
   return app;
 }
 
-export const firestore = (): Firestore => getFirestore(quizApp());
+let db: Firestore | null = null;
+
+export function firestore(): Firestore {
+  if (db) return db;
+  db = getFirestore(quizApp());
+  db.settings({ ignoreUndefinedProperties: true });
+  return db;
+}
+
+/**
+ * Collections Studio keeps in the Quiz Master project for its own runs, the
+ * schedule and the creation locks. The prefix keeps them apart from the app's
+ * collections.
+ */
+export const STUDIO_COL = {
+  runs: "studio_quizRuns",
+  locks: "studio_locks",
+  config: "studio_config",
+} as const;
 
 /** Firestore values → plain JS: Timestamps become Dates, Bytes Buffers. */
 function fromFirestore(value: unknown): unknown {

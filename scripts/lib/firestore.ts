@@ -1,5 +1,5 @@
 /**
- * Firestore for scripts (seed, import): reads FIREBASE_SERVICE_ACCOUNT from the
+ * Firestore for scripts (the seed): reads FIREBASE_SERVICE_ACCOUNT from the
  * environment or .env.local, like Next.js does. The app's own client in
  * src/lib/firestore.ts is server-only, so scripts can't import it.
  */

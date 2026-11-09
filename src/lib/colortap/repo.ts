@@ -1,6 +1,7 @@
 /**
- * Where Color Tap's settings, runs and logs live: Firestore
- * (`config/colorTapSchedule`, `colorTapRuns/{id}` with a `logs` subcollection),
+ * Where Color Tap's settings, runs and logs live: Color Tap's own Firestore
+ * (`studio_config/colorTapSchedule`, `studio_colorTapRuns/{id}` with a `logs`
+ * subcollection), never the site's database,
  * behind a small interface so the tests can use an in-memory copy.
  *
  * Two leases keep runs safe when several tabs or devices drive them:
@@ -12,8 +13,9 @@
  *   tabs can never handle the same page twice.
  */
 import "server-only";
-import { COL, firestore, toRow } from "@/lib/firestore";
+import { toRow } from "@/lib/firestore";
 import { FirestoreRuns } from "@/lib/firestoreRuns";
+import { STUDIO_COL, colorTapDb } from "./firebase";
 
 export interface ScheduleRow {
   id: number;
@@ -86,8 +88,8 @@ export interface RunRepo {
 const SCHEDULE_DEFAULTS = { autoEnabled: false, days: 90, lastCleanupAt: null, lastAutoAt: null };
 
 export class FirestoreRunRepo implements RunRepo {
-  private runs = new FirestoreRuns<RunRow>(COL.colorTapRuns);
-  private scheduleRef = () => firestore().collection(COL.config).doc("colorTapSchedule");
+  private runs = new FirestoreRuns<RunRow>(STUDIO_COL.runs, colorTapDb, STUDIO_COL.locks);
+  private scheduleRef = () => colorTapDb().collection(STUDIO_COL.config).doc("colorTapSchedule");
 
   async getSchedule(): Promise<ScheduleRow> {
     const ref = this.scheduleRef();

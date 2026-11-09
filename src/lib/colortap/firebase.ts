@@ -10,6 +10,7 @@
 import "server-only";
 import { cert, getApp, initializeApp, type App } from "firebase-admin/app";
 import { getAuth, type UserRecord } from "firebase-admin/auth";
+import { getFirestore, type Firestore } from "firebase-admin/firestore";
 import type { GuestUser, UserAdmin } from "./guestCleanup";
 
 export const COLORTAP_PROJECT_ID = "color-tap-c06bf";
@@ -79,6 +80,36 @@ function colorTapApp(): App {
   );
   return app;
 }
+
+let db: Firestore | null = null;
+
+/**
+ * Color Tap's own Firestore, where Studio keeps its cleanup runs and settings
+ * (collections prefixed `studio_`), so they never use the site's quota. Tests
+ * against the emulator need no key.
+ */
+export function colorTapDb(): Firestore {
+  if (db) return db;
+  let base: App;
+  if (!process.env[ENV_NAME] && process.env.FIRESTORE_EMULATOR_HOST) {
+    try {
+      base = getApp(`${APP_NAME}-emulator`);
+    } catch {
+      base = initializeApp({ projectId: process.env.GCLOUD_PROJECT || "demo-arovyx" }, `${APP_NAME}-emulator`);
+    }
+  } else {
+    base = colorTapApp();
+  }
+  db = getFirestore(base);
+  db.settings({ ignoreUndefinedProperties: true });
+  return db;
+}
+
+export const STUDIO_COL = {
+  runs: "studio_colorTapRuns",
+  locks: "studio_locks",
+  config: "studio_config",
+} as const;
 
 /** The fields the rules read. Auth gives its times as date strings. */
 export function toGuestUser(u: UserRecord): GuestUser {

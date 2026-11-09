@@ -4,7 +4,7 @@
  */
 import "server-only";
 import { ALL_CATEGORIES, isCategory } from "./categories";
-import { createRun, snapshot, tick, type EngineDeps, type RunKind, type RunOptions, type RunSummary } from "./engine";
+import { cachedProgress, createRun, progressOf, tick, type EngineDeps, type RunKind, type RunOptions, type RunSummary } from "./engine";
 import { firebaseConfigured } from "./firebase";
 import * as ist from "./ist";
 import { modelFamily, models } from "./nimClient";
@@ -105,7 +105,7 @@ export async function statusPayload() {
     }
   }
   const activeRuns = await Promise.all(
-    running.map(async (r) => ({ ...runDto(r), progress: (await snapshot(repo, r.id)).progress }))
+    running.map(async (r) => ({ ...runDto(r), progress: cachedProgress(r) }))
   );
   const lastFinished = recent.find((r) => r.status !== "running") ?? null;
   return {
@@ -267,7 +267,7 @@ export async function runDetail(id: string, after?: Date) {
   const logs = await repo.logs(id, { after, limit: 500 });
   return {
     run: runDto(run),
-    progress: (await snapshot(repo, id)).progress,
+    progress: run.status === "running" ? progressOf(steps, parse<RunSummary>(run.summary, {})) : cachedProgress(run),
     steps: steps.map((s) => ({
       key: s.key,
       order: s.order,
