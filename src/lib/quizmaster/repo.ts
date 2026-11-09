@@ -1,6 +1,7 @@
 /**
- * Where runs, steps and logs live: Firestore (`quizRuns/{id}` with `steps`
- * and `logs` subcollections), behind a small interface so the engine's tests
+ * Where runs, steps and logs live: the Quiz Master project's own Firestore
+ * (`studio_quizRuns/{id}` with `steps` and `logs` subcollections), never the
+ * site's database, behind a small interface so the engine's tests
  * can use an in-memory copy.
  *
  * Two leases keep runs safe when several tabs or devices drive them:
@@ -12,8 +13,8 @@
  *   tabs can never run the same step twice.
  */
 import "server-only";
-import { COL } from "@/lib/firestore";
 import { FirestoreRuns } from "@/lib/firestoreRuns";
+import { STUDIO_COL, firestore } from "./firebase";
 
 export interface RunRow {
   id: string;
@@ -28,6 +29,8 @@ export interface RunRow {
   startedAt: Date;
   finishedAt: Date | null;
   summary: string;
+  /** JSON `Progress` saved at the end of each tick (for busy tabs and the status card). */
+  progress?: string;
   createdAt: Date;
 }
 
@@ -57,6 +60,7 @@ export interface NewRun {
   slot: string;
   options: string;
   summary?: string;
+  progress?: string;
 }
 
 export interface NewStep {
@@ -101,7 +105,7 @@ function splitStepId(id: string): { runId: string; key: string } {
 }
 
 export class FirestoreRunRepo implements RunRepo {
-  private runs = new FirestoreRuns<RunRow>(COL.quizRuns);
+  private runs = new FirestoreRuns<RunRow>(STUDIO_COL.runs, firestore, STUDIO_COL.locks);
 
   private stepRef(runId: string, key: string) {
     return this.runs.ref(runId).collection("steps").doc(stepDocId(key));

@@ -180,6 +180,10 @@ export async function nimChat(
         return content;
       }
 
+      // Free the connection: an unread error body keeps its socket busy, and
+      // enough of them (429s during a busy run) stall later requests.
+      await res.body?.cancel().catch(() => {});
+
       // Models that reject chat_template_kwargs — retry once without it.
       if (res.status === 400 && useTemplateKwargs) {
         useTemplateKwargs = false;

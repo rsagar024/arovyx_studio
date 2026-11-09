@@ -1,7 +1,19 @@
+import { unstable_cache } from "next/cache";
+import { CACHE_TAGS } from "@/lib/api";
 import { aiLogCounts, countUnreadMessages, listMessages, listProjects, recentAiLogs } from "@/lib/store";
 import { CATEGORIES, type Category } from "@/lib/validators";
 
 const AI_WINDOW_DAYS = 30;
+
+/**
+ * The 30-day AI success/failure counts read every log in the window, so they
+ * are cached for 10 minutes rather than re-read on each Overview visit.
+ */
+const cachedAiCounts = unstable_cache(
+  async () => aiLogCounts(new Date(Date.now() - AI_WINDOW_DAYS * 24 * 60 * 60 * 1000)),
+  ["ai-log-counts-v1"],
+  { tags: [CACHE_TAGS.ai], revalidate: 600 }
+);
 
 export interface CategoryCount {
   published: number;
@@ -14,15 +26,13 @@ export interface CategoryCount {
  * from `AiLog`, and recently edited projects.
  */
 export async function getDashboardData() {
-  const since = new Date(Date.now() - AI_WINDOW_DAYS * 24 * 60 * 60 * 1000);
-
   // One read of every project (a few dozen) feeds the counts and the recent list.
   const [allProjects, recentMessages, unreadCount, aiLogs, aiCounts] = await Promise.all([
     listProjects({ orderBy: "updatedAt" }),
     listMessages(5),
     countUnreadMessages(),
     recentAiLogs(10),
-    aiLogCounts(since),
+    cachedAiCounts(),
   ]);
   const aiGeneratedCount = allProjects.filter((p) => p.aiGenerated).length;
   const recentProjects = allProjects

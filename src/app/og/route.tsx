@@ -7,7 +7,7 @@ import { ImageResponse } from "next/og";
  *
  * Edge runtime on purpose: in the Node runtime @vercel/og fails to load its
  * bundled font from a file URL on Windows ("Invalid URL" at build). Edge
- * can't reach Prisma, so the card carries the brand rather than SiteConfig.
+ * can't use the Firebase Admin SDK, so the card carries the brand rather than SiteConfig.
  */
 export const runtime = "edge";
 

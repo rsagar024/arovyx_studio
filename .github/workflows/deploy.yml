@@ -147,6 +147,9 @@ jobs:
           QUIZMASTER_TRANSLATE_MODEL: ${{ vars.QUIZMASTER_TRANSLATE_MODEL }}
           # Studio → Color Tap (optional: the tab can't run without the key)
           COLORTAP_FIREBASE_SERVICE_ACCOUNT: ${{ secrets.COLORTAP_FIREBASE_SERVICE_ACCOUNT }}
+          # Vercel Cron sends it as a Bearer token to /api/cron/sync-projects (optional:
+          # without it the daily project sync is refused and only an admin can run it)
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
         run: |
           api="https://api.vercel.com/v10/projects/$VERCEL_PROJECT_ID/env?upsert=true&teamId=$VERCEL_ORG_ID"
           failed=0
@@ -154,7 +157,7 @@ jobs:
                       ADMIN_SECRET_KEY ADMIN_JWT_SECRET NEXT_PUBLIC_SITE_URL \
                       QUIZMASTER_FIREBASE_SERVICE_ACCOUNT QUIZMASTER_FIREBASE_PROJECT_ID \
                       QUIZMASTER_GEN_MODEL QUIZMASTER_VERIFY_MODEL QUIZMASTER_TRANSLATE_MODEL \
-                      COLORTAP_FIREBASE_SERVICE_ACCOUNT; do
+                      COLORTAP_FIREBASE_SERVICE_ACCOUNT CRON_SECRET; do
             value="${!name}"
             [ -z "$value" ] && { echo "skip $name (not set; app default applies)"; continue; }
             # GitHub Secrets → "sensitive" (encrypted, never readable back; runtime-only).
