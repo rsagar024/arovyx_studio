@@ -240,6 +240,27 @@ describe("ticks", () => {
     expect(users.deleted).toEqual(["a", "b", "c"]);
   });
 
+  it("saves about once a minute, not after every page, and checks for Cancel as rarely", async () => {
+    const clock = { t: NOW };
+    const pages = Array.from({ length: 20 }, (_, i) => [guest(`g${i}`, 200)]);
+    const users = new FakeUsers(pages, () => {
+      clock.t += 5_000; // 20 pages × 5 s = 100 s
+    });
+    const repo = new MemoryRunRepo();
+    const service = createColorTapService({ repo, makeUsers: () => users, keyProblem: () => null, clock: () => clock.t });
+    const { runId } = await service.startCleanup(90, false);
+    let reads = 0;
+    const getRun = repo.getRun.bind(repo);
+    repo.getRun = async (id) => (reads++, getRun(id));
+    const before = repo.commits;
+    const r = await service.tickRun(runId);
+    expect(r).toMatchObject({ done: true, status: "succeeded", pages: 20 });
+    expect(users.deleted.length).toBe(20);
+    expect(repo.commits - before).toBeLessThanOrEqual(3);
+    expect(reads).toBeLessThanOrEqual(4); // start, a minute in, before finishing (+ the route's own)
+    expect((await repo.logs(runId)).some((l) => l.message.includes("run finished: succeeded"))).toBe(true);
+  });
+
   it("retries a failed page, and the run still succeeds", async () => {
     const { service, users, finish } = setup();
     users.failLists = 2;

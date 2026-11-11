@@ -10,7 +10,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import { ColorTapNotConfigured } from "./firebase";
 import { cleanupPage, startState, type CleanupCounts, type CleanupState, type UserAdmin } from "./guestCleanup";
-import type { NewLog, RunRepo, RunRow } from "./repo";
+import type { NewLog, RunChange, RunRepo, RunRow } from "./repo";
 
 export const TICK_BUDGET_MS = 240_000;
 /** The tick lease outlives the budget so a slow last page can't overlap the next tick. */
@@ -19,6 +19,10 @@ export const RUN_LEASE_MS = 10 * 60_000;
 export const MAX_ATTEMPTS = 3;
 /** Don't start a page with less than this left. */
 const MIN_PAGE_MS = 30_000;
+/** Save the run at least this often while a tick works (and always at its end). */
+const SAVE_EVERY_MS = 60_000;
+/** How often a tick re-reads the run to see if it was cancelled. */
+const CANCEL_CHECK_MS = 60_000;
 
 export interface EngineDeps {
   repo: RunRepo;
@@ -77,9 +81,45 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
 
   const logLine = (level: string, message: string): NewLog => ({ at: new Date(clock()), level, message: cleanLine(message) });
 
+  // The run is kept in memory for the tick and saved in one batched write at
+  // most once a minute and at the end: every Firestore read and write counts
+  // on the free plan.
+  const current: RunRow = { ...run };
+  let changes: RunChange = {};
+  let lines: NewLog[] = [];
+  let savedAt = clock();
+  const set = (data: RunChange) => {
+    Object.assign(current, data);
+    Object.assign(changes, data);
+  };
+  const save = async (force = false) => {
+    if (!force && clock() - savedAt < SAVE_EVERY_MS) return;
+    savedAt = clock();
+    const run = { ...changes };
+    const logs = lines;
+    changes = {};
+    lines = [];
+    // Renew the run lease with the same write (unless the run just ended).
+    if (current.status === "running") run.lockedUntil = new Date(clock() + RUN_LEASE_MS);
+    await repo.commit(runId, { run, logs });
+  };
+  let checkedAt = clock();
+  /** Cancelled from Studio? Re-read at most once a minute. */
+  const cancelled = async (fresh = false) => {
+    if (!fresh && clock() - checkedAt < CANCEL_CHECK_MS) return false;
+    checkedAt = clock();
+    const now = await repo.getRun(runId);
+    if (now?.status === "running") return false;
+    // Keep what Cancel wrote; don't save over it.
+    Object.assign(current, now ?? { status: "cancelled" });
+    changes = {};
+    return true;
+  };
+
   const fail = async (message: string) => {
-    await repo.addLogs(runId, [logLine("error", `run finished: failed (${message})`)]);
-    await repo.updateRun(runId, { status: "failed", finishedAt: new Date(clock()), lockedUntil: null, error: message });
+    lines.push(logLine("error", `run finished: failed (${message})`));
+    set({ status: "failed", finishedAt: new Date(clock()), lockedUntil: null, error: message });
+    await save(true);
   };
 
   try {
@@ -88,10 +128,8 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
     let users: UserAdmin | null = null;
 
     while (deadline - clock() >= MIN_PAGE_MS) {
-      // Cancelled from Studio since the last page.
-      if ((await repo.getRun(runId))?.status !== "running") break;
+      if (await cancelled()) break;
 
-      const lines: NewLog[] = [];
       try {
         users ??= deps.makeUsers();
         state = await cleanupPage(users, state, {
@@ -103,35 +141,35 @@ export async function tick(deps: EngineDeps, runId: string): Promise<TickResult>
       } catch (err) {
         attempts += 1;
         const message = errText(err);
-        await repo.addLogs(runId, [logLine("warn", `page failed (attempt ${attempts}/${MAX_ATTEMPTS}): ${message}`)]);
+        lines.push(logLine("warn", `page failed (attempt ${attempts}/${MAX_ATTEMPTS}): ${message}`));
         if (attempts >= MAX_ATTEMPTS || err instanceof ColorTapNotConfigured) {
-          await repo.updateRun(runId, { attempts });
+          set({ attempts });
           await fail(message);
           break;
         }
-        await repo.updateRun(runId, { attempts, error: message });
+        set({ attempts, error: message });
+        await save();
         continue;
       }
 
       attempts = 0;
-      await repo.addLogs(runId, lines);
-      await repo.updateRun(runId, { state: JSON.stringify(state), attempts: 0, error: null });
-      await repo.renewLock(runId, token, new Date(clock() + RUN_LEASE_MS));
+      set({ state: JSON.stringify(state), attempts: 0, error: null });
 
       if (state.done) {
-        if ((await repo.getRun(runId))?.status !== "running") break;
+        if (await cancelled(true)) break;
         const finishedAt = new Date(clock());
-        await repo.addLogs(runId, [logLine("info", "run finished: succeeded")]);
-        await repo.updateRun(runId, { status: "succeeded", finishedAt, lockedUntil: null });
+        lines.push(logLine("info", "run finished: succeeded"));
+        set({ status: "succeeded", finishedAt, lockedUntil: null });
+        await save(true);
         // Only a real cleanup moves the clock: a dry run leaves it where it is.
         if (!run.dryRun) await repo.updateSchedule({ lastCleanupAt: finishedAt });
         break;
       }
+      await save();
     }
   } finally {
+    if (Object.keys(changes).length || lines.length) await save(true).catch(() => {});
     await repo.releaseTick(runId, token);
   }
-  const final = await repo.getRun(runId);
-  if (!final) throw new RunNotFound();
-  return resultOf(final);
+  return resultOf(current);
 }

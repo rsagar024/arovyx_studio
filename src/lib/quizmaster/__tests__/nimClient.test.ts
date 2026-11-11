@@ -363,6 +363,44 @@ describe("failover", () => {
     expect(called).toEqual(POOL); // each once
   });
 
+  it("says why it gave up: every model timed out, or none was left to ask", async () => {
+    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
+    byModel({ "a/1": "hang", "b/1": "hang", "c/1": "hang" });
+    const c = fast();
+    const first = await settle(() => c.chat(MESSAGES, { model: "a/1", fallbacks: POOL })).catch((e: unknown) => e);
+    expect(first).toMatchObject({ reason: "timed_out" });
+    // Another lane in the same tick: nothing is asked, and it says so.
+    const second = await c.chat(MESSAGES, { model: "a/1", fallbacks: POOL }).catch((e: unknown) => e);
+    expect(second).toMatchObject({ reason: "benched" });
+  });
+
+  it("the last model to ask may use the rest of the tick, not just 3 minutes", async () => {
+    vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
+    // The verifier's case: two slow models, asked at once.
+    const answerAt: Record<string, number> = { "a/1": 400_000, "b/1": 210_000 };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((_url: string, init: { body: string; signal: AbortSignal }) => {
+        const model = JSON.parse(init.body).model as string;
+        return new Promise<Response>((resolve, reject) => {
+          init.signal.addEventListener("abort", () => reject(Object.assign(new Error("aborted"), { name: "AbortError" })));
+          setTimeout(
+            () => resolve(new Response(JSON.stringify({ choices: [{ message: { content: `from ${model}` }, finish_reason: "stop" }] }))),
+            answerAt[model]
+          );
+        });
+      })
+    );
+    const reply = await settle(() =>
+      new NimClient({ deadline: Date.now() + 240_000, backoffMs: 0, retryDelayMs: 0 }).chat(MESSAGES, {
+        model: "a/1",
+        fallbacks: ["b/1"],
+        hedge: 2,
+      })
+    );
+    expect(reply).toBe("from b/1"); // 210 s: past the 180 s cap, inside the tick
+  });
+
   it("a model that errors gets a second pass, 429s and 5xx may recover", async () => {
     vi.stubEnv("NVIDIA_NIM_API_KEY", "k");
     const called = byModel({ "a/1": 503, "b/1": 503 });

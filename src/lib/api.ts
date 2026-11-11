@@ -163,8 +163,13 @@ export function quotaMessage(err: unknown): string | null {
     : null;
 }
 
-/** Cache tags of the public data (see src/lib/projects.ts). */
-export const CACHE_TAGS = { projects: "projects", site: "site-config", ai: "ai-logs" } as const;
+/** Cache tags of the cached site data (see src/lib/projects.ts and src/lib/adminData.ts). */
+export const CACHE_TAGS = { projects: "projects", site: "site-config", ai: "ai-logs", messages: "messages" } as const;
+
+/** After a contact message is added, read, or deleted. */
+export function revalidateMessages() {
+  revalidateTag(CACHE_TAGS.messages);
+}
 
 export function revalidatePublicPages(extraPaths: string[] = []) {
   revalidateTag(CACHE_TAGS.projects);

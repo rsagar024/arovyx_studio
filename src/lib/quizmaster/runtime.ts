@@ -22,7 +22,7 @@ import {
 import type { UserAdmin } from "./guestCleanup";
 import { PrintMessenger, type Messenger } from "./messenger";
 import { NimClient, models, type Models, type Nim } from "./nimClient";
-import { DryRunBankStore, MemoryBankStore, type BankStore } from "./questionBank";
+import { CachedBankStore, DryRunBankStore, MemoryBankStore, type BankStore } from "./questionBank";
 import { DryRunDocStore, MemoryDocStore, type DocStore } from "./writes";
 
 export interface JobDeps {
@@ -35,6 +35,8 @@ export interface JobDeps {
   /** Null without a Firebase key. */
   users: UserAdmin | null;
   remoteConfig: () => Promise<RemoteConfigParameters | null>;
+  /** Bank docs read and written by this tick so far (Firestore only). */
+  usage?: () => { reads: number; writes: number };
 }
 
 export interface JobContext {
@@ -49,10 +51,12 @@ export function makeJobDeps(ctx: JobContext): JobDeps {
   const nim = new NimClient({ deadline: ctx.deadline, now: ctx.now ?? Date.now, log: ctx.log });
   const base = { nim, models: models(), seed: seedBank() };
   if (firebaseConfigured()) {
-    const bank = new FirestoreBankStore();
+    // One tick reads each bank doc once (see CachedBankStore).
+    const bank = new CachedBankStore(new FirestoreBankStore());
     const docs = new FirestoreDocStore();
     return {
       ...base,
+      usage: () => ({ reads: bank.reads, writes: bank.writes }),
       bank: ctx.dryRun ? new DryRunBankStore(bank, ctx.log) : bank,
       docs: ctx.dryRun ? new DryRunDocStore(docs, ctx.log) : docs,
       messenger: new FcmMessenger(),

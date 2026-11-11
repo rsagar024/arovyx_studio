@@ -88,8 +88,20 @@ export interface Nim {
   chat(messages: ChatMessage[], opts: ChatOptions): Promise<string>;
 }
 
+/**
+ * Why a call gave up without an answer:
+ * - `time`: the tick has too little time left (the unit runs again next tick);
+ * - `timed_out`: every allowed model was asked and none answered in time;
+ * - `benched`: every allowed model already timed out or refused earlier in
+ *   this tick (another lane found out), so none was asked.
+ */
+export type DeadlineReason = "time" | "timed_out" | "benched";
+
 export class DeadlineError extends Error {
-  constructor(message = "out of time in this tick") {
+  constructor(
+    message = "out of time in this tick",
+    readonly reason: DeadlineReason = "time"
+  ) {
     super(message);
     this.name = "DeadlineError";
   }
@@ -147,9 +159,11 @@ export class NimClient implements Nim {
     const remaining = () => allowed.filter((m) => !this.benched.has(m) && !spent.has(m));
 
     let last: NIMError | null = null;
+    let asked = false;
     for (let pass = 1; pass <= PASSES; pass++) {
       const candidates = remaining();
       if (!candidates.length) break;
+      asked = true;
       const outcome = await this.race(candidates, system, user, opts, spent);
       if (outcome.reply !== undefined) return outcome.reply;
       last = outcome.error ?? last;
@@ -159,7 +173,9 @@ export class NimClient implements Nim {
       }
     }
     // Every model is down for now, which the next tick may not find: not this unit's fault.
-    if (!last || last.code === "timeout") throw new DeadlineError("every model timed out in this tick");
+    const names = allowed.map(shortName).join(", ");
+    if (!asked) throw new DeadlineError(`no model left to ask in this tick (${names} timed out or refused)`, "benched");
+    if (!last || last.code === "timeout") throw new DeadlineError(`${names}: every model timed out in this tick`, "timed_out");
     throw last;
   }
 
@@ -207,7 +223,11 @@ export class NimClient implements Nim {
         clearTimeout(timer);
         const model = peek();
         if (!model) return finishIfIdle();
-        const timeoutMs = Math.min(MODEL_TIMEOUT_MS, this.deadline - this.now() - 5_000);
+        // The last model to ask may use all the time left: nothing comes after
+        // it, and the slow verifiers often need more than 3 minutes.
+        const isLast = !candidates.slice(candidates.indexOf(model) + 1).some((m) => !this.benched.has(m));
+        const cap = isLast && Number.isFinite(this.deadline) ? Number.POSITIVE_INFINITY : MODEL_TIMEOUT_MS;
+        const timeoutMs = Math.min(cap, this.deadline - this.now() - 5_000);
         if (timeoutMs < MIN_CALL_MS) {
           if (inFlight === 0) settle(() => reject(new DeadlineError()));
           return;
@@ -223,6 +243,7 @@ export class NimClient implements Nim {
             launch();
           }, HEDGE_AFTER_MS);
         }
+        const askedAt = this.now();
         this.ask(model, system, user, opts, timeoutMs, abort.signal).then(
           (reply) => {
             inFlight--;
@@ -234,6 +255,9 @@ export class NimClient implements Nim {
           (err: unknown) => {
             inFlight--;
             if (settled) return;
+            const secs = Math.round((this.now() - askedAt) / 1000);
+            // Every failure in the log: slow verifies were impossible to diagnose without it.
+            this.log(`NIM ${shortName(model)} failed after ${secs}s: ${err instanceof NIMError ? err.code : "error"} (${String((err as Error)?.message ?? err).slice(0, 120)})`);
             // Not a model problem, or the key is at fault: every model would answer the same.
             if (!(err instanceof NIMError) || err.code === "auth" || err.code === "missing_key") {
               settle(() => reject(err));

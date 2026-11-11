@@ -12,6 +12,8 @@ import { useRunDriver } from "./useRunDriver";
 
 /** Background status refresh: rare, since each refresh costs database reads. */
 const STATUS_REFRESH_MS = 15 * 60_000;
+/** Coming back to the tab refreshes at most this often. */
+const VISIBLE_REFRESH_MS = 5 * 60_000;
 
 interface StartResponse {
   runId: string;
@@ -37,7 +39,9 @@ export default function QuizMasterPanel() {
   const starting = useRef(false);
   const lastAutoStart = useRef(0);
 
+  const lastRefresh = useRef(0);
   const refresh = useCallback(async () => {
+    lastRefresh.current = Date.now();
     try {
       const s = await api<Status>("/schedule");
       skew.current = new Date(s.serverNow).getTime() - Date.now();
@@ -103,7 +107,8 @@ export default function QuizMasterPanel() {
     const onVisible = () => {
       if (document.visibilityState === "visible") {
         setNow(Date.now());
-        void refresh();
+        // Switching tabs back and forth shouldn't re-read the run list each time.
+        if (Date.now() - lastRefresh.current > VISIBLE_REFRESH_MS) void refresh();
       }
     };
     document.addEventListener("visibilitychange", onVisible);

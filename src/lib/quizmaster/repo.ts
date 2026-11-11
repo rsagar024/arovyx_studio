@@ -31,6 +31,9 @@ export interface RunRow {
   summary: string;
   /** JSON `Progress` saved at the end of each tick (for busy tabs and the status card). */
   progress?: string;
+  /** JSON `StepInfo[]`: every step in brief, saved with each commit, so finished
+   * step docs never need reading again. Absent on runs from before it existed. */
+  stepList?: string;
   createdAt: Date;
 }
 
@@ -43,7 +46,28 @@ export interface StepRow {
   attempts: number;
   state: string;
   error: string | null;
+  /** Ticks in which every model of this unit timed out (not counted as attempts). */
+  deferrals?: number;
   updatedAt: Date;
+}
+
+/** A step in brief, as the run doc's `stepList` keeps it. */
+export interface StepInfo {
+  key: string;
+  order: number;
+  status: string;
+  attempts: number;
+  deferrals?: number;
+  error?: string | null;
+  /** The models that answered a finished unit. */
+  models?: string[];
+}
+
+/** One batched save: run fields, step rows to write whole, and new log lines. */
+export interface RunChanges {
+  run?: Partial<Omit<RunRow, "id">>;
+  steps?: StepRow[];
+  logs?: Array<{ at: Date; level: string; message: string }>;
 }
 
 export interface LogRow {
@@ -61,6 +85,7 @@ export interface NewRun {
   options: string;
   summary?: string;
   progress?: string;
+  stepList?: string;
 }
 
 export interface NewStep {
@@ -77,6 +102,8 @@ export interface RunRepo {
   createRunIfFree(data: NewRun, steps: NewStep[], now: Date, lockedUntil: Date): Promise<CreateResult>;
   getRun(id: string): Promise<RunRow | null>;
   activeRun(kind?: string): Promise<RunRow | null>;
+  /** Every running run, newest first (one query). */
+  runningRuns(): Promise<RunRow[]>;
   listRuns(limit: number): Promise<RunRow[]>;
   updateRun(id: string, data: Partial<Omit<RunRow, "id">>): Promise<void>;
   /** Takes the tick lease if no other tick holds it. Atomic. */
@@ -85,6 +112,12 @@ export interface RunRepo {
   renewLock(id: string, token: string, lockedUntil: Date): Promise<void>;
   releaseTick(id: string, token: string): Promise<void>;
   steps(runId: string): Promise<StepRow[]>;
+  /** The steps still to run (finished ones are in the run's `stepList`). */
+  pendingSteps(runId: string): Promise<StepRow[]>;
+  /** Saves run fields, steps and logs in one batched write. */
+  commit(runId: string, changes: RunChanges): Promise<void>;
+  /** Reads/writes counted for this run since the last call (Firestore only). */
+  takeUsage?(runId: string): { reads: number; writes: number };
   /** Adds a step; an existing key is returned unchanged (idempotent). */
   addStep(runId: string, step: NewStep): Promise<StepRow>;
   updateStep(id: string, data: Partial<Pick<StepRow, "status" | "attempts" | "state" | "error">>): Promise<void>;
@@ -122,7 +155,21 @@ export class FirestoreRunRepo implements RunRepo {
       attempts: data.attempts,
       state: data.state,
       error: data.error ?? null,
+      deferrals: data.deferrals ?? 0,
       updatedAt,
+    };
+  }
+
+  private stepData(s: StepRow) {
+    return {
+      key: s.key,
+      order: s.order,
+      status: s.status,
+      attempts: s.attempts,
+      deferrals: s.deferrals ?? 0,
+      state: s.state,
+      error: s.error ?? null,
+      updatedAt: new Date(),
     };
   }
 
@@ -162,6 +209,10 @@ export class FirestoreRunRepo implements RunRepo {
     return (await this.runs.running()).find((r) => !kind || r.kind === kind) ?? null;
   }
 
+  runningRuns() {
+    return this.runs.running();
+  }
+
   listRuns(limit: number) {
     return this.runs.listRuns(limit);
   }
@@ -184,7 +235,26 @@ export class FirestoreRunRepo implements RunRepo {
 
   async steps(runId: string) {
     const snap = await this.runs.ref(runId).collection("steps").orderBy("order", "asc").get();
+    this.runs.count(runId, Math.max(1, snap.size));
     return snap.docs.map((d) => this.stepRow(runId, d.data()));
+  }
+
+  async pendingSteps(runId: string) {
+    const snap = await this.runs.ref(runId).collection("steps").where("status", "==", "pending").get();
+    this.runs.count(runId, Math.max(1, snap.size));
+    return snap.docs.map((d) => this.stepRow(runId, d.data())).sort((a, b) => a.order - b.order);
+  }
+
+  commit(runId: string, changes: RunChanges) {
+    return this.runs.commit(runId, {
+      run: changes.run as Record<string, unknown> | undefined,
+      docs: (changes.steps ?? []).map((s) => ({ ref: this.stepRef(runId, s.key), data: this.stepData(s) })),
+      logs: changes.logs,
+    });
+  }
+
+  takeUsage(runId: string) {
+    return this.runs.takeUsage(runId);
   }
 
   async addStep(runId: string, step: NewStep) {
@@ -256,6 +326,9 @@ export class MemoryRunRepo implements RunRepo {
     const r = [...this.runs.values()].reverse().find((x) => x.status === "running" && (!kind || x.kind === kind));
     return r ? { ...r } : null;
   }
+  async runningRuns() {
+    return [...this.runs.values()].reverse().filter((r) => r.status === "running").map((r) => ({ ...r }));
+  }
   async listRuns(limit: number) {
     return [...this.runs.values()].reverse().slice(0, limit).map((r) => ({ ...r }));
   }
@@ -292,6 +365,7 @@ export class MemoryRunRepo implements RunRepo {
       attempts: 0,
       state: step.state ?? "{}",
       error: null,
+      deferrals: 0,
       updatedAt: new Date(),
     };
     this.stepRows.set(row.id, row);
@@ -300,6 +374,24 @@ export class MemoryRunRepo implements RunRepo {
   async updateStep(id: string, data: Partial<Pick<StepRow, "status" | "attempts" | "state" | "error">>) {
     const s = this.stepRows.get(id);
     if (s) Object.assign(s, data, { updatedAt: new Date() });
+  }
+  async pendingSteps(runId: string) {
+    return [...this.stepRows.values()]
+      .filter((s) => s.runId === runId && s.status === "pending")
+      .sort((a, b) => a.order - b.order)
+      .map((s) => ({ ...s }));
+  }
+  /** Number of commit calls, for tests. */
+  commits = 0;
+  async commit(runId: string, changes: RunChanges) {
+    this.commits++;
+    for (const st of changes.steps ?? []) {
+      const existing = [...this.stepRows.values()].find((x) => x.runId === runId && x.key === st.key);
+      const id = existing?.id ?? nextId("step");
+      this.stepRows.set(id, { ...st, id, runId, updatedAt: new Date() });
+    }
+    if (changes.logs?.length) await this.addLogs(runId, changes.logs);
+    if (changes.run) await this.updateRun(runId, changes.run);
   }
   async addLogs(runId: string, logs: Array<{ at: Date; level: string; message: string }>) {
     for (const l of logs) this.logRows.push({ id: nextId("log"), runId, ...l });

@@ -21,6 +21,8 @@ export const CLEANUP_EVERY_MS = DAY_MS;
 /** A failed or cancelled automatic run waits this long, not until the next page refresh. */
 export const AUTO_RETRY_MS = 60 * 60 * 1000;
 const RETENTION_DAYS = 60;
+/** Runs shown in the history table. */
+const HISTORY_RUNS = 12;
 
 export class BadRequest extends Error {}
 export class Conflict extends Error {
@@ -111,7 +113,11 @@ export function createColorTapService(deps: ColorTapDeps) {
     async status() {
       const now = nowDate();
       const schedule = await repo.getSchedule();
-      const [runs, active] = await Promise.all([repo.listRuns(30), repo.activeRun()]);
+      // Each run listed is a read on every refresh: keep the table short, and
+      // look further for a running run only when the table may not hold it.
+      const runs = await repo.listRuns(HISTORY_RUNS);
+      const active =
+        runs.find((r) => r.status === "running") ?? (runs.length >= HISTORY_RUNS ? await repo.activeRun() : null);
       return {
         serverNow: now.toISOString(),
         projectId: COLORTAP_PROJECT_ID,

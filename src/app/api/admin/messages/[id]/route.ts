@@ -5,6 +5,7 @@ import { getSession } from "@/lib/session";
 import {
   jsonError,
   jsonOk,
+  revalidateMessages,
   zodErrorDetails,
   zodErrorMessage,
 } from "@/lib/api";
@@ -33,6 +34,7 @@ export async function PATCH(
   }
 
   const message = await updateMessage(existing.id, { isRead: parsed.data.isRead });
+  revalidateMessages();
 
   return jsonOk({ message });
 }
@@ -49,5 +51,6 @@ export async function DELETE(
   if (!existing) return jsonError(404, "Message not found.");
 
   await deleteMessage(existing.id);
+  revalidateMessages();
   return jsonOk({ message: "Message deleted.", id: existing.id });
 }
