@@ -9,6 +9,7 @@ import { categoryFor } from "../categories";
 import {
   createRun,
   finalStatus,
+  MAX_DEFERRALS,
   planSteps,
   tick,
   TICK_BUDGET_MS,
@@ -360,6 +361,105 @@ describe("ticks", () => {
     const r = await tick(deps, run.id);
     expect(r.done).toBe(true);
     expect(r.status).toBe("cancelled");
+  });
+});
+
+describe("slow models", () => {
+  /** Verify calls time out (every model asked, none answered) while `slow` is above 0. */
+  function slowVerifier(deps: EngineDeps, slow: { left: number; sizes: number[] }, reason: "timed_out" | "benched" = "timed_out") {
+    const original = deps.makeJobs;
+    deps.makeJobs = (ctx) => {
+      const j = original(ctx);
+      const inner = j.nim;
+      return {
+        ...j,
+        nim: {
+          chat: async (m: ChatMessage[], o: ChatOptions) => {
+            if (o.model === "ver") {
+              slow.sizes.push(JSON.parse(m[m.length - 1]!.content.slice(m[m.length - 1]!.content.indexOf("{"))).questions?.length ?? -1);
+              if (slow.left > 0) {
+                slow.left--;
+                throw new DeadlineError("ver: every model timed out in this tick", reason);
+              }
+            }
+            return inner.chat(m, o);
+          },
+        },
+      };
+    };
+  }
+
+  it("a verify whose models all time out isn't counted as an attempt; the batch gets smaller", async () => {
+    const { deps, repo, bank } = setup();
+    const slow = { left: 4, sizes: [] as number[] };
+    slowVerifier(deps, slow);
+    const { run } = await createRun(deps, { kind: "question_bank", trigger: "timer", slot: "am", options: options() });
+    const { result } = await runToEnd(deps, run.id);
+    expect(result.status).toBe("succeeded");
+    expect((await qb.loadCategory(bank, DAILY)).length).toBe(45);
+    const steps = await repo.steps(run.id);
+    expect(steps.every((s) => s.attempts === 0)).toBe(true);
+    expect(steps.some((s) => (s.deferrals ?? 0) > 0)).toBe(true);
+    // 12, then 6, then 3 (the smallest).
+    expect(slow.sizes.slice(0, 4)).toEqual([12, 6, 3, 3]);
+    const logs = (await repo.logs(run.id)).map((l) => l.message).join("\n");
+    expect(logs).toContain("not counted as an attempt");
+  });
+
+  it("models that stay slow fail the category after MAX_DEFERRALS ticks, with a clear reason", async () => {
+    const { deps, repo } = setup();
+    slowVerifier(deps, { left: Number.POSITIVE_INFINITY, sizes: [] });
+    const { run } = await createRun(deps, { kind: "question_bank", trigger: "timer", slot: "am", options: options() });
+    const { result } = await runToEnd(deps, run.id);
+    expect(result.status).toBe("partial");
+    const summary = JSON.parse((await repo.getRun(run.id))!.summary);
+    expect(summary.categories[DAILY].status).toBe("failed");
+    expect(summary.categories[DAILY].error).toMatch(/too slow/);
+    const failed = (await repo.steps(run.id)).find((s) => s.status === "failed")!;
+    expect(failed.deferrals).toBe(MAX_DEFERRALS);
+    expect(failed.attempts).toBe(0);
+  });
+
+  it("models benched by another lane skip the unit for this tick, uncounted", async () => {
+    const { deps, repo } = setup();
+    slowVerifier(deps, { left: 2, sizes: [] }, "benched");
+    const { run } = await createRun(deps, { kind: "question_bank", trigger: "timer", slot: "am", options: options() });
+    const { result } = await runToEnd(deps, run.id);
+    expect(result.status).toBe("succeeded");
+    const steps = await repo.steps(run.id);
+    expect(steps.every((s) => s.attempts === 0 && !s.deferrals)).toBe(true);
+  });
+});
+
+describe("Firestore usage", () => {
+  it("a tick reads the steps once and saves in a few batched commits", async () => {
+    const { deps, repo } = setup({ callMs: 20_000 });
+    const { run } = await createRun(deps, { kind: "question_bank", trigger: "timer", slot: "am", options: options() });
+    let fullReads = 0;
+    let pendingReads = 0;
+    const steps = repo.steps.bind(repo);
+    const pending = repo.pendingSteps.bind(repo);
+    repo.steps = async (id) => (fullReads++, steps(id));
+    repo.pendingSteps = async (id) => (pendingReads++, pending(id));
+    const before = repo.commits;
+    const first = await tick(deps, run.id);
+    expect(first.done).toBe(false);
+    expect(fullReads).toBe(0); // the run's stepList stands in for the finished steps
+    expect(pendingReads).toBe(1);
+    // ~12 units in 240 s, saved at most once a minute, plus the end: a handful, not one per unit.
+    expect(repo.commits - before).toBeLessThanOrEqual(6);
+    const saved = JSON.parse((await repo.getRun(run.id))!.stepList!);
+    expect(saved.filter((s: { status: string }) => s.status === "done").length).toBeGreaterThan(5);
+    const { result } = await runToEnd(deps, run.id);
+    expect(result.status).toBe("succeeded");
+  });
+
+  it("runs from before stepList still resume, reading their steps once", async () => {
+    const { deps, repo } = setup({ callMs: 50_000 });
+    const { run } = await createRun(deps, { kind: "question_bank", trigger: "timer", slot: "am", options: options() });
+    await repo.updateRun(run.id, { stepList: undefined });
+    const { result } = await runToEnd(deps, run.id);
+    expect(result.status).toBe("succeeded");
   });
 });
 

@@ -78,6 +78,8 @@ export interface RunRepo {
   renewLock(id: string, token: string, lockedUntil: Date): Promise<void>;
   releaseTick(id: string, token: string): Promise<void>;
   addLogs(runId: string, logs: NewLog[]): Promise<void>;
+  /** Saves run fields and log lines in one batched write. */
+  commit(runId: string, changes: { run?: RunChange; logs?: NewLog[] }): Promise<void>;
   logs(runId: string, opts?: { after?: Date; limit?: number }): Promise<LogRow[]>;
   /** Deletes finished runs (with their logs) created before `date`. */
   pruneBefore(date: Date): Promise<number>;
@@ -101,9 +103,11 @@ export class FirestoreRunRepo implements RunRepo {
   }
 
   async updateSchedule(data: Partial<Omit<ScheduleRow, "id">>) {
-    await this.getSchedule();
-    await this.scheduleRef().set({ ...data, updatedAt: new Date() }, { merge: true });
-    return this.getSchedule();
+    // One read and one write: the merged row is what was saved.
+    const current = await this.getSchedule();
+    const fields = { ...data, updatedAt: new Date() };
+    await this.scheduleRef().set(fields, { merge: true });
+    return { ...current, ...fields, id: 1 };
   }
 
   async createRunIfFree(data: NewRun, now: Date, lockedUntil: Date): Promise<CreateResult> {
@@ -160,6 +164,10 @@ export class FirestoreRunRepo implements RunRepo {
 
   addLogs(runId: string, logs: NewLog[]) {
     return this.runs.addLogs(runId, logs);
+  }
+
+  commit(runId: string, changes: { run?: RunChange; logs?: NewLog[] }) {
+    return this.runs.commit(runId, { run: changes.run as Record<string, unknown> | undefined, logs: changes.logs });
   }
 
   logs(runId: string, opts: { after?: Date; limit?: number } = {}) {
@@ -251,6 +259,13 @@ export class MemoryRunRepo implements RunRepo {
   }
   async addLogs(runId: string, logs: NewLog[]) {
     for (const l of logs) this.logRows.push({ id: nextId(), runId, ...l });
+  }
+  /** Number of commit calls, for tests. */
+  commits = 0;
+  async commit(runId: string, changes: { run?: RunChange; logs?: NewLog[] }) {
+    this.commits++;
+    if (changes.logs?.length) await this.addLogs(runId, changes.logs);
+    if (changes.run) await this.updateRun(runId, changes.run);
   }
   async logs(runId: string, opts: { after?: Date; limit?: number } = {}) {
     return this.logRows

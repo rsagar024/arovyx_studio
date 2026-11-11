@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
-import { listProjects } from "@/lib/store";
+import { allProjects } from "@/lib/adminData";
+import { getPublishedProjects } from "@/lib/projects";
 import { toProjectDTO, categorySchema } from "@/lib/validators";
 import { isAdminRequest, jsonError, jsonOk } from "@/lib/api";
 
@@ -35,11 +36,9 @@ export async function GET(req: NextRequest) {
 
   const isAdmin = await isAdminRequest(req);
 
-  const rows = (await listProjects({ publishedOnly: !isAdmin })).filter(
-    (p) => !category || p.category === category
-  );
-
-  let projects = rows.map(toProjectDTO);
+  // Both lists are cached (one Firestore read an hour at most, fresh after any edit).
+  const all = isAdmin ? (await allProjects()).map(toProjectDTO) : await getPublishedProjects();
+  let projects = all.filter((p) => !category || p.category === category);
 
   if (q) {
     const needle = q.toLowerCase();

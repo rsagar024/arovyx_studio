@@ -57,6 +57,33 @@ d("Quiz Master FirestoreRunRepo", () => {
     expect(await repo.acquireTick(run.id, "t4", now(), later(240_000), later(600_000))).toBe(true);
   });
 
+  it("saves run fields, steps and logs in one commit, and lists only pending steps", async () => {
+    const { FirestoreRunRepo } = await import("../quizmaster/repo");
+    const repo = new FirestoreRunRepo();
+    const { run } = await repo.createRunIfFree(
+      { kind: "question_bank", trigger: "manual", slot: "am", options: "{}", stepList: "[]" },
+      [{ key: "science:prepare", order: 0 }, { key: "publish", order: 100_001 }],
+      now(),
+      later(600_000)
+    );
+    const [prepare] = await repo.pendingSteps(run.id);
+    await repo.commit(run.id, {
+      run: { summary: '{"current":"x"}', stepList: '[{"key":"science:prepare"}]' },
+      steps: [
+        { ...prepare!, status: "done" },
+        { ...prepare!, id: `${run.id}|science:generate:0:easy`, key: "science:generate:0:easy", order: 1, state: '{"a":1}', deferrals: 2 },
+      ],
+      logs: [{ at: now(), level: "info", message: "one" }, { at: later(1), level: "info", message: "two" }],
+    });
+    expect((await repo.pendingSteps(run.id)).map((s) => s.key)).toEqual(["science:generate:0:easy", "publish"]);
+    expect((await repo.pendingSteps(run.id))[0]!.deferrals).toBe(2);
+    const saved = (await repo.getRun(run.id))!;
+    expect(saved.summary).toBe('{"current":"x"}');
+    expect(saved.status).toBe("running"); // an update: fields not given are kept
+    expect((await repo.logs(run.id)).map((l) => l.message)).toEqual(["one", "two"]);
+    expect(repo.takeUsage(run.id).writes).toBeGreaterThan(0);
+  });
+
   it("lets three lanes save to one run at once without a lock stall", async () => {
     const { FirestoreRunRepo } = await import("../quizmaster/repo");
     const repo = new FirestoreRunRepo();

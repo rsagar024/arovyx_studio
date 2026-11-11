@@ -10,6 +10,8 @@ import { useRunDriver } from "./useRunDriver";
 
 /** Background status refresh: rare, since each refresh costs database reads. */
 const STATUS_REFRESH_MS = 15 * 60_000;
+/** Coming back to the tab refreshes at most this often. */
+const VISIBLE_REFRESH_MS = 5 * 60_000;
 
 /**
  * Studio → Color Tap. Runs only from this open tab: an unfinished run resumes
@@ -26,7 +28,9 @@ export default function ColorTapPanel() {
   /** Runs this tab saw finish, so a status fetched just before isn't re-driven. */
   const finished = useRef(new Set<string>());
 
+  const lastRefresh = useRef(0);
   const refresh = useCallback(async () => {
+    lastRefresh.current = Date.now();
     try {
       setStatus(await api<Status>("/status"));
       setError(null);
@@ -72,7 +76,8 @@ export default function ColorTapPanel() {
     void refresh();
     const id = setInterval(() => void refresh(), STATUS_REFRESH_MS);
     const onVisible = () => {
-      if (document.visibilityState === "visible") void refresh();
+      // Switching tabs back and forth shouldn't re-read the runs each time.
+      if (document.visibilityState === "visible" && Date.now() - lastRefresh.current > VISIBLE_REFRESH_MS) void refresh();
     };
     document.addEventListener("visibilitychange", onVisible);
     return () => {

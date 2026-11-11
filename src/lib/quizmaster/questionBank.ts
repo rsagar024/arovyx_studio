@@ -341,3 +341,45 @@ export async function writeSeed(store: BankStore, category: string, seed: Group[
 export function appendBatch(store: BankStore, category: string, date: string, slot: string, groups: Group[]) {
   return mergeIntoBase(store, category, groups, (g) => inBatch(g, date, slot));
 }
+
+/**
+ * One tick's view of the bank: each doc and the doc list are read from
+ * Firestore once, then served from memory (writes update the memory too).
+ * The bank docs are big and the helpers above re-read them often (prepare,
+ * dedupe, write, publish), and every read counts on the free plan. Only one
+ * run writes the bank at a time, so nothing changes it underneath a tick.
+ */
+export class CachedBankStore implements BankStore {
+  private docs = new Map<string, BankDoc | null>();
+  private meta: BankDoc[] | null = null;
+  reads = 0;
+  writes = 0;
+  constructor(private inner: BankStore) {}
+
+  async get(docId: string) {
+    if (!this.docs.has(docId)) {
+      this.reads++;
+      this.docs.set(docId, await this.inner.get(docId));
+    }
+    return this.docs.get(docId) ?? null;
+  }
+  async put(doc: BankDoc) {
+    await this.inner.put(doc);
+    this.writes++;
+    this.docs.set(doc.id, doc);
+    if (this.meta) this.meta = [...this.meta.filter((d) => d.id !== doc.id), { ...doc, data: Buffer.alloc(0) }].sort(byId);
+  }
+  async listMeta() {
+    if (!this.meta) {
+      this.meta = await this.inner.listMeta();
+      this.reads += Math.max(1, this.meta.length);
+    }
+    return [...this.meta];
+  }
+  async delete(docId: string) {
+    await this.inner.delete(docId);
+    this.writes++;
+    this.docs.set(docId, null);
+    if (this.meta) this.meta = this.meta.filter((d) => d.id !== docId);
+  }
+}

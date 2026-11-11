@@ -77,6 +77,9 @@ export interface GenState {
   /** The final groups, numbered, being translated. */
   groups: Group[];
   tr: { lang: number; attempt: 1 | 2; pending: number[]; pos: number; failed: number[] };
+  /** Verify / translate batch sizes, halved when the models keep timing out (default VERIFY_BATCH / TRANSLATE_BATCH). */
+  verifyBatch?: number;
+  translateBatch?: number;
   /** Where the groups went, once written. */
   doc?: { id: string; count: number };
 }
@@ -87,6 +90,28 @@ export interface GeneratorDeps {
   models: Models;
   seed: Record<string, Group[]>;
   log?: (line: string) => void;
+}
+
+/** The smallest batch a slow model is asked for. */
+export const MIN_BATCH = 3;
+const vBatch = (s: GenState) => s.verifyBatch ?? VERIFY_BATCH;
+const tBatch = (s: GenState) => s.translateBatch ?? TRANSLATE_BATCH;
+
+/**
+ * Makes the next unit smaller after its models all timed out: a verify or
+ * translate batch is halved (12 → 6 → 3), so a slow model can answer in time.
+ * Returns false when there was nothing left to shrink.
+ */
+export function shrinkUnit(s: GenState): boolean {
+  if (s.phase === "verify" && vBatch(s) > MIN_BATCH) {
+    s.verifyBatch = Math.max(MIN_BATCH, Math.floor(vBatch(s) / 2));
+    return true;
+  }
+  if (s.phase === "translate" && tBatch(s) > MIN_BATCH) {
+    s.translateBatch = Math.max(MIN_BATCH, Math.floor(tBatch(s) / 2));
+    return true;
+  }
+  return false;
 }
 
 export function startState(
@@ -122,10 +147,10 @@ export function describeUnit(s: GenState): string {
     case "generate":
       return `generate ${s.genQueue[0]?.[0] ?? ""}${s.round ? ` (retry ${s.round})` : ""}`;
     case "verify":
-      return `verify ${Math.floor(s.verifyPos / VERIFY_BATCH) + 1}/${Math.max(1, Math.ceil(s.toVerify.length / VERIFY_BATCH))}`;
+      return `verify ${Math.floor(s.verifyPos / vBatch(s)) + 1}/${Math.max(1, Math.ceil(s.toVerify.length / vBatch(s)))}`;
     case "translate": {
       const lang = TRANSLATIONS[s.tr.lang]?.[0] ?? "";
-      return `translate ${lang} ${Math.floor(s.tr.pos / TRANSLATE_BATCH) + 1}/${Math.max(1, Math.ceil(s.tr.pending.length / TRANSLATE_BATCH))}${s.tr.attempt === 2 ? " (retry)" : ""}`;
+      return `translate ${lang} ${Math.floor(s.tr.pos / tBatch(s)) + 1}/${Math.max(1, Math.ceil(s.tr.pending.length / tBatch(s)))}${s.tr.attempt === 2 ? " (retry)" : ""}`;
     }
     default:
       return s.phase;
@@ -138,9 +163,9 @@ export function unitKey(s: GenState): string {
     case "generate":
       return `${s.category}:generate:${s.round}:${s.genQueue[0]?.[0] ?? "x"}`;
     case "verify":
-      return `${s.category}:verify:${s.round}:${Math.floor(s.verifyPos / VERIFY_BATCH) + 1}`;
+      return `${s.category}:verify:${s.round}:${Math.floor(s.verifyPos / vBatch(s)) + 1}`;
     case "translate":
-      return `${s.category}:translate_${TRANSLATIONS[s.tr.lang]?.[0] ?? "x"}:${s.tr.attempt}:${Math.floor(s.tr.pos / TRANSLATE_BATCH) + 1}`;
+      return `${s.category}:translate_${TRANSLATIONS[s.tr.lang]?.[0] ?? "x"}:${s.tr.attempt}:${Math.floor(s.tr.pos / tBatch(s)) + 1}`;
     default:
       return `${s.category}:${s.phase}`;
   }
@@ -324,7 +349,7 @@ export class Generator {
   }
 
   private async verify(s: GenState, pipeline: Pipeline) {
-    const batch = s.toVerify.slice(s.verifyPos, s.verifyPos + VERIFY_BATCH);
+    const batch = s.toVerify.slice(s.verifyPos, s.verifyPos + vBatch(s));
     const writers = s.genFamilies?.length ? s.genFamilies : [modelFamily(this.deps.models.generate)];
     for (const group of await pipeline.verifyBatch(batch, writers)) {
       const bucket = s.chosen[group.difficulty as Difficulty];
@@ -334,7 +359,7 @@ export class Generator {
         s.avoid = s.avoid.slice(0, RECENT_IN_PROMPT);
       }
     }
-    s.verifyPos += VERIFY_BATCH;
+    s.verifyPos += vBatch(s);
     if (s.verifyPos >= s.toVerify.length) {
       s.toVerify = [];
       this.startRound(s, s.round + 1);
@@ -373,9 +398,9 @@ export class Generator {
 
   private async translate(s: GenState, pipeline: Pipeline) {
     const [lang, name] = TRANSLATIONS[s.tr.lang]!;
-    const chunk = s.tr.pending.slice(s.tr.pos, s.tr.pos + TRANSLATE_BATCH);
+    const chunk = s.tr.pending.slice(s.tr.pos, s.tr.pos + tBatch(s));
     s.tr.failed.push(...(await pipeline.translateChunk(s.groups, chunk, lang, name)));
-    s.tr.pos += TRANSLATE_BATCH;
+    s.tr.pos += tBatch(s);
     if (s.tr.pos < s.tr.pending.length) return;
     // This pass over `pending` is done.
     if (s.tr.failed.length && s.tr.attempt === 1) {

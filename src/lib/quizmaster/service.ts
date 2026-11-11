@@ -4,7 +4,18 @@
  */
 import "server-only";
 import { ALL_CATEGORIES, isCategory } from "./categories";
-import { cachedProgress, createRun, progressOf, tick, type EngineDeps, type RunKind, type RunOptions, type RunSummary } from "./engine";
+import {
+  cachedProgress,
+  createRun,
+  stepInfo,
+  stepListOf,
+  stepModels,
+  tick,
+  type EngineDeps,
+  type RunKind,
+  type RunOptions,
+  type RunSummary,
+} from "./engine";
 import { firebaseConfigured } from "./firebase";
 import * as ist from "./ist";
 import { modelFamily, models } from "./nimClient";
@@ -22,7 +33,7 @@ import {
 } from "./schedule";
 import { repo, scheduleDb } from "./storage";
 
-export { repo };
+export { repo, stepModels };
 
 const parse = <T>(text: string, fallback: T): T => {
   try {
@@ -92,16 +103,19 @@ function scheduleDto(s: ScheduleRow, now: Date) {
   };
 }
 
+/** Runs shown in the history table (each costs a read per refresh). */
+const HISTORY_RUNS = 12;
+
 /** Everything the tab needs on load and on each refresh. */
 export async function statusPayload() {
   const now = new Date();
   const schedule = await getSchedule(scheduleDb, now);
-  const recent = await repo.listRuns(30);
+  const recent = await repo.listRuns(HISTORY_RUNS);
   const running = recent.filter((r) => r.status === "running");
-  for (const kind of ["question_bank", "seed", "guest_cleanup"]) {
-    if (!running.some((r) => r.kind === kind)) {
-      const older = await repo.activeRun(kind);
-      if (older) running.push(older);
+  // A running run older than the table (rare): one query finds every kind.
+  if (recent.length >= HISTORY_RUNS) {
+    for (const r of await repo.runningRuns()) {
+      if (!running.some((x) => x.id === r.id)) running.push(r);
     }
   }
   const activeRuns = await Promise.all(
@@ -250,32 +264,27 @@ async function start(kind: RunKind, trigger: "timer" | "manual", slot: string, o
   return { runId: result.run.id, created: result.created, resumed: !result.created };
 }
 
-/** The models that answered a finished step; none for older runs or model-free steps. */
-export function stepModels(state: string): string[] {
-  try {
-    const models = (JSON.parse(state) as { models?: unknown } | null)?.models;
-    return Array.isArray(models) ? models.filter((m): m is string => typeof m === "string") : [];
-  } catch {
-    return [];
-  }
-}
-
+/**
+ * A run for the drawer: the run doc and the new log lines only. The steps come
+ * from the run's `stepList`; only runs from before it existed read their
+ * step docs, and only on the first load (`after` unset).
+ */
 export async function runDetail(id: string, after?: Date) {
   const run = await repo.getRun(id);
   if (!run) return null;
-  const steps = await repo.steps(id);
+  const list = stepListOf(run) ?? (after ? null : (await repo.steps(id)).map(stepInfo));
   const logs = await repo.logs(id, { after, limit: 500 });
   return {
     run: runDto(run),
-    progress: run.status === "running" ? progressOf(steps, parse<RunSummary>(run.summary, {})) : cachedProgress(run),
-    steps: steps.map((s) => ({
+    progress: cachedProgress(run),
+    steps: list?.map((s) => ({
       key: s.key,
       order: s.order,
       status: s.status,
       attempts: s.attempts,
-      error: s.error,
-      models: stepModels(s.state),
-    })),
+      error: s.error ?? null,
+      models: s.models ?? [],
+    })) ?? null,
     logs: logs.map((l) => ({ at: l.at.toISOString(), level: l.level, message: l.message })),
   };
 }

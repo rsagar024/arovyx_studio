@@ -16,6 +16,9 @@ import {
   type RunInfo,
 } from "./api";
 
+/** How often an open drawer refreshes a running run. */
+const LIVE_POLL_MS = 15_000;
+
 function StatusPill({ status }: { status: string }) {
   return <span className={cn("rounded-full border px-2 py-0.5 text-xs", STATUS_STYLE[status])}>{status}</span>;
 }
@@ -89,17 +92,23 @@ function RunDrawer({ id, onClose, onChanged }: { id: string; onClose: () => void
     cursor.current = null;
     setLogs([]);
     const load = async () => {
+      // Each poll costs Firestore reads: none while the tab is hidden.
+      if (document.visibilityState !== "visible") {
+        timer = setTimeout(load, LIVE_POLL_MS);
+        return;
+      }
       try {
         const q = cursor.current ? `?after=${encodeURIComponent(cursor.current)}` : "";
         const d = await api<RunDetail>(`/runs/${id}${q}`);
         if (!alive) return;
-        setDetail(d);
+        // Older runs send their steps on the first load only: keep them.
+        setDetail((old) => ({ ...d, steps: d.steps ?? old?.steps ?? [] }));
         if (d.logs.length) {
           cursor.current = d.logs[d.logs.length - 1]!.at;
           setLogs((old) => [...old, ...d.logs].slice(-2000));
         }
-        // Live while running.
-        if (d.run.status === "running") timer = setTimeout(load, 3_000);
+        // Live while running (the tick saves about once a minute).
+        if (d.run.status === "running") timer = setTimeout(load, LIVE_POLL_MS);
       } catch (err) {
         if (alive) toast.error(err instanceof Error ? err.message : "Couldn't load the run.");
       }
@@ -209,11 +218,11 @@ function RunDrawer({ id, onClose, onChanged }: { id: string; onClose: () => void
               )}
               <div>
                 <button type="button" className="text-xs text-accent-600 underline dark:text-accent-400" onClick={() => setShowSteps((x) => !x)}>
-                  {showSteps ? "Hide" : "Show"} all {detail.steps.length} step rows
+                  {showSteps ? "Hide" : "Show"} all {(detail.steps ?? []).length} step rows
                 </button>
                 {showSteps && (
                   <ul className="mt-2 max-h-48 space-y-0.5 overflow-y-auto font-mono text-[11px]">
-                    {detail.steps.map((s) => (
+                    {(detail.steps ?? []).map((s) => (
                       <li key={s.key} className={cn(s.status === "failed" && "text-rose-500", s.status === "pending" && "text-[var(--muted)]")}>
                         {s.status.padEnd(7)} {s.key}
                         {s.models?.length ? ` · ${s.models.map((m) => m.split("/").pop()).join(", ")}` : ""}

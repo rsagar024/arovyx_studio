@@ -1,6 +1,7 @@
 import { unstable_cache } from "next/cache";
 import { CACHE_TAGS } from "@/lib/api";
-import { aiLogCounts, countUnreadMessages, listMessages, listProjects, recentAiLogs } from "@/lib/store";
+import { allProjects, inbox, latestAiLogs } from "@/lib/adminData";
+import { aiLogCounts } from "@/lib/store";
 import { CATEGORIES, type Category } from "@/lib/validators";
 
 const AI_WINDOW_DAYS = 30;
@@ -26,16 +27,17 @@ export interface CategoryCount {
  * from `AiLog`, and recently edited projects.
  */
 export async function getDashboardData() {
-  // One read of every project (a few dozen) feeds the counts and the recent list.
-  const [allProjects, recentMessages, unreadCount, aiLogs, aiCounts] = await Promise.all([
-    listProjects({ orderBy: "updatedAt" }),
-    listMessages(5),
-    countUnreadMessages(),
-    recentAiLogs(10),
+  // All cached (see adminData.ts): an Overview visit usually reads nothing.
+  const [projects, mail, aiLogs, aiCounts] = await Promise.all([
+    allProjects("updatedAt"),
+    inbox(),
+    latestAiLogs(),
     cachedAiCounts(),
   ]);
-  const aiGeneratedCount = allProjects.filter((p) => p.aiGenerated).length;
-  const recentProjects = allProjects
+  const recentMessages = mail.messages.slice(0, 5);
+  const unreadCount = mail.unread;
+  const aiGeneratedCount = projects.filter((p) => p.aiGenerated).length;
+  const recentProjects = projects
     .slice(0, 5)
     .map(({ id, title, slug, category, isPublished, updatedAt }) => ({ id, title, slug, category, isPublished, updatedAt }));
 
@@ -43,7 +45,7 @@ export async function getDashboardData() {
   const byCategory = Object.fromEntries(
     CATEGORIES.map((c) => [c, { published: 0, draft: 0 }])
   ) as Record<Category, CategoryCount>;
-  for (const row of allProjects) {
+  for (const row of projects) {
     const bucket = byCategory[row.category as Category];
     if (!bucket) continue; // unknown category string — ignore
     if (row.isPublished) bucket.published += 1;

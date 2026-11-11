@@ -13,7 +13,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
  * costs database reads, and the free plan counts them.
  */
 export function nextTickDelay(busy: boolean, tookMs: number): number {
-  if (busy) return 15_000;
+  if (busy) return 30_000;
   return tookMs < 10_000 ? 3_000 : 300;
 }
 
