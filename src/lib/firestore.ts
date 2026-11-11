@@ -53,11 +53,32 @@ function siteApp(): App {
   return app;
 }
 
+/** Firestore instances already configured, shared by every copy of this module. */
+const CONFIGURED = Symbol.for("arovyx.firestore.configured");
+type WithConfigured = typeof globalThis & { [CONFIGURED]?: WeakSet<Firestore> };
+
+/**
+ * `getFirestore(app)`, configured once. Next can bundle a module like this one
+ * into several server chunks, each with its own module-level variables, while
+ * firebase-admin hands all of them the same Firestore instance. `settings()`
+ * may run only once per instance, before its first use, so a second chunk
+ * calling it threw "Firestore has already been initialized" and broke
+ * prerendering. The set of configured instances therefore lives on globalThis.
+ */
+export function configuredFirestore(app: App): Firestore {
+  const instance = getFirestore(app);
+  const g = globalThis as WithConfigured;
+  const done = (g[CONFIGURED] ??= new WeakSet<Firestore>());
+  if (!done.has(instance)) {
+    done.add(instance);
+    // Optional fields are often `undefined` in patches; skip them instead of throwing.
+    instance.settings({ ignoreUndefinedProperties: true });
+  }
+  return instance;
+}
+
 export function firestore(): Firestore {
-  if (db) return db;
-  db = getFirestore(siteApp());
-  // Optional fields are often `undefined` in patches; skip them instead of throwing.
-  db.settings({ ignoreUndefinedProperties: true });
+  db ??= configuredFirestore(siteApp());
   return db;
 }
 

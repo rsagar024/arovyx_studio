@@ -10,7 +10,8 @@
 import "server-only";
 import { cert, getApp, initializeApp, type App } from "firebase-admin/app";
 import { getAuth, type UserRecord } from "firebase-admin/auth";
-import { getFirestore, type Firestore } from "firebase-admin/firestore";
+import type { Firestore } from "firebase-admin/firestore";
+import { configuredFirestore } from "@/lib/firestore";
 import type { GuestUser, UserAdmin } from "./guestCleanup";
 
 export const COLORTAP_PROJECT_ID = "color-tap-c06bf";
@@ -100,8 +101,8 @@ export function colorTapDb(): Firestore {
   } else {
     base = colorTapApp();
   }
-  db = getFirestore(base);
-  db.settings({ ignoreUndefinedProperties: true });
+  // Configured once per instance, however many chunks load this module (see configuredFirestore).
+  db = configuredFirestore(base);
   return db;
 }
 
