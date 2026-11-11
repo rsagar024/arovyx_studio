@@ -6,7 +6,7 @@ import {
   jsonError,
   jsonOk,
   rateLimit,
-  revalidatePublicPages,
+  revalidateMessages,
   zodErrorDetails,
   zodErrorMessage,
 } from "@/lib/api";
@@ -47,9 +47,9 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  // 4. Persist + refresh any public page cache.
+  // 4. Persist, and show it in the Studio inbox (the public pages don't change).
   const created = await createMessage(parsed.data);
-  revalidatePublicPages();
+  revalidateMessages();
 
   return jsonOk(
     { message: "Message sent — talk soon!", id: created.id },

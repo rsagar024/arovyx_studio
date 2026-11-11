@@ -1,8 +1,9 @@
 import { NextRequest } from "next/server";
-import { countUnreadMessages, deleteMessages, listMessages } from "@/lib/store";
+import { deleteMessages } from "@/lib/store";
+import { inbox } from "@/lib/adminData";
 import { messageBulkDeleteSchema } from "@/lib/validators";
 import { getSession } from "@/lib/session";
-import { jsonError, jsonOk, zodErrorDetails, zodErrorMessage } from "@/lib/api";
+import { jsonError, jsonOk, revalidateMessages, zodErrorDetails, zodErrorMessage } from "@/lib/api";
 
 /**
  * GET /api/admin/messages (spec §7) — contact inbox, newest first,
@@ -14,12 +15,8 @@ export async function GET() {
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const [messages, unreadCount] = await Promise.all([
-    listMessages(),
-    countUnreadMessages(),
-  ]);
-
-  return jsonOk({ count: messages.length, unreadCount, messages });
+  const { messages, unread } = await inbox();
+  return jsonOk({ count: messages.length, unreadCount: unread, messages });
 }
 
 /**
@@ -45,5 +42,6 @@ export async function DELETE(req: NextRequest) {
   }
 
   const count = await deleteMessages(parsed.data.ids);
+  revalidateMessages();
   return jsonOk({ deleted: count });
 }

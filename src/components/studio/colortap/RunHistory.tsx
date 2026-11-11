@@ -6,6 +6,9 @@ import { ChevronDown, ChevronRight, Square } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { STATUS_STYLE, api, buttonClass, cardClass, fmtDuration, fmtIst, type RunDetail, type RunInfo } from "./api";
 
+/** How often an open run refreshes while it runs (the tick saves about once a minute). */
+const LIVE_POLL_MS = 15_000;
+
 export default function RunHistory({ runs, onChanged }: { runs: RunInfo[]; onChanged: () => void }) {
   const [openId, setOpenId] = useState<string | null>(null);
   return (
@@ -92,6 +95,11 @@ function RunLog({ id, onChanged }: { id: string; onChanged: () => void }) {
     let alive = true;
     let timer: ReturnType<typeof setTimeout>;
     const load = async () => {
+      // Each poll costs Firestore reads: none while the tab is hidden.
+      if (document.visibilityState !== "visible") {
+        timer = setTimeout(load, LIVE_POLL_MS);
+        return;
+      }
       try {
         const q = cursor.current ? `?after=${encodeURIComponent(cursor.current)}` : "";
         const d = await api<RunDetail>(`/runs/${id}${q}`);
@@ -102,7 +110,7 @@ function RunLog({ id, onChanged }: { id: string; onChanged: () => void }) {
           setLogs((old) => [...old, ...d.logs].slice(-2000));
         }
         // Live while running.
-        if (d.run.status === "running") timer = setTimeout(load, 3_000);
+        if (d.run.status === "running") timer = setTimeout(load, LIVE_POLL_MS);
       } catch (err) {
         if (alive) toast.error(err instanceof Error ? err.message : "Couldn't load the run.");
       }

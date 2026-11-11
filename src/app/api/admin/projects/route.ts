@@ -1,5 +1,6 @@
 import { NextRequest } from "next/server";
-import { createProject, listProjects } from "@/lib/store";
+import { createProject } from "@/lib/store";
+import { allProjects } from "@/lib/adminData";
 import {
   projectInputSchema,
   serializeProject,
@@ -23,7 +24,7 @@ export async function GET() {
   const session = await getSession();
   if (!session) return jsonError(401, "Unauthorized");
 
-  const rows = await listProjects({ orderBy: "updatedAt" });
+  const rows = await allProjects("updatedAt");
   const projects = rows.map(toProjectDTO);
   return jsonOk({ count: projects.length, projects });
 }
